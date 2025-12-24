@@ -7,11 +7,14 @@ from .views import (
 app_name = 'pages'
 
 urlpatterns = [
+    # Static Pages
     path('', HomeView.as_view(), name='home'),
     path('about/', AboutView.as_view(), name='about'),
     path('terms/', TermsView.as_view(), name='terms'),
     path('privacy/', PrivacyView.as_view(), name='privacy'),
     path('refund-policy/', RefundView.as_view(), name='refund'),
     path('shipping-policy/', ShippingView.as_view(), name='shipping'),
+
+    # Functional Views
     path('search/', global_search, name='global_search'),
 ]
