@@ -1,0 +1,394 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% block meta_description %}Sellux Plaster Ltd - Home of Affordable Luxury. Premium plastering, POP ceiling designs, and luxury cornices in Accra, Ghana. Expert architectural solutions since 2015.{% endblock %}">
+    <meta name="keywords" content="plastering, POP ceiling, cornices, interior design, architecture, Sellux Plaster, luxury interiors, Ghana, Accra, affordable luxury">
+    <meta name="author" content="Sellux Plaster Ltd">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}Sellux Plaster Ltd | Home of Affordable Luxury{% endblock %}">
+    <meta property="og:description" content="Elevating spaces with premium cornices, ceiling designs, and professional craftsmanship. Home of Affordable Luxury.">
+    <meta property="og:image" content="{% static 'images/logo.png' %}">
+
+    <title>{% block title %}Sellux Plaster Ltd | Home of Affordable Luxury{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        :root {
+            --primary-color: #ff7b00; /* Vibrant Orange */
+            --primary-hover: #e66f00;
+            --secondary-color: #1a1a1a; /* Soft Black */
+            --dark-bg: #000000; /* Pure Black */
+            --light-bg: #ffffff;
+            --accent-color: #ff9d00;
+            --text-main: #121212;
+            --text-muted: #666666;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+        }
+
+        .text-primary { color: var(--primary-color) !important; }
+        .bg-primary { background-color: var(--primary-color) !important; }
+        .bg-primary-subtle { background-color: #fff3e6 !important; }
+        .border-primary { border-color: var(--primary-color) !important; }
+
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.95) !important;
+            transition: all 0.3s ease;
+            padding: 0.8rem 0;
+        }
+
+        .navbar-brand img {
+            max-height: 45px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .navbar-brand {
+            font-size: 1.25rem;
+            letter-spacing: -1px;
+            color: #ffffff !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand span {
+            color: var(--primary-color);
+        }
+
+        .slogan-text {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-top: -5px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #ffffff !important;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            opacity: 1;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+            border-radius: 8px;
+            color: #000;
+            box-shadow: 0 4px 6px -1px rgba(255, 123, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(255, 123, 0, 0.3);
+            color: #000;
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #000;
+        }
+
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            background: #fff;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background-color: var(--dark-bg);
+            color: #999;
+        }
+
+        .footer-heading {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-link {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Nav Search Bar Styling */
+        .nav-search .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50px;
+            padding-left: 40px;
+            transition: 0.3s;
+        }
+        .nav-search .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: var(--primary-color);
+            box-shadow: none;
+        }
+        .nav-search {
+            position: relative;
+        }
+        .nav-search i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); color: #fff; }
+
+        /* Hero animations */
+        .hero-title {
+            animation: fadeInUp 1s both;
+        }
+
+        .hero-subtitle {
+            animation: fadeInUp 1s 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top shadow-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <div>
+                    <div class="d-flex align-items-center">
+                        <img src="{% static 'images/logo.png' %}" alt="Sellux Plaster Logo" onerror="this.style.display='none'">
+                        <span>SELLUX</span>PLASTER
+                    </div>
+                    <small class="slogan-text d-none d-md-block">Home of Affordable Luxury</small>
+                </div>
+            </a>
+            
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Search Bar Integrated into Header -->
+                <div class="nav-search ms-lg-4 d-none d-lg-block" style="width: 250px;">
+                    <form action="{% url 'pages:global_search' %}" method="get">
+                        <i class="bi bi-search"></i>
+                        <input type="text" name="q" class="form-control" placeholder="Search..." required>
+                    </form>
+                </div>
+
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'services:service_list' %}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'catalogue:product_list' %}">Catalogue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:project_list' %}">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'faq:faq_list' %}">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact:contact_us' %}">Contact</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown ms-lg-3">
+                            <a class="btn btn-outline-primary dropdown-toggle rounded-pill px-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-2 rounded-4">
+                                <li><a class="dropdown-item py-2" href="{% url 'dashboard:home' %}"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
+                                <li><a class="dropdown-item py-2" href="{% url 'accounts:profile' %}"><i class="bi bi-person me-2"></i> Profile</a></li>
+                                <li><hr class="dropdown-divider opacity-50"></li>
+                                <li>
+                                    <form action="{% url 'accounts:logout' %}" method="post" class="p-0">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item py-2 text-danger border-0 bg-transparent w-100 text-start"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item ms-lg-3">
+                            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary text-black px-4" href="{% url 'accounts:register' %}">Get Started</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <a href="https://wa.me/233549926773?text=Hello%20Sellux%20Plaster,%20I'm%20interested%20in%20your%20services." class="whatsapp-float" target="_blank">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+
+    <main class="flex-shrink-0">
+        {% if messages %}
+            <div class="container mt-4">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show rounded-4 shadow-sm border-0" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer py-5 mt-auto">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <h5 class="footer-heading">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="{% static 'images/logo.png' %}" alt="Logo" style="max-height: 40px;" onerror="this.style.display='none'">
+                            <span class="ms-2">SELLUX <span class="text-primary">PLASTER</span></span>
+                        </div>
+                        <small class="text-primary fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Home of Affordable Luxury</small>
+                    </h5>
+                    <p class="mt-3 small">Redefining elegance with precision plastering and architectural masterpieces since 2015. We bring your vision to life with artisan craftsmanship.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="footer-heading">Services</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'services:service_list' %}" class="footer-link">Our Services</a></li>
+                        <li><a href="#" class="footer-link">Cornice Design</a></li>
+                        <li><a href="#" class="footer-link">POP Ceilings</a></li>
+                        <li><a href="#" class="footer-link">Gypsum Board</a></li>
+                        <li><a href="{% url 'portfolio:project_list' %}" class="footer-link">Design Insights (Blog)</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="footer-heading">Company</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'pages:about' %}" class="footer-link">About Us</a></li>
+                        <li><a href="{% url 'contact:contact_us' %}" class="footer-link">Contact Us</a></li>
+                        <li><a href="{% url 'faq:faq_list' %}" class="footer-link">FAQ</a></li>
+                        <li><hr class="border-secondary opacity-25" style="width: 50px;"></li>
+                        <li><a href="{% url 'pages:terms' %}" class="footer-link">Terms of Service</a></li>
+                        <li><a href="{% url 'pages:privacy' %}" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="{% url 'pages:refund' %}" class="footer-link">Refund Policy</a></li>
+                        <li><a href="{% url 'pages:shipping' %}" class="footer-link">Shipping Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="footer-heading">Contact Us</h5>
+                    <div class="mb-3 text-secondary small">
+                        <p class="mb-2 d-flex align-items-start"><i class="bi bi-geo-alt text-primary me-2 mt-1"></i> Odokor, Dr. Busia Highway, Accra, Ghana</p>
+                        <p class="mb-2 d-flex align-items-center"><i class="bi bi-telephone text-primary me-2"></i> 055 208 8784 / 054 992 6773</p>
+                        <p class="mb-0 d-flex align-items-center"><i class="bi bi-envelope text-primary me-2"></i> selluxplasterltd@gmail.com</p>
+                    </div>
+                    <div class="mt-4">
+                        <h6 class="text-white fw-bold mb-3 small text-uppercase">Newsletter</h6>
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-dark border-secondary text-white rounded-start-pill px-3" placeholder="Email address" style="font-size: 0.8rem;">
+                            <button class="btn btn-primary rounded-end-pill px-3 py-1" type="button"><i class="bi bi-send"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-5 border-secondary opacity-25">
+            <div class="text-center small">
+                <p>&copy; {% now "Y" %} Sellux Plaster Ltd. Crafted for luxury. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

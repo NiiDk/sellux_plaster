@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>Order Placed</h1>
+  {% if order %}
+    <p>Thank you, {{ order.user.get_full_name|default:order.user.username }} — your order has been created.</p>
+    <ul>
+      <li>Order #: {{ order.pk }}</li>
+      <li>Item: {{ order.catalogue_item.title }}</li>
+      <li>Quantity: {{ order.quantity }}</li>
+      <li>Total: {{ order.total_amount }}</li>
+      <li>Payment status: {{ order.payment_status }}</li>
+    </ul>
+    <p>You will receive an email and SMS confirmation when payment is confirmed.</p>
+  {% else %}
+    <p>Order not found.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Login | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<section class="py-5 my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-8">
+                <div class="card border-0 shadow-lg rounded-5 overflow-hidden animate__animated animate__fadeInUp">
+                    <div class="card-header bg-dark text-white text-center py-4 border-0">
+                        <h3 class="fw-bold mb-0">Welcome Back</h3>
+                        <p class="small opacity-75 mb-0">Login to manage your architectural projects</p>
+                    </div>
+                    <div class="card-body p-5">
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg rounded-pill py-3 fw-bold">
+                                    Login to Dashboard <i class="bi bi-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <hr class="my-4">
+                        
+                        <div class="text-center">
+                            <p class="text-muted small">Don't have an account yet?</p>
+                            <a href="{% url 'accounts:register' %}" class="btn btn-outline-dark rounded-pill px-4 btn-sm fw-semibold">
+                                Create an Account
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="/" class="text-secondary text-decoration-none small">
+                        <i class="bi bi-house-door me-1"></i> Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

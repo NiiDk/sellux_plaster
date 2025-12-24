@@ -1,0 +1,10 @@
+django>=4.2
+python-dotenv
+Pillow
+requests
+django-crispy-forms
+crispy-bootstrap5
+whitenoise
+django-cloudinary-storage
+cloudinary
+gunicorn

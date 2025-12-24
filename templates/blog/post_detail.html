@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<article class="py-5">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 animate__animated animate__fadeIn">
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb" class="mb-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" class="text-dark text-decoration-none">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'blog:post_list' %}" class="text-dark text-decoration-none">Insights</a></li>
+                        {% if post.category %}
+                        <li class="breadcrumb-item active text-primary fw-bold" aria-current="page">{{ post.category.name }}</li>
+                        {% endif %}
+                    </ol>
+                </nav>
+
+                <!-- Post Header -->
+                <h1 class="display-4 fw-bold mb-4">{{ post.title }}</h1>
+                
+                <div class="d-flex align-items-center gap-3 mb-5 py-3 border-top border-bottom">
+                    <div class="bg-primary text-black rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">
+                        {{ post.author.username|slice:":1"|upper }}
+                    </div>
+                    <div>
+                        <div class="fw-bold small">By {{ post.author.get_full_name|default:post.author.username }}</div>
+                        <div class="text-muted small">Published on {{ post.created_at|date:"M d, Y" }}</div>
+                    </div>
+                </div>
+
+                <!-- Featured Image -->
+                {% if post.featured_image %}
+                <div class="rounded-5 overflow-hidden shadow-lg mb-5">
+                    <img src="{{ post.featured_image.url }}" class="img-fluid w-100" alt="{{ post.title }}" style="max-height: 500px; object-fit: cover;">
+                </div>
+                {% endif %}
+
+                <!-- Post Content -->
+                <div class="post-content lead text-muted" style="line-height: 1.8; font-size: 1.1rem;">
+                    {{ post.content|linebreaks }}
+                </div>
+
+                <!-- Footer / CTA -->
+                <div class="mt-5 p-5 bg-light rounded-5 text-center">
+                    <h3 class="fw-bold mb-3">Inspired by this design?</h3>
+                    <p class="text-muted mb-4">Our master plasterers can bring these insights into your home or project.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="{% url 'contact:contact_us' %}" class="btn btn-primary rounded-pill px-4 fw-bold">Talk to an Expert</a>
+                        <a href="{% url 'custom_requests:request_create' %}" class="btn btn-outline-dark rounded-pill px-4 fw-bold">Request a Quote</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}

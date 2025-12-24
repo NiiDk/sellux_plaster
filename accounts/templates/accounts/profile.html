@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}My Profile | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row g-5">
+        <!-- Profile Form -->
+        <div class="col-lg-8 animate__animated animate__fadeInLeft">
+            <div class="card border-0 shadow-sm rounded-5 p-5">
+                <h2 class="fw-bold mb-4">Edit Profile</h2>
+                <form method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.email|as_crispy_field }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.phone|as_crispy_field }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.bio|as_crispy_field }}
+                    </div>
+                    
+                    <div class="mb-4">
+                        {{ form.profile_image|as_crispy_field }}
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill py-3 fw-bold">
+                            Update Profile <i class="bi bi-check-circle ms-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Profile Preview -->
+        <div class="col-lg-4 animate__animated animate__fadeInRight">
+            <div class="card border-0 shadow-sm rounded-5 overflow-hidden">
+                <div class="bg-dark py-5 text-center position-relative">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 opacity-25" style="background: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+                    {% if user.profile_image %}
+                        <img src="{{ user.profile_image.url }}" class="rounded-circle border border-4 border-white shadow-lg" alt="{{ user.username }}" style="width: 150px; height: 150px; object-fit: cover; position: relative; z-index: 1;">
+                    {% else %}
+                        <div class="rounded-circle border border-4 border-white shadow-lg mx-auto bg-primary d-flex align-items-center justify-content-center text-white" style="width: 150px; height: 150px; position: relative; z-index: 1;">
+                            <span class="display-4 fw-bold">{{ user.username|slice:":1"|upper }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="card-body p-4 text-center">
+                    <h4 class="fw-bold mb-1">{{ user.get_full_name|default:user.username }}</h4>
+                    <p class="text-muted small mb-3">{{ user.email }}</p>
+                    <hr>
+                    <div class="text-start small text-muted">
+                        <p class="mb-2"><i class="bi bi-calendar3 me-2"></i> Joined: {{ user.date_joined|date:"M Y" }}</p>
+                        <p class="mb-0"><i class="bi bi-telephone me-2"></i> {{ user.phone|default:"No phone added" }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Shortcut -->
+            <div class="card border-0 bg-primary text-white rounded-5 p-4 mt-4 shadow-sm">
+                <h5 class="fw-bold mb-2">Member Dashboard</h5>
+                <p class="small opacity-75 mb-3">View your order history and project status.</p>
+                <a href="{% url 'dashboard:home' %}" class="btn btn-white bg-white text-primary rounded-pill btn-sm fw-bold">Go to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

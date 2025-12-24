@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Design Insights | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<!-- Blog Header -->
+<section class="py-5 bg-dark text-white position-relative overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100 opacity-25" style="background: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+    <div class="container py-5 position-relative z-1">
+        <div class="row align-items-center">
+            <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                <span class="badge bg-primary text-black px-3 py-2 rounded-pill mb-3 fw-bold">ARCHITECTURAL BLOG</span>
+                <h1 class="display-4 fw-bold mb-3">Design <span class="text-primary">Insights</span></h1>
+                <p class="lead opacity-75">Expert tips on POP ceilings, luxury cornices, and modern interior finishing trends in Ghana.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Grid -->
+<section class="py-5">
+    <div class="container py-5">
+        <div class="row g-4">
+            {% for post in posts %}
+                <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0 }}00ms;">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift">
+                        <div class="position-relative">
+                            {% if post.featured_image %}
+                                <img src="{{ post.featured_image.url }}" class="card-img-top" alt="{{ post.title }}" style="height: 240px; object-fit: cover;">
+                            {% endif %}
+                            <div class="position-absolute top-0 start-0 m-3">
+                                <span class="badge bg-primary text-black rounded-pill px-3">{{ post.category.name }}</span>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <small class="text-muted d-block mb-2">{{ post.created_at|date:"M d, Y" }}</small>
+                            <h4 class="fw-bold mb-3">{{ post.title }}</h4>
+                            <p class="text-muted small mb-4 line-clamp-3">{{ post.excerpt }}</p>
+                            <a href="{{ post.get_absolute_url }}" class="btn btn-outline-dark rounded-pill px-4 btn-sm fw-bold">
+                                Read Article <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted">Our designers are currently drafting new insights. Check back soon!</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm" href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                {% endif %}
+                <li class="page-item active"><span class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm">{{ page_obj.number }}</span></li>
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+    }
+</style>
+{% endblock %}

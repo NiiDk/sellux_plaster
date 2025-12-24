@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Exquisite Plastering | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <nav aria-label="breadcrumb" class="mb-4 animate__animated animate__fadeIn">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" class="text-dark text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'catalogue:product_list' %}" class="text-dark text-decoration-none">Catalogue</a></li>
+                <li class="breadcrumb-item active text-primary fw-bold" aria-current="page">{{ product.name }}</li>
+            </ol>
+        </nav>
+
+        <div class="row g-5">
+            <!-- Product Gallery -->
+            <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                <div class="main-image-container rounded-5 overflow-hidden mb-3 shadow-sm bg-light">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" id="mainProductImage" class="img-fluid w-100" alt="{{ product.name }}" style="height: 500px; object-fit: cover;">
+                    {% else %}
+                        <div class="bg-secondary d-flex align-items-center justify-content-center" style="height: 500px;">
+                            <i class="bi bi-image text-white opacity-25 display-1"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                {% if product.additional_images.all %}
+                <div class="row g-3">
+                    <div class="col-3">
+                        <img src="{{ product.image.url }}" class="img-fluid rounded-4 thumbnail-img active shadow-sm" style="height: 100px; width: 100%; object-fit: cover; cursor: pointer;" onclick="changeMainImage(this.src, this)">
+                    </div>
+                    {% for gallery_item in product.additional_images.all %}
+                    <div class="col-3">
+                        <img src="{{ gallery_item.image.url }}" class="img-fluid rounded-4 thumbnail-img shadow-sm" style="height: 100px; width: 100%; object-fit: cover; cursor: pointer;" onclick="changeMainImage(this.src, this)">
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Product Info -->
+            <div class="col-lg-5 animate__animated animate__fadeInRight">
+                <div class="ps-lg-4">
+                    <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3 fw-bold">{{ product.category.name }}</span>
+                    <h1 class="display-4 fw-bold mb-3">{{ product.name }}</h1>
+                    
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <h2 class="text-primary fw-bold mb-0">GH₵{{ product.price }}</h2>
+                        {% if product.stock > 0 %}
+                            <span class="text-success small fw-bold"><i class="bi bi-check-circle-fill me-1"></i> In Stock</span>
+                        {% else %}
+                            <span class="text-danger small fw-bold"><i class="bi bi-x-circle-fill me-1"></i> Out of Stock</span>
+                        {% endif %}
+                    </div>
+
+                    <p class="lead text-muted mb-5" style="line-height: 1.8;">
+                        {{ product.description }}
+                    </p>
+
+                    <div class="card bg-light border-0 rounded-4 p-4 mb-5">
+                        <form action="{% url 'orders:order_create' %}" method="get">
+                            <input type="hidden" name="product" value="{{ product.id }}">
+                            <div class="row g-3 align-items-center">
+                                <div class="col-4">
+                                    <label class="form-label small fw-bold text-muted">Quantity</label>
+                                    <input type="number" name="quantity" class="form-control rounded-pill border-0 shadow-sm" value="1" min="1" max="{{ product.stock }}">
+                                </div>
+                                <div class="col-8">
+                                    <label class="form-label d-none d-md-block opacity-0">Label</label>
+                                    {% if product.stock > 0 %}
+                                        <button type="submit" class="btn btn-primary btn-lg rounded-pill w-100 fw-bold shadow">
+                                            Place Order Now <i class="bi bi-cart-plus-fill ms-2"></i>
+                                        </button>
+                                    {% else %}
+                                        <button type="button" class="btn btn-secondary btn-lg rounded-pill w-100 fw-bold" disabled>
+                                            Currently Unavailable
+                                        </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="d-flex flex-column gap-3 small text-muted">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-truck text-primary"></i> Nationwide delivery within 3-5 working days.
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-shield-lock text-primary"></i> 100% Quality Guaranteed by Sellux.
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-headset text-primary"></i> 24/7 Support for architectural installation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function changeMainImage(src, thumb) {
+        document.getElementById('mainProductImage').src = src;
+        // Remove active class from all thumbnails
+        document.querySelectorAll('.thumbnail-img').forEach(el => el.classList.remove('active', 'border', 'border-primary', 'border-2'));
+        // Add active class to clicked thumbnail
+        thumb.classList.add('active', 'border', 'border-primary', 'border-2');
+    }
+</script>
+
+<style>
+    .thumbnail-img { transition: 0.3s; opacity: 0.7; }
+    .thumbnail-img:hover { opacity: 1; }
+    .thumbnail-img.active { opacity: 1; }
+</style>
+{% endblock %}

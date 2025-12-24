@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Portfolio | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<!-- Portfolio Header -->
+<section class="py-5 bg-white border-bottom">
+    <div class="container py-4">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3 animate__animated animate__fadeIn">OUR CRAFTSMANSHIP</span>
+                <h1 class="display-4 fw-bold mb-3">Project Showcase</h1>
+                <p class="lead text-muted">A curated selection of our finest plastering, ceiling, and interior works across the country.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Grid -->
+<section class="py-5">
+    <div class="container py-4">
+        <div class="row g-4">
+            {% for project in projects %}
+                <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
+                    <div class="card h-100 overflow-hidden border-0 shadow-sm hover-lift">
+                        <div class="position-relative">
+                            {% if project.image %}
+                                <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 280px; object-fit: cover;">
+                            {% else %}
+                                <div class="bg-secondary-subtle d-flex align-items-center justify-content-center" style="height: 280px;">
+                                    <i class="bi bi-image text-muted fs-1"></i>
+                                </div>
+                            {% endif %}
+                            <div class="position-absolute top-0 end-0 m-3">
+                                <span class="badge bg-dark bg-opacity-75 px-3 py-2 rounded-pill">{{ project.completion_date|date:"Y" }}</span>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-2">{{ project.title }}</h5>
+                            <p class="card-text text-muted small mb-4 line-clamp-2">
+                                {{ project.description|truncatewords:20 }}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{% url 'portfolio:project_detail' project.slug %}" class="btn btn-outline-primary rounded-pill px-4 btn-sm fw-semibold">
+                                    View Details
+                                </a>
+                                {% if project.is_featured %}
+                                    <span class="text-warning"><i class="bi bi-star-fill"></i> Featured</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center py-5">
+                    <div class="bg-light rounded-5 p-5">
+                        <i class="bi bi-collection text-muted display-1 mb-4"></i>
+                        <h3>No projects found</h3>
+                        <p class="text-muted">Check back soon for our latest architectural works.</p>
+                        <a href="{% url 'contact:contact_us' %}" class="btn btn-primary mt-3 px-4">Request a Consultation</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="row mt-5 pt-4">
+            <div class="col-12">
+                <nav aria-label="Portfolio pagination">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link rounded-pill px-3 me-2 border-0 shadow-sm" href="?page={{ page_obj.previous_page_number }}">
+                                    <i class="bi bi-arrow-left"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                        
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active"><span class="page-link rounded-pill px-3 mx-1 border-0 shadow-sm">{{ num }}</span></li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li class="page-item"><a class="page-link rounded-pill px-3 mx-1 border-0 shadow-sm" href="?page={{ num }}">{{ num }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link rounded-pill px-3 ms-2 border-0 shadow-sm" href="?page={{ page_obj.next_page_number }}">
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+    }
+    .hover-lift {
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .hover-lift:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    }
+    .page-link {
+        color: var(--dark-bg);
+        font-weight: 600;
+    }
+    .page-item.active .page-link {
+        background-color: var(--primary-color);
+        color: white;
+    }
+</style>
+{% endblock %}

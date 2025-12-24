@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Request Custom Design | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg rounded-5 overflow-hidden animate__animated animate__fadeInUp">
+                <div class="card-header bg-dark text-white p-5 text-center position-relative">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 opacity-25" style="background: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+                    <span class="badge bg-primary text-black mb-3 position-relative">BESPOKE DESIGN</span>
+                    <h1 class="fw-bold position-relative">Tell us your vision</h1>
+                    <p class="opacity-75 mb-0 position-relative">Upload photos of your space and we'll provide a custom architectural quote.</p>
+                </div>
+                <div class="card-body p-5">
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                {{ form.project_title|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form.description|as_crispy_field }}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.inspiration_image|as_crispy_field }}
+                                <small class="text-muted">Got a design you saw online? Upload it here.</small>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.site_photo|as_crispy_field }}
+                                <small class="text-muted">A photo of your actual wall or ceiling.</small>
+                            </div>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill py-3 fw-bold">
+                                Submit Request <i class="bi bi-send-fill ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Dashboard | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Dashboard Header -->
+    <div class="row mb-5 animate__animated animate__fadeIn">
+        <div class="col-lg-8">
+            <h1 class="display-5 fw-bold mb-2">Welcome back, <span class="text-primary">{{ user.first_name|default:user.username }}</span></h1>
+            <p class="text-muted">Track your luxury plastering projects and material orders in one place.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end d-flex align-items-center justify-content-lg-end">
+            <a href="{% url 'catalogue:product_list' %}" class="btn btn-primary rounded-pill px-4">
+                <i class="bi bi-plus-lg me-2"></i>New Order
+            </a>
+        </div>
+    </div>
+
+    <!-- Stats Overview -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card bg-white p-4 border-0 shadow-sm rounded-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="bg-primary-subtle p-3 rounded-circle">
+                        <i class="bi bi-cart-check text-primary fs-3"></i>
+                    </div>
+                    <div>
+                        <h3 class="fw-bold mb-0">{{ orders.count }}</h3>
+                        <p class="text-muted mb-0">Total Orders</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-white p-4 border-0 shadow-sm rounded-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="bg-info-subtle p-3 rounded-circle">
+                        <i class="bi bi-clock-history text-info fs-3"></i>
+                    </div>
+                    <div>
+                        <h3 class="fw-bold mb-0">{% if orders.0.status %}{{ orders.0.get_status_display }}{% else %}None{% endif %}</h3>
+                        <p class="text-muted mb-0">Last Order Status</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-white p-4 border-0 shadow-sm rounded-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="bg-success-subtle p-3 rounded-circle">
+                        <i class="bi bi-wallet2 text-success fs-3"></i>
+                    </div>
+                    <div>
+                        <h3 class="fw-bold mb-0">GH₵{{ total_spent|default:"0.00" }}</h3>
+                        <p class="text-muted mb-0">Total Investment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card bg-white border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-0 p-4">
+                    <h5 class="fw-bold mb-0">Recent Material Orders</h5>
+                </div>
+                <div class="table-responsive p-0">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="px-4 py-3 border-0">Product</th>
+                                <th class="py-3 border-0">Qty</th>
+                                <th class="py-3 border-0">Amount</th>
+                                <th class="py-3 border-0">Status</th>
+                                <th class="py-3 border-0 text-end pe-4">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td class="px-4 py-3 border-0">
+                                        <div class="fw-semibold text-dark">{{ order.product.name }}</div>
+                                    </td>
+                                    <td class="py-3 border-0">{{ order.quantity }}</td>
+                                    <td class="py-3 border-0">GH₵{{ order.total_amount }}</td>
+                                    <td class="py-3 border-0">
+                                        {% if order.status == 'delivered' %}
+                                            <span class="badge bg-success-subtle text-success rounded-pill px-3">Delivered</span>
+                                        {% elif order.status == 'pending' %}
+                                            <span class="badge bg-warning-subtle text-warning rounded-pill px-3">Pending</span>
+                                        {% else %}
+                                            <span class="badge bg-primary-subtle text-primary rounded-pill px-3">{{ order.get_status_display }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="py-3 border-0 text-end pe-4 text-muted small">{{ order.created_at|date:"M d, Y" }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center py-5 text-muted">
+                                        <i class="bi bi-bag-x display-4 mb-3 d-block"></i>
+                                        <p>You haven't placed any orders yet.</p>
+                                        <a href="{% url 'catalogue:product_list' %}" class="btn btn-outline-primary btn-sm rounded-pill px-3">Explore Materials</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <!-- Account Summary Card -->
+            <div class="card bg-dark text-white border-0 shadow-sm rounded-4 p-4 mb-4">
+                <h5 class="fw-bold mb-4">Account Summary</h5>
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="bg-secondary rounded-circle" style="width: 50px; height: 50px; background: url('https://ui-avatars.com/api/?name={{ user.username }}&background=0d6efd&color=fff') center/cover;"></div>
+                    <div>
+                        <div class="fw-bold">{{ user.get_full_name|default:user.username }}</div>
+                        <div class="text-secondary small">{{ user.email }}</div>
+                    </div>
+                </div>
+                <div class="d-grid">
+                    <a href="{% url 'accounts:profile' %}" class="btn btn-outline-light btn-sm rounded-pill">Edit Profile</a>
+                </div>
+            </div>
+
+            <!-- Support Card -->
+            <div class="card bg-primary text-white border-0 shadow-sm rounded-4 p-4">
+                <h5 class="fw-bold mb-2">Need Expert Help?</h5>
+                <p class="small opacity-75 mb-4">Our master plasterers are available for on-site consultations and custom design requests.</p>
+                <div class="d-grid">
+                    <a href="{% url 'contact:contact_us' %}" class="btn btn-white bg-white text-primary btn-sm rounded-pill fw-bold">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

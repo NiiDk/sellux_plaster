@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Catalogue | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<!-- Catalogue Header -->
+<section class="py-5 bg-white border-bottom">
+    <div class="container py-4">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3 animate__animated animate__fadeIn">PREMIUM MATERIALS</span>
+                <h1 class="display-4 fw-bold mb-3">Architectural Catalogue</h1>
+                <p class="lead text-muted">Discover our range of high-quality cornices, POP designs, and decorative plaster materials crafted for excellence.</p>
+            </div>
+            <div class="col-lg-5 d-none d-lg-block text-end">
+                <i class="bi bi-box-seam text-primary opacity-25" style="font-size: 8rem;"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Product Grid Section -->
+<section class="py-5">
+    <div class="container py-4">
+        <div class="row g-4">
+            {% for product in products %}
+                <div class="col-sm-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
+                    <div class="card h-100 border-0 shadow-sm hover-lift overflow-hidden">
+                        <!-- Product Image -->
+                        <div class="position-relative overflow-hidden bg-light" style="height: 240px;">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" class="card-img-top w-100 h-100" alt="{{ product.name }}" style="object-fit: cover; transition: transform 0.5s ease;">
+                            {% else %}
+                                <div class="w-100 h-100 d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-image text-muted fs-1"></i>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Stock Badge -->
+                            <div class="position-absolute top-0 start-0 m-3">
+                                {% if product.stock > 0 %}
+                                    <span class="badge bg-success bg-opacity-75 rounded-pill px-3">In Stock</span>
+                                {% else %}
+                                    <span class="badge bg-danger bg-opacity-75 rounded-pill px-3">Out of Stock</span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body p-4 d-flex flex-column">
+                            <div class="mb-2">
+                                <small class="text-primary fw-bold text-uppercase tracking-wider" style="font-size: 0.7rem;">{{ product.category.name }}</small>
+                            </div>
+                            <h5 class="card-title fw-bold mb-3">{{ product.name }}</h5>
+                            
+                            <div class="mt-auto">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span class="fs-4 fw-bold text-dark">GH₵{{ product.price }}</span>
+                                    <small class="text-muted">Per Unit</small>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <a href="{% url 'catalogue:product_detail' product.slug %}" class="btn btn-outline-dark rounded-pill py-2 fw-semibold">
+                                        View Details
+                                    </a>
+                                    {% if product.stock > 0 %}
+                                    <a href="{% url 'orders:order_create' %}?product={{ product.id }}" class="btn btn-primary rounded-pill py-2 fw-semibold">
+                                        Order Now
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center py-5">
+                    <div class="bg-white rounded-5 p-5 shadow-sm">
+                        <i class="bi bi-search text-muted display-1 mb-4"></i>
+                        <h3 class="fw-bold">No products found</h3>
+                        <p class="text-muted">Our master craftsmen are currently updating our digital inventory. Please check back shortly.</p>
+                        <a href="{% url 'contact:contact_us' %}" class="btn btn-primary mt-3 px-5 rounded-pill py-3">Inquire Directly</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="row mt-5">
+            <div class="col-12">
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm" href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                        {% endif %}
+                        <li class="page-item active"><span class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm">{{ page_obj.number }}</span></li>
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+    .tracking-wider { letter-spacing: 0.05em; }
+    .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .hover-lift:hover { transform: translateY(-10px); box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important; }
+    .card-img-top:hover { transform: scale(1.05); }
+</style>
+{% endblock %}
