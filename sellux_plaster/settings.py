@@ -10,17 +10,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-sellux-plaster-key-123')
 
-# Force DEBUG to False in production unless explicitly set to True
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+# Check if running on Render
+IS_RENDER = os.getenv('RENDER', 'False') == 'true'
 
-# Render-specific Hostname handling
-ALLOWED_HOSTS = ['sellux-plaster.onrender.com', 'localhost', '127.0.0.1']
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+# Smart DEBUG setting
+if IS_RENDER:
+    DEBUG = os.getenv('DEBUG', 'False') == 'True'
+else:
+    DEBUG = True
+
+# Smart ALLOWED_HOSTS
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sellux-plaster.onrender.com']
+RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# Additional wildcard for safety during initial deployment
-if DEBUG:
+# Additional wildcard for safety locally
+if not IS_RENDER:
     ALLOWED_HOSTS.append('*')
 
 # CSRF Trusted Origins for Render (Required for HTTPS)
@@ -59,7 +65,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Safe to keep for both
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -88,13 +94,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sellux_plaster.wsgi.application'
 
-# Database configuration for Render (PostgreSQL)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}"),
-        conn_max_age=600
-    )
-}
+# Smart Database configuration
+if IS_RENDER:
+    # Production: Use PostgreSQL from DATABASE_URL
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.getenv('DATABASE_URL'),
+            conn_max_age=600
+        )
+    }
+else:
+    # Local: Use SQLite
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -114,16 +130,32 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STORAGES = {
-    "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
 
-# Cloudinary configuration
+# Smart Storages (Media & Static)
+if IS_RENDER:
+    # Production: Cloudinary for Media, Whitenoise for Static
+    STORAGES = {
+        "default": {
+            "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+else:
+    # Local: FileSystem for Media, Standard for Static
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+
+# Cloudinary configuration (Always loaded, but only used via STORAGES on Render)
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dkvcn0j3c',
     'API_KEY': '631397258551635',
