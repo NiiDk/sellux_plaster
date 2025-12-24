@@ -10,13 +10,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-sellux-plaster-key-123')
 
+# Force DEBUG to False in production unless explicitly set to True
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-# Allow all hosts on Render for now, or specifically add the domain
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'sellux-plaster.onrender.com,localhost,127.0.0.1,*').split(',')
+# Render-specific Hostname handling
+ALLOWED_HOSTS = ['sellux-plaster.onrender.com', 'localhost', '127.0.0.1']
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+# Additional wildcard for safety during initial deployment
+if DEBUG:
+    ALLOWED_HOSTS.append('*')
 
 # CSRF Trusted Origins for Render (Required for HTTPS)
 CSRF_TRUSTED_ORIGINS = ['https://sellux-plaster.onrender.com']
+if RENDER_EXTERNAL_HOSTNAME:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{RENDER_EXTERNAL_HOSTNAME}')
 
 # Application definition
 INSTALLED_APPS = [
@@ -49,7 +59,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # Essential for static files on Render
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -104,10 +114,16 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
-# Media files (Cloudinary is recommended for Render production)
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# Cloudinary configuration
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dkvcn0j3c',
     'API_KEY': '631397258551635',
