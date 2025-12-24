@@ -12,7 +12,11 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-sellux-plaster-key-123')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'sellux-plaster.onrender.com,localhost,127.0.0.1').split(',')
+# Allow all hosts on Render for now, or specifically add the domain
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'sellux-plaster.onrender.com,localhost,127.0.0.1,*').split(',')
+
+# CSRF Trusted Origins for Render (Required for HTTPS)
+CSRF_TRUSTED_ORIGINS = ['https://sellux-plaster.onrender.com']
 
 # Application definition
 INSTALLED_APPS = [
