@@ -12,7 +12,7 @@
             <p class="text-muted">Track your luxury plastering projects and material orders in one place.</p>
         </div>
         <div class="col-lg-4 text-lg-end d-flex align-items-center justify-content-lg-end">
-            <a href="{% url 'catalogue:product_list' %}" class="btn btn-primary rounded-pill px-4">
+            <a href="{% url 'catalogue:product_list' %}" class="btn btn-primary rounded-pill px-4 fw-bold text-black">
                 <i class="bi bi-plus-lg me-2"></i>New Order
             </a>
         </div>
@@ -28,7 +28,7 @@
                     </div>
                     <div>
                         <h3 class="fw-bold mb-0">{{ orders.count }}</h3>
-                        <p class="text-muted mb-0">Total Orders</p>
+                        <p class="text-muted mb-0 small">Total Orders</p>
                     </div>
                 </div>
             </div>
@@ -40,8 +40,8 @@
                         <i class="bi bi-clock-history text-info fs-3"></i>
                     </div>
                     <div>
-                        <h3 class="fw-bold mb-0">{% if orders.0.status %}{{ orders.0.get_status_display }}{% else %}None{% endif %}</h3>
-                        <p class="text-muted mb-0">Last Order Status</p>
+                        <h3 class="fw-bold mb-0">{{ orders.0.get_status_display|default:"No Orders" }}</h3>
+                        <p class="text-muted mb-0 small">Latest Order Status</p>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     </div>
                     <div>
                         <h3 class="fw-bold mb-0">GH₵{{ total_spent|default:"0.00" }}</h3>
-                        <p class="text-muted mb-0">Total Investment</p>
+                        <p class="text-muted mb-0 small">Total Investment</p>
                     </div>
                 </div>
             </div>
@@ -66,41 +66,45 @@
         <div class="col-lg-8">
             <div class="card bg-white border-0 shadow-sm rounded-4 overflow-hidden">
                 <div class="card-header bg-white border-0 p-4">
-                    <h5 class="fw-bold mb-0">Recent Material Orders</h5>
+                    <h5 class="fw-bold mb-0">Order Tracking & History</h5>
                 </div>
                 <div class="table-responsive p-0">
                     <table class="table table-hover align-middle mb-0">
                         <thead class="bg-light">
                             <tr>
-                                <th class="px-4 py-3 border-0">Product</th>
-                                <th class="py-3 border-0">Qty</th>
-                                <th class="py-3 border-0">Amount</th>
-                                <th class="py-3 border-0">Status</th>
-                                <th class="py-3 border-0 text-end pe-4">Date</th>
+                                <th class="px-4 py-3 border-0 small text-uppercase fw-bold text-muted">Order ID</th>
+                                <th class="py-3 border-0 small text-uppercase fw-bold text-muted">Status</th>
+                                <th class="py-3 border-0 small text-uppercase fw-bold text-muted">Amount</th>
+                                <th class="py-3 border-0 small text-uppercase fw-bold text-muted text-end pe-4">Updates / Feedback</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for order in orders %}
                                 <tr>
-                                    <td class="px-4 py-3 border-0">
-                                        <div class="fw-semibold text-dark">{{ order.product.name }}</div>
+                                    <td class="px-4 py-4 border-0">
+                                        <div class="fw-bold text-dark">#{{ order.id }}</div>
+                                        <small class="text-muted">{{ order.created_at|date:"M d, Y" }}</small>
                                     </td>
-                                    <td class="py-3 border-0">{{ order.quantity }}</td>
-                                    <td class="py-3 border-0">GH₵{{ order.total_amount }}</td>
-                                    <td class="py-3 border-0">
-                                        {% if order.status == 'delivered' %}
-                                            <span class="badge bg-success-subtle text-success rounded-pill px-3">Delivered</span>
-                                        {% elif order.status == 'pending' %}
-                                            <span class="badge bg-warning-subtle text-warning rounded-pill px-3">Pending</span>
+                                    <td class="py-4 border-0">
+                                        <span class="badge {% if order.status == 'delivered' %}bg-success-subtle text-success{% elif order.status == 'pending' %}bg-warning-subtle text-warning{% elif order.status == 'cancelled' %}bg-danger-subtle text-danger{% else %}bg-primary-subtle text-primary{% endif %} rounded-pill px-3">
+                                            {{ order.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td class="py-4 border-0 fw-bold">GH₵{{ order.total_amount }}</td>
+                                    <td class="py-4 border-0 text-end pe-4">
+                                        {% if order.admin_feedback %}
+                                            <div class="bg-light p-3 rounded-3 text-start small border-start border-primary border-4 shadow-sm" style="max-width: 300px; margin-left: auto;">
+                                                <i class="bi bi-info-circle-fill text-primary me-2"></i>
+                                                {{ order.admin_feedback }}
+                                            </div>
                                         {% else %}
-                                            <span class="badge bg-primary-subtle text-primary rounded-pill px-3">{{ order.get_status_display }}</span>
+                                            <span class="text-muted small">Awaiting update...</span>
                                         {% endif %}
                                     </td>
-                                    <td class="py-3 border-0 text-end pe-4 text-muted small">{{ order.created_at|date:"M d, Y" }}</td>
                                 </tr>
                             {% empty %}
                                 <tr>
-                                    <td colspan="5" class="text-center py-5 text-muted">
+                                    <td colspan="4" class="text-center py-5 text-muted">
                                         <i class="bi bi-bag-x display-4 mb-3 d-block"></i>
                                         <p>You haven't placed any orders yet.</p>
                                         <a href="{% url 'catalogue:product_list' %}" class="btn btn-outline-primary btn-sm rounded-pill px-3">Explore Materials</a>
@@ -112,12 +116,15 @@
                 </div>
             </div>
         </div>
+        
         <div class="col-lg-4">
             <!-- Account Summary Card -->
             <div class="card bg-dark text-white border-0 shadow-sm rounded-4 p-4 mb-4">
                 <h5 class="fw-bold mb-4">Account Summary</h5>
                 <div class="d-flex align-items-center gap-3 mb-4">
-                    <div class="bg-secondary rounded-circle" style="width: 50px; height: 50px; background: url('https://ui-avatars.com/api/?name={{ user.username }}&background=0d6efd&color=fff') center/cover;"></div>
+                    <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center fw-bold text-white" style="width: 50px; height: 50px; background-color: #ff7b00 !important;">
+                        {{ user.username|slice:":1"|upper }}
+                    </div>
                     <div>
                         <div class="fw-bold">{{ user.get_full_name|default:user.username }}</div>
                         <div class="text-secondary small">{{ user.email }}</div>
@@ -128,12 +135,12 @@
                 </div>
             </div>
 
-            <!-- Support Card -->
-            <div class="card bg-primary text-white border-0 shadow-sm rounded-4 p-4">
-                <h5 class="fw-bold mb-2">Need Expert Help?</h5>
-                <p class="small opacity-75 mb-4">Our master plasterers are available for on-site consultations and custom design requests.</p>
+            <!-- Custom Request Sidebar -->
+            <div class="card bg-primary text-black border-0 shadow-sm rounded-4 p-4">
+                <h5 class="fw-bold mb-2">Bespoke Project?</h5>
+                <p class="small opacity-75 mb-4">Track your custom design quotes and architectural requests here.</p>
                 <div class="d-grid">
-                    <a href="{% url 'contact:contact_us' %}" class="btn btn-white bg-white text-primary btn-sm rounded-pill fw-bold">Contact Support</a>
+                    <a href="{% url 'custom_requests:request_list' %}" class="btn btn-black bg-black text-white btn-sm rounded-pill fw-bold">My Custom Designs</a>
                 </div>
             </div>
         </div>

@@ -25,14 +25,25 @@ RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# Additional wildcard for safety locally
 if not IS_RENDER:
     ALLOWED_HOSTS.append('*')
 
-# CSRF Trusted Origins for Render (Required for HTTPS)
+# CSRF & Security Origins
 CSRF_TRUSTED_ORIGINS = ['https://sellux-plaster.onrender.com']
 if RENDER_EXTERNAL_HOSTNAME:
     CSRF_TRUSTED_ORIGINS.append(f'https://{RENDER_EXTERNAL_HOSTNAME}')
+
+# PRODUCTION SECURITY HARDENING
+if not DEBUG:
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000 # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = 'DENY'
 
 # Application definition
 INSTALLED_APPS = [
@@ -48,8 +59,10 @@ INSTALLED_APPS = [
     'cloudinary',
     'crispy_forms',
     'crispy_bootstrap5',
+    'axes', # Brute force protection
 
     # Local Apps
+    'core', # Shared logic & Utilities
     'accounts',
     'pages',
     'portfolio',
@@ -61,17 +74,24 @@ INSTALLED_APPS = [
     'custom_requests',
     'services',
     'blog',
+    'cart',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # Safe to keep for both
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'axes.middleware.AxesMiddleware', # Rate limiting
 ]
 
 ROOT_URLCONF = 'sellux_plaster.urls'
@@ -87,6 +107,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.brand_context',
             ],
         },
     },
@@ -96,7 +117,6 @@ WSGI_APPLICATION = 'sellux_plaster.wsgi.application'
 
 # Smart Database configuration
 if IS_RENDER:
-    # Production: Use PostgreSQL from DATABASE_URL
     DATABASES = {
         'default': dj_database_url.config(
             default=os.getenv('DATABASE_URL'),
@@ -104,7 +124,6 @@ if IS_RENDER:
         )
     }
 else:
-    # Local: Use SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -126,14 +145,12 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (Whitenoise)
+# Static & Media
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Smart Storages (Media & Static)
 if IS_RENDER:
-    # Production: Cloudinary for Media, Whitenoise for Static
     STORAGES = {
         "default": {
             "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
@@ -143,7 +160,6 @@ if IS_RENDER:
         },
     }
 else:
-    # Local: FileSystem for Media, Standard for Static
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     STORAGES = {
@@ -155,7 +171,7 @@ else:
         },
     }
 
-# Cloudinary configuration (Always loaded, but only used via STORAGES on Render)
+# Cloudinary
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dkvcn0j3c',
     'API_KEY': '631397258551635',
@@ -166,12 +182,28 @@ CLOUDINARY_STORAGE = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-# Paystack Config
+# Paystack
 PAYSTACK_PUBLIC_KEY = os.getenv('PAYSTACK_PUBLIC_KEY')
 PAYSTACK_SECRET_KEY = os.getenv('PAYSTACK_SECRET_KEY')
-CURRENCY_CODE = os.getenv('CURRENCY_CODE', 'GHS')
+CURRENCY_CODE = 'GHS'
+CURRENCY_SYMBOL = 'GH₵'
 
-# Login/Logout redirects
+# Cart configuration
+CART_SESSION_ID = 'cart'
+
+# Axes Configuration (Rate Limiting)
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 1 # hour
+AXES_LOCK_OUT_AT_FAILURE = True
+
+# Cache Configuration
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'dashboard:home'
 LOGOUT_REDIRECT_URL = 'pages:home'

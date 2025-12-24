@@ -4,9 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    # Admin must have a trailing slash
     path('admin/', admin.site.urls),
-
     path('accounts/', include('accounts.urls')),
     path('', include('pages.urls')),
     path('services/', include('services.urls')),
@@ -18,9 +16,9 @@ urlpatterns = [
     path('custom-requests/', include('custom_requests.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('insights/', include('blog.urls')),
+    path('cart/', include('cart.urls')), # Added cart URLs
 ]
 
-# Standard static/media serving for development
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
