@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Business Intelligence | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="display-5 fw-bold mb-0">Admin <span class="text-primary">Intelligence</span></h1>
+            <p class="text-muted">Real-time conversion metrics and financial tracking.</p>
+        </div>
+        <a href="/admin/" class="btn btn-dark rounded-pill px-4 btn-sm fw-bold">
+            <i class="bi bi-gear-fill me-2"></i>Sellux Plaster Admin
+        </a>
+    </div>
+
+    <!-- Top Stats Row -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <small class="text-uppercase fw-bold text-muted mb-2">Gross Revenue</small>
+                <h2 class="fw-bold text-success mb-0">GH₵{{ gross_revenue|floatformat:2 }}</h2>
+                <small class="text-muted">Paid in full</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <small class="text-uppercase fw-bold text-muted mb-2">Pending Orders</small>
+                <h2 class="fw-bold text-warning mb-0">GH₵{{ pending_revenue|floatformat:2 }}</h2>
+                <small class="text-muted">Waiting for Paystack</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <small class="text-uppercase fw-bold text-muted mb-2">Conversion Rate</small>
+                <h2 class="fw-bold text-primary mb-0">{{ request_stats.conversion_rate }}%</h2>
+                <small class="text-muted">Requests to Paid Orders</small>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <small class="text-uppercase fw-bold text-muted mb-2">Custom Requests</small>
+                <h2 class="fw-bold mb-0">{{ request_stats.total }}</h2>
+                <small class="text-muted">Lifetime submissions</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-5">
+        <!-- Success Funnel & Products -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-5 p-5 mb-5">
+                <h4 class="fw-bold mb-4">Request Funnel Analysis</h4>
+                <div class="progress rounded-pill mb-4" style="height: 30px;">
+                    <div class="progress-bar bg-primary text-black fw-bold" role="progressbar" style="width: {{ request_stats.conversion_rate }}%">
+                        Paid ({{ request_stats.paid }})
+                    </div>
+                    <div class="progress-bar bg-dark" role="progressbar" style="width: 25%">
+                        Accepted ({{ request_stats.accepted }})
+                    </div>
+                </div>
+                <div class="row text-center mt-2">
+                    <div class="col-4 border-end">
+                        <h5 class="mb-0 fw-bold">{{ request_stats.total }}</h5>
+                        <small class="text-muted">Inbound Leads</small>
+                    </div>
+                    <div class="col-4 border-end">
+                        <h5 class="mb-0 fw-bold text-primary">{{ request_stats.accepted }}</h5>
+                        <small class="text-muted">Quotes Approved</small>
+                    </div>
+                    <div class="col-4">
+                        <h5 class="mb-0 fw-bold text-success">{{ request_stats.paid }}</h5>
+                        <small class="text-muted">Converted Deals</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-5 overflow-hidden">
+                <div class="card-header bg-white border-0 p-4">
+                    <h5 class="fw-bold mb-0">Recent Business Activity</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th class="px-4 border-0">Order ID</th>
+                                <th class="border-0">Customer</th>
+                                <th class="border-0">Amount</th>
+                                <th class="border-0">Status</th>
+                                <th class="border-0 text-end pe-4">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in recent_orders %}
+                            <tr>
+                                <td class="px-4 fw-bold">#{{ order.id }}</td>
+                                <td>{{ order.first_name }} {{ order.last_name }}</td>
+                                <td class="fw-bold">GH₵{{ order.total_amount }}</td>
+                                <td>
+                                    <span class="badge {% if order.payment_status == 'paid' %}bg-success-subtle text-success{% else %}bg-warning-subtle text-warning{% endif %} rounded-pill px-3">
+                                        {{ order.get_payment_status_display }}
+                                    </span>
+                                </td>
+                                <td class="text-end pe-4 text-muted small">{{ order.created_at|date:"M d, H:i" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Ranking -->
+        <div class="col-lg-4">
+            <div class="card border-0 bg-dark text-white rounded-5 p-4 mb-4">
+                <h5 class="fw-bold mb-4">Top Selling Materials</h5>
+                <div class="d-flex flex-column gap-3">
+                    {% for product in top_products %}
+                    <div class="d-flex align-items-center justify-content-between p-3 rounded-4 bg-secondary bg-opacity-10">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="fw-bold text-primary">#{{ forloop.counter }}</div>
+                            <div class="small fw-bold">{{ product.name }}</div>
+                        </div>
+                        <span class="badge bg-primary text-black rounded-pill">{{ product.sales_count }} sold</span>
+                    </div>
+                    {% empty %}
+                    <p class="text-muted small">No sales data yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="card border-0 bg-primary text-black rounded-5 p-4 shadow-sm text-center">
+                <div class="fs-1 mb-2"><i class="bi bi-lightning-charge-fill"></i></div>
+                <h5 class="fw-bold mb-2">Performance Spike</h5>
+                <p class="small opacity-75 mb-0">You've had 12 custom requests in the last 24 hours. Consider increasing POP ceiling board inventory.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

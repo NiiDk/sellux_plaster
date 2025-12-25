@@ -1,4 +1,5 @@
 import json
+import logging
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -11,7 +12,9 @@ from django.contrib import messages
 from .models import Order, OrderItem
 from cart.cart import Cart
 from catalogue.models import Product
-from core.services import PaystackService
+from core.services import PaystackService, NotificationService
+
+logger = logging.getLogger(__name__)
 
 class OrderCreateView(LoginRequiredMixin, TemplateView):
     template_name = 'orders/order_create.html'
@@ -42,7 +45,6 @@ class OrderCreateView(LoginRequiredMixin, TemplateView):
         if len(cart) == 0:
             return redirect('catalogue:product_list')
 
-        # Create Order
         order = Order.objects.create(
             user=request.user,
             first_name=request.user.first_name or request.user.username,
@@ -53,7 +55,6 @@ class OrderCreateView(LoginRequiredMixin, TemplateView):
             total_amount=cart.get_total_price()
         )
         
-        # Create Order Items
         for item in cart:
             OrderItem.objects.create(
                 order=order,
@@ -62,7 +63,6 @@ class OrderCreateView(LoginRequiredMixin, TemplateView):
                 quantity=item['quantity']
             )
         
-        # Initialize Paystack
         callback_url = request.build_absolute_uri(reverse('orders:verify'))
         res = PaystackService.initialize_transaction(
             email=order.email,
@@ -87,33 +87,58 @@ class OrderVerifyView(LoginRequiredMixin, TemplateView):
         if success:
             order_id = data['metadata']['order_id']
             order = get_object_or_404(Order, id=order_id)
-            order.payment_status = 'paid'
-            order.save()
+            
+            # Defensive check: if already paid via webhook, just show success
+            if order.payment_status != 'paid':
+                order.payment_status = 'paid'
+                order.payment_channel = data.get('channel', 'unknown')
+                order.transaction_id = data.get('id')
+                order.save()
+                
             messages.success(request, f"Payment successful! Your order #{order.id} is being processed.")
             return redirect('orders:success', pk=order.id)
         
-        messages.error(request, "Payment verification failed.")
+        messages.error(request, "Payment verification failed or timed out.")
         return redirect('dashboard:home')
 
 @csrf_exempt
 def paystack_webhook(request):
+    """
+    Production-grade Webhook Guard for Sellux Plaster.
+    Handles background verification and state persistence.
+    """
     payload = request.body
     signature = request.headers.get('x-paystack-signature')
     
     if not PaystackService.verify_webhook(payload, signature):
+        logger.warning(f"Invalid Paystack Webhook Signature received.")
         return HttpResponse(status=400)
     
-    event_data = json.loads(payload)
-    if event_data['event'] == 'charge.success':
-        reference = event_data['data']['reference']
-        order_id = event_data['data']['metadata']['order_id']
-        order = Order.objects.filter(id=order_id).first()
-        if order:
-            order.payment_status = 'paid'
-            order.paystack_ref = reference
-            order.save()
+    try:
+        event_data = json.loads(payload)
+        event_type = event_data.get('event')
+        
+        if event_type == 'charge.success':
+            data = event_data['data']
+            reference = data['reference']
+            order_id = data['metadata'].get('order_id')
             
-    return HttpResponse(status=200)
+            order = Order.objects.filter(id=order_id).first()
+            if order and order.payment_status != 'paid':
+                order.payment_status = 'paid'
+                order.paystack_ref = reference
+                order.payment_channel = data.get('channel', 'webhook')
+                order.transaction_id = data.get('id')
+                order.save()
+                
+                # Automated artisan touch: Notify the sales team via internal log
+                logger.info(f"ORDER PAID (WEBHOOK): Order #{order.id} verified via Paystack.")
+                
+        return HttpResponse(status=200)
+        
+    except (json.JSONDecodeError, KeyError) as e:
+        logger.error(f"Webhook processing error: {str(e)}")
+        return HttpResponse(status=400)
 
 class OrderSuccessView(LoginRequiredMixin, DetailView):
     model = Order

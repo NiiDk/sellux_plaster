@@ -3,6 +3,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+# Custom Branding for Django Administration
+admin.site.site_header = "Sellux Plaster Administration"
+admin.site.site_title = "Sellux Plaster Admin Portal"
+admin.site.index_title = "Welcome to Sellux Plaster Business Manager"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
@@ -16,7 +21,7 @@ urlpatterns = [
     path('custom-requests/', include('custom_requests.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('insights/', include('blog.urls')),
-    path('cart/', include('cart.urls')), # Added cart URLs
+    path('cart/', include('cart.urls')),
 ]
 
 if settings.DEBUG:

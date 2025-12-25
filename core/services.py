@@ -2,6 +2,7 @@ import requests
 import logging
 import hmac
 import hashlib
+import os
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -73,9 +74,6 @@ class NotificationService(BaseService):
     """
     @classmethod
     def send_email(cls, subject, recipient_list, template_name, context):
-        """
-        Sends a branded HTML email.
-        """
         html_content = render_to_string(template_name, context)
         text_content = strip_tags(html_content)
         
@@ -96,15 +94,50 @@ class NotificationService(BaseService):
 
     @classmethod
     def send_sms(cls, phone_number, message):
-        """
-        Placeholder for Twilio/BulkSMS integration.
-        """
         logger.info(f"SMS trigger: To {phone_number} -> {message}")
-        # Implementation for Twilio would go here
         return True
 
 class AIService(BaseService):
-    """ Hook for future AI integrations. """
+    """
+    Architectural AI Service for Sellux Plaster.
+    Can be linked to OpenAI, Anthropic, or Gemini.
+    """
+    API_KEY = os.getenv('AI_API_KEY')
+    API_URL = "https://api.openai.com/v1/chat/completions"
+
     @classmethod
-    def generate_content(cls, prompt):
-        return "AI content generation hook active."
+    def enhance_design_brief(cls, raw_description, service_type):
+        """
+        Transforms a simple user description into a professional architectural brief.
+        """
+        if not cls.API_KEY:
+            return f"Service: {service_type}. Note: {raw_description} (AI enhancement disabled - missing key)"
+
+        prompt = f"Act as an architectural designer for Sellux Plaster. Enhance this brief for a {service_type}: '{raw_description}'. Use professional terminology like 'recessed lighting', 'shadow gaps', or 'crown moldings'. Keep it concise but luxury-focused."
+        
+        try:
+            headers = {"Authorization": f"Bearer {cls.API_KEY}", "Content-Type": "application/json"}
+            data = {
+                "model": "gpt-3.5-turbo",
+                "messages": [{"role": "user", "content": prompt}]
+            }
+            response = requests.post(cls.API_URL, headers=headers, json=data, timeout=10)
+            return response.json()['choices'][0]['message']['content']
+        except Exception as e:
+            logger.error(f"AI brief enhancement failed: {str(e)}")
+            return raw_description
+
+    @classmethod
+    def suggest_quote_price(cls, service_type, sq_ft):
+        """
+        Provides a baseline estimate for the admin based on Ghanian market rates.
+        """
+        rates = {
+            'pop_ceiling': 45, # GH₵ per sq ft
+            'cornice_install': 15, 
+            'drywall_partition': 65,
+            'skimming': 12
+        }
+        base_rate = rates.get(service_type, 20)
+        estimated = float(sq_ft or 0) * base_rate
+        return round(estimated, 2)

@@ -8,6 +8,15 @@ class Service(models.Model):
     short_description = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField(upload_to='services/')
+    
+    # Contextual Selling: Recommended products for this specific service
+    recommended_products = models.ManyToManyField(
+        'catalogue.Product', 
+        blank=True, 
+        related_name='suggested_for_services',
+        help_text="Select materials from the catalogue usually required for this service."
+    )
+    
     is_active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=0)
 

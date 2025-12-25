@@ -38,9 +38,13 @@ class Order(models.Model):
     
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_PENDING)
     payment_status = models.CharField(max_length=20, choices=PAYMENT_CHOICES, default=PAYMENT_PENDING)
-    paystack_ref = models.CharField(max_length=100, blank=True)
     
-    admin_feedback = models.TextField(blank=True, help_text="Notes for the customer regarding order status (e.g. tracking numbers, delivery time estimates).")
+    # Financial Metadata
+    paystack_ref = models.CharField(max_length=100, blank=True, unique=True, null=True)
+    payment_channel = models.CharField(max_length=50, blank=True, help_text="e.g. mobile_money, card")
+    transaction_id = models.CharField(max_length=100, blank=True, null=True)
+    
+    admin_feedback = models.TextField(blank=True, help_text="Notes for the customer regarding order status.")
     
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
     created_at = models.DateTimeField(auto_now_add=True)
@@ -50,7 +54,7 @@ class Order(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"Order #{self.id}"
+        return f"Order #{self.id} - {self.first_name}"
 
     def get_absolute_url(self):
         return reverse('orders:success', kwargs={'pk': self.pk})
@@ -62,7 +66,7 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return str(self.id)
+        return f"Item {self.id} for Order {self.order.id}"
 
     def get_cost(self):
         return self.price * self.quantity

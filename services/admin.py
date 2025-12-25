@@ -4,5 +4,19 @@ from .models import Service
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('title', 'order', 'is_active')
-    prepopulated_fields = {'slug': ('title',)}
     list_editable = ('order', 'is_active')
+    prepopulated_fields = {'slug': ('title',)}
+    filter_horizontal = ('recommended_products',) # Easier multi-select UI
+    
+    fieldsets = (
+        ('Service Info', {
+            'fields': ('title', 'slug', 'icon', 'short_description', 'description', 'image')
+        }),
+        ('Contextual Selling', {
+            'fields': ('recommended_products',),
+            'description': 'Link specific catalogue materials to this service to encourage cross-selling.'
+        }),
+        ('Display Settings', {
+            'fields': ('order', 'is_active')
+        }),
+    )

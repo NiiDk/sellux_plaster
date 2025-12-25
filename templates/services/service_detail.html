@@ -19,7 +19,7 @@
                 <h1 class="display-3 fw-bold mb-4">{{ service.title }}</h1>
                 <p class="lead opacity-75 mb-5">{{ service.short_description }}</p>
                 <div class="d-flex gap-3">
-                    <a href="{% url 'contact:contact_us' %}" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold">Get a Quote</a>
+                    <a href="{% url 'contact:contact_us' %}" class="btn btn-primary btn-lg rounded-pill px-5 py-3 fw-bold text-black">Get a Quote</a>
                     <a href="#details" class="btn btn-outline-light btn-lg rounded-pill px-5 py-3">Learn More</a>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <div class="card border-0 shadow-sm rounded-5 p-5">
                     <div class="d-flex align-items-center gap-3 mb-4 text-primary">
                         <i class="bi {{ service.icon }} fs-1"></i>
-                        <h2 class="fw-bold mb-0">Service Overview</h2>
+                        <h2 class="fw-bold mb-0 text-black">Service Overview</h2>
                     </div>
                     <div class="service-description lead text-muted mb-5" style="line-height: 1.8;">
                         {{ service.description|linebreaks }}
@@ -57,25 +57,25 @@
                         <div class="col-md-6">
                             <div class="d-flex gap-3">
                                 <i class="bi bi-check-circle-fill text-primary"></i>
-                                <p class="mb-0">Premium quality materials sourced globally.</p>
+                                <p class="mb-0 text-muted">Premium quality materials sourced globally.</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex gap-3">
                                 <i class="bi bi-check-circle-fill text-primary"></i>
-                                <p class="mb-0">Certified master craftsmen with years of experience.</p>
+                                <p class="mb-0 text-muted">Certified master craftsmen with years of experience.</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex gap-3">
                                 <i class="bi bi-check-circle-fill text-primary"></i>
-                                <p class="mb-0">Fast turnaround and clean job sites.</p>
+                                <p class="mb-0 text-muted">Fast turnaround and clean job sites.</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex gap-3">
                                 <i class="bi bi-check-circle-fill text-primary"></i>
-                                <p class="mb-0">Full warranty on all architectural installations.</p>
+                                <p class="mb-0 text-muted">Full warranty on all architectural installations.</p>
                             </div>
                         </div>
                     </div>
@@ -84,6 +84,30 @@
 
             <!-- Sidebar -->
             <div class="col-lg-4 animate__animated animate__fadeInRight">
+                <!-- NEW: Contextual Selling Sidebar Section -->
+                {% if service.recommended_products.all %}
+                <div class="card border-0 bg-light shadow-sm rounded-5 p-4 mb-4 border-start border-primary border-5">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-box-seam me-2 text-primary"></i>Essential Materials</h5>
+                    <p class="text-muted small mb-4">You'll need these high-quality materials from our catalogue for a perfect {{ service.title }} finish:</p>
+                    
+                    <div class="d-flex flex-column gap-3 mb-4">
+                        {% for product in service.recommended_products.all %}
+                        <div class="d-flex align-items-center gap-3 bg-white p-2 rounded-4 shadow-sm">
+                            <img src="{{ product.image.url }}" class="rounded-3" style="width: 50px; height: 50px; object-fit: cover;">
+                            <div class="flex-grow-1">
+                                <h6 class="fw-bold mb-0 small">{{ product.name }}</h6>
+                                <span class="text-primary small fw-bold">GH₵{{ product.price }}</span>
+                            </div>
+                            <a href="{{ product.get_absolute_url }}" class="btn btn-dark btn-sm rounded-circle">
+                                <i class="bi bi-plus-lg"></i>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{% url 'catalogue:product_list' %}" class="btn btn-outline-dark btn-sm rounded-pill w-100 fw-bold">Browse All Materials</a>
+                </div>
+                {% endif %}
+
                 <div class="card border-0 bg-white shadow-sm rounded-5 p-4 mb-4">
                     <h4 class="fw-bold mb-4">Request a Consultation</h4>
                     <p class="text-muted small mb-4">Interested in {{ service.title }}? Send us a message and our experts will get back to you within 24 hours.</p>
@@ -103,6 +127,10 @@
 <style>
     .shadow-2xl {
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    .hover-lift:hover {
+        transform: translateY(-5px);
+        transition: 0.3s;
     }
 </style>
 {% endblock %}
