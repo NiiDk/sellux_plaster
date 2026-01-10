@@ -130,6 +130,16 @@
             justify-content: center;
         }
 
+        .navbar-nav .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 992px) {
+            .navbar-nav .nav-item {
+                margin-bottom: 0;
+            }
+        }
+
         .btn-primary {
             background-color: var(--primary-color);
             border: none;
@@ -340,8 +350,8 @@
             </a>
 
             <div class="d-flex align-items-center">
-                <a href="{% url 'cart:cart_detail' %}" class="nav-link cart-btn position-relative d-lg-none">
-                    <i class="bi bi-cart fs-2"></i>
+                <a href="{% url 'cart:cart_detail' %}" class="nav-link cart-btn position-relative d-lg-none me-2">
+                    <i class="bi bi-cart fs-3"></i>
                     {% if cart|length > 0 %}
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ cart|length }}
@@ -362,7 +372,7 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'contact:contact_us' %}">Contact</a></li>
                     <li class="nav-item d-none d-lg-block">
                         <a href="{% url 'cart:cart_detail' %}" class="nav-link cart-btn position-relative">
-                            <i class="bi bi-cart fs-2"></i>
+                            <i class="bi bi-cart fs-3"></i>
                             {% if cart|length > 0 %}
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     {{ cart|length }}
