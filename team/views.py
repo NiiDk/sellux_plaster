@@ -2,8 +2,8 @@ from django.shortcuts import render
 from .models import TeamMember
 
 def team_list_view(request):
-    firm_leadership = TeamMember.objects.filter(is_active=True, department='Management').order_by('order_weight')
-    associates = TeamMember.objects.filter(is_active=True).exclude(department='Management').order_by('order_weight')
+    firm_leadership = TeamMember.objects.filter(is_active=True, is_management=True).order_by('order_weight')
+    associates = TeamMember.objects.filter(is_active=True, is_management=False).order_by('order_weight')
     context = {
         'firm_leadership': firm_leadership,
         'associates': associates,
