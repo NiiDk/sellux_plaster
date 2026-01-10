@@ -106,7 +106,7 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             color: var(--accent-color) !important;
-            margin: 0 0.75rem;
+            margin: 0 1rem;
             padding: 0.4rem 0.8rem;
             border: 1px solid var(--primary-color);
             border-radius: var(--border-radius);
@@ -206,18 +206,6 @@
 
         img.loaded {
             opacity: 1;
-        }
-
-        .nav-search {
-            position: relative;
-        }
-
-        .nav-search i {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary-color);
         }
 
         .whatsapp-float {
@@ -351,23 +339,30 @@
                 </div>
             </a>
 
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-            </button>
+            <div class="d-flex align-items-center">
+                <a href="{% url 'cart:cart_detail' %}" class="nav-link cart-btn position-relative d-lg-none">
+                    <i class="bi bi-cart fs-2"></i>
+                    {% if cart|length > 0 %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ cart|length }}
+                        </span>
+                    {% endif %}
+                </a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+                </button>
+            </div>
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'services:service_list' %}">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'catalogue:product_list' %}">Shop</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:project_list' %}">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'estimation:estimator' %}">Estimator</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'about:about' %}">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'team:team_list' %}">Our Team</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'contact:contact_us' %}">Contact</a></li>
-                    <li class="nav-item">
+                    <li class="nav-item d-none d-lg-block">
                         <a href="{% url 'cart:cart_detail' %}" class="nav-link cart-btn position-relative">
-                            <i class="bi bi-cart fs-3"></i>
+                            <i class="bi bi-cart fs-2"></i>
                             {% if cart|length > 0 %}
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     {{ cart|length }}
