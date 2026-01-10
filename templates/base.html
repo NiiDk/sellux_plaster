@@ -28,22 +28,22 @@
         /* --- LUXURY BRANDING: BLACK & ORANGE --- */
         :root {
             /* Brand Colors */
-            --primary-color: #d96a00; /* Your original robust orange */
-            --primary-vibrant: #ff7b00; /* A lighter shade for hover effects */
-            --black-onyx: #050505; /* Deep rich black */
-            --black-charcoal: #121212; /* Secondary dark */
-            --white-alabaster: #F9F9F9; /* Off-white for eyes */
+            --primary-color: #d96a00;
+            --primary-vibrant: #ff7b00;
+            --black-onyx: #050505;
+            --black-charcoal: #121212;
+            --white-alabaster: #F9F9F9;
+
+            /* Amber Glass Variable */
+            --amber-glass: rgba(217, 106, 0, 0.96);
 
             /* UI Variables */
             --nav-height: 80px;
             --border-radius-pill: 50px;
-            --border-radius-card: 12px;
 
-            /* Shadows for Depth */
-            --shadow-glow: 0 0 20px rgba(217, 106, 0, 0.15);
+            /* Shadows & Transitions */
             --shadow-float: 0 10px 30px rgba(0,0,0,0.2);
-
-            --transition-fast: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
@@ -60,91 +60,185 @@
             letter-spacing: -0.5px;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- ADVANTAGE CARD (Orange Outline) --- */
+        .advantage-card {
+            border: 1px solid var(--primary-color);
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            height: 100%;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(217, 106, 0, 0.15);
+            border-color: var(--primary-vibrant);
+        }
+
+        .advantage-card h3, .advantage-card h4, .advantage-card h5 {
+            color: var(--black-onyx);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        /* --- NAVIGATION: DYNAMIC STATE --- */
         .navbar {
-            background-color: var(--black-onyx) !important;
+            background-color: var(--black-onyx);
             padding: 0;
-            height: var(--nav-height);
+            min-height: var(--nav-height);
             box-shadow: 0 2px 20px rgba(0,0,0,0.5);
             z-index: 1030;
+            transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
         }
 
-        .navbar-container {
-            height: 100%;
-            display: flex;
-            align-items: center;
+        /* Active State (Mobile Menu Open) */
+        .navbar.mobile-nav-active {
+            background-color: var(--amber-glass) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
-        /* Logo Fix: Explicit Sizing */
+        .navbar-container { display: flex; align-items: center; }
+
+        /* Logo Styling */
         .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #fff !important;
-            font-size: 1.35rem;
+            display: flex; align-items: center; gap: 12px;
+            color: #fff !important; font-size: 1.35rem; padding: 10px 0;
+            transition: color 0.3s ease;
         }
 
         .logo-wrapper {
-            width: 45px;
-            height: 45px;
+            width: 45px; height: 45px;
             background: #fff;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             padding: 4px;
-            /* Orange glow border */
             box-shadow: 0 0 0 2px var(--primary-color);
+            transition: box-shadow 0.3s ease;
         }
+        .logo-wrapper img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
-        .logo-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Ensures logo fits inside the square */
-            display: block;
-        }
-
-        .brand-text {
-            line-height: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .brand-text span:first-child {
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
+        .brand-text { line-height: 1; display: flex; flex-direction: column; }
+        .brand-text span:first-child { font-weight: 800; letter-spacing: 1px; }
         .brand-text span:last-child {
-            font-size: 0.75rem;
-            color: var(--primary-color);
-            letter-spacing: 2px;
-            font-weight: 500;
+            font-size: 0.75rem; color: var(--primary-color); letter-spacing: 2px; font-weight: 500;
+            transition: color 0.3s ease;
         }
 
-        /* Nav Links */
+        /* --- MOBILE MENU TRANSFORMATIONS --- */
+        .navbar.mobile-nav-active .navbar-brand { color: #000 !important; }
+        .navbar.mobile-nav-active .brand-text span:last-child { color: #000 !important; }
+        .navbar.mobile-nav-active .logo-wrapper { box-shadow: 0 0 0 2px #000 !important; }
+        .navbar.mobile-nav-active .navbar-toggler i { color: #000 !important; }
+        .navbar.mobile-nav-active .navbar-toggler { border-color: rgba(0,0,0,0.3) !important; }
+        .navbar.mobile-nav-active .mobile-cart-icon { color: #000 !important; }
+        .navbar.mobile-nav-active .mobile-cart-badge { background-color: #000 !important; color: var(--primary-color) !important; }
+
+        /* Nav Links Styles */
         .nav-link {
-            color: rgba(255,255,255,0.7) !important;
+            color: rgba(255,255,255,0.7);
             font-size: 0.9rem;
             font-weight: 500;
             text-transform: uppercase;
             padding: 8px 16px !important;
-            transition: var(--transition-fast);
+            transition: var(--transition-smooth);
             border-radius: 4px;
         }
 
-        .nav-link:hover, .nav-link.active {
-            color: #fff !important;
-            background-color: rgba(255,255,255,0.05);
+        @media (min-width: 992px) {
+            .nav-link:hover, .nav-link.active {
+                color: #fff !important;
+                background-color: rgba(255,255,255,0.05);
+            }
         }
 
-        /* Mobile Toggler */
-        .navbar-toggler {
-            border: 1px solid rgba(255,255,255,0.2);
+        /* --- DESKTOP EXPAND & COLLAPSE ANIMATION --- */
+        @media (min-width: 992px) {
+            .dropdown-menu {
+                display: block; /* Override default 'none' to allow transitions */
+                visibility: hidden; /* Hide via visibility to keep DOM present */
+                opacity: 0;
+                transform: translateY(10px); /* Start slightly down */
+                transition: all 0.3s cubic-bezier(0.2, 0, 0, 1); /* Kinetic Easing */
+                pointer-events: none; /* Prevent clicks when hidden */
+            }
+
+            /* When Bootstrap adds .show class */
+            .dropdown-menu.show {
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0); /* Slide up to position */
+                pointer-events: auto;
+            }
         }
-        .navbar-toggler:focus {
-            box-shadow: none;
-            border-color: var(--primary-color);
+
+        /* --- UNIVERSAL CHEVRON ROTATION --- */
+        .dropdown-toggle::after { display: none !important; } /* Hide default caret */
+
+        .chevron-rotate {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        /* Mobile: Rotate when expanded */
+        .mobile-profile-toggle[aria-expanded="true"] .chevron-rotate {
+            transform: rotate(180deg);
+        }
+
+        /* Desktop: Rotate when show class added by BS */
+        .nav-link.show .chevron-rotate {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-collapse { padding: 1rem 0 2rem 0; }
+
+            .navbar-nav .nav-item .nav-link {
+                color: #000 !important;
+                font-weight: 700;
+                font-size: 1.1rem;
+                text-align: left;
+                padding: 15px 0 !important;
+                border-bottom: 1px solid rgba(0,0,0,0.1);
+            }
+
+            .navbar-nav .nav-item .nav-link:hover {
+                padding-left: 10px !important;
+                color: #fff !important;
+            }
+
+            /* Mobile Profile Accordion Styles */
+            .mobile-profile-toggle {
+                color: #000 !important;
+                font-weight: 700;
+                border-bottom: 1px solid rgba(0,0,0,0.1);
+                cursor: pointer;
+                background: transparent;
+                border: none;
+                width: 100%;
+                text-align: left;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 0;
+            }
+
+            .mobile-profile-toggle:focus { outline: none; }
+
+            .mobile-profile-collapse {
+                background: rgba(0,0,0,0.05);
+                border-radius: 8px;
+                margin-top: 5px;
+            }
+
+            .mobile-profile-collapse .nav-link {
+                font-size: 0.95rem !important;
+                border-bottom: none !important;
+                padding: 10px 15px !important;
+                opacity: 0.8;
+            }
         }
 
         /* --- BUTTONS --- */
@@ -156,108 +250,53 @@
             font-weight: 600;
             font-size: 0.9rem;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(217, 106, 0, 0.4); /* Orange shadow */
-            transition: var(--transition-fast);
+            box-shadow: 0 4px 15px rgba(217, 106, 0, 0.4);
+            transition: var(--transition-smooth);
+            color: #fff;
         }
 
         .btn-primary:hover {
             background-color: var(--primary-vibrant);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(217, 106, 0, 0.6);
+            color: #fff;
         }
 
         /* --- FLOATING ELEMENTS --- */
         .whatsapp-float, .cart-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
+            position: fixed; width: 60px; height: 60px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-size: 28px;
             box-shadow: var(--shadow-float);
             z-index: 1000;
-            transition: var(--transition-fast);
-            cursor: pointer;
-            text-decoration: none;
+            transition: var(--transition-smooth);
+            cursor: pointer; text-decoration: none;
         }
-
-        .whatsapp-float {
-            bottom: 30px;
-            right: 30px;
-            background: #25D366;
-            color: white;
-            border: 2px solid #fff;
-        }
-
-        .cart-float {
-            bottom: 100px;
-            right: 30px;
-            background: var(--black-onyx);
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            z-index: 1001;
-        }
-
-        .whatsapp-float:hover, .cart-float:hover {
-            transform: scale(1.1);
-        }
+        .whatsapp-float { bottom: 30px; right: 30px; background: #25D366; color: white; border: 2px solid #fff; }
+        .cart-float { bottom: 100px; right: 30px; background: var(--black-onyx); color: var(--primary-color); border: 2px solid var(--primary-color); z-index: 1001; }
+        .whatsapp-float:hover, .cart-float:hover { transform: scale(1.1); }
 
         /* --- PROMO MODAL --- */
-        .promo-modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.85); /* Darker backdrop */
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-        }
-        .promo-modal-content {
-            border-radius: 0; /* Boxy = Modern Architecture feel */
-            border: 1px solid #333;
-        }
-        .promo-form-half {
-            background: #fff;
-        }
+        .promo-modal-backdrop { background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 2000; }
+        .promo-modal-content { border-radius: 0; border: 1px solid #333; }
+        .promo-form-half { background: #fff; }
 
         /* --- FOOTER --- */
-        footer {
-            background-color: var(--black-onyx);
-            color: #888;
-            border-top: 3px solid var(--primary-color); /* The Brand Line */
-        }
+        footer { background-color: var(--black-onyx); color: #888; border-top: 3px solid var(--primary-color); }
+        .footer-heading { color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 20px; }
+        .footer-link { color: #888; text-decoration: none; transition: 0.3s; }
+        .footer-link:hover { color: var(--primary-color); padding-left: 5px; }
 
-        .footer-heading {
-            color: #fff;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .footer-link {
-            color: #888;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .footer-link:hover {
-            color: var(--primary-color);
-            padding-left: 5px;
-        }
-
-        /* Utils */
         .text-primary { color: var(--primary-color) !important; }
         .bg-primary { background-color: var(--primary-color) !important; }
-
-        img[loading="lazy"] {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
+        img[loading="lazy"] { opacity: 0; transition: opacity 0.5s ease-in-out; }
         img.loaded { opacity: 1; }
-
     </style>
     {% block extra_css %}{% endblock extra_css %}
 </head>
 <body class="d-flex flex-column min-vh-100">
-<nav class="navbar navbar-expand-lg sticky-top">
+<nav class="navbar navbar-expand-lg sticky-top" id="mainNavbar">
     <div class="container navbar-container">
         <a class="navbar-brand me-auto" href="/">
             <div class="logo-wrapper">
@@ -270,10 +309,10 @@
         </a>
 
         <div class="d-flex align-items-center d-lg-none">
-            <a href="{% url 'cart:cart_detail' %}" class="nav-link position-relative me-3 text-white">
-                <i class="bi bi-bag fs-4"></i>
+            <a href="{% url 'cart:cart_detail' %}" class="nav-link position-relative me-3 mobile-cart-icon text-white" style="background: transparent !important; box-shadow: none;">
+                <i class="bi bi-bag fs-3"></i>
                 {% if cart|length > 0 %}
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-primary" style="font-size: 0.6rem; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-primary mobile-cart-badge" style="font-size: 0.6rem; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;">
                             {{ cart|length }}
                         </span>
                 {% endif %}
@@ -284,7 +323,7 @@
         </div>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-center">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'services:service_list' %}">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'about:about' %}">About</a></li>
@@ -294,7 +333,7 @@
                 <li class="nav-item d-none d-lg-block ms-3">
                     <a href="{% url 'cart:cart_detail' %}" class="btn btn-outline-light rounded-pill position-relative d-flex align-items-center gap-2" style="border-color: rgba(255,255,255,0.2);">
                         <i class="bi bi-bag"></i>
-                        <span class="small">Quote</span>
+                        <span class="small">Cart</span>
                         {% if cart|length > 0 %}
                         <span class="badge bg-primary rounded-circle ms-1">{{ cart|length }}</span>
                         {% endif %}
@@ -302,18 +341,40 @@
                 </li>
 
                 {% if user.is_authenticated %}
-                <li class="nav-item dropdown ms-lg-3">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown">
+                <li class="nav-item dropdown ms-lg-3 mt-3 mt-lg-0">
+                    <a class="nav-link dropdown-toggle d-none d-lg-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {% if user.profile_image %}
                         <img src="{{ user.profile_image.url }}" class="rounded-circle border border-secondary" style="width: 32px; height: 32px; object-fit: cover;">
                         {% else %}
-                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold" style="width: 32px; height: 32px;">
+                        <div class="rounded-circle bg-white text-dark d-flex align-items-center justify-content-center fw-bold" style="width: 32px; height: 32px;">
                             {{ user.username|slice:":1"|upper }}
                         </div>
                         {% endif %}
-                        <span class="d-lg-none d-xl-inline">{{ user.username }}</span>
+                        <span class="d-inline">{{ user.username }}</span>
+                        <i class="bi bi-chevron-down chevron-rotate small"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-3" style="background: var(--black-charcoal);">
+
+                    <div class="d-lg-none w-100">
+                        <button class="mobile-profile-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#mobileProfileMenu" aria-expanded="false" aria-controls="mobileProfileMenu">
+                                    <span>
+                                        <i class="bi bi-person-circle me-2"></i> My Account
+                                    </span>
+                            <i class="bi bi-chevron-down chevron-rotate"></i>
+                        </button>
+
+                        <div class="collapse mobile-profile-collapse" id="mobileProfileMenu">
+                            <div class="p-2">
+                                <a href="{% url 'dashboard:home' %}" class="nav-link ps-4">Dashboard</a>
+                                <a href="{% url 'accounts:profile' %}" class="nav-link ps-4">Profile</a>
+                                <form action="{% url 'accounts:logout' %}" method="post" class="mt-1">
+                                    {% csrf_token %}
+                                    <button type="submit" class="nav-link ps-4 text-start w-100 text-danger fw-bold border-0 bg-transparent">Logout</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-3 d-none d-lg-block" style="background: var(--black-charcoal);">
                         <li><a class="dropdown-item text-light hover-primary" href="{% url 'dashboard:home' %}"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
                         <li><a class="dropdown-item text-light hover-primary" href="{% url 'accounts:profile' %}"><i class="bi bi-person me-2"></i> Profile</a></li>
                         <li><hr class="dropdown-divider bg-secondary opacity-25"></li>
@@ -326,9 +387,13 @@
                     </ul>
                 </li>
                 {% else %}
-                <li class="nav-item ms-lg-3 d-flex gap-2 mt-3 mt-lg-0">
-                    <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
-                    <a class="btn btn-primary text-white" href="{% url 'accounts:register' %}">Get Started</a>
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                    <div class="d-lg-flex gap-2">
+                        <a class="nav-link d-lg-inline-block px-3 py-2 text-center text-lg-start mb-2 mb-lg-0 border border-dark rounded-pill d-lg-none" href="{% url 'accounts:login' %}" style="border-color: #000 !important; color: #000 !important;">Login</a>
+                        <a class="nav-link d-none d-lg-inline-block px-3 py-2" href="{% url 'accounts:login' %}" style="border: 1px solid rgba(255,255,255,0.3); border-radius: 50px;">Login</a>
+
+                        <a class="btn btn-primary d-block d-lg-inline-block text-white" href="{% url 'accounts:register' %}" style="border: 2px solid #000; background: #000; color: var(--primary-color) !important;">Get Started</a>
+                    </div>
                 </li>
                 {% endif %}
             </ul>
@@ -456,7 +521,19 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Lazy Load
+        // --- 1. INDUSTRIAL GLASS MENU LOGIC ---
+        const navbar = document.getElementById('mainNavbar');
+        const navCollapse = document.getElementById('navbarNav');
+
+        navCollapse.addEventListener('show.bs.collapse', function () {
+            navbar.classList.add('mobile-nav-active');
+        });
+
+        navCollapse.addEventListener('hide.bs.collapse', function () {
+            navbar.classList.remove('mobile-nav-active');
+        });
+
+        // --- 2. LAZY LOADING ---
         const lazyImages = document.querySelectorAll('img[loading="lazy"]');
         if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
@@ -470,7 +547,7 @@
             lazyImages.forEach(img => observer.observe(img));
         }
 
-        // Draggable Cart
+        // --- 3. DRAGGABLE CART ---
         const cartFloat = document.getElementById('cart-float');
         if (cartFloat) {
             let isDragging = false, startX, startY, initialLeft, initialTop;
@@ -496,7 +573,7 @@
             document.addEventListener('mouseup', () => isDragging = false);
         }
 
-        // Promo Logic
+        // --- 4. PROMO MODAL ---
         const promoModal = document.getElementById('promo-modal');
         const promoCloseBtn = document.getElementById('promo-close-btn');
         const subscribeForm = document.getElementById('subscribe-form');

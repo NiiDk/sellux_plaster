@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load mathfilters %}
 
 {% block title %}Checkout | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
 <div class="container my-5 fade-in-up">
     <div class="row g-5">
-        <!-- Checkout Form -->
+
         <div class="col-lg-7">
             <div class="d-flex align-items-center mb-4">
                 <i class="bi bi-shield-check fs-2 text-primary me-3"></i>
@@ -16,11 +17,14 @@
                     <p class="text-muted mb-0">Your information is protected with industry-standard encryption.</p>
                 </div>
             </div>
+
             <div class="card shadow-sm p-4 rounded-4">
                 <div class="card-body">
                     <form method="post" novalidate>
                         {% csrf_token %}
+
                         {{ form|crispy }}
+
                         <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-primary btn-lg">Proceed to Payment</button>
                         </div>
@@ -29,42 +33,53 @@
             </div>
         </div>
 
-        <!-- Order Summary -->
         <div class="col-lg-5">
-            <div class="card shadow-sm rounded-4" style="background-color: var(--light-bg);">
-                <div class="card-body p-4">
-                    <h4 class="fw-bold mb-4">Order Summary</h4>
-                    <ul class="list-group list-group-flush">
-                        {% for item in cart %}
-                            <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent px-0">
-                                <div>
-                                    <h6 class="mb-0">{{ item.product.name }}</h6>
-                                    <small class="text-muted">Quantity: {{ item.quantity }}</small>
-                                </div>
-                                <span class="fw-bold">S{{ item.total_price|floatformat:2 }}</span>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <div class="d-flex justify-content-between align-items-center mt-4 pt-4 border-top fw-bold fs-5">
-                        <span>Subtotal</span>
-                        <span>S{{ cart.get_total_price|floatformat:2 }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mt-2 text-muted">
-                        <span>Tax ({{ tax_rate }}%)</span>
-                        <span>S{{ cart.get_total_price|mul:tax_rate|div:100|floatformat:2 }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mt-2 text-muted">
-                        <span>Delivery</span>
-                        <span>S0.00</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mt-4 pt-4 border-top fw-bold fs-4">
-                        <span>Grand Total</span>
-                        <span>S{{ cart.get_total_price|add:cart.get_total_price|mul:tax_rate|div:100|floatformat:2 }}</span>
-                    </div>
+            <div class="card shadow-sm rounded-4" style="background-color: #f8f9fa;"> <div class="card-body p-4">
+                <h4 class="fw-bold mb-4">Order Summary</h4>
+
+                <ul class="list-group list-group-flush mb-3">
+                    {% for item in cart %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent px-0">
+                        <div>
+                            <h6 class="mb-0">{{ item.product.name }}</h6>
+                            <small class="text-muted">Quantity: {{ item.quantity }}</small>
+                        </div>
+                        <span class="fw-bold">GH₵{{ item.total_price|floatformat:2 }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                {% with total_price=cart.get_total_price %}
+                {% with tax_amount=total_price|mul:tax_rate|div:100 %}
+
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-4 border-top fw-bold fs-5">
+                    <span>Subtotal</span>
+                    <span>GH₵{{ total_price|floatformat:2 }}</span>
                 </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-2 text-muted">
+                    <span>Tax ({{ tax_rate }}%)</span>
+                    <span>GH₵{{ tax_amount|floatformat:2 }}</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-2 text-muted">
+                    <span>Delivery</span>
+                    <span>Free</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-4 border-top fw-bold fs-3 text-primary">
+                    <span>Grand Total</span>
+                    <span>GH₵{{ total_price|add:tax_amount|floatformat:2 }}</span>
+                </div>
+
+                {% endwith %}
+                {% endwith %}
             </div>
+            </div>
+
             <div class="text-center mt-4">
-                <img src="https://www.paystack.com/assets/payment/img/logo-stack-blue.svg" alt="Paystack" style="height: 40px;">
+                <p class="small text-muted mb-2">Secured by</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Paystack_Logo.png/1200px-Paystack_Logo.png" alt="Paystack" style="height: 25px; object-fit: contain;">
             </div>
         </div>
     </div>
