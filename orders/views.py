@@ -48,7 +48,6 @@ class OrderCreateView(View):
             if request.user.is_authenticated:
                 order.user = request.user
             
-            # Calculate costs
             subtotal = cart.get_total_price()
             try:
                 shipping_settings = ShippingSetting.objects.first()
@@ -61,7 +60,7 @@ class OrderCreateView(View):
                     base_fee = Decimal(city.base_delivery_fee)
                     variable_fee = (subtotal / 100) * (Decimal(shipping_settings.delivery_fee_per_100) if shipping_settings else 0)
                     order.delivery_fee = base_fee + variable_fee
-            except ShippingSetting.DoesNotExist:
+            except (ShippingSetting.DoesNotExist, City.DoesNotExist):
                 order.tax = 0
                 order.delivery_fee = 0
             
