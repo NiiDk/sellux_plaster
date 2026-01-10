@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice</title>
+    <style>
+        @page {
+            size: a4 portrait;
+            margin: 1.5cm;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url(https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2) format('woff2');
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url(https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2) format('woff2');
+            font-weight: bold;
+        }
+
+        body { font-family: 'Inter', sans-serif; color: #333; }
+        .header-container { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+        .logo { width: 120px; }
+        .company-details { text-align: right; }
+        .company-details h1 { color: #d96a00; margin: 0; font-size: 24px; }
+        .company-details p { margin: 2px 0; font-size: 12px; }
+        .invoice-meta { display: flex; justify-content: space-between; margin-bottom: 30px; background-color: #f8f9fa; padding: 15px; border-radius: 8px; }
+        .meta-left, .meta-right { font-size: 12px; }
+        .meta-right { text-align: right; }
+        .items-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        .items-table th, .items-table td { padding: 12px 15px; border-bottom: 1px solid #eee; text-align: left; }
+        .items-table th { background-color: #f8f9fa; font-weight: bold; text-transform: uppercase; font-size: 11px; }
+        .items-table .text-right { text-align: right; }
+        .totals-section { float: right; width: 45%; }
+        .totals-table { width: 100%; }
+        .totals-table td { padding: 8px 0; }
+        .totals-table .total { font-weight: bold; }
+        .totals-table .grand-total { font-size: 1.5em; color: #d96a00; border-top: 2px solid #333; padding-top: 10px; }
+        .footer { position: fixed; bottom: -40px; left: 0; right: 0; text-align: center; font-size: 10px; color: #777; }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <img src="file://C:/Users/USER/Desktop/sellux_plaster/static/images/logo.png" class="logo" alt="Sellux Plaster Ltd">
+        <div class="company-details">
+            <h1>INVOICE</h1>
+            <p>Sellux Plaster Ltd</p>
+            <p>Odokor, Dr. Busia Highway, Accra</p>
+            <p>selluxplasterltd@gmail.com</p>
+        </div>
+    </div>
+
+    <div class="invoice-meta">
+        <div class="meta-left">
+            <strong>Billed To:</strong><br>
+            {{ order.first_name }} {{ order.last_name }}<br>
+            {{ order.email }}
+        </div>
+        <div class="meta-right">
+            <strong>Invoice #:</strong> {{ order.id }}<br>
+            <strong>Date:</strong> {{ order.created_at|date:"d M Y" }}
+        </div>
+    </div>
+
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th class="text-right">Quantity</th>
+                <th class="text-right">Unit Price</th>
+                <th class="text-right">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td class="text-right">{{ item.quantity }}</td>
+                <td class="text-right">S{{ item.price|floatformat:2 }}</td>
+                <td class="text-right">S{{ item.get_cost|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="totals-section">
+        <table class="totals-table">
+            <tr>
+                <td>Subtotal</td>
+                <td class="text-right">S{{ order.total_amount|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <td>Tax</td>
+                <td class="text-right">S{{ order.tax|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <td>Delivery</td>
+                <td class="text-right">S{{ order.delivery_fee|floatformat:2 }}</td>
+            </tr>
+            <tr class="grand-total">
+                <td><strong>Grand Total</strong></td>
+                <td class="text-right"><strong>S{{ order.get_grand_total|floatformat:2 }}</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>Thank you for your business!</p>
+    </div>
+</body>
+</html>

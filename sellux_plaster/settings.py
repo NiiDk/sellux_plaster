@@ -15,7 +15,7 @@ IS_RENDER = os.getenv('RENDER', 'False') == 'true'
 
 # Smart DEBUG setting
 if IS_RENDER:
-    DEBUG = os.getenv('DEBUG', 'False') == 'True'
+    DEBUG = False
 else:
     DEBUG = True
 
@@ -75,6 +75,11 @@ INSTALLED_APPS = [
     'services',
     'blog',
     'cart',
+    'estimation',
+    'shipping',
+    'promotions',
+    'about',
+    'team',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -108,6 +113,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.brand_context',
+                'core.context_processors.cart_context',
+                'core.context_processors.promotions_context',
             ],
         },
     },

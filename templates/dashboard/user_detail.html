@@ -1,0 +1,15 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+
+{% block admin_content %}
+<h1 class="display-5 fw-bold mb-5">User: {{ user_obj.username }}</h1>
+<div class="card">
+    <div class="card-body">
+        <p><strong>First Name:</strong> {{ user_obj.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user_obj.last_name }}</p>
+        <p><strong>Email:</strong> {{ user_obj.email }}</p>
+        <p><strong>Staff status:</strong> {{ user_obj.is_staff }}</p>
+        <p><strong>Date joined:</strong> {{ user_obj.date_joined }}</p>
+        <a href="{% url 'dashboard:user_update' user_obj.pk %}" class="btn btn-primary">Edit User</a>
+    </div>
+</div>
+{% endblock admin_content %}

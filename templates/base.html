@@ -4,25 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="{% block meta_description %}Sellux Plaster Ltd - Home of Affordable Luxury. Premium plastering, POP ceiling designs, and luxury cornices in Accra, Ghana. Expert architectural solutions since 2015.{% endblock %}">
+    <meta name="description" content="{% block meta_description %}Sellux Plaster Ltd - Premium plastering, POP ceiling designs, and luxury cornices in Accra, Ghana. Expert architectural solutions since 2015.{% endblock meta_description %}">
     <meta name="keywords" content="plastering, POP ceiling, cornices, interior design, architecture, Sellux Plaster, luxury interiors, Ghana, Accra, affordable luxury">
     <meta name="author" content="Sellux Plaster Ltd">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{% block og_title %}Sellux Plaster Ltd | Home of Affordable Luxury{% endblock %}">
-    <meta property="og:description" content="Elevating spaces with premium cornices, ceiling designs, and professional craftsmanship. Home of Affordable Luxury.">
+    <meta property="og:title" content="{% block og_title %}Sellux Plaster Ltd | Premium Architectural Solutions{% endblock og_title %}">
+    <meta property="og:description" content="Elevating spaces with premium cornices, ceiling designs, and professional craftsmanship.">
     <meta property="og:image" content="{% static 'images/logo.png' %}">
 
-    <title>{% block title %}Sellux Plaster Ltd | Home of Affordable Luxury{% endblock %}</title>
-    
+    <title>{% block title %}Sellux Plaster Ltd | Premium Architectural Solutions{% endblock title %}</title>
+
     <!-- Critical Preconnects -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -32,14 +32,17 @@
 
     <style>
         :root {
-            --primary-color: #ff7b00; /* Vibrant Orange */
-            --primary-hover: #e66f00;
-            --secondary-color: #1a1a1a; /* Soft Black */
-            --dark-bg: #000000; /* Pure Black */
-            --light-bg: #ffffff;
-            --accent-color: #ff9d00;
-            --text-main: #121212;
-            --text-muted: #666666;
+            --primary-color: #d96a00;
+            --primary-hover: #c35e00;
+            --secondary-color: #2a2a2a;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f8f9fa;
+            --accent-color: #ff8c00;
+            --text-main: #333;
+            --text-muted: #777;
+            --border-radius: 10px;
+            --shadow-sm: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.04);
+            --shadow-md: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.05);
         }
 
         body {
@@ -49,11 +52,12 @@
             overflow-x: hidden;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease;
         }
 
         h1, h2, h3, .navbar-brand {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
+            font-weight: 700;
         }
 
         .text-primary { color: var(--primary-color) !important; }
@@ -62,21 +66,32 @@
         .border-primary { border-color: var(--primary-color) !important; }
 
         .navbar {
-            backdrop-filter: blur(10px);
-            background-color: rgba(0, 0, 0, 0.95) !important;
-            transition: all 0.3s ease;
-            padding: 0.8rem 0;
+            background-color: var(--dark-bg) !important;
+            padding: 1rem 0;
+        }
+
+        .navbar-brand .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin-right: 12px;
+            overflow: hidden;
+            border: 3px solid var(--primary-color);
+            box-shadow: var(--shadow-sm);
         }
 
         .navbar-brand img {
-            max-height: 45px;
-            width: auto;
-            margin-right: 10px;
+            max-width: 100%;
+            height: auto;
         }
 
         .navbar-brand {
-            font-size: 1.25rem;
-            letter-spacing: -1px;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
             color: #ffffff !important;
             display: flex;
             align-items: center;
@@ -86,83 +101,96 @@
             color: var(--primary-color);
         }
 
-        .slogan-text {
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: block;
-            margin-top: -5px;
-        }
-
         .nav-link {
-            font-weight: 500;
-            color: #ffffff !important;
-            margin: 0 0.5rem;
-            transition: color 0.3s ease;
-            opacity: 0.8;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--accent-color) !important;
+            margin: 0 0.75rem;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            background-color: transparent;
+            transition: all 0.3s ease;
         }
 
-        .nav-link:hover {
-            color: var(--primary-color) !important;
-            opacity: 1;
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--dark-bg) !important;
+        }
+
+        .nav-link.cart-btn {
+            border-radius: 50%;
+            padding: 0.8rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-primary {
             background-color: var(--primary-color);
             border: none;
-            padding: 0.8rem 1.5rem;
-            font-weight: 600;
-            border-radius: 8px;
-            color: #000;
-            box-shadow: 0 4px 6px -1px rgba(255, 123, 0, 0.2);
+            padding: 0.9rem 1.8rem;
+            font-weight: 700;
+            border-radius: var(--border-radius);
+            color: #fff;
+            box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(255, 123, 0, 0.3);
-            color: #000;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            color: #fff;
         }
 
         .btn-outline-primary {
             color: var(--primary-color);
             border-color: var(--primary-color);
+            border-width: 2px;
+            padding: 0.9rem 1.8rem;
+            font-weight: 700;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
         }
 
         .btn-outline-primary:hover {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
-            color: #000;
+            color: #fff;
         }
 
         .card {
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
             background: #fff;
         }
 
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
         }
 
         footer {
             background-color: var(--dark-bg);
-            color: #999;
+            color: #aaa;
         }
 
         .footer-heading {
             color: white;
             font-weight: 700;
             margin-bottom: 1.5rem;
+            font-size: 1.2rem;
         }
 
         .footer-link {
-            color: #999;
+            color: #aaa;
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -171,36 +199,22 @@
             color: var(--primary-color);
         }
 
-        /* Performance Optimization: Lazy Image handling */
         img[loading="lazy"] {
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
-        
+
         img.loaded {
             opacity: 1;
         }
 
-        /* Nav Search Bar Styling */
-        .nav-search .form-control {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            border-radius: 50px;
-            padding-left: 40px;
-            transition: 0.3s;
-        }
-        .nav-search .form-control:focus {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-color: var(--primary-color);
-            box-shadow: none;
-        }
         .nav-search {
             position: relative;
         }
+
         .nav-search i {
             position: absolute;
-            left: 15px;
+            left: 18px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary-color);
@@ -210,82 +224,167 @@
             position: fixed;
             bottom: 40px;
             right: 40px;
-            background-color: #25d366;
+            background: linear-gradient(45deg, #25d366, #128c7e);
             color: #FFF;
             border-radius: 50px;
             text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            font-size: 28px;
+            box-shadow: var(--shadow-md);
             z-index: 1000;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            transition: 0.3s;
-        }
-        .whatsapp-float:hover { transform: scale(1.1); color: #fff; }
-
-        /* Hero animations */
-        .hero-title {
-            animation: fadeInUp 1s both;
+            transition: all 0.3s ease;
         }
 
-        .hero-subtitle {
-            animation: fadeInUp 1s 0.2s both;
+        .whatsapp-float:hover { transform: scale(1.1) rotate(10deg); color: #fff; }
+
+        .cart-float {
+            position: fixed;
+            bottom: 120px;
+            right: 40px;
+            background-color: var(--primary-color);
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 28px;
+            box-shadow: var(--shadow-md);
+            z-index: 1001;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: grab;
+        }
+
+        .cart-float.dragging {
+            cursor: grabbing;
+            transition: none;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out both;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translate3d(0, 40px, 0);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: translate3d(0, 0, 0);
+                transform: translateY(0);
             }
         }
+
+        .promo-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .promo-modal-content {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            max-width: 800px;
+            width: 90%;
+            display: flex;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .promo-image-half {
+            width: 45%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .promo-form-half {
+            width: 55%;
+            padding: 40px;
+            position: relative;
+        }
+
+        .promo-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+        .promo-modal-close:hover {
+            color: #000;
+        }
+
     </style>
-    {% block extra_css %}{% endblock %}
+    {% block extra_css %}{% endblock extra_css %}
 </head>
 <body class="d-flex flex-column min-vh-100">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg sticky-top shadow-lg">
-        <div class="container">
-            <a class="navbar-brand" href="/">
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto" href="/">
                 <div>
                     <div class="d-flex align-items-center">
-                        <img src="{% static 'images/logo.png' %}" alt="Sellux Plaster Logo" onerror="this.style.display='none'" width="45" height="45">
+                        <div class="logo-container">
+                            <img src="{% static 'images/logo.png' %}" alt="Sellux Plaster Logo" onerror="this.style.display='none'">
+                        </div>
                         <span>SELLUX</span>PLASTER
                     </div>
-                    <small class="slogan-text d-none d-md-block">Home of Affordable Luxury</small>
                 </div>
             </a>
-            
+
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Search Bar Integrated into Header -->
-                <div class="nav-search ms-lg-4 d-none d-lg-block" style="width: 250px;">
-                    <form action="{% url 'pages:global_search' %}" method="get">
-                        <i class="bi bi-search"></i>
-                        <input type="text" name="q" class="form-control" placeholder="Search..." required>
-                    </form>
-                </div>
-
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'services:service_list' %}">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'catalogue:product_list' %}">Catalogue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'catalogue:product_list' %}">Shop</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'portfolio:project_list' %}">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'faq:faq_list' %}">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'estimation:estimator' %}">Estimator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about:about' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'team:team_list' %}">Our Team</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'contact:contact_us' %}">Contact</a></li>
+                    <li class="nav-item">
+                        <a href="{% url 'cart:cart_detail' %}" class="nav-link cart-btn position-relative">
+                            <i class="bi bi-cart fs-3"></i>
+                            {% if cart|length > 0 %}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {{ cart|length }}
+                                </span>
+                            {% endif %}
+                        </a>
+                    </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item dropdown ms-lg-3">
-                            <a class="btn btn-outline-primary dropdown-toggle rounded-pill px-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if user.profile_image %}
+                                    <img src="{{ user.profile_image.url }}" class="rounded-circle me-2" alt="{{ user.username }}" style="width: 32px; height: 32px; object-fit: cover;">
+                                {% else %}
+                                    <div class="rounded-circle me-2 bg-primary d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px;">
+                                        <span class="fw-bold">{{ user.username|slice:":1"|upper }}</span>
+                                    </div>
+                                {% endif %}
                                 {{ user.username }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-2 rounded-4">
@@ -305,13 +404,44 @@
                             <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-primary text-black px-4" href="{% url 'accounts:register' %}">Get Started</a>
+                            <a class="btn btn-primary px-4" href="{% url 'accounts:register' %}">Get Started</a>
                         </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
+
+    {% if active_promotion %}
+    <div class="promo-modal-backdrop" id="promo-modal">
+        <div class="promo-modal-content">
+            <div class="promo-image-half" style="background-image: url({{ active_promotion.image.url }});"></div>
+            <div class="promo-form-half">
+                <button type="button" class="promo-modal-close" id="promo-close-btn">&times;</button>
+                <h2 class="fw-bold">{{ active_promotion.title }}</h2>
+                <p class="text-muted">{{ active_promotion.description }}</p>
+                <form id="subscribe-form">
+                    <div class="mb-3">
+                        <input type="email" id="subscribe-email" class="form-control" placeholder="Enter your email address" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </div>
+                </form>
+                <div id="promo-message" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if cart|length > 0 %}
+    <a href="{% url 'cart:cart_detail' %}" class="cart-float" id="cart-float" title="View Cart">
+        <i class="bi bi-cart-fill"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ cart|length }}
+        </span>
+    </a>
+    {% endif %}
 
     <a href="https://wa.me/233549926773?text=Hello%20Sellux%20Plaster,%20I'm%20interested%20in%20your%20services." class="whatsapp-float" target="_blank">
         <i class="bi bi-whatsapp"></i>
@@ -329,12 +459,11 @@
             </div>
         {% endif %}
 
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock content %}
     </main>
 
     <!-- Footer -->
-    <footer class="footer py-5 mt-auto">
+    <footer class="footer py-4 mt-auto">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-3">
@@ -343,7 +472,6 @@
                             <img src="{% static 'images/logo.png' %}" alt="Logo" style="max-height: 40px;" onerror="this.style.display='none'">
                             <span class="ms-2">SELLUX <span class="text-primary">PLASTER</span></span>
                         </div>
-                        <small class="text-primary fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Home of Affordable Luxury</small>
                     </h5>
                     <p class="mt-3 small">Redefining elegance with precision plastering and architectural masterpieces since 2015. We bring your vision to life with artisan craftsmanship.</p>
                     <div class="d-flex gap-3 mt-4">
@@ -377,11 +505,20 @@
                     </ul>
                 </div>
                 <div class="col-lg-3">
-                    <h5 class="footer-heading">Contact Us</h5>
+                    <h5 class="footer-heading">Contact and Address</h5>
                     <div class="mb-3 text-secondary small">
-                        <p class="mb-2 d-flex align-items-start"><i class="bi bi-geo-alt text-primary me-2 mt-1"></i> Odokor, Dr. Busia Highway, Accra, Ghana</p>
-                        <p class="mb-2 d-flex align-items-center"><i class="bi bi-telephone text-primary me-2"></i> 055 208 8784 / 054 992 6773</p>
-                        <p class="mb-0 d-flex align-items-center"><i class="bi bi-envelope text-primary me-2"></i> selluxplasterltd@gmail.com</p>
+                        <p class="mb-2 d-flex align-items-start">
+                            <i class="bi bi-geo-alt text-primary me-2 mt-1"></i>
+                            <a href="https://www.google.com/maps/place/Sellux+Plaster+LTD(Plasterboard+and+ceiling+materials)/@5.5743229,-0.2843095,14.4z/data=!4m6!3m5!1s0xfdf9bb89bcdaccb:0x35642fad98c1e46e!8m2!3d5.5787557!4d-0.2589208!16s%2Fg%2F11lv8l344t?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="footer-link">Odokor, Dr. Busia Highway, Accra, Ghana</a>
+                        </p>
+                        <p class="mb-2 d-flex align-items-center">
+                            <i class="bi bi-telephone text-primary me-2"></i>
+                            <a href="tel:0552088784" class="footer-link">055 208 8784</a> / <a href="tel:0549926773" class="footer-link">054 992 6773</a>
+                        </p>
+                        <p class="mb-0 d-flex align-items-center">
+                            <i class="bi bi-envelope text-primary me-2"></i>
+                            <a href="mailto:selluxplasterltd@gmail.com" class="footer-link">selluxplasterltd@gmail.com</a>
+                        </p>
                     </div>
                     <div class="mt-4">
                         <h6 class="text-white fw-bold mb-3 small text-uppercase">Newsletter</h6>
@@ -392,7 +529,7 @@
                     </div>
                 </div>
             </div>
-            <hr class="my-5 border-secondary opacity-25">
+            <hr class="my-4 border-secondary opacity-25">
             <div class="text-center small">
                 <p>&copy; {% now "Y" %} Sellux Plaster Ltd. Crafted for luxury. All Rights Reserved.</p>
             </div>
@@ -402,13 +539,12 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Performance: Lightweight Intersection Observer for Lazy Images
         document.addEventListener("DOMContentLoaded", function() {
             const lazyImages = document.querySelectorAll('img[loading="lazy"]');
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
-                        if (entries[0].isIntersecting) {
+                        if (entry.isIntersecting) {
                             let img = entry.target;
                             img.classList.add('loaded');
                             observer.unobserve(img);
@@ -417,7 +553,80 @@
                 });
                 lazyImages.forEach(img => observer.observe(img));
             }
+
+            const cartFloat = document.getElementById('cart-float');
+            if (cartFloat) {
+                let isDragging = false;
+                let offsetX, offsetY;
+
+                cartFloat.addEventListener('mousedown', function(e) {
+                    isDragging = true;
+                    cartFloat.classList.add('dragging');
+                    offsetX = e.clientX - cartFloat.getBoundingClientRect().left;
+                    offsetY = e.clientY - cartFloat.getBoundingClientRect().top;
+                });
+
+                document.addEventListener('mousemove', function(e) {
+                    if (isDragging) {
+                        const newX = e.clientX - offsetX;
+                        const newY = e.clientY - offsetY;
+                        cartFloat.style.left = `${newX}px`;
+                        cartFloat.style.top = `${newY}px`;
+                    }
+                });
+
+                document.addEventListener('mouseup', function(e) {
+                    isDragging = false;
+                    cartFloat.classList.remove('dragging');
+                });
+            }
+
+            const promoModal = document.getElementById('promo-modal');
+            const promoCloseBtn = document.getElementById('promo-close-btn');
+            const subscribeForm = document.getElementById('subscribe-form');
+            const promoMessage = document.getElementById('promo-message');
+
+            if (promoModal && !document.cookie.includes('promo_shown=true')) {
+                promoModal.style.display = 'flex';
+            }
+
+            if(promoCloseBtn) {
+                promoCloseBtn.addEventListener('click', () => {
+                    promoModal.style.display = 'none';
+                    document.cookie = "promo_shown=true; max-age=86400; path=/"; // Expires in 1 day
+                });
+            }
+
+            if(subscribeForm) {
+                subscribeForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('subscribe-email').value;
+                    fetch('{% url "promotions:subscribe" %}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        body: JSON.stringify({ email: email })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        promoMessage.textContent = data.message;
+                        if(data.success) {
+                            promoMessage.classList.add('text-success');
+                            setTimeout(() => {
+                                promoModal.style.display = 'none';
+                                document.cookie = "promo_shown=true; max-age=86400; path=/";
+                            }, 2000);
+                        }
+                        else {
+                             promoMessage.classList.add('text-danger');
+                        }
+                    });
+                });
+            }
         });
     </script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

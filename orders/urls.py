@@ -8,4 +8,5 @@ urlpatterns = [
     path('verify/', views.OrderVerifyView.as_view(), name='verify'),
     path('webhook/', views.paystack_webhook, name='webhook'),
     path('success/<int:pk>/', views.OrderSuccessView.as_view(), name='success'),
+    path('download-invoice/<int:order_id>/', views.download_invoice_pdf, name='download_invoice'),
 ]

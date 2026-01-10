@@ -1,0 +1,29 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+
+{% block admin_content %}
+<h1 class="display-5 fw-bold mb-5">Manage Estimation Services</h1>
+<a href="{% url 'dashboard:service_create' %}" class="btn btn-primary mb-3">Add Service</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Cost per SqM</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for service in services %}
+            <tr>
+                <td>{{ service.name }}</td>
+                <td>GH₵{{ service.cost_per_sqm }}</td>
+                <td>{% if service.is_active %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <a href="{% url 'dashboard:service_update' service.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="{% url 'dashboard:service_delete' service.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock admin_content %}

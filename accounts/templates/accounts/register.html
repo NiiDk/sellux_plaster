@@ -5,77 +5,28 @@
 {% block title %}Register | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<section class="py-5 my-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
-                <div class="card border-0 shadow-lg rounded-5 overflow-hidden animate__animated animate__fadeIn">
-                    <div class="row g-0">
-                        <!-- Left Side: Brand/Info -->
-                        <div class="col-md-5 bg-dark text-white d-none d-md-flex align-items-center p-5">
-                            <div>
-                                <h2 class="fw-bold mb-4">Join Sellux Plaster</h2>
-                                <p class="opacity-75 mb-4">Create an account to track your orders, save your favorite designs, and get exclusive access to our premium collections.</p>
-                                <ul class="list-unstyled small opacity-75">
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Track material orders</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Custom project requests</li>
-                                    <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Exclusive design updates</li>
-                                </ul>
-                            </div>
+<div class="container my-5 fade-in-up">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card shadow-md">
+                <div class="card-body p-lg-5 p-4">
+                    <div class="text-center mb-5">
+                        <h1 class="display-5 fw-bold">Create Your Account</h1>
+                        <p class="lead text-muted">Join Sellux Plaster to manage your projects.</p>
+                    </div>
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Create Account</button>
                         </div>
-                        
-                        <!-- Right Side: Form -->
-                        <div class="col-md-7 bg-white p-5">
-                            <h3 class="fw-bold mb-4">Create Account</h3>
-                            <form method="post" novalidate>
-                                {% csrf_token %}
-                                
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        {{ form.username|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.email|as_crispy_field }}
-                                    </div>
-                                </div>
-                                
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        {{ form.first_name|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.last_name|as_crispy_field }}
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    {{ form.phone|as_crispy_field }}
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        {{ form.password1|as_crispy_field }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form.password2|as_crispy_field }}
-                                    </div>
-                                </div>
-                                
-                                <div class="d-grid mt-4">
-                                    <button type="submit" class="btn btn-primary btn-lg rounded-pill py-3 fw-bold">
-                                        Start Your Journey
-                                    </button>
-                                </div>
-                            </form>
-                            
-                            <p class="text-center text-muted mt-4 small">
-                                Already have an account? <a href="{% url 'accounts:login' %}" class="text-primary fw-bold text-decoration-none">Login here</a>
-                            </p>
-                        </div>
+                    </form>
+                    <div class="text-center mt-4">
+                        <p class="text-muted small mb-0">Already have an account? <a href="{% url 'accounts:login' %}" class="text-primary">Log in</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 {% endblock %}

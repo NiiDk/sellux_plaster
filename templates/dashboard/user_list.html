@@ -1,0 +1,29 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+
+{% block admin_content %}
+<h1 class="display-5 fw-bold mb-5">Manage Users</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Staff</th>
+            <th>Date Joined</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user_obj in users %}
+            <tr>
+                <td>{{ user_obj.username }}</td>
+                <td>{{ user_obj.email }}</td>
+                <td>{% if user_obj.is_staff %}Yes{% else %}No{% endif %}</td>
+                <td>{{ user_obj.date_joined|date:"M d, Y" }}</td>
+                <td>
+                    <a href="{% url 'dashboard:user_detail' user_obj.pk %}" class="btn btn-sm btn-secondary">View</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock admin_content %}

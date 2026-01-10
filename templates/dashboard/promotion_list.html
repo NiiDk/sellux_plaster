@@ -1,0 +1,27 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+
+{% block admin_content %}
+<h1 class="display-5 fw-bold mb-5">Manage Promotions</h1>
+<a href="{% url 'dashboard:promotion_create' %}" class="btn btn-primary mb-3">Add Promotion</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for promotion in promotions %}
+            <tr>
+                <td>{{ promotion.title }}</td>
+                <td>{% if promotion.is_active %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <a href="{% url 'dashboard:promotion_update' promotion.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="{% url 'dashboard:promotion_delete' promotion.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock admin_content %}

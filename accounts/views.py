@@ -36,6 +36,11 @@ class LoginView(auth_views.LoginView):
 
     template_name = 'accounts/login.html'
 
+    def get_success_url(self):
+        if self.request.user.is_staff:
+            return reverse_lazy('dashboard:admin_intel')
+        return reverse_lazy('dashboard:home')
+
 
 class LogoutView(auth_views.LogoutView):
     """Logout view; uses `LOGOUT_REDIRECT_URL` from settings."""

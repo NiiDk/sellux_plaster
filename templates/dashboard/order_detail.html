@@ -1,0 +1,51 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+
+{% block admin_content %}
+<h1 class="display-5 fw-bold mb-5">Order #{{ order.id }}</h1>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Order Items</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in order.items.all %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>GH₵{{ item.price }}</td>
+                                <td>GH₵{{ item.get_cost }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Order Details</h5>
+                <p><strong>Customer:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+                <p><strong>Email:</strong> {{ order.email }}</p>
+                <p><strong>Phone:</strong> {{ order.phone_number }}</p>
+                <p><strong>Delivery Option:</strong> {{ order.get_delivery_option_display }}</p>
+                {% if order.delivery_option == 'delivery' %}
+                    <p><strong>Address:</strong> {{ order.address }}, {{ order.city }}</p>
+                {% endif %}
+                <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+                <p><strong>Payment Status:</strong> {{ order.get_payment_status_display }}</p>
+                <a href="{% url 'dashboard:order_update' order.pk %}" class="btn btn-primary">Update Order</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock admin_content %}

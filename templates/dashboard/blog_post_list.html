@@ -1,0 +1,31 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+
+{% block admin_content %}
+<h1 class="display-5 fw-bold mb-5">Manage Blog Posts</h1>
+<a href="{% url 'dashboard:blog_post_create' %}" class="btn btn-primary mb-3">Add Post</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Author</th>
+            <th>Published</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.category.name }}</td>
+                <td>{{ post.author.username }}</td>
+                <td>{% if post.is_published %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <a href="{% url 'dashboard:blog_post_update' post.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="{% url 'dashboard:blog_post_delete' post.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock admin_content %}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Exquisite Plastering | Sellux Plaster Ltd{% endblock %}
+{% block title %}{{ product.name }} | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
 <section class="py-5">
@@ -61,26 +61,15 @@
                     </p>
 
                     <div class="card bg-light border-0 rounded-4 p-4 mb-5">
-                        <form action="{% url 'orders:order_create' %}" method="get">
-                            <input type="hidden" name="product" value="{{ product.id }}">
-                            <div class="row g-3 align-items-center">
-                                <div class="col-4">
-                                    <label class="form-label small fw-bold text-muted">Quantity</label>
-                                    <input type="number" name="quantity" class="form-control rounded-pill border-0 shadow-sm" value="1" min="1" max="{{ product.stock }}">
-                                </div>
-                                <div class="col-8">
-                                    <label class="form-label d-none d-md-block opacity-0">Label</label>
-                                    {% if product.stock > 0 %}
-                                        <button type="submit" class="btn btn-primary btn-lg rounded-pill w-100 fw-bold shadow">
-                                            Place Order Now <i class="bi bi-cart-plus-fill ms-2"></i>
-                                        </button>
-                                    {% else %}
-                                        <button type="button" class="btn btn-secondary btn-lg rounded-pill w-100 fw-bold" disabled>
-                                            Currently Unavailable
-                                        </button>
-                                    {% endif %}
-                                </div>
+                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                {{ cart_product_form.quantity }}
+                                <button type="submit" class="btn btn-primary fw-bold shadow">
+                                    Add to Cart <i class="bi bi-cart-plus-fill ms-2"></i>
+                                </button>
                             </div>
+                            {{ cart_product_form.override }}
                         </form>
                     </div>
 

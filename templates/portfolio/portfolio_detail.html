@@ -1,31 +1,452 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} | Sellux Plaster Portfolio{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/img-comparison-slider@7/dist/styles.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.0/photoswipe.min.css" />
+<style>
+    /* Ensure images fill the container */
+    .img-fill-container {
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+    }
+
+    /* Comparison Slider Styles */
+    .slider-with-custom-handle {
+        --divider-width: 2px;
+        --divider-color: #ff7b00;
+        --default-handle-color: #ff7b00;
+        --default-handle-width: 40px;
+        --default-handle-height: 40px;
+        width: 100%;
+        height: 450px;
+        display: block;
+    }
+
+    .slider-with-custom-handle img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .custom-handle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        background: #ff7b00;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    /* CSS-only Fallback Styles - FIXED */
+    .img-comparison-fallback {
+        position: relative;
+        width: 100%;
+        height: 450px;
+        overflow: hidden;
+        background: #000;
+        cursor: ew-resize;
+    }
+
+    .img-comparison-fallback img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+    }
+
+    .img-comparison-fallback .before {
+        z-index: 2;
+        clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+        transition: clip-path 0.3s ease;
+    }
+
+    .img-comparison-fallback .after {
+        z-index: 1;
+    }
+
+    /* Hover effect that shows more of the before image */
+    .img-comparison-fallback:hover .before {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    /* Alternative: Click and drag effect */
+    .img-comparison-fallback.active .before {
+        clip-path: polygon(0 0, var(--slider-position, 50%) 0, var(--slider-position, 50%) 100%, 0 100%);
+    }
+
+    .comparison-handle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        background: #ff7b00;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        z-index: 3;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        pointer-events: none;
+    }
+
+    .comparison-handle svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Other styles */
+    .hover-zoom:hover {
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+
+    .product-card {
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        border-color: #ff7b00;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <h1>{{ item.title }}</h1>
-      <p class="text-muted">{{ item.category }} — {{ item.date }}</p>
-      <p>{{ item.description }}</p>
+<!-- Project Detail Hero (Smaller) -->
+<section class="py-4 bg-dark text-white position-relative">
+    <div class="container py-4 z-1 position-relative">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'portfolio:project_list' %}" class="text-primary text-decoration-none">Portfolio</a></li>
+                <li class="breadcrumb-item active text-white opacity-75" aria-current="page">{{ project.title }}</li>
+            </ol>
+        </nav>
+        <h1 class="display-5 fw-bold mb-2">{{ project.title }}</h1>
+        <p class="lead opacity-75 col-lg-8">{{ project.description|truncatewords:30 }}</p>
+    </div>
+</section>
 
-      <div class="row">
-        {% for img in item.images.all %}
-          <div class="col-md-6 mb-3">
-            <img src="{{ img.image.url }}" class="img-fluid rounded" alt="{{ img.caption }}">
-            {% if img.caption %}<small class="text-muted">{{ img.caption }}</small>{% endif %}
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5>Project Details</h5>
-          <p><strong>Category:</strong> {{ item.category }}</p>
-          <p><strong>Date:</strong> {{ item.date }}</p>
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-8">
+                <!-- Main Image Display - FIXED FALLBACK -->
+                <div class="card border-0 shadow-lg rounded-5 overflow-hidden mb-5 bg-light" style="min-height: 450px;">
+                    {% if project.before_image and project.before_image.name and project.image and project.image.name %}
+                    <!-- CSS FALLBACK - Shows immediately -->
+                    <div class="img-comparison-fallback" id="css-comparison">
+                        <img src="{{ project.image.url }}" class="after" alt="After {{ project.title }}">
+                        <img src="{{ project.before_image.url }}" class="before" alt="Before {{ project.title }}">
+                        <div class="comparison-handle">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor">
+                                <path d="M136,40V216a8,8,0,0,1-16,0V40a8,8,0,0,1,16,0ZM88,96v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Zm32,0v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Zm32,0v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Zm32,0v64a8,8,0,0,1-16,0V96a8,8,0,0,1,16,0Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript slider - hidden initially -->
+                    <img-comparison-slider class="slider-with-custom-handle d-none" id="js-comparison" value="30">
+                        <img slot="first" src="{{ project.before_image.url }}" loading="lazy" alt="Before {{ project.title }}" />
+                        <img slot="second" src="{{ project.image.url }}" loading="lazy" alt="After {{ project.title }}" />
+                        <div slot="handle" class="custom-handle">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" fill="currentColor" viewBox="0 0 256 256">
+                                <rect width="256" height="256" fill="none"></rect>
+                                <line x1="128" y1="40" x2="128" y2="216" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+                                <polyline points="88 160 48 128 88 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline>
+                                <polyline points="168 160 208 128 168 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline>
+                            </svg>
+                        </div>
+                    </img-comparison-slider>
+
+                    {% elif project.image and project.image.name %}
+                    <!-- Single Image -->
+                    <img src="{{ project.image.url }}" class="img-fluid w-100 h-100" style="object-fit: cover; min-height: 450px;" alt="{{ project.title }}">
+                    {% else %}
+                    <!-- Placeholder -->
+                    <div class="d-flex align-items-center justify-content-center h-100" style="min-height: 450px;">
+                        <i class="bi bi-image-alt display-1 text-muted opacity-25"></i>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Project Description -->
+                <div class="card border-0 shadow-sm rounded-5 p-5 mb-5">
+                    <h3 class="fw-bold mb-4">About The Project</h3>
+                    <div class="text-muted" style="line-height: 1.8;">
+                        {{ project.description|linebreaks }}
+                    </div>
+                </div>
+
+                <!-- Product Used for the Project Section -->
+                {% if project.materials_used.exists %}
+                <div class="card border-0 shadow-sm rounded-5 p-5 mb-5">
+                    <h3 class="fw-bold mb-4">Products Used for This Project</h3>
+                    <p class="text-muted mb-4">High-quality materials that ensured durability and excellent finish:</p>
+
+                    <div class="row g-4">
+                        {% for product in project.materials_used.all %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card product-card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                                {% if product.image %}
+                                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+                                {% else %}
+                                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                    <i class="bi bi-box display-4 text-muted"></i>
+                                </div>
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">{{ product.name }}</h5>
+                                    <p class="card-text text-muted small">
+                                        {{ product.description|truncatewords:20|default:"Premium quality product" }}
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        {% if product.category %}
+                                        <span class="badge bg-primary rounded-pill">{{ product.category.name }}</span>
+                                        {% else %}
+                                        <span class="badge bg-secondary rounded-pill">Material</span>
+                                        {% endif %}
+                                        {% if product.get_absolute_url %}
+                                        <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary btn-sm">
+                                            View Product <i class="bi bi-arrow-right ms-1"></i>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mt-4 pt-3 border-top">
+                        <p class="text-muted small mb-0">
+                            <i class="bi bi-info-circle me-2"></i>
+                            All products used are from our premium catalogue, ensuring quality and longevity.
+                        </p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="card border-0 bg-light shadow-sm rounded-5 p-4 mb-4">
+                    <h5 class="fw-bold mb-4">Project Details</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3 small text-muted">
+                        <li class="d-flex gap-3 align-items-center">
+                            <i class="bi bi-calendar-check text-primary"></i>
+                            <div>
+                                <strong>Completed:</strong>
+                                <div>{{ project.completion_date|date:"F Y" }}</div>
+                            </div>
+                        </li>
+                        <li class="d-flex gap-3 align-items-center">
+                            <i class="bi bi-geo-alt text-primary"></i>
+                            <div>
+                                <strong>Location:</strong>
+                                <div>{{ project.location|default:"Not specified" }}</div>
+                            </div>
+                        </li>
+                        <li class="d-flex gap-3 align-items-center">
+                            <i class="bi bi-building text-primary"></i>
+                            <div>
+                                <strong>Type:</strong>
+                                <div>{{ project.get_project_type_display }}</div>
+                            </div>
+                        </li>
+                        {% if project.before_image and project.before_image.name %}
+                        <li class="d-flex gap-3 align-items-center">
+                            <i class="bi bi-images text-primary"></i>
+                            <div>
+                                <strong>Features:</strong>
+                                <div>Before & After Comparison</div>
+                            </div>
+                        </li>
+                        {% endif %}
+                        {% if project.materials_used.exists %}
+                        <li class="d-flex gap-3 align-items-center">
+                            <i class="bi bi-tools text-primary"></i>
+                            <div>
+                                <strong>Materials:</strong>
+                                <div>{{ project.materials_used.all.count }} product{{ project.materials_used.all.count|pluralize }}</div>
+                            </div>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <!-- Materials Used Summary -->
+                {% if project.materials_used.exists %}
+                <div class="card border-0 bg-dark text-white rounded-5 p-4 mb-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-tools me-2"></i>Materials Used
+                    </h5>
+                    <p class="small opacity-75 mb-3">This project utilized {{ project.materials_used.all.count }} premium product{{ project.materials_used.all.count|pluralize }}:</p>
+                    <div class="d-flex flex-column gap-2">
+                        {% for product in project.materials_used.all|slice:":5" %}
+                        <div class="text-white small p-2 rounded-3 bg-white bg-opacity-10 d-flex align-items-center">
+                            <i class="bi bi-check-circle me-2 text-primary"></i>
+                            <span>{{ product.name }}</span>
+                        </div>
+                        {% endfor %}
+                        {% if project.materials_used.all.count > 5 %}
+                        <div class="text-center mt-2">
+                            <span class="small opacity-75">+{{ project.materials_used.all.count|add:"-5" }} more products</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Call to Action -->
+                <div class="card border-0 bg-primary text-white rounded-5 p-4">
+                    <h5 class="fw-bold mb-3">Like This Project?</h5>
+                    <p class="small mb-4">Get a similar transformation for your space with our expert team.</p>
+                    <div class="d-grid gap-2">
+                        <a href="/contact/" class="btn btn-light btn-lg rounded-4 fw-bold">
+                            <i class="bi bi-chat-dots me-2"></i>Get Free Quote
+                        </a>
+                        <a href="tel:+233123456789" class="btn btn-outline-light btn-lg rounded-4">
+                            <i class="bi bi-telephone me-2"></i>Call Now
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <!-- Gallery -->
+        {% if project.gallery.exists %}
+        <div class="mt-5 pt-5 border-top">
+            <h2 class="fw-bold mb-4 text-center">Project Gallery</h2>
+            <p class="text-center text-muted mb-5">Additional photos from this project</p>
+            <div class="row g-3 pswp-gallery" id="project-gallery">
+                {% for item in project.gallery.all %}
+                <div class="col-md-4">
+                    <a href="{{ item.image.url }}"
+                       data-pswp-width="{{ item.image.width }}"
+                       data-pswp-height="{{ item.image.height }}"
+                       target="_blank" class="d-block rounded-4 overflow-hidden shadow-sm">
+                        <img src="{{ item.image.url }}" alt="{{ item.caption|default:project.title }}" class="img-fluid hover-zoom" loading="lazy" style="height: 250px; object-fit: cover;">
+                    </a>
+                    {% if item.caption %}
+                    <p class="small text-muted mt-2 mb-0 text-center">{{ item.caption }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
-  </div>
-</div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/img-comparison-slider@7/dist/index.js"></script>
+<script>
+    // Simple and reliable JavaScript for comparison slider
+    document.addEventListener('DOMContentLoaded', function() {
+        const cssComparison = document.getElementById('css-comparison');
+        const jsComparison = document.getElementById('js-comparison');
+
+        // Only proceed if both elements exist (meaning we have before/after images)
+        if (cssComparison && jsComparison) {
+            // Try to load the JavaScript slider
+            setTimeout(function() {
+                try {
+                    // Check if library loaded and custom element is defined
+                    if (typeof window.ImageComparisonSlider !== 'undefined' &&
+                        customElements.get('img-comparison-slider')) {
+                        // Show JS slider, hide CSS fallback
+                        jsComparison.classList.remove('d-none');
+                        cssComparison.style.display = 'none';
+                        console.log('JavaScript comparison slider activated');
+                    } else {
+                        console.log('JavaScript library not available, using CSS fallback');
+                        // CSS fallback remains visible
+                    }
+                } catch (error) {
+                    console.error('Error loading comparison slider:', error);
+                    // CSS fallback remains visible
+                }
+            }, 500); // Give time for library to load
+        }
+
+        // Add click and drag functionality for CSS fallback
+        const fallback = document.querySelector('.img-comparison-fallback');
+        if (fallback && !document.getElementById('js-comparison').classList.contains('d-none')) {
+            let isDragging = false;
+
+            fallback.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                updateSliderPosition(e);
+                fallback.classList.add('active');
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (isDragging) {
+                    updateSliderPosition(e);
+                }
+            });
+
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+                fallback.classList.remove('active');
+            });
+
+            function updateSliderPosition(e) {
+                const rect = fallback.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percentage = (x / rect.width) * 100;
+                const clamped = Math.max(0, Math.min(100, percentage));
+                fallback.style.setProperty('--slider-position', clamped + '%');
+
+                // Move handle
+                const handle = fallback.querySelector('.comparison-handle');
+                if (handle) {
+                    handle.style.left = clamped + '%';
+                }
+            }
+
+            // Also work on touch devices
+            fallback.addEventListener('touchstart', function(e) {
+                isDragging = true;
+                updateSliderPosition(e.touches[0]);
+                fallback.classList.add('active');
+            });
+
+            document.addEventListener('touchmove', function(e) {
+                if (isDragging) {
+                    updateSliderPosition(e.touches[0]);
+                }
+            });
+
+            document.addEventListener('touchend', function() {
+                isDragging = false;
+                fallback.classList.remove('active');
+            });
+        }
+    });
+</script>
+<script type="module">
+    import PhotoSwipeLightbox from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.0/photoswipe-lightbox.esm.min.js';
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: '#project-gallery',
+        children: 'a',
+        pswpModule: () => import('https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.0/photoswipe.esm.min.js')
+    });
+    lightbox.init();
+</script>
 {% endblock %}

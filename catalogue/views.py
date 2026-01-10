@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView
-from .models import Category, Product
+from .models import Product
+from cart.forms import CartAddProductForm
 
 class ProductListView(ListView):
     model = Product
@@ -14,3 +15,8 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalogue/product_detail.html'
     context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart_product_form'] = CartAddProductForm()
+        return context

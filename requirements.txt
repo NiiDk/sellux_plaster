@@ -1,13 +1,29 @@
+# Core Framework
 django>=4.2
-python-dotenv
-Pillow
-requests
-django-crispy-forms
-crispy-bootstrap5
-whitenoise
-django-cloudinary-storage
-cloudinary
+
+# Web Server
 gunicorn
+
+# Database & Data
 dj-database-url
 psycopg2-binary
+
+# Static & Media Files
+cloudinary
+django-cloudinary-storage
+Pillow
+whitenoise
+
+# Forms
+django-crispy-forms
+crispy-bootstrap5
+
+# PDF Generation
+xhtml2pdf
+
+# Security & Admin
 django-axes
+
+# Utilities
+python-dotenv
+requests

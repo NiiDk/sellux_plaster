@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us | Sellux Plaster Ltd{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3">OUR FIRM</span>
+            <h1 class="display-4 fw-bold">About Sellux Plaster</h1>
+        </div>
+
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <img src="{{ about_page.image.url }}" class="img-fluid rounded-4 shadow-sm" alt="{{ about_page.title }}">
+            </div>
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm p-4 rounded-4">
+                    <div class="card-body">
+                        <h3 class="fw-bold text-primary">{{ about_page.subtitle }}</h3>
+                        <p class="text-muted">{{ about_page.main_content }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-5 mt-5">
+            <div class="col-lg-8">
+                <h3 class="fw-bold mb-4">Professional Pedigree</h3>
+                <p class="text-muted">{{ about_page.professional_pedigree }}</p>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm p-4 rounded-4 mb-4">
+                    <h5 class="fw-bold">Our Vision</h5>
+                    <p class="text-muted">{{ about_page.vision }}</p>
+                </div>
+                <div class="card border-0 shadow-sm p-4 rounded-4 bg-dark text-white">
+                    <h5 class="fw-bold">Our Mission</h5>
+                    <p class="text-white-50">{{ about_page.mission }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center my-5 pt-5">
+            <h2 class="fw-bold">Our Core Values</h2>
+            <p class="text-muted">Guiding principles that define our commitment to excellence and integrity.</p>
+        </div>
+
+        <div class="row g-4">
+            {% for value in about_page.core_values.all %}
+            <div class="col-lg-3">
+                <div class="card border-0 shadow-sm p-4 rounded-4 text-center h-100 hover-lift">
+                    <div class="mb-3">
+                        <i class="{{ value.icon }} fs-1 text-primary"></i>
+                    </div>
+                    <h5 class="fw-bold">{{ value.title }}</h5>
+                    <p class="text-muted small">{{ value.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

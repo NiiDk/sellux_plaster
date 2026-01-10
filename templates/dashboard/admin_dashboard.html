@@ -1,104 +1,107 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Admin Control | Sellux Plaster Ltd{% endblock %}
+{% block title %}Admin Dashboard | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <!-- Admin Header -->
-    <div class="row mb-5">
-        <div class="col-lg-8">
-            <h1 class="display-5 fw-bold mb-2">Business <span class="text-primary">Overview</span></h1>
-            <p class="text-muted">Manage orders, monitor inventory, and review customer growth.</p>
-        </div>
-        <div class="col-lg-4 text-lg-end">
-            <a href="/admin/" class="btn btn-dark rounded-pill px-4">
-                <i class="bi bi-gear-fill me-2"></i>Sellux Plaster Admin
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100vh;">
+        <a href="{% url 'dashboard:admin_home' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-4">Admin Dashboard</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="{% url 'dashboard:admin_intel' %}" class="nav-link text-white" aria-current="page">
+                    <i class="bi bi-speedometer2 me-2"></i>
+                    Overview
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'dashboard:product_list' %}" class="nav-link text-white">
+                    <i class="bi bi-box-seam me-2"></i>
+                    Products
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'dashboard:order_list' %}" class="nav-link text-white">
+                    <i class="bi bi-receipt me-2"></i>
+                    Orders
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'dashboard:user_list' %}" class="nav-link text-white">
+                    <i class="bi bi-people me-2"></i>
+                    Users
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'dashboard:service_list' %}" class="nav-link text-white">
+                    <i class="bi bi-tools me-2"></i>
+                    Services
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'dashboard:blog_post_list' %}" class="nav-link text-white">
+                    <i class="bi bi-file-earmark-text me-2"></i>
+                    Blog
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'dashboard:promotion_list' %}" class="nav-link text-white">
+                    <i class="bi bi-megaphone me-2"></i>
+                    Promotions
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if user.profile_image %}
+                    <img src="{{ user.profile_image.url }}" alt="" width="32" height="32" class="rounded-circle me-2">
+                {% endif %}
+                <strong>{{ user.username }}</strong>
             </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Sign out</a></li>
+            </ul>
         </div>
     </div>
 
-    <!-- Admin Stats -->
-    <div class="row g-4 mb-5">
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
-                <div class="text-primary fs-1 mb-2"><i class="bi bi-people-fill"></i></div>
-                <h2 class="fw-bold mb-0">{{ user_count }}</h2>
-                <p class="text-muted small mb-0">Total Customers</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
-                <div class="text-success fs-1 mb-2"><i class="bi bi-cart-check-fill"></i></div>
-                <h2 class="fw-bold mb-0">{{ recent_orders.count }}</h2>
-                <p class="text-muted small mb-0">Total Orders</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
-                <div class="text-primary fs-1 mb-2"><i class="bi bi-lightning-charge-fill"></i></div>
-                <h2 class="fw-bold mb-0">GH₵{{ revenue|default:"0" }}</h2>
-                <p class="text-muted small mb-0">Gross Revenue</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm rounded-4 p-4 text-center">
-                <div class="text-info fs-1 mb-2"><i class="bi bi-graph-up-arrow"></i></div>
-                <h2 class="fw-bold mb-0">94%</h2>
-                <p class="text-muted small mb-0">Growth Rate</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Admin Content -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                <div class="card-header bg-white border-0 p-4 d-flex justify-content-between align-items-center">
-                    <h5 class="fw-bold mb-0">Recent Business Activity</h5>
-                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-3">View All</button>
+    <!-- Main Content -->
+    <div class="flex-grow-1 p-5">
+        {% block admin_content %}
+        <h1 class="display-5 fw-bold mb-5">Dashboard Overview</h1>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Total Revenue</h3>
+                        <p>GH₵12,345</p>
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
-                        <thead class="bg-light">
-                            <tr>
-                                <th class="px-4 py-3 border-0">Customer</th>
-                                <th class="py-3 border-0">Item</th>
-                                <th class="py-3 border-0">Amount</th>
-                                <th class="py-3 border-0">Status</th>
-                                <th class="py-3 border-0 text-end pe-4">Processed</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for order in recent_orders %}
-                                <tr>
-                                    <td class="px-4 py-3 border-0">
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div class="bg-secondary-subtle rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px; font-size: 0.8rem;">
-                                                {{ order.user.username|slice:":1"|upper }}
-                                            </div>
-                                            <div class="fw-semibold">{{ order.user.get_full_name|default:order.user.username }}</div>
-                                        </div>
-                                    </td>
-                                    <td class="py-3 border-0">{{ order.product.name }}</td>
-                                    <td class="py-3 border-0">GH₵{{ order.total_amount }}</td>
-                                    <td class="py-3 border-0">
-                                        <span class="badge {% if order.status == 'delivered' %}bg-success-subtle text-success{% elif order.status == 'pending' %}bg-warning-subtle text-warning{% else %}bg-primary-subtle text-primary{% endif %} rounded-pill px-3">
-                                            {{ order.get_status_display }}
-                                        </span>
-                                    </td>
-                                    <td class="py-3 border-0 text-end pe-4 text-muted small">{{ order.created_at|date:"M d, H:i" }}</td>
-                                </tr>
-                            {% empty %}
-                                <tr>
-                                    <td colspan="5" class="text-center py-5">No recent activity.</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Total Orders</h3>
+                        <p>123</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>New Users</h3>
+                        <p>45</p>
+                    </div>
                 </div>
             </div>
         </div>
+        {% endblock admin_content %}
     </div>
 </div>
-{% endblock %}
+{% endblock content %}

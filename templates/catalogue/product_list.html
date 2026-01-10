@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Our Catalogue | Sellux Plaster Ltd{% endblock %}
+{% block title %}Our Shop | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
 <!-- Catalogue Header -->
@@ -10,11 +10,11 @@
         <div class="row align-items-center">
             <div class="col-lg-7">
                 <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3 animate__animated animate__fadeIn">PREMIUM MATERIALS</span>
-                <h1 class="display-4 fw-bold mb-3">Architectural Catalogue</h1>
+                <h1 class="display-4 fw-bold mb-3">Material Shop</h1>
                 <p class="lead text-muted">Discover our range of high-quality cornices, POP designs, and decorative plaster materials crafted for excellence.</p>
             </div>
             <div class="col-lg-5 d-none d-lg-block text-end">
-                <i class="bi bi-box-seam text-primary opacity-25" style="font-size: 8rem;"></i>
+                <i class="bi bi-shop text-primary opacity-25" style="font-size: 8rem;"></i>
             </div>
         </div>
     </div>
@@ -23,6 +23,14 @@
 <!-- Product Grid Section -->
 <section class="py-5">
     <div class="container py-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <form action="{% url 'pages:global_search' %}" method="get" class="nav-search">
+                    <i class="bi bi-search"></i>
+                    <input type="text" name="q" class="form-control" placeholder="Search for products..." required>
+                </form>
+            </div>
+        </div>
         <div class="row g-4">
             {% for product in products %}
                 <div class="col-sm-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
@@ -30,7 +38,7 @@
                         <!-- Product Image -->
                         <div class="position-relative overflow-hidden bg-light" style="height: 240px;">
                             {% if product.image %}
-                                <img src="{{ product.image.url }}" class="card-img-top w-100 h-100" alt="{{ product.name }}" style="object-fit: cover; transition: transform 0.5s ease;">
+                                <img src="{{ product.image.url }}" class="card-img-top w-100 h-100" alt="{{ product.name }}" style="object-fit: cover; transition: transform 0.5s ease;" loading="lazy">
                             {% else %}
                                 <div class="w-100 h-100 d-flex align-items-center justify-content-center">
                                     <i class="bi bi-image text-muted fs-1"></i>
@@ -60,13 +68,17 @@
                                     <small class="text-muted">Per Unit</small>
                                 </div>
                                 <div class="d-grid gap-2">
-                                    <a href="{% url 'catalogue:product_detail' product.slug %}" class="btn btn-outline-dark rounded-pill py-2 fw-semibold">
+                                    <a href="{{ product.get_absolute_url }}" class="btn btn-outline-dark rounded-pill py-2 fw-semibold">
                                         View Details
                                     </a>
-                                    {% if product.stock > 0 %}
-                                    <a href="{% url 'orders:order_create' %}?product={{ product.id }}" class="btn btn-primary rounded-pill py-2 fw-semibold">
-                                        Order Now
-                                    </a>
+                                    {% if product.is_available and product.stock > 0 %}
+                                        <form action="{% url 'cart:cart_add' product.id %}" method="post" class="d-grid">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="btn btn-primary rounded-pill py-2 fw-semibold text-black">Add to Cart</button>
+                                        </form>
+                                    {% else %}
+                                        <button class="btn btn-outline-secondary rounded-pill py-2 fw-semibold" disabled>Out of Stock</button>
                                     {% endif %}
                                 </div>
                             </div>
@@ -79,7 +91,7 @@
                         <i class="bi bi-search text-muted display-1 mb-4"></i>
                         <h3 class="fw-bold">No products found</h3>
                         <p class="text-muted">Our master craftsmen are currently updating our digital inventory. Please check back shortly.</p>
-                        <a href="{% url 'contact:contact_us' %}" class="btn btn-primary mt-3 px-5 rounded-pill py-3">Inquire Directly</a>
+                        <a href="{% url 'contact:contact_us' %}" class="btn btn-primary mt-3 px-5 rounded-pill py-3 text-black">Inquire Directly</a>
                     </div>
                 </div>
             {% endfor %}

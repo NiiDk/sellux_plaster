@@ -5,6 +5,14 @@ from django.urls import reverse
 from catalogue.models import Product
 
 class Order(models.Model):
+    DELIVERY_OPTION_DELIVERY = 'delivery'
+    DELIVERY_OPTION_PICKUP = 'pickup'
+
+    DELIVERY_CHOICES = [
+        (DELIVERY_OPTION_DELIVERY, 'Delivery'),
+        (DELIVERY_OPTION_PICKUP, 'In-store Pickup'),
+    ]
+
     STATUS_PENDING = 'pending'
     STATUS_PROCESSING = 'processing'
     STATUS_SHIPPED = 'shipped'
@@ -29,16 +37,21 @@ class Order(models.Model):
         (PAYMENT_FAILED, 'Failed'),
     ]
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='orders')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='orders', null=True, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
-    address = models.CharField(max_length=250)
-    city = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=15, blank=True)
+    delivery_option = models.CharField(max_length=20, choices=DELIVERY_CHOICES, default=DELIVERY_OPTION_DELIVERY)
+    address = models.CharField(max_length=250, blank=True)
+    city = models.CharField(max_length=100, blank=True)
     
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_PENDING)
     payment_status = models.CharField(max_length=20, choices=PAYMENT_CHOICES, default=PAYMENT_PENDING)
     
+    tax = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
+    delivery_fee = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal('0.00'))
+
     # Financial Metadata
     paystack_ref = models.CharField(max_length=100, blank=True, unique=True, null=True)
     payment_channel = models.CharField(max_length=50, blank=True, help_text="e.g. mobile_money, card")
@@ -55,6 +68,9 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order #{self.id} - {self.first_name}"
+
+    def get_grand_total(self):
+        return self.total_amount + self.tax + self.delivery_fee
 
     def get_absolute_url(self):
         return reverse('orders:success', kwargs={'pk': self.pk})

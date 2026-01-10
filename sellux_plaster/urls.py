@@ -14,7 +14,7 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('services/', include('services.urls')),
     path('portfolio/', include('portfolio.urls')),
-    path('catalogue/', include('catalogue.urls')),
+    path('shop/', include('catalogue.urls')), # Renamed from 'catalogue'
     path('faq/', include('faq.urls')),
     path('contact/', include('contact.urls')),
     path('orders/', include('orders.urls')),
@@ -22,6 +22,10 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('insights/', include('blog.urls')),
     path('cart/', include('cart.urls')),
+    path('estimation/', include('estimation.urls')),
+    path('promotions/', include('promotions.urls')),
+    path('about/', include('about.urls')),
+    path('team/', include('team.urls')),
 ]
 
 if settings.DEBUG:

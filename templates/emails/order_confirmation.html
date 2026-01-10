@@ -1,45 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; }
-        .header { text-align: center; padding-bottom: 20px; border-bottom: 2px solid #ff7b00; }
-        .logo { font-size: 24px; font-weight: bold; color: #000; }
-        .logo span { color: #ff7b00; }
-        .content { padding: 20px 0; }
-        .order-details { background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0; }
-        .footer { font-size: 12px; text-align: center; color: #999; padding-top: 20px; border-top: 1px solid #eee; }
-        .btn { display: inline-block; padding: 12px 25px; background-color: #ff7b00; color: #000; text-decoration: none; border-radius: 50px; font-weight: bold; }
-    </style>
+    <title>Order Confirmation</title>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">SELLUX<span>PLASTER</span></div>
-            <p style="margin: 5px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Home of Affordable Luxury</p>
-        </div>
-        <div class="content">
-            <h2>Thank you for your order, {{ order.first_name }}!</h2>
-            <p>We've received your order <strong>#{{ order.id }}</strong> and our team is getting ready to process it.</p>
-            
-            <div class="order-details">
-                <h3 style="margin-top: 0;">Order Summary</h3>
-                <p style="margin-bottom: 5px;"><strong>Customer:</strong> {{ order.first_name }} {{ order.last_name }}</p>
-                <p style="margin-bottom: 5px;"><strong>Site Location:</strong> {{ order.address }}, {{ order.city }}</p>
-                <p style="margin-bottom: 5px;"><strong>Total Amount:</strong> GH₵{{ order.total_amount }}</p>
-            </div>
-
-            <p>You will receive another update once your payment is confirmed and materials are scheduled for delivery.</p>
-            
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="{{ site_url }}{% url 'dashboard:home' %}" class="btn">View Order Dashboard</a>
-            </div>
-        </div>
-        <div class="footer">
-            <p>&copy; {% now "Y" %} Sellux Plaster Ltd. Odokor, Dr. Busia Highway, Accra, Ghana.</p>
-            <p>Phone: 055 208 8784 / 054 992 6773</p>
-        </div>
-    </div>
+    <h2>Thank you for your order, {{ order.first_name }}!</h2>
+    <p>Your order with ID #{{ order.id }} has been confirmed and is now being processed.</p>
+    <h4>Order Summary:</h4>
+    <ul>
+        {% for item in order.items.all %}
+            <li>{{ item.product.name }} (x{{ item.quantity }}) - GH₵{{ item.get_cost }}</li>
+        {% endfor %}
+    </ul>
+    <p><strong>Total: GH₵{{ order.total_amount }}</strong></p>
+    <p>You can view your order details in your dashboard: <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'dashboard:home' %}">My Dashboard</a></p>
 </body>
 </html>
