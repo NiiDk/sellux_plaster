@@ -1,637 +1,838 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="{% block meta_description %}Sellux Plaster Ltd - Premium plastering, POP ceiling designs, and luxury cornices in Accra, Ghana. Expert architectural solutions since 2015.{% endblock meta_description %}">
-    <meta name="keywords" content="plastering, POP ceiling, cornices, interior design, architecture, Sellux Plaster, luxury interiors, Ghana, Accra, affordable luxury">
+    <!-- Enhanced SEO with Schema Markup -->
+    <meta name="description" content="{% block meta_description %}Premium plastering, POP ceiling designs, and luxury cornices in Accra, Ghana. Expert architectural solutions with artisan craftsmanship since 2015.{% endblock meta_description %}">
+    <meta name="keywords" content="{% block meta_keywords %}plastering, POP ceiling, cornices, interior design, architecture, Sellux Plaster, luxury interiors, Ghana, Accra, affordable luxury, construction, renovation{% endblock meta_keywords %}">
     <meta name="author" content="Sellux Plaster Ltd">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
 
-    <!-- Open Graph / Facebook -->
+    <!-- Enhanced Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{% block og_title %}Sellux Plaster Ltd | Premium Architectural Solutions{% endblock og_title %}">
-    <meta property="og:description" content="Elevating spaces with premium cornices, ceiling designs, and professional craftsmanship.">
-    <meta property="og:image" content="{% static 'images/logo.png' %}">
+    <meta property="og:site_name" content="Sellux Plaster Ltd">
+    <meta property="og:title" content="{% block og_title %}Sellux Plaster Ltd | Architectural Excellence in Ghana{% endblock og_title %}">
+    <meta property="og:description" content="{% block og_description %}Transforming spaces with premium cornices, ceiling designs, and professional craftsmanship in Accra.{% endblock og_description %}">
+    <meta property="og:image" content="{% static 'images/social-preview.jpg' %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:locale" content="en_GH">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@selluxplaster">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HomeAndConstructionBusiness",
+            "name": "Sellux Plaster Ltd",
+            "image": "{% static 'images/logo.png' %}",
+            "@id": "",
+            "url": "https://selluxplaster.com",
+            "telephone": "+233552088784",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Dr. Busia Highway",
+                "addressLocality": "Odokor, Accra",
+                "addressRegion": "Greater Accra",
+                "addressCountry": "GH"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 5.5787557,
+                "longitude": -0.2589208
+            },
+            "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "08:00",
+                "closes": "18:00"
+            },
+            "sameAs": [
+                "https://www.facebook.com/selluxplaster",
+                "https://www.instagram.com/selluxplaster",
+                "https://twitter.com/selluxplaster"
+            ]
+        }
+    </script>
 
     <title>{% block title %}Sellux Plaster Ltd | Premium Architectural Solutions{% endblock title %}</title>
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
 
-    <!-- Critical Preconnects -->
+    <!-- Performance Optimized Loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap">
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
+    <!-- Core CSS (Inlined for Critical Rendering Path) -->
     <style>
+        /* CRITICAL CSS - Above the fold */
         :root {
-            --primary-color: #d96a00;
-            --primary-hover: #c35e00;
-            --secondary-color: #2a2a2a;
-            --dark-bg: #1a1a1a;
-            --light-bg: #f8f9fa;
-            --accent-color: #ff8c00;
-            --text-main: #333;
-            --text-muted: #777;
-            --border-radius: 10px;
-            --shadow-sm: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.04);
-            --shadow-md: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.05);
+            /* Enhanced Color System */
+            --primary-50: #fff7ed;
+            --primary-100: #ffedd5;
+            --primary-200: #fed7aa;
+            --primary-300: #fdba74;
+            --primary-400: #fb923c;
+            --primary-500: #f97316; /* Primary Orange */
+            --primary-600: #ea580c;
+            --primary-700: #c2410c;
+            --primary-800: #9a3412;
+            --primary-900: #7c2d12;
+
+            --neutral-50: #fafafa;
+            --neutral-100: #f5f5f5;
+            --neutral-200: #e5e5e5;
+            --neutral-300: #d4d4d4;
+            --neutral-400: #a3a3a3;
+            --neutral-500: #737373;
+            --neutral-600: #525252;
+            --neutral-700: #404040;
+            --neutral-800: #262626;
+            --neutral-900: #171717;
+
+            /* Semantic Colors */
+            --color-background: var(--neutral-50);
+            --color-surface: #ffffff;
+            --color-text: var(--neutral-900);
+            --color-text-secondary: var(--neutral-600);
+
+            /* Spacing System (8px base) */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+
+            /* Typography Scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
+
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Base Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-main);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
             overflow-x: hidden;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
-            transition: background-color 0.3s ease;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        h1, h2, h3, .navbar-brand {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
+        /* Accessibility Focus */
+        :focus-visible {
+            outline: 2px solid var(--primary-500);
+            outline-offset: 2px;
         }
 
-        .text-primary { color: var(--primary-color) !important; }
-        .bg-primary { background-color: var(--primary-color) !important; }
-        .bg-primary-subtle { background-color: #fff3e6 !important; }
-        .border-primary { border-color: var(--primary-color) !important; }
-
-        .navbar {
-            background-color: var(--dark-bg) !important;
-            padding: 1rem 0;
+        /* Skip to Main Content */
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-500);
+            color: white;
+            padding: var(--space-2) var(--space-4);
+            text-decoration: none;
+            z-index: 9999;
+            transition: top var(--transition-base);
         }
 
-        .navbar-brand .logo-container {
+        .skip-to-content:focus {
+            top: 0;
+        }
+
+        /* Typography Hierarchy */
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.025em;
+        }
+
+        h1 {
+            font-size: var(--text-5xl);
+        }
+
+        h2 {
+            font-size: var(--text-4xl);
+        }
+
+        h3 {
+            font-size: var(--text-3xl);
+        }
+
+        /* Navigation - Enhanced */
+        .main-nav {
+            background: linear-gradient(135deg, var(--neutral-900) 0%, var(--neutral-800) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--space-3) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all var(--transition-base);
+        }
+
+        .main-nav.scrolled {
+            padding: var(--space-2) 0;
+            background: rgba(26, 26, 26, 0.95);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-4);
+        }
+
+        /* Brand Identity */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+            border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            background-color: #fff;
-            border-radius: 50%;
-            margin-right: 12px;
             overflow: hidden;
-            border: 3px solid var(--primary-color);
-            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-base);
         }
 
-        .navbar-brand img {
-            max-width: 100%;
-            height: auto;
+        .brand-logo:hover {
+            transform: rotate(-5deg) scale(1.05);
         }
 
-        .navbar-brand {
-            font-size: 1.4rem;
-            letter-spacing: -0.5px;
-            color: #ffffff !important;
+        .brand-text {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: var(--text-xl);
+        }
+
+        .brand-text span {
+            color: var(--primary-300);
+            font-weight: 800;
+        }
+
+        /* Mobile Navigation Toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: var(--text-2xl);
+            cursor: pointer;
+            padding: var(--space-2);
+            border-radius: var(--radius-md);
+            transition: background-color var(--transition-fast);
+        }
+
+        .nav-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
             display: flex;
             align-items: center;
-        }
-
-        .navbar-brand span {
-            color: var(--primary-color);
+            gap: var(--space-4);
+            list-style: none;
         }
 
         .nav-link {
-            font-weight: 600;
-            font-size: 0.85rem;
+            color: var(--neutral-300);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: var(--text-sm);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            position: relative;
             text-transform: uppercase;
-            color: var(--accent-color) !important;
-            margin: 0 1rem;
-            padding: 0.4rem 0.8rem;
-            border: 1px solid var(--primary-color);
-            border-radius: var(--border-radius);
-            background-color: transparent;
-            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
         }
 
-        .nav-link:hover, .nav-link.active {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: var(--dark-bg) !important;
-        }
-
-        .nav-link.cart-btn {
-            border-radius: 50%;
-            padding: 0.8rem;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .navbar-nav .nav-item {
-            margin-bottom: 1rem;
-        }
-
-        @media (min-width: 992px) {
-            .navbar-nav .nav-item {
-                margin-bottom: 0;
-            }
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            border: none;
-            padding: 0.9rem 1.8rem;
-            font-weight: 700;
-            border-radius: var(--border-radius);
-            color: #fff;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-            color: #fff;
-        }
-
-        .btn-outline-primary {
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-            border-width: 2px;
-            padding: 0.9rem 1.8rem;
-            font-weight: 700;
-            border-radius: var(--border-radius);
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline-primary:hover {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: #fff;
-        }
-
-        .card {
-            border: 1px solid #eee;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-            background: #fff;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        footer {
-            background-color: var(--dark-bg);
-            color: #aaa;
-        }
-
-        .footer-heading {
+        .nav-link:hover,
+        .nav-link.active {
             color: white;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        .footer-link {
-            color: #aaa;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--primary-color);
-        }
-
-        img[loading="lazy"] {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        img.loaded {
-            opacity: 1;
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background: linear-gradient(45deg, #25d366, #128c7e);
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 28px;
-            box-shadow: var(--shadow-md);
-            z-index: 1000;
-            width: 65px;
-            height: 65px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .whatsapp-float:hover { transform: scale(1.1) rotate(10deg); color: #fff; }
-
-        .cart-float {
-            position: fixed;
-            bottom: 120px;
-            right: 40px;
-            background-color: var(--primary-color);
-            color: #FFF;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 28px;
-            box-shadow: var(--shadow-md);
-            z-index: 1001;
-            width: 65px;
-            height: 65px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: grab;
-        }
-
-        .cart-float.dragging {
-            cursor: grabbing;
-            transition: none;
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .promo-modal-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .promo-modal-content {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            max-width: 800px;
-            width: 90%;
-            display: flex;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .promo-image-half {
-            width: 45%;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .promo-form-half {
-            width: 55%;
-            padding: 40px;
-            position: relative;
-        }
-
-        .promo-modal-close {
+        .nav-link::after {
+            content: '';
             position: absolute;
-            top: 15px;
-            right: 20px;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-500);
+            transition: all var(--transition-base);
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 80%;
+        }
+
+        /* User Actions */
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .cart-btn {
+            position: relative;
             background: none;
             border: none;
-            font-size: 24px;
+            color: white;
+            font-size: var(--text-xl);
+            padding: var(--space-2);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            color: #777;
-        }
-        .promo-modal-close:hover {
-            color: #000;
+            transition: all var(--transition-fast);
         }
 
+        .cart-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--primary-500);
+            color: white;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--neutral-900);
+                flex-direction: column;
+                padding: var(--space-4);
+                gap: var(--space-2);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all var(--transition-base);
+                box-shadow: var(--shadow-lg);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        /* Utility Classes */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
+
+    <!-- Non-critical CSS (Loaded asynchronously) -->
+    <link rel="stylesheet" href="{% static 'css/enhanced.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap">
+    </noscript>
+
+    <!-- Bootstrap CSS (Minimal Import) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
     {% block extra_css %}{% endblock extra_css %}
 </head>
-<body class="d-flex flex-column min-vh-100">
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand me-auto" href="/">
-                <div>
-                    <div class="d-flex align-items-center">
-                        <div class="logo-container">
-                            <img src="{% static 'images/logo.png' %}" alt="Sellux Plaster Logo" onerror="this.style.display='none'">
-                        </div>
-                        <span>SELLUX</span>PLASTER
-                    </div>
-                </div>
-            </a>
+<body>
+<!-- Skip to Content Link -->
+<a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-            <div class="d-flex align-items-center">
-                <a href="{% url 'cart:cart_detail' %}" class="nav-link cart-btn position-relative d-lg-none me-2">
-                    <i class="bi bi-cart fs-3"></i>
-                    {% if cart|length > 0 %}
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {{ cart|length }}
-                        </span>
-                    {% endif %}
-                </a>
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-                </button>
+<!-- Enhanced Navigation -->
+<nav class="main-nav" id="main-nav">
+    <div class="nav-container">
+        <a href="/" class="brand">
+            <div class="brand-logo">
+                <img src="{% static 'images/logo.svg' %}" alt="Sellux Plaster Logo" width="40" height="40" onerror="this.src='{% static 'images/logo.png' %}'">
             </div>
+            <div class="brand-text">SELLUX <span>PLASTER</span></div>
+        </a>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'services:service_list' %}">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'about:about' %}">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'team:team_list' %}">Our Team</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'contact:contact_us' %}">Contact</a></li>
-                    <li class="nav-item d-none d-lg-block">
-                        <a href="{% url 'cart:cart_detail' %}" class="nav-link cart-btn position-relative">
-                            <i class="bi bi-cart fs-3"></i>
-                            {% if cart|length > 0 %}
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ cart|length }}
-                                </span>
-                            {% endif %}
-                        </a>
-                    </li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item dropdown ms-lg-3">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {% if user.profile_image %}
-                                    <img src="{{ user.profile_image.url }}" class="rounded-circle me-2" alt="{{ user.username }}" style="width: 32px; height: 32px; object-fit: cover;">
-                                {% else %}
-                                    <div class="rounded-circle me-2 bg-primary d-flex align-items-center justify-content-center text-white" style="width: 32px; height: 32px;">
-                                        <span class="fw-bold">{{ user.username|slice:":1"|upper }}</span>
-                                    </div>
-                                {% endif %}
-                                {{ user.username }}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-2 rounded-4">
-                                <li><a class="dropdown-item py-2" href="{% url 'dashboard:home' %}"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
-                                <li><a class="dropdown-item py-2" href="{% url 'accounts:profile' %}"><i class="bi bi-person me-2"></i> Profile</a></li>
-                                <li><hr class="dropdown-divider opacity-50"></li>
-                                <li>
-                                    <form action="{% url 'accounts:logout' %}" method="post" class="p-0">
-                                        {% csrf_token %}
-                                        <button type="submit" class="dropdown-item py-2 text-danger border-0 bg-transparent w-100 text-start"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <i class="bi bi-list"></i>
+        </button>
+
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></li>
+            <li><a href="{% url 'services:service_list' %}" class="nav-link {% if 'services' in request.path %}active{% endif %}">Services</a></li>
+            <li><a href="{% url 'portfolio:gallery' %}" class="nav-link {% if 'portfolio' in request.path %}active{% endif %}">Portfolio</a></li>
+            <li><a href="{% url 'about:about' %}" class="nav-link {% if 'about' in request.path %}active{% endif %}">About</a></li>
+            <li><a href="{% url 'team:team_list' %}" class="nav-link {% if 'team' in request.path %}active{% endif %}">Our Team</a></li>
+            <li><a href="{% url 'blog:post_list' %}" class="nav-link {% if 'blog' in request.path %}active{% endif %}">Insights</a></li>
+            <li><a href="{% url 'contact:contact_us' %}" class="nav-link {% if 'contact' in request.path %}active{% endif %}">Contact</a></li>
+        </ul>
+
+        <div class="user-actions">
+            <button class="cart-btn" id="cart-toggle" aria-label="Shopping cart">
+                <i class="bi bi-cart3"></i>
+                {% if cart|length > 0 %}
+                <span class="cart-count">{{ cart|length }}</span>
+                {% endif %}
+            </button>
+
+            {% if user.is_authenticated %}
+            <div class="user-dropdown">
+                <button class="user-avatar" id="user-menu-toggle" aria-label="User menu">
+                    {% if user.profile_image %}
+                    <img src="{{ user.profile_image.url }}" alt="{{ user.username }}" width="32" height="32" class="rounded-circle">
                     {% else %}
-                        <li class="nav-item ms-lg-3">
-                            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary px-4" href="{% url 'accounts:register' %}">Get Started</a>
-                        </li>
+                    <div class="avatar-placeholder">
+                        {{ user.username|slice:":1"|upper }}
+                    </div>
                     {% endif %}
-                </ul>
+                </button>
+                <div class="dropdown-menu" id="user-menu">
+                    <a href="{% url 'dashboard:home' %}" class="dropdown-item">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                    <a href="{% url 'accounts:profile' %}" class="dropdown-item">
+                        <i class="bi bi-person"></i> Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <form action="{% url 'accounts:logout' %}" method="post" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="dropdown-item">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </button>
+                    </form>
+                </div>
             </div>
+            {% else %}
+            <div class="auth-buttons">
+                <a href="{% url 'accounts:login' %}" class="btn btn-outline-light btn-sm">Login</a>
+                <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-sm">Get Started</a>
+            </div>
+            {% endif %}
         </div>
-    </nav>
+    </div>
+</nav>
 
-    {% if active_promotion %}
-    <div class="promo-modal-backdrop" id="promo-modal">
-        <div class="promo-modal-content">
-            <div class="promo-image-half" style="background-image: url({{ active_promotion.image.url }});"></div>
-            <div class="promo-form-half">
-                <button type="button" class="promo-modal-close" id="promo-close-btn">&times;</button>
-                <h2 class="fw-bold">{{ active_promotion.title }}</h2>
-                <p class="text-muted">{{ active_promotion.description }}</p>
-                <form id="subscribe-form">
-                    <div class="mb-3">
-                        <input type="email" id="subscribe-email" class="form-control" placeholder="Enter your email address" required>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Subscribe</button>
-                    </div>
-                </form>
-                <div id="promo-message" class="mt-3"></div>
-            </div>
+<!-- Cart Sidebar -->
+<aside class="cart-sidebar" id="cart-sidebar" aria-hidden="true">
+    <div class="cart-header">
+        <h3>Shopping Cart</h3>
+        <button class="cart-close" id="cart-close" aria-label="Close cart">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    <div class="cart-content">
+        <!-- Cart items will be loaded here -->
+    </div>
+    <div class="cart-footer">
+        <a href="{% url 'cart:cart_detail' %}" class="btn btn-primary w-100">View Cart</a>
+    </div>
+</aside>
+<div class="cart-overlay" id="cart-overlay"></div>
+
+<!-- Main Content -->
+<main id="main-content" tabindex="-1">
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+        {% endfor %}
     </div>
     {% endif %}
 
-    {% if cart|length > 0 %}
-    <a href="{% url 'cart:cart_detail' %}" class="cart-float" id="cart-float" title="View Cart">
-        <i class="bi bi-cart-fill"></i>
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ cart|length }}
-        </span>
-    </a>
-    {% endif %}
+    {% block content %}{% endblock content %}
+</main>
 
-    <a href="https://wa.me/233549926773?text=Hello%20Sellux%20Plaster,%20I'm%20interested%20in%20your%20services." class="whatsapp-float" target="_blank">
-        <i class="bi bi-whatsapp"></i>
-    </a>
-
-    <main class="flex-shrink-0">
-        {% if messages %}
-            <div class="container mt-4">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show rounded-4 shadow-sm border-0" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<!-- Enhanced Footer -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <!-- Company Info -->
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <img src="{% static 'images/logo.svg' %}" alt="Sellux Plaster Logo" width="40" height="40">
                     </div>
-                {% endfor %}
+                    <div class="brand-text">SELLUX <span>PLASTER</span></div>
+                </div>
+                <p class="footer-description">
+                    Transforming spaces with artisan craftsmanship since 2015.
+                    We bring architectural visions to life with precision and elegance.
+                </p>
+                <div class="social-links">
+                    <a href="https://facebook.com/selluxplaster" aria-label="Facebook" class="social-link">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://instagram.com/selluxplaster" aria-label="Instagram" class="social-link">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com/selluxplaster" aria-label="Twitter" class="social-link">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/selluxplaster" aria-label="LinkedIn" class="social-link">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a href="https://wa.me/233549926773" aria-label="WhatsApp" class="social-link">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                </div>
             </div>
-        {% endif %}
 
-        {% block content %}{% endblock content %}
-    </main>
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h4 class="footer-heading">Services</h4>
+                <ul class="footer-links">
+                    <li><a href="{% url 'services:service_list' %}">All Services</a></li>
+                    <li><a href="{% url 'services:category' 'cornices' %}">Cornice Design</a></li>
+                    <li><a href="{% url 'services:category' 'ceilings' %}">POP Ceilings</a></li>
+                    <li><a href="{% url 'services:category' 'gypsum' %}">Gypsum Board</a></li>
+                    <li><a href="{% url 'services:category' 'plastering' %}">Premium Plastering</a></li>
+                </ul>
+            </div>
 
-    <!-- Footer -->
-    <footer class="footer py-4 mt-auto">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-3">
-                    <h5 class="footer-heading">
-                        <div class="d-flex align-items-center mb-2">
-                            <img src="{% static 'images/logo.png' %}" alt="Logo" style="max-height: 40px;" onerror="this.style.display='none'">
-                            <span class="ms-2">SELLUX <span class="text-primary">PLASTER</span></span>
-                        </div>
-                    </h5>
-                    <p class="mt-3 small">Redefining elegance with precision plastering and architectural masterpieces since 2015. We bring your vision to life with artisan craftsmanship.</p>
-                    <div class="d-flex gap-3 mt-4">
-                        <a href="#" class="text-white fs-5"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="text-white fs-5"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="text-white fs-5"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" class="text-white fs-5"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <h5 class="footer-heading">Services</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'services:service_list' %}" class="footer-link">Our Services</a></li>
-                        <li><a href="#" class="footer-link">Cornice Design</a></li>
-                        <li><a href="#" class="footer-link">POP Ceilings</a></li>
-                        <li><a href="#" class="footer-link">Gypsum Board</a></li>
-                        <li><a href="{% url 'blog:post_list' %}" class="footer-link">Design Insights (Blog)</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h5 class="footer-heading">Company</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'pages:about' %}" class="footer-link">About Us</a></li>
-                        <li><a href="{% url 'contact:contact_us' %}" class="footer-link">Contact Us</a></li>
-                        <li><a href="{% url 'faq:faq_list' %}" class="footer-link">FAQ</a></li>
-                        <li><hr class="border-secondary opacity-25" style="width: 50px;"></li>
-                        <li><a href="{% url 'pages:terms' %}" class="footer-link">Terms of Service</a></li>
-                        <li><a href="{% url 'pages:privacy' %}" class="footer-link">Privacy Policy</a></li>
-                        <li><a href="{% url 'pages:refund' %}" class="footer-link">Refund Policy</a></li>
-                        <li><a href="{% url 'pages:shipping' %}" class="footer-link">Shipping Policy</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h5 class="footer-heading">Contact and Address</h5>
-                    <div class="mb-3 text-secondary small">
-                        <p class="mb-2 d-flex align-items-start">
-                            <i class="bi bi-geo-alt text-primary me-2 mt-1"></i>
-                            <a href="https://www.google.com/maps/place/Sellux+Plaster+LTD(Plasterboard+and+ceiling+materials)/@5.5743229,-0.2843095,14.4z/data=!4m6!3m5!1s0xfdf9bb89bcdaccb:0x35642fad98c1e46e!8m2!3d5.5787557!4d-0.2589208!16s%2Fg%2F11lv8l344t?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="footer-link">Odokor, Dr. Busia Highway, Accra, Ghana</a>
-                        </p>
-                        <p class="mb-2 d-flex align-items-center">
-                            <i class="bi bi-telephone text-primary me-2"></i>
-                            <a href="tel:0552088784" class="footer-link">055 208 8784</a> / <a href="tel:0549926773" class="footer-link">054 992 6773</a>
-                        </p>
-                        <p class="mb-0 d-flex align-items-center">
-                            <i class="bi bi-envelope text-primary me-2"></i>
-                            <a href="mailto:selluxplasterltd@gmail.com" class="footer-link">selluxplasterltd@gmail.com</a>
-                        </p>
-                    </div>
-                    <div class="mt-4">
-                        <h6 class="text-white fw-bold mb-3 small text-uppercase">Newsletter</h6>
+            <!-- Company Links -->
+            <div class="footer-section">
+                <h4 class="footer-heading">Company</h4>
+                <ul class="footer-links">
+                    <li><a href="{% url 'about:about' %}">About Us</a></li>
+                    <li><a href="{% url 'team:team_list' %}">Our Team</a></li>
+                    <li><a href="{% url 'portfolio:gallery' %}">Portfolio</a></li>
+                    <li><a href="{% url 'blog:post_list' %}">Blog & Insights</a></li>
+                    <li><a href="{% url 'faq:faq_list' %}">FAQ</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact & Newsletter -->
+            <div class="footer-section">
+                <h4 class="footer-heading">Contact</h4>
+                <address class="contact-info">
+                    <p>
+                        <i class="bi bi-geo-alt"></i>
+                        <a href="https://maps.google.com/?q=Sellux+Plaster+LTD+Odokor+Accra" target="_blank">
+                            Dr. Busia Highway, Odokor<br>Accra, Ghana
+                        </a>
+                    </p>
+                    <p>
+                        <i class="bi bi-telephone"></i>
+                        <a href="tel:+233552088784">055 208 8784</a> /
+                        <a href="tel:+233549926773">054 992 6773</a>
+                    </p>
+                    <p>
+                        <i class="bi bi-envelope"></i>
+                        <a href="mailto:selluxplasterltd@gmail.com">selluxplasterltd@gmail.com</a>
+                    </p>
+                </address>
+
+                <div class="newsletter">
+                    <h5 class="newsletter-title">Stay Updated</h5>
+                    <form class="newsletter-form">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-dark border-secondary text-white rounded-start-pill px-3" placeholder="Email address" style="font-size: 0.8rem;">
-                            <button class="btn btn-primary rounded-end-pill px-3 py-1" type="button"><i class="bi bi-send text-black"></i></button>
+                            <input type="email"
+                                   class="form-control"
+                                   placeholder="Your email address"
+                                   aria-label="Email address"
+                                   required>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="bi bi-send"></i>
+                            </button>
                         </div>
-                    </div>
+                        <small class="form-text">Get design tips and exclusive offers</small>
+                    </form>
                 </div>
-            </div>
-            <hr class="my-4 border-secondary opacity-25">
-            <div class="text-center small">
-                <p>&copy; {% now "Y" %} Sellux Plaster Ltd. Crafted for luxury. All Rights Reserved.</p>
             </div>
         </div>
-    </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; {% now "Y" %} Sellux Plaster Ltd. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="{% url 'pages:privacy' %}">Privacy Policy</a>
+                    <a href="{% url 'pages:terms' %}">Terms of Service</a>
+                    <a href="{% url 'pages:refund' %}">Refund Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Floating Action Buttons -->
+<div class="fab-container">
+    <a href="https://wa.me/233549926773?text=Hello%20Sellux%20Plaster,%20I'm%20interested%20in%20your%20services"
+       class="fab fab-whatsapp"
+       target="_blank"
+       aria-label="Chat on WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <a href="tel:+233552088784"
+       class="fab fab-phone"
+       aria-label="Call us">
+        <i class="bi bi-telephone"></i>
+    </a>
+    <button class="fab fab-cart"
+            id="fab-cart"
+            aria-label="Open cart">
+        <i class="bi bi-cart3"></i>
+        {% if cart|length > 0 %}
+        <span class="fab-badge">{{ cart|length }}</span>
+        {% endif %}
+    </button>
+</div>
+
+<!-- Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"
+        defer></script>
+
+<script>
+    // Enhanced JavaScript with modern patterns
+    (function() {
+        'use strict';
+
+        // DOM Ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            // Cart Functionality
+            const cartToggle = document.getElementById('cart-toggle');
+            const fabCart = document.getElementById('fab-cart');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const cartOverlay = document.getElementById('cart-overlay');
+            const cartClose = document.getElementById('cart-close');
+
+            function openCart() {
+                cartSidebar.setAttribute('aria-hidden', 'false');
+                cartSidebar.classList.add('active');
+                cartOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeCart() {
+                cartSidebar.setAttribute('aria-hidden', 'true');
+                cartSidebar.classList.remove('active');
+                cartOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            if (cartToggle) cartToggle.addEventListener('click', openCart);
+            if (fabCart) fabCart.addEventListener('click', openCart);
+            if (cartClose) cartClose.addEventListener('click', closeCart);
+            if (cartOverlay) cartOverlay.addEventListener('click', closeCart);
+
+            // Scroll Behavior for Navigation
+            const mainNav = document.getElementById('main-nav');
+            let lastScroll = 0;
+
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset;
+
+                if (currentScroll <= 0) {
+                    mainNav.classList.remove('scrolled');
+                    return;
+                }
+
+                if (currentScroll > lastScroll) {
+                    // Scrolling down
+                    mainNav.style.transform = 'translateY(-100%)';
+                } else {
+                    // Scrolling up
+                    mainNav.style.transform = 'translateY(0)';
+                    mainNav.classList.add('scrolled');
+                }
+
+                lastScroll = currentScroll;
+            });
+
+            // Lazy Loading Images
             if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries) => {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            let img = entry.target;
-                            img.classList.add('loaded');
+                            const img = entry.target;
+                            const src = img.getAttribute('data-src');
+                            if (src) {
+                                img.src = src;
+                                img.classList.add('loaded');
+                            }
                             observer.unobserve(img);
                         }
                     });
                 });
-                lazyImages.forEach(img => observer.observe(img));
-            }
 
-            const cartFloat = document.getElementById('cart-float');
-            if (cartFloat) {
-                let isDragging = false;
-                let offsetX, offsetY;
-
-                cartFloat.addEventListener('mousedown', function(e) {
-                    isDragging = true;
-                    cartFloat.classList.add('dragging');
-                    offsetX = e.clientX - cartFloat.getBoundingClientRect().left;
-                    offsetY = e.clientY - cartFloat.getBoundingClientRect().top;
-                });
-
-                document.addEventListener('mousemove', function(e) {
-                    if (isDragging) {
-                        const newX = e.clientX - offsetX;
-                        const newY = e.clientY - offsetY;
-                        cartFloat.style.left = `${newX}px`;
-                        cartFloat.style.top = `${newY}px`;
-                    }
-                });
-
-                document.addEventListener('mouseup', function(e) {
-                    isDragging = false;
-                    cartFloat.classList.remove('dragging');
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    imageObserver.observe(img);
                 });
             }
 
-            const promoModal = document.getElementById('promo-modal');
-            const promoCloseBtn = document.getElementById('promo-close-btn');
-            const subscribeForm = document.getElementById('subscribe-form');
-            const promoMessage = document.getElementById('promo-message');
-
-            if (promoModal && !document.cookie.includes('promo_shown=true')) {
-                promoModal.style.display = 'flex';
-            }
-
-            if(promoCloseBtn) {
-                promoCloseBtn.addEventListener('click', () => {
-                    promoModal.style.display = 'none';
-                    document.cookie = "promo_shown=true; max-age=86400; path=/"; // Expires in 1 day
-                });
-            }
-
-            if(subscribeForm) {
-                subscribeForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const email = document.getElementById('subscribe-email').value;
-                    fetch('{% url "promotions:subscribe" %}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': '{{ csrf_token }}'
-                        },
-                        body: JSON.stringify({ email: email })
+            // Service Worker Registration (PWA)
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registered:', registration);
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        promoMessage.textContent = data.message;
-                        if(data.success) {
-                            promoMessage.classList.add('text-success');
-                            setTimeout(() => {
-                                promoModal.style.display = 'none';
-                                document.cookie = "promo_shown=true; max-age=86400; path=/";
-                            }, 2000);
-                        }
-                        else {
-                             promoMessage.classList.add('text-danger');
-                        }
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed:', error);
                     });
+            }
+
+            // Network Status Detection
+            function updateNetworkStatus() {
+                const status = navigator.onLine ? 'online' : 'offline';
+                document.documentElement.setAttribute('data-network', status);
+            }
+
+            window.addEventListener('online', updateNetworkStatus);
+            window.addEventListener('offline', updateNetworkStatus);
+            updateNetworkStatus();
+
+            // Theme Preference
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+            function updateTheme() {
+                const theme = localStorage.getItem('theme') ||
+                              (prefersDark.matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-bs-theme', theme);
+            }
+
+            prefersDark.addEventListener('change', updateTheme);
+            updateTheme();
+
+            // Performance Monitoring
+            if ('performance' in window) {
+                window.addEventListener('load', function() {
+                    const timing = performance.timing;
+                    const loadTime = timing.loadEventEnd - timing.navigationStart;
+
+                    if (loadTime > 3000) {
+                        console.warn('Load time exceeded 3 seconds:', loadTime);
+                    }
                 });
             }
         });
-    </script>
-    {% block extra_js %}{% endblock %}
+
+        // Error Boundary
+        window.addEventListener('error', function(e) {
+            console.error('Unhandled error:', e.error);
+            // Could send to analytics service
+        });
+
+        // Unhandled Promise Rejection
+        window.addEventListener('unhandledrejection', function(e) {
+            console.error('Unhandled promise rejection:', e.reason);
+        });
+    })();
+</script>
+
+{% block extra_js %}{% endblock extra_js %}
 </body>
 </html>
