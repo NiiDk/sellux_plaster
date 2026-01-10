@@ -48,17 +48,22 @@ class OrderCreateView(View):
             if request.user.is_authenticated:
                 order.user = request.user
             
+            # Calculate costs
             subtotal = cart.get_total_price()
-            shipping_settings = ShippingSetting.objects.first()
-            tax_rate = Decimal(shipping_settings.tax_rate if shipping_settings else 0)
-            order.tax = subtotal * (tax_rate / Decimal(100))
+            try:
+                shipping_settings = ShippingSetting.objects.first()
+                tax_rate = Decimal(shipping_settings.tax_rate if shipping_settings else 0)
+                order.tax = subtotal * (tax_rate / Decimal(100))
 
-            if order.delivery_option == 'delivery':
-                city_name = form.cleaned_data['city']
-                city = City.objects.get(name=city_name)
-                base_fee = Decimal(city.base_delivery_fee)
-                variable_fee = (subtotal / 100) * (Decimal(shipping_settings.delivery_fee_per_100) if shipping_settings else 0)
-                order.delivery_fee = base_fee + variable_fee
+                if order.delivery_option == 'delivery':
+                    city_name = form.cleaned_data['city']
+                    city = City.objects.get(name=city_name)
+                    base_fee = Decimal(city.base_delivery_fee)
+                    variable_fee = (subtotal / 100) * (Decimal(shipping_settings.delivery_fee_per_100) if shipping_settings else 0)
+                    order.delivery_fee = base_fee + variable_fee
+            except ShippingSetting.DoesNotExist:
+                order.tax = 0
+                order.delivery_fee = 0
             
             order.total_amount = subtotal
             order.save()
