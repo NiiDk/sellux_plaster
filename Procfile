@@ -1,0 +1,1 @@
+web: gunicorn sellux_plaster.wsgi:application
