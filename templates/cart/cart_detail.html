@@ -1,65 +1,164 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Your Shopping Cart | Sellux Plaster Ltd{% endblock %}
+{% block title %}Project Selection | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<div class="container my-5 fade-in-up">
-    <div class="row g-5">
-        <div class="col-lg-8">
-            <h2 class="fw-bold mb-4">Your Shopping Cart</h2>
-            {% if cart|length > 0 %}
-                {% for item in cart %}
-                    <div class="card mb-3 shadow-sm">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-md-2">
-                                    <img src="{{ item.product.image.url }}" class="img-fluid rounded-3" alt="{{ item.product.name }}">
-                                </div>
-                                <div class="col-md-4">
-                                    <h5 class="mb-0">{{ item.product.name }}</h5>
-                                    <small class="text-muted">Price: GH₵{{ item.price|floatformat:2 }}</small>
-                                </div>
-                                <div class="col-md-3">
-                                    <form action="{% url 'cart:cart_add' item.product.id %}" method="post" class="d-flex">
-                                        {% csrf_token %}
-                                        {{ item.update_quantity_form.quantity }}
-                                        {{ item.update_quantity_form.override }}
-                                        <button type="submit" class="btn btn-primary btn-sm ms-2">Update</button>
-                                    </form>
-                                </div>
-                                <div class="col-md-2 text-md-end">
-                                    <h6 class="mb-0 fw-bold">GH₵{{ item.total_price|floatformat:2 }}</h6>
-                                </div>
-                                <div class="col-md-1 text-md-end">
-                                    <a href="{% url 'cart:cart_remove' item.product.id %}" class="text-danger"><i class="bi bi-trash"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div class="text-center py-5">
-                    <p class="lead">Your cart is empty.</p>
-                    <a href="{% url 'catalogue:product_list' %}" class="btn btn-primary">Continue Shopping</a>
-                </div>
-            {% endif %}
-        </div>
 
-        <div class="col-lg-4">
-            <div class="card shadow-sm rounded-4">
-                <div class="card-body p-4">
-                    <h4 class="fw-bold mb-4">Order Summary</h4>
-                    <div class="d-flex justify-content-between align-items-center mt-4 pt-4 border-top fw-bold fs-5">
-                        <span>Total</span>
-                        <span>GH₵{{ cart.get_total_price|floatformat:2 }}</span>
-                    </div>
-                    <div class="d-grid mt-4">
-                        <a href="{% url 'orders:order_create' %}" class="btn btn-primary btn-lg">Proceed to Checkout</a>
-                    </div>
-                </div>
+<section class="py-5 bg-pattern-3d border-bottom position-relative">
+    <div class="position-absolute bottom-0 start-0 w-100 h-50" style="background: linear-gradient(to top, #ffffff, transparent);"></div>
+    <div class="container position-relative z-1 pt-3">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <p class="small text-uppercase fw-bold text-primary ls-2 mb-2">Review Your Materials</p>
+                <h1 class="display-5 fw-bold text-dark mb-0">Project Selection</h1>
+            </div>
+            <div class="col-lg-6 text-lg-end mt-3 mt-lg-0">
+                <a href="{% url 'catalogue:product_list' %}" class="text-decoration-none text-muted fw-bold small ls-1 hover-primary">
+                    <i class="bi bi-arrow-left me-2"></i> Continue Browsing
+                </a>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<section class="py-5 bg-white min-vh-50">
+    <div class="container py-2">
+        {% if cart|length > 0 %}
+        <div class="row g-5">
+
+            <div class="col-lg-8 animate__animated animate__fadeInUp">
+                <div class="d-none d-md-flex text-uppercase text-muted small fw-bold ls-2 border-bottom pb-3 mb-4">
+                    <div class="col-6">Product Details</div>
+                    <div class="col-3 text-center">Quantity</div>
+                    <div class="col-3 text-end">Subtotal</div>
+                </div>
+
+                <div class="d-flex flex-column gap-4">
+                    {% for item in cart %}
+                    <div class="row align-items-center pb-4 border-bottom border-light">
+
+                        <div class="col-md-6 d-flex align-items-center gap-4 mb-3 mb-md-0">
+                            <div class="bg-light rounded-3 overflow-hidden shadow-sm flex-shrink-0" style="width: 100px; height: 100px;">
+                                <img src="{{ item.product.image.url }}" class="w-100 h-100 object-fit-cover" alt="{{ item.product.name }}">
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1 text-dark">{{ item.product.name }}</h5>
+                                <div class="text-muted small mb-2">Unit Price: GH₵{{ item.price|floatformat:2 }}</div>
+                                <a href="{% url 'cart:cart_remove' item.product.id %}" class="text-danger small text-decoration-none fw-bold d-md-none">
+                                    Remove
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 d-flex justify-content-md-center mb-3 mb-md-0">
+                            <form action="{% url 'cart:cart_add' item.product.id %}" method="post" class="d-flex align-items-center gap-2">
+                                {% csrf_token %}
+                                <div class="input-group input-group-sm" style="width: 120px;">
+                                    {{ item.update_quantity_form.quantity }} <button type="submit" class="btn btn-outline-dark border-start-0" data-bs-toggle="tooltip" title="Update Quantity">
+                                    <i class="bi bi-check-lg"></i>
+                                </button>
+                                </div>
+                                {{ item.update_quantity_form.override }}
+                            </form>
+                        </div>
+
+                        <div class="col-md-3 text-md-end d-flex flex-column align-items-md-end justify-content-between h-100">
+                            <span class="fs-5 fw-bold text-primary">GH₵{{ item.total_price|floatformat:2 }}</span>
+                            <a href="{% url 'cart:cart_remove' item.product.id %}" class="text-muted small text-decoration-none mt-2 d-none d-md-inline-block hover-danger transition-colors">
+                                <i class="bi bi-x-circle me-1"></i> Remove
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top: 100px; z-index: 10;">
+                    <div class="bg-black text-white p-5 rounded-0 position-relative overflow-hidden shadow-lg border border-dark animate__animated animate__fadeInRight">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-dots opacity-25"></div>
+
+                        <div class="position-relative z-1">
+                            <h4 class="fw-bold mb-4 font-heading">Order Summary</h4>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3 opacity-75">
+                                <span>Subtotal</span>
+                                <span>GH₵{{ cart.get_total_price|floatformat:2 }}</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4 opacity-75">
+                                <span>Est. Taxes</span>
+                                <span class="small fst-italic">Calculated at checkout</span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center pt-4 border-top border-secondary border-opacity-50 mb-4">
+                                <span class="fs-5">Total</span>
+                                <span class="fs-3 fw-bold text-primary">GH₵{{ cart.get_total_price|floatformat:2 }}</span>
+                            </div>
+
+                            <div class="d-grid gap-3">
+                                <a href="{% url 'orders:order_create' %}" class="btn btn-primary py-3 fw-bold rounded-pill shadow-float">
+                                    Secure Checkout <i class="bi bi-lock-fill ms-2"></i>
+                                </a>
+                                <p class="text-center small text-white-50 mb-0 mt-2">
+                                    <i class="bi bi-shield-check me-1"></i> SSL Encrypted Payment
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {% else %}
+        <div class="row justify-content-center py-5 animate__animated animate__fadeIn">
+            <div class="col-lg-6 text-center">
+                <div class="mb-4">
+                    <i class="bi bi-box-seam text-muted opacity-25" style="font-size: 5rem;"></i>
+                </div>
+                <h2 class="fw-bold mb-3">Your project board is empty.</h2>
+                <p class="text-muted mb-5">Start curating your space with our premium selection of architectural finishes.</p>
+                <a href="{% url 'catalogue:product_list' %}" class="btn btn-dark rounded-pill px-5 py-3 fw-bold">
+                    Browse Catalogue
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+    /* Styling the Django Quantity Input */
+    .input-group input {
+        border-right: 0;
+        text-align: center;
+        font-weight: 600;
+        border-color: #dee2e6;
+    }
+
+    .input-group input:focus {
+        box-shadow: none;
+        border-color: var(--primary-color);
+    }
+
+    .input-group .btn-outline-dark:hover {
+        background-color: var(--black-onyx);
+    }
+
+    /* Typography */
+    .ls-1 { letter-spacing: 1px; }
+    .ls-2 { letter-spacing: 2px; }
+    .font-heading { font-family: 'Montserrat', sans-serif; }
+
+    /* Hover Effects */
+    .hover-danger:hover { color: #dc3545 !important; }
+    .transition-colors { transition: color 0.3s ease; }
+    .object-fit-cover { object-fit: cover; }
+
+    /* Sticky Adjustments */
+    .sticky-top { transition: all 0.3s ease; }
+</style>
+
 {% endblock %}

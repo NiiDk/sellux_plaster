@@ -14,7 +14,7 @@
                 <p class="lead text-muted">Discover our range of high-quality cornices, POP designs, and decorative plaster materials crafted for excellence.</p>
             </div>
             <div class="col-lg-5">
-                 <form action="{% url 'pages:global_search' %}" method="get" class="nav-search">
+                <form action="{% url 'pages:global_search' %}" method="get" class="nav-search">
                     <i class="bi bi-search"></i>
                     <input type="text" name="q" class="form-control form-control-lg" placeholder="Search for products..." required>
                 </form>
@@ -28,67 +28,67 @@
     <div class="container py-4">
         <div class="row g-4">
             {% for product in products %}
-                <div class="col-sm-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
-                    <div class="card h-100 border-0 shadow-sm hover-lift overflow-hidden">
-                        <!-- Product Image -->
-                        <div class="position-relative overflow-hidden bg-light" style="height: 240px;">
-                            {% if product.image %}
-                                <img src="{{ product.image.url }}" class="card-img-top w-100 h-100" alt="{{ product.name }}" style="object-fit: cover; transition: transform 0.5s ease;" loading="lazy">
+            <div class="col-sm-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
+                <div class="card h-100 border-0 shadow-sm hover-lift overflow-hidden">
+                    <!-- Product Image -->
+                    <div class="position-relative overflow-hidden bg-light" style="height: 240px;">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top w-100 h-100" alt="{{ product.name }}" style="object-fit: cover; transition: transform 0.5s ease;" loading="lazy">
+                        {% else %}
+                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-image text-muted fs-1"></i>
+                        </div>
+                        {% endif %}
+
+                        <!-- Stock Badge -->
+                        <div class="position-absolute top-0 start-0 m-3">
+                            {% if product.stock > 0 %}
+                            <span class="badge bg-success bg-opacity-75 rounded-pill px-3">In Stock</span>
                             {% else %}
-                                <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-image text-muted fs-1"></i>
-                                </div>
+                            <span class="badge bg-danger bg-opacity-75 rounded-pill px-3">Out of Stock</span>
                             {% endif %}
-                            
-                            <!-- Stock Badge -->
-                            <div class="position-absolute top-0 start-0 m-3">
-                                {% if product.stock > 0 %}
-                                    <span class="badge bg-success bg-opacity-75 rounded-pill px-3">In Stock</span>
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="card-body p-4 d-flex flex-column">
+                        <div class="mb-2">
+                            <small class="text-primary fw-bold text-uppercase tracking-wider" style="font-size: 0.7rem;">{{ product.category.name }}</small>
+                        </div>
+                        <h5 class="card-title fw-bold mb-3">{{ product.name }}</h5>
+
+                        <div class="mt-auto">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <span class="fs-4 fw-bold text-dark">GH₵{{ product.price }}</span>
+                                <small class="text-muted">Per Unit</small>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-outline-dark rounded-pill py-2 fw-semibold">
+                                    View Details
+                                </a>
+                                {% if product.is_available and product.stock > 0 %}
+                                <form action="{% url 'cart:cart_add' product.id %}" method="post" class="d-grid">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="btn btn-primary rounded-pill py-2 fw-semibold text-black">Add to Cart</button>
+                                </form>
                                 {% else %}
-                                    <span class="badge bg-danger bg-opacity-75 rounded-pill px-3">Out of Stock</span>
+                                <button class="btn btn-outline-secondary rounded-pill py-2 fw-semibold" disabled>Out of Stock</button>
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- Card Body -->
-                        <div class="card-body p-4 d-flex flex-column">
-                            <div class="mb-2">
-                                <small class="text-primary fw-bold text-uppercase tracking-wider" style="font-size: 0.7rem;">{{ product.category.name }}</small>
-                            </div>
-                            <h5 class="card-title fw-bold mb-3">{{ product.name }}</h5>
-                            
-                            <div class="mt-auto">
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <span class="fs-4 fw-bold text-dark">GH₵{{ product.price }}</span>
-                                    <small class="text-muted">Per Unit</small>
-                                </div>
-                                <div class="d-grid gap-2">
-                                    <a href="{{ product.get_absolute_url }}" class="btn btn-outline-dark rounded-pill py-2 fw-semibold">
-                                        View Details
-                                    </a>
-                                    {% if product.is_available and product.stock > 0 %}
-                                        <form action="{% url 'cart:cart_add' product.id %}" method="post" class="d-grid">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" class="btn btn-primary rounded-pill py-2 fw-semibold text-black">Add to Cart</button>
-                                        </form>
-                                    {% else %}
-                                        <button class="btn btn-outline-secondary rounded-pill py-2 fw-semibold" disabled>Out of Stock</button>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
+            </div>
             {% empty %}
-                <div class="col-12 text-center py-5">
-                    <div class="bg-white rounded-5 p-5 shadow-sm">
-                        <i class="bi bi-search text-muted display-1 mb-4"></i>
-                        <h3 class="fw-bold">No products found</h3>
-                        <p class="text-muted">Our master craftsmen are currently updating our digital inventory. Please check back shortly.</p>
-                        <a href="{% url 'contact:contact_us' %}" class="btn btn-primary mt-3 px-5 rounded-pill py-3 text-black">Inquire Directly</a>
-                    </div>
+            <div class="col-12 text-center py-5">
+                <div class="bg-white rounded-5 p-5 shadow-sm">
+                    <i class="bi bi-search text-muted display-1 mb-4"></i>
+                    <h3 class="fw-bold">No products found</h3>
+                    <p class="text-muted">Our master craftsmen are currently updating our digital inventory. Please check back shortly.</p>
+                    <a href="{% url 'contact:contact_us' %}" class="btn btn-primary mt-3 px-5 rounded-pill py-3 text-black">Inquire Directly</a>
                 </div>
+            </div>
             {% endfor %}
         </div>
 
@@ -99,11 +99,11 @@
                 <nav>
                     <ul class="pagination justify-content-center">
                         {% if page_obj.has_previous %}
-                            <li class="page-item"><a class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm" href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                        <li class="page-item"><a class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm" href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
                         {% endif %}
                         <li class="page-item active"><span class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm">{{ page_obj.number }}</span></li>
                         {% if page_obj.has_next %}
-                            <li class="page-item"><a class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                        <li class="page-item"><a class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm" href="?page={{ page_obj.next_page_number }}">Next</a></li>
                         {% endif %}
                     </ul>
                 </nav>

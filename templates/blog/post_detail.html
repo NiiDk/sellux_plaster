@@ -4,57 +4,118 @@
 {% block title %}{{ post.title }} | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<article class="py-5">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 animate__animated animate__fadeIn">
-                <!-- Breadcrumb -->
-                <nav aria-label="breadcrumb" class="mb-4">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/" class="text-dark text-decoration-none">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'blog:post_list' %}" class="text-dark text-decoration-none">Insights</a></li>
-                        {% if post.category %}
-                        <li class="breadcrumb-item active text-primary fw-bold" aria-current="page">{{ post.category.name }}</li>
-                        {% endif %}
-                    </ol>
-                </nav>
 
-                <!-- Post Header -->
-                <h1 class="display-4 fw-bold mb-4">{{ post.title }}</h1>
-                
-                <div class="d-flex align-items-center gap-3 mb-5 py-3 border-top border-bottom">
-                    <div class="bg-primary text-black rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 40px; height: 40px;">
-                        {{ post.author.username|slice:":1"|upper }}
-                    </div>
-                    <div>
-                        <div class="fw-bold small">By {{ post.author.get_full_name|default:post.author.username }}</div>
-                        <div class="text-muted small">Published on {{ post.created_at|date:"M d, Y" }}</div>
-                    </div>
+<header class="position-relative pt-5 pb-5 bg-pattern-3d border-bottom">
+    <div class="position-absolute bottom-0 start-0 w-100 h-100" style="background: linear-gradient(to bottom, transparent 50%, #ffffff 100%);"></div>
+
+    <div class="container position-relative z-1 pt-4">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-10 animate__animated animate__fadeIn">
+                <div class="mb-4">
+                    <a href="{% url 'blog:post_list' %}" class="text-uppercase text-decoration-none fw-bold small text-primary ls-2 hover-opacity">
+                        <i class="bi bi-arrow-left me-2"></i> The Journal
+                    </a>
                 </div>
 
-                <!-- Featured Image -->
-                {% if post.featured_image %}
-                <div class="rounded-5 overflow-hidden shadow-lg mb-5">
-                    <img src="{{ post.featured_image.url }}" class="img-fluid w-100" alt="{{ post.title }}" style="max-height: 500px; object-fit: cover;">
-                </div>
+                {% if post.category %}
+                <span class="d-inline-block border border-dark rounded-0 px-3 py-1 text-uppercase small fw-bold mb-4 ls-1">
+                    {{ post.category.name }}
+                </span>
                 {% endif %}
 
-                <!-- Post Content -->
-                <div class="post-content lead text-muted" style="line-height: 1.8; font-size: 1.1rem;">
-                    {{ post.content|linebreaks }}
-                </div>
+                <h1 class="display-4 fw-bold mb-4 text-dark lh-sm" style="letter-spacing: -1px;">{{ post.title }}</h1>
 
-                <!-- Footer / CTA -->
-                <div class="mt-5 p-5 bg-light rounded-5 text-center">
-                    <h3 class="fw-bold mb-3">Inspired by this design?</h3>
-                    <p class="text-muted mb-4">Our master plasterers can bring these insights into your home or project.</p>
-                    <div class="d-flex justify-content-center gap-3">
-                        <a href="{% url 'contact:contact_us' %}" class="btn btn-primary rounded-pill px-4 fw-bold">Talk to an Expert</a>
-                        <a href="{% url 'custom_requests:request_create' %}" class="btn btn-outline-dark rounded-pill px-4 fw-bold">Request a Quote</a>
-                    </div>
+                <div class="d-flex align-items-center justify-content-center text-muted small text-uppercase ls-2 gap-3">
+                    <span>{{ post.created_at|date:"F d, Y" }}</span>
+                    <span class="text-primary">•</span>
+                    <span>By {{ post.author.get_full_name|default:post.author.username }}</span>
                 </div>
             </div>
         </div>
     </div>
+</header>
+
+<article class="bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+                {% if post.featured_image %}
+                <div class="my-5 position-relative animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 border border-primary opacity-25" style="transform: translate(15px, 15px); z-index: 0;"></div>
+
+                    <div class="ratio ratio-21x9 shadow-sm position-relative z-1 bg-light overflow-hidden">
+                        <img src="{{ post.featured_image.url }}" class="object-fit-cover w-100 h-100" alt="{{ post.title }}">
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-9">
+                        <div class="article-body fs-5 text-secondary lh-lg mb-5 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                            {{ post.content|linebreaks }}
+                        </div>
+
+                        <div class="border-top border-bottom py-4 my-5 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                            <div class="text-muted small text-uppercase ls-1">
+                                Share this insight
+                            </div>
+                            <div class="d-flex gap-3">
+                                <a href="#" class="btn btn-outline-dark btn-sm rounded-circle" style="width: 40px; height: 40px; display: grid; place-items: center;"><i class="bi bi-facebook"></i></a>
+                                <a href="#" class="btn btn-outline-dark btn-sm rounded-circle" style="width: 40px; height: 40px; display: grid; place-items: center;"><i class="bi bi-twitter"></i></a>
+                                <a href="#" class="btn btn-outline-dark btn-sm rounded-circle" style="width: 40px; height: 40px; display: grid; place-items: center;"><i class="bi bi-linkedin"></i></a>
+                                <a href="https://wa.me/?text=Read this: {{ request.build_absolute_uri }}" class="btn btn-outline-dark btn-sm rounded-circle" style="width: 40px; height: 40px; display: grid; place-items: center;"><i class="bi bi-whatsapp"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="bg-black text-white p-5 position-relative overflow-hidden mb-5" style="border: 1px solid #333;">
+                            <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-3d opacity-10" style="filter: invert(1);"></div>
+
+                            <div class="position-relative z-1 text-center">
+                                <span class="d-block text-primary small fw-bold text-uppercase ls-2 mb-3">From Insight to Reality</span>
+                                <h3 class="h2 fw-bold mb-4">Inspired by this design?</h3>
+                                <p class="text-white-50 col-lg-8 mx-auto mb-4">
+                                    Our master craftsmen are ready to bring this level of precision and elegance to your personal project.
+                                </p>
+                                <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                                    <a href="{% url 'contact:contact_us' %}" class="btn btn-primary px-4 py-2 fw-bold">Start a Conversation</a>
+                                    <a href="{% url 'services:service_list' %}" class="btn btn-outline-light px-4 py-2">Explore Services</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </article>
+
+<style>
+    /* Typography Fine-Tuning */
+    .ls-1 { letter-spacing: 1px; }
+    .ls-2 { letter-spacing: 2px; }
+
+    .hover-opacity { transition: opacity 0.2s; opacity: 0.7; }
+    .hover-opacity:hover { opacity: 1; }
+
+    /* Editorial "Drop Cap" Effect for the first paragraph */
+    .article-body > p:first-of-type::first-letter {
+        float: left;
+        font-size: 3.5rem;
+        line-height: 0.8;
+        font-weight: 700;
+        margin-right: 0.5rem;
+        margin-top: 0.2rem;
+        color: var(--primary-color);
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Paragraph spacing */
+    .article-body p {
+        margin-bottom: 1.5rem;
+    }
+</style>
+
 {% endblock %}

@@ -1,75 +1,141 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
 
 {% block title %}Order #{{ order.id }} Confirmed | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<div class="container my-5 fade-in-up">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow-lg p-4 p-lg-5">
-                <div class="card-body">
-                    <div class="text-center mb-5">
-                        <i class="bi bi-check-circle-fill text-success display-3 mb-3"></i>
-                        <h2 class="fw-bold">Thank You for Your Order!</h2>
-                        <p class="text-muted">Your order has been placed successfully. A confirmation has been sent to your email.</p>
-                        <a href="{% url 'orders:download_invoice' order.id %}" class="btn btn-primary">Download Invoice (PDF)</a>
-                    </div>
+<section class="min-vh-100 py-5 bg-white position-relative overflow-hidden">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-grid opacity-25"></div>
 
-                    <div class="p-4 rounded-4" style="background-color: var(--light-bg);">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h5 class="fw-bold">Order #: {{ order.id }}</h5>
-                                <p class="text-muted mb-0">Date: {{ order.created_at|date:"d M Y" }}</p>
-                            </div>
-                            <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                                <h5 class="fw-bold">Billed To</h5>
-                                <p class="text-muted mb-0">{{ order.first_name }} {{ order.last_name }}</p>
-                                <p class="text-muted mb-0">{{ order.email }}</p>
-                                <p class="text-muted mb-0">{{ order.phone_number }}</p>
-                            </div>
+    <div class="container position-relative z-1 py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <div class="text-center mb-5 animate__animated animate__fadeInDown">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success bg-opacity-10 p-4 mb-4 border border-success border-opacity-25">
+                        <i class="bi bi-check2-all text-success display-4"></i>
+                    </div>
+                    <h1 class="display-4 fw-bold text-dark mb-3">Order Confirmed</h1>
+                    <p class="lead text-muted mx-auto mb-4" style="max-width: 600px;">
+                        Thank you, {{ order.first_name }}. Your order for premium materials has been successfully logged. Our logistics team will contact you shortly.
+                    </p>
+
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                        <a href="{% url 'orders:download_invoice' order.id %}" class="btn btn-dark rounded-pill px-4 py-3 fw-bold shadow-sm transition-all">
+                            <i class="bi bi-file-earmark-pdf me-2"></i> Download Official Invoice
+                        </a>
+                        <a href="/" class="btn btn-outline-dark rounded-pill px-4 py-3 fw-bold">
+                            Return to Site
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-white border rounded-5 shadow-lg overflow-hidden animate__animated animate__fadeInUp">
+                    <div class="bg-light p-4 border-bottom d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div>
+                            <span class="text-uppercase text-muted fw-bold ls-1 small d-block">Reference Number</span>
+                            <span class="fw-bold text-dark fs-5">#ORD-{{ order.id|stringformat:"05d" }}</span>
+                        </div>
+                        <div class="text-md-end">
+                            <span class="text-uppercase text-muted fw-bold ls-1 small d-block">Logistics Target</span>
+                            <span class="fw-bold text-dark">{{ order.created_at|date:"d M Y" }}</span>
                         </div>
                     </div>
 
-                    <h4 class="fw-bold mt-5 mb-3">Order Details</h4>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Item</th>
-                                <th scope="col" class="text-center">Quantity</th>
-                                <th scope="col" class="text-end">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in order.items.all %}
-                            <tr>
-                                <td>{{ item.product.name }}</td>
-                                <td class="text-center">{{ item.quantity }}</td>
-                                <td class="text-end">S{{ item.get_cost|floatformat:2 }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                        <tfoot>
-                            <tr class="fw-bold">
-                                <td colspan="2">Subtotal</td>
-                                <td class="text-end">S{{ order.total_amount|floatformat:2 }}</td>
-                            </tr>
-                             <tr>
-                                <td colspan="2">Tax</td>
-                                <td class="text-end">S{{ order.tax|floatformat:2 }}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Delivery Fee</td>
-                                <td class="text-end">S{{ order.delivery_fee|floatformat:2 }}</td>
-                            </tr>
-                            <tr class="fw-bold fs-5 border-top">
-                                <td colspan="2">Grand Total</td>
-                                <td class="text-end">S{{ order.get_grand_total|floatformat:2 }}</td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <div class="p-4 p-lg-5">
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-6">
+                                <h6 class="text-uppercase text-muted fw-bold ls-1 small mb-3">Client Information</h6>
+                                <p class="mb-0 fw-bold text-dark fs-5">{{ order.first_name }} {{ order.last_name }}</p>
+                                <p class="mb-0 text-muted">{{ order.email }}</p>
+                                <p class="mb-0 text-muted">{{ order.phone_number }}</p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <h6 class="text-uppercase text-muted fw-bold ls-1 small mb-3">Material Destination</h6>
+                                <p class="text-muted mb-0">Address details provided in checkout</p>
+                                <p class="text-muted mb-0">Logistics status: <span class="badge bg-primary-subtle text-primary rounded-pill">Processing</span></p>
+                            </div>
+                        </div>
+
+                        <h6 class="text-uppercase text-muted fw-bold ls-1 small mb-4">Material Manifest</h6>
+                        <div class="table-responsive">
+                            <table class="table table-borderless align-middle">
+                                <thead class="border-bottom">
+                                <tr class="small text-muted text-uppercase fw-bold">
+                                    <th class="ps-0 py-3">Specification</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-end pe-0">Investment</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in order.items.all %}
+                                <tr class="border-bottom border-light">
+                                    <td class="ps-0 py-3">
+                                        <span class="fw-bold text-dark d-block">{{ item.product.name }}</span>
+                                        <small class="text-muted">Premium Grade Material</small>
+                                    </td>
+                                    <td class="text-center fw-bold">{{ item.quantity }}</td>
+                                    <td class="text-end pe-0 fw-bold">GHS {{ item.get_cost|floatformat:2 }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="2" class="pt-4 text-muted">Material Subtotal</td>
+                                    <td class="text-end pt-4 fw-medium text-dark">GHS {{ order.total_amount|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-muted">VAT & Processing</td>
+                                    <td class="text-end fw-medium text-dark">GHS {{ order.tax|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-muted">Logistics & Delivery</td>
+                                    <td class="text-end fw-medium text-dark">GHS {{ order.delivery_fee|floatformat:2 }}</td>
+                                </tr>
+                                <tr class="border-top">
+                                    <td colspan="2" class="pt-3 text-dark fw-bold fs-5">Total Investment</td>
+                                    <td class="text-end pt-3 text-primary fw-bold fs-4">GHS {{ order.get_grand_total|floatformat:2 }}</td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="mt-5 row g-4">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="bi bi-box-seam text-primary fs-3 mb-2 d-block"></i>
+                            <h6 class="fw-bold">Packing</h6>
+                            <p class="small text-muted">Materials are inspected and packed securely.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="bi bi-truck text-primary fs-3 mb-2 d-block"></i>
+                            <h6 class="fw-bold">Delivery</h6>
+                            <p class="small text-muted">Dispatch occurs within 3-5 working days.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="bi bi-tools text-primary fs-3 mb-2 d-block"></i>
+                            <h6 class="fw-bold">Installation</h6>
+                            <p class="small text-muted">Our teams are available for on-site application.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<style>
+    .ls-1 { letter-spacing: 1px; }
+    .ls-2 { letter-spacing: 2px; }
+    .transition-all { transition: all 0.3s ease; }
+    .btn-dark:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important; }
+</style>
 {% endblock %}

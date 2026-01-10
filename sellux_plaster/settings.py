@@ -47,12 +47,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mathfilters',
 
     # Third Party Apps
     'cloudinary_storage',
     'cloudinary',
+    'mathfilters',
     'crispy_forms',
+    'django.contrib.humanize',
     'crispy_bootstrap5',
     'axes',  # Brute force protection
 

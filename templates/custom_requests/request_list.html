@@ -1,79 +1,125 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}My Custom Requests | Sellux Plaster Ltd{% endblock %}
+{% block title %}My Projects | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="row mb-5 align-items-center">
-        <div class="col-md-8">
-            <h1 class="display-5 fw-bold mb-2">My Custom <span class="text-primary">Designs</span></h1>
-            <p class="text-muted">Track the status of your bespoke architectural requests.</p>
-        </div>
-        <div class="col-md-4 text-md-end">
-            <a href="{% url 'custom_requests:request_create' %}" class="btn btn-primary rounded-pill px-4 fw-bold">
-                <i class="bi bi-plus-lg me-2"></i>New Request
-            </a>
+<section class="bg-pattern-3d position-relative border-bottom pt-5 pb-5">
+    <div class="position-absolute bottom-0 start-0 w-100 h-75" style="background: linear-gradient(to top, #ffffff 0%, transparent 100%);"></div>
+    <div class="container position-relative z-1 pt-4">
+        <div class="row align-items-end">
+            <div class="col-lg-8 animate__animated animate__fadeInLeft">
+                <p class="small text-uppercase fw-bold text-primary ls-2 mb-2">Client Portal</p>
+                <h1 class="display-4 fw-bold text-dark mb-0">Your Design Portfolio</h1>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0 animate__animated animate__fadeInRight">
+                <a href="{% url 'custom_requests:request_create' %}" class="btn btn-dark rounded-pill px-4 py-3 fw-bold shadow-float">
+                    <i class="bi bi-plus-lg me-2"></i> Commission New Project
+                </a>
+            </div>
         </div>
     </div>
+</section>
 
-    <div class="row g-4">
-        {% for req in requests %}
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0 }}00ms;">
+<section class="py-5 bg-white min-vh-100">
+    <div class="container py-4">
+
+        <div class="row g-5">
+            {% for req in requests %}
+            <div class="col-md-6 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0 }}00ms;">
+
+                <div class="card border-0 rounded-4 shadow-sm overflow-hidden group-hover h-100 bg-light">
                     <div class="row g-0 h-100">
-                        <div class="col-md-4 bg-light d-flex align-items-center justify-content-center">
+
+                        <div class="col-sm-5 position-relative overflow-hidden">
                             {% if req.site_photo %}
-                                <img src="{{ req.site_photo.url }}" class="img-fluid h-100 w-100" style="object-fit: cover;" alt="{{ req.project_title }}">
+                            <img src="{{ req.site_photo.url }}" class="w-100 h-100 object-fit-cover transition-transform" alt="Site Photo">
                             {% elif req.inspiration_image %}
-                                <img src="{{ req.inspiration_image.url }}" class="img-fluid h-100 w-100" style="object-fit: cover;" alt="{{ req.project_title }}">
+                            <img src="{{ req.inspiration_image.url }}" class="w-100 h-100 object-fit-cover transition-transform" alt="Inspiration">
                             {% else %}
-                                <i class="bi bi-card-image text-muted display-4"></i>
+                            <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-secondary bg-opacity-10 text-muted">
+                                <i class="bi bi-easel2 fs-1 opacity-25"></i>
+                            </div>
                             {% endif %}
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body p-4">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h5 class="fw-bold mb-0">{{ req.project_title }}</h5>
-                                    <span class="badge {% if req.status == 'pending' %}bg-warning-subtle text-warning{% elif req.status == 'quoted' %}bg-info-subtle text-info{% elif req.status == 'accepted' %}bg-success-subtle text-success{% else %}bg-danger-subtle text-danger{% endif %} rounded-pill px-3">
-                                        {{ req.get_status_display }}
-                                    </span>
-                                </div>
-                                <p class="text-muted small mb-3 text-truncate-2">{{ req.description }}</p>
-                                <div class="small text-secondary mb-3">
-                                    <i class="bi bi-calendar-event me-2"></i>Requested on {{ req.created_at|date:"M d, Y" }}
-                                </div>
-                                {% if req.admin_note %}
-                                    <div class="bg-light p-3 rounded-3 mb-0">
-                                        <small class="fw-bold text-dark d-block mb-1">Sellux Team Note:</small>
-                                        <small class="text-muted italic">{{ req.admin_note }}</small>
-                                    </div>
+
+                            <div class="position-absolute top-0 start-0 m-3">
+                                {% if req.status == 'pending' %}
+                                <span class="badge bg-white text-dark border shadow-sm fw-bold rounded-pill px-3 py-2"><span class="dot bg-warning me-2"></span>Reviewing</span>
+                                {% elif req.status == 'quoted' %}
+                                <span class="badge bg-primary text-white border-0 shadow-sm fw-bold rounded-pill px-3 py-2"><span class="dot bg-white me-2"></span>Quote Ready</span>
+                                {% elif req.status == 'accepted' %}
+                                <span class="badge bg-success text-white border-0 shadow-sm fw-bold rounded-pill px-3 py-2"><span class="dot bg-white me-2"></span>Active</span>
+                                {% else %}
+                                <span class="badge bg-secondary text-white border-0 shadow-sm fw-bold rounded-pill px-3 py-2">Archived</span>
                                 {% endif %}
                             </div>
                         </div>
+
+                        <div class="col-sm-7 p-4 d-flex flex-column justify-content-center bg-white">
+                            <div class="mb-3">
+                                <small class="text-uppercase text-muted fw-bold ls-1" style="font-size: 0.7rem;">
+                                    ID: #{{ req.id|stringformat:"04d" }} &bull; {{ req.created_at|date:"M d, Y" }}
+                                </small>
+                            </div>
+
+                            <h3 class="h4 fw-bold mb-2">{{ req.project_title }}</h3>
+                            <p class="text-muted small line-clamp-2 mb-4">
+                                {{ req.description }}
+                            </p>
+
+                            {% if req.admin_note %}
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-3 mb-3 border border-primary border-opacity-10">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <i class="bi bi-chat-quote-fill text-primary small"></i>
+                                    <span class="fw-bold text-primary small text-uppercase">Architect's Note</span>
+                                </div>
+                                <p class="mb-0 small text-dark fst-italic">"{{ req.admin_note }}"</p>
+                            </div>
+                            {% endif %}
+
+                            {% if req.status == 'quoted' %}
+                            <div class="mt-auto">
+                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill fw-bold w-100">View Quote</a>
+                            </div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
+
             </div>
-        {% empty %}
+            {% empty %}
             <div class="col-12 text-center py-5">
-                <div class="bg-white rounded-5 p-5 shadow-sm border border-dashed">
-                    <i class="bi bi-clipboard-plus text-muted display-1 mb-4"></i>
-                    <h3 class="fw-bold">No custom requests yet</h3>
-                    <p class="text-muted col-lg-6 mx-auto">Have a specific design in mind? Upload your inspiration and let our master plasterers bring it to life.</p>
-                    <a href="{% url 'custom_requests:request_create' %}" class="btn btn-primary mt-3 px-5 rounded-pill py-3 fw-bold shadow">
-                        Start First Request
+                <div class="py-5 opacity-50 border-2 border-dashed border-secondary rounded-5">
+                    <i class="bi bi-compass display-1 text-muted mb-4"></i>
+                    <h3 class="fw-bold text-dark">Your portfolio is empty.</h3>
+                    <p class="text-muted mb-4">You haven't commissioned any custom designs yet.</p>
+                    <a href="{% url 'custom_requests:request_create' %}" class="btn btn-primary rounded-pill px-5 py-3 fw-bold shadow">
+                        Start Your First Project
                     </a>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
+</section>
 
 <style>
-    .text-truncate-2 {
+    /* Styling */
+    .ls-1 { letter-spacing: 1px; }
+    .ls-2 { letter-spacing: 2px; }
+    .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+
+    .object-fit-cover { object-fit: cover; }
+
+    /* Hover Zoom */
+    .transition-transform { transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1); }
+    .group-hover:hover .transition-transform { transform: scale(1.05); }
+
+    /* Line Clamp */
+    .line-clamp-2 {
         display: -webkit-box;
         -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;  
+        -webkit-box-orient: vertical;
         overflow: hidden;
     }
 </style>

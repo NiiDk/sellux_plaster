@@ -1,20 +1,124 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Authorize Order | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<div class="container">
-  <h1>Place Order</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    {{ form.item }}
-    <div class="mb-3">
-      {{ form.quantity.label_tag }}
-      {{ form.quantity }}
-      {% if form.quantity.errors %}
-        <div class="text-danger">{{ form.quantity.errors }}</div>
-      {% endif %}
+<div class="bg-white border-bottom py-3">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 small text-uppercase ls-1">
+                <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'catalogue:product_list' %}" class="text-decoration-none text-muted">Shop</a></li>
+                <li class="breadcrumb-item active text-dark fw-bold" aria-current="page">Authorization</li>
+            </ol>
+        </nav>
     </div>
-    <button class="btn btn-primary" type="submit">Place Order</button>
-  </form>
 </div>
+
+<section class="py-5 bg-white min-vh-75 d-flex align-items-center">
+    <div class="position-absolute top-50 start-50 translate-middle w-100 h-100 bg-pattern-grid opacity-25"></div>
+
+    <div class="container position-relative z-1">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+
+                <div class="text-center mb-5 animate__animated animate__fadeInDown">
+                    <span class="d-inline-block bg-primary-subtle text-primary px-3 py-1 rounded-pill small fw-bold text-uppercase ls-2 mb-3">
+                        Final Step
+                    </span>
+                    <h1 class="display-5 fw-bold text-dark mb-2">Authorize Your Order</h1>
+                    <p class="text-muted">Confirm the quantity of materials required for your project.</p>
+                </div>
+
+                <div class="bg-white p-4 p-md-5 rounded-5 shadow-lg border border-light-subtle animate__animated animate__fadeInUp">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger rounded-4 small">
+                            {{ form.non_field_errors }}
+                        </div>
+                        {% endif %}
+
+                        <div class="d-none">
+                            {{ form.item }}
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="{{ form.quantity.id_for_label }}" class="form-label small fw-bold text-uppercase ls-1 text-muted mb-3">
+                                <i class="bi bi-box-seam me-2"></i>Quantity Required
+                            </label>
+
+                            <div class="quantity-input-wrapper position-relative">
+                                {{ form.quantity }}
+                                {% if form.quantity.errors %}
+                                <div class="text-danger small mt-2 fw-bold">
+                                    <i class="bi bi-exclamation-circle me-1"></i> {{ form.quantity.errors|striptags }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <small class="text-muted mt-3 d-block">Please verify the quantity based on your site measurements.</small>
+                        </div>
+
+                        <div class="d-grid gap-3">
+                            <button class="btn btn-primary btn-lg rounded-pill fw-bold py-3 shadow-float" type="submit">
+                                Place Official Order <i class="bi bi-arrow-right-short ms-2 fs-4"></i>
+                            </button>
+                            <a href="{% url 'catalogue:product_list' %}" class="btn btn-link text-decoration-none text-muted small fw-bold">
+                                Return to Material Library
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="text-center mt-5 opacity-50 grayscale d-flex justify-content-center align-items-center gap-4">
+                    <i class="bi bi-shield-lock fs-4"></i>
+                    <i class="bi bi-patch-check fs-4"></i>
+                    <span class="small fw-bold text-uppercase ls-2">Verified Transaction</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Typography & Hierarchy */
+    .ls-1 { letter-spacing: 1px; }
+    .ls-2 { letter-spacing: 2px; }
+    .grayscale { filter: grayscale(100%); }
+
+    /* Customizing Django Inputs */
+    .quantity-input-wrapper input {
+        width: 100%;
+        border: 2px solid #eee;
+        border-radius: 15px;
+        padding: 15px 25px;
+        font-size: 1.5rem;
+        font-weight: 800;
+        text-align: center;
+        color: var(--primary-color);
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+
+    .quantity-input-wrapper input:focus {
+        border-color: var(--primary-color);
+        background-color: #fff;
+        box-shadow: 0 0 0 4px rgba(217, 106, 0, 0.1);
+        outline: none;
+    }
+
+    /* Button Styling */
+    .shadow-float {
+        box-shadow: 0 4px 15px rgba(217, 106, 0, 0.3);
+    }
+    .shadow-float:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(217, 106, 0, 0.4);
+    }
+</style>
+
 {% endblock %}

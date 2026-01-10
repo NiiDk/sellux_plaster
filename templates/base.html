@@ -25,23 +25,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
+        /* --- GLOBAL SCROLL FIX --- */
+        html, body {
+            overflow-x: hidden; /* Kills the side scrolling */
+            width: 100%;
+            position: relative;
+        }
+
         /* --- LUXURY BRANDING: BLACK & ORANGE --- */
         :root {
-            /* Brand Colors */
             --primary-color: #d96a00;
             --primary-vibrant: #ff7b00;
             --black-onyx: #050505;
             --black-charcoal: #121212;
             --white-alabaster: #F9F9F9;
-
-            /* Amber Glass Variable */
             --amber-glass: rgba(217, 106, 0, 0.96);
-
-            /* UI Variables */
             --nav-height: 80px;
             --border-radius-pill: 50px;
-
-            /* Shadows & Transitions */
             --shadow-float: 0 10px 30px rgba(0,0,0,0.2);
             --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -50,7 +50,6 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--white-alabaster);
             color: #333;
-            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -60,15 +59,51 @@
             letter-spacing: -0.5px;
         }
 
-        /* --- ADVANTAGE CARD (Orange Outline) --- */
+        /* --- NEW: LUXURY GEOMETRIC PATTERNS (CSS Generated) --- */
+
+        /* Pattern 1: Architectural Grid (Precision) - Used on Advantage Cards */
+        .bg-pattern-grid {
+            background-color: #ffffff;
+            background-image:
+                linear-gradient(rgba(217, 106, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(217, 106, 0, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Pattern 2: Diagonal Speed Lines (Modern) - Used on Promo Modal */
+        .bg-pattern-lines {
+            background-color: #ffffff;
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(217, 106, 0, 0.03) 0px,
+                rgba(217, 106, 0, 0.03) 1px,
+                transparent 1px,
+                transparent 10px
+            );
+        }
+
+        /* Pattern 3: Tech Dots (Structure) - Used on Footer/Dark Areas */
+        .bg-pattern-dots {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 15px 15px;
+        }
+
+
+        /* --- UPDATED: ADVANTAGE CARD (Now with Pattern) --- */
         .advantage-card {
             border: 1px solid var(--primary-color);
-            background: #fff;
             padding: 2rem;
             border-radius: 12px;
             height: 100%;
             transition: var(--transition-smooth);
             position: relative;
+
+            /* Applying Pattern 1 by default */
+            background-color: #fff;
+            background-image:
+                linear-gradient(rgba(217, 106, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(217, 106, 0, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px; /* Larger grid for luxury feel */
         }
 
         .advantage-card:hover {
@@ -93,7 +128,6 @@
             transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
         }
 
-        /* Active State (Mobile Menu Open) */
         .navbar.mobile-nav-active {
             background-color: var(--amber-glass) !important;
             backdrop-filter: blur(12px);
@@ -102,7 +136,6 @@
 
         .navbar-container { display: flex; align-items: center; }
 
-        /* Logo Styling */
         .navbar-brand {
             display: flex; align-items: center; gap: 12px;
             color: #fff !important; font-size: 1.35rem; padding: 10px 0;
@@ -127,7 +160,6 @@
             transition: color 0.3s ease;
         }
 
-        /* --- MOBILE MENU TRANSFORMATIONS --- */
         .navbar.mobile-nav-active .navbar-brand { color: #000 !important; }
         .navbar.mobile-nav-active .brand-text span:last-child { color: #000 !important; }
         .navbar.mobile-nav-active .logo-wrapper { box-shadow: 0 0 0 2px #000 !important; }
@@ -136,7 +168,6 @@
         .navbar.mobile-nav-active .mobile-cart-icon { color: #000 !important; }
         .navbar.mobile-nav-active .mobile-cart-badge { background-color: #000 !important; color: var(--primary-color) !important; }
 
-        /* Nav Links Styles */
         .nav-link {
             color: rgba(255,255,255,0.7);
             font-size: 0.9rem;
@@ -154,136 +185,100 @@
             }
         }
 
-        /* --- DESKTOP EXPAND & COLLAPSE ANIMATION --- */
+        /* --- EXPAND & COLLAPSE ANIMATION (Desktop) --- */
         @media (min-width: 992px) {
             .dropdown-menu {
-                display: block; /* Override default 'none' to allow transitions */
-                visibility: hidden; /* Hide via visibility to keep DOM present */
+                display: block;
+                visibility: hidden;
                 opacity: 0;
-                transform: translateY(10px); /* Start slightly down */
-                transition: all 0.3s cubic-bezier(0.2, 0, 0, 1); /* Kinetic Easing */
-                pointer-events: none; /* Prevent clicks when hidden */
+                transform: translateY(10px);
+                transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+                pointer-events: none;
             }
-
-            /* When Bootstrap adds .show class */
             .dropdown-menu.show {
                 visibility: visible;
                 opacity: 1;
-                transform: translateY(0); /* Slide up to position */
+                transform: translateY(0);
                 pointer-events: auto;
             }
         }
 
-        /* --- UNIVERSAL CHEVRON ROTATION --- */
-        .dropdown-toggle::after { display: none !important; } /* Hide default caret */
+        .dropdown-toggle::after { display: none !important; }
 
         .chevron-rotate {
             display: inline-block;
             transition: transform 0.3s ease;
         }
-
-        /* Mobile: Rotate when expanded */
-        .mobile-profile-toggle[aria-expanded="true"] .chevron-rotate {
-            transform: rotate(180deg);
-        }
-
-        /* Desktop: Rotate when show class added by BS */
-        .nav-link.show .chevron-rotate {
-            transform: rotate(180deg);
-        }
+        .mobile-profile-toggle[aria-expanded="true"] .chevron-rotate { transform: rotate(180deg); }
+        .nav-link.show .chevron-rotate { transform: rotate(180deg); }
 
         @media (max-width: 991.98px) {
             .navbar-collapse { padding: 1rem 0 2rem 0; }
-
             .navbar-nav .nav-item .nav-link {
                 color: #000 !important;
-                font-weight: 700;
-                font-size: 1.1rem;
-                text-align: left;
-                padding: 15px 0 !important;
-                border-bottom: 1px solid rgba(0,0,0,0.1);
+                font-weight: 700; font-size: 1.1rem; text-align: left;
+                padding: 15px 0 !important; border-bottom: 1px solid rgba(0,0,0,0.1);
             }
+            .navbar-nav .nav-item .nav-link:hover { padding-left: 10px !important; color: #fff !important; }
 
-            .navbar-nav .nav-item .nav-link:hover {
-                padding-left: 10px !important;
-                color: #fff !important;
-            }
-
-            /* Mobile Profile Accordion Styles */
             .mobile-profile-toggle {
-                color: #000 !important;
-                font-weight: 700;
+                color: #000 !important; font-weight: 700;
                 border-bottom: 1px solid rgba(0,0,0,0.1);
-                cursor: pointer;
-                background: transparent;
-                border: none;
-                width: 100%;
-                text-align: left;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                cursor: pointer; background: transparent; border: none;
+                width: 100%; text-align: left;
+                display: flex; justify-content: space-between; align-items: center;
                 padding: 15px 0;
             }
-
             .mobile-profile-toggle:focus { outline: none; }
-
-            .mobile-profile-collapse {
-                background: rgba(0,0,0,0.05);
-                border-radius: 8px;
-                margin-top: 5px;
-            }
-
-            .mobile-profile-collapse .nav-link {
-                font-size: 0.95rem !important;
-                border-bottom: none !important;
-                padding: 10px 15px !important;
-                opacity: 0.8;
-            }
+            .mobile-profile-collapse { background: rgba(0,0,0,0.05); border-radius: 8px; margin-top: 5px; }
+            .mobile-profile-collapse .nav-link { font-size: 0.95rem !important; border-bottom: none !important; padding: 10px 15px !important; opacity: 0.8; }
         }
 
-        /* --- BUTTONS --- */
         .btn-primary {
-            background-color: var(--primary-color);
-            border: none;
-            border-radius: var(--border-radius-pill);
-            padding: 10px 24px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
+            background-color: var(--primary-color); border: none;
+            border-radius: var(--border-radius-pill); padding: 10px 24px;
+            font-weight: 600; font-size: 0.9rem; letter-spacing: 0.5px;
             box-shadow: 0 4px 15px rgba(217, 106, 0, 0.4);
-            transition: var(--transition-smooth);
-            color: #fff;
+            transition: var(--transition-smooth); color: #fff;
         }
-
         .btn-primary:hover {
-            background-color: var(--primary-vibrant);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(217, 106, 0, 0.6);
-            color: #fff;
+            background-color: var(--primary-vibrant); transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 106, 0, 0.6); color: #fff;
         }
 
-        /* --- FLOATING ELEMENTS --- */
         .whatsapp-float, .cart-float {
-            position: fixed; width: 60px; height: 60px;
-            border-radius: 50%;
+            position: fixed; width: 60px; height: 60px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 28px;
-            box-shadow: var(--shadow-float);
-            z-index: 1000;
-            transition: var(--transition-smooth);
+            font-size: 28px; box-shadow: var(--shadow-float);
+            z-index: 1000; transition: var(--transition-smooth);
             cursor: pointer; text-decoration: none;
         }
         .whatsapp-float { bottom: 30px; right: 30px; background: #25D366; color: white; border: 2px solid #fff; }
         .cart-float { bottom: 100px; right: 30px; background: var(--black-onyx); color: var(--primary-color); border: 2px solid var(--primary-color); z-index: 1001; }
         .whatsapp-float:hover, .cart-float:hover { transform: scale(1.1); }
 
-        /* --- PROMO MODAL --- */
         .promo-modal-backdrop { background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 2000; }
         .promo-modal-content { border-radius: 0; border: 1px solid #333; }
-        .promo-form-half { background: #fff; }
 
-        /* --- FOOTER --- */
-        footer { background-color: var(--black-onyx); color: #888; border-top: 3px solid var(--primary-color); }
+        /* APPLYING PATTERN 2 TO PROMO MODAL FORM HALF */
+        .promo-form-half {
+            background-color: #fff;
+            /* Inherits bg-pattern-lines logic essentially */
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(217, 106, 0, 0.03) 0px,
+                rgba(217, 106, 0, 0.03) 1px,
+                transparent 1px,
+                transparent 10px
+            );
+        }
+
+        /* Footer with Pattern 3 (Dots) */
+        footer {
+            background-color: var(--black-onyx); color: #888; border-top: 3px solid var(--primary-color);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px); /* Subtle dots */
+            background-size: 20px 20px;
+        }
         .footer-heading { color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 20px; }
         .footer-link { color: #888; text-decoration: none; transition: 0.3s; }
         .footer-link:hover { color: var(--primary-color); padding-left: 5px; }

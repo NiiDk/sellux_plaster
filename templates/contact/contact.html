@@ -2,70 +2,116 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %}Contact Us | Sellux Plaster Ltd{% endblock %}
+{% block title %}Start Your Project | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<section class="py-5">
-    <div class="container py-4">
-        <div class="text-center mb-5">
-            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3">GET IN TOUCH</span>
-            <h1 class="h1 fw-bold">Connect with our Team</h1>
-        </div>
 
-        <div class="row g-5">
-            <!-- Left Column: Contact Details -->
-            <div class="col-lg-5">
-                <div class="p-4 rounded-4 shadow-sm h-100 hover-lift" style="background-color: #fff;">
-                    <div class="text-center mb-4">
-                        <div class="d-inline-block p-2 bg-white rounded-circle shadow-sm mb-3">
-                            <img src="{% static 'images/support_avatar.png' %}" class="rounded-circle" alt="Professional Support" style="width: 150px; height: 150px; object-fit: cover; border: 4px solid var(--primary-color);">
+<section class="bg-pattern-3d position-relative border-bottom pt-5 pb-5">
+    <div class="position-absolute bottom-0 start-0 w-100 h-75" style="background: linear-gradient(to top, #ffffff 0%, transparent 100%);"></div>
+
+    <div class="container position-relative z-1 pt-4 text-center">
+        <div class="animate__animated animate__fadeInUp">
+            <span class="d-inline-block border border-dark px-3 py-1 rounded-pill small fw-bold text-uppercase ls-2 mb-3 bg-white">
+                Contact Us
+            </span>
+            <h1 class="display-3 fw-bold text-dark mb-4">Let's Build Something <br><span class="text-primary">Exceptional.</span></h1>
+            <p class="lead text-muted fs-5 opacity-75 col-lg-6 mx-auto">
+                Whether it's a residential masterpiece or a commercial landmark, our team is ready to bring your vision to life.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-white">
+    <div class="container py-5 my-lg-5">
+        <div class="row g-0 shadow-lg rounded-5 overflow-hidden border border-light-subtle">
+
+            <div class="col-lg-5 bg-black text-white p-5 position-relative d-flex flex-column justify-content-between min-vh-50">
+                <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-dots opacity-25"></div>
+
+                <div class="position-relative z-1 animate__animated animate__fadeInLeft">
+
+                    <div class="d-flex align-items-center gap-3 mb-5">
+                        <div class="p-1 rounded-circle border border-primary border-opacity-50">
+                            <img src="{% static 'images/support_avatar.png' %}" class="rounded-circle shadow-lg" alt="Support Team" style="width: 60px; height: 60px; object-fit: cover;">
                         </div>
-                        <h3 class="h4 fw-bold">Professional Support</h3>
-                        <p class="text-primary fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">READY TO ASSIST YOU</p>
+                        <div>
+                            <span class="d-block fw-bold text-white small">Professional Support</span>
+                            <span class="d-block text-primary small text-uppercase ls-1" style="font-size: 0.7rem;">Online Now</span>
+                        </div>
                     </div>
 
-                    <div class="d-flex flex-column gap-4">
-                        <div class="d-flex align-items-start gap-3">
-                            <i class="bi bi-telephone-outbound fs-5 text-primary"></i>
+                    <h3 class="h4 fw-bold font-heading mb-5">Contact Directory</h3>
+
+                    <div class="d-flex flex-column gap-5">
+                        <div class="d-flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="bg-white bg-opacity-10 p-3 rounded-circle text-primary">
+                                    <i class="bi bi-telephone"></i>
+                                </div>
+                            </div>
                             <div>
-                                <h6 class="fw-bold text-muted text-uppercase small">Direct Lines</h6>
-                                <a href="tel:0552088784" class="contact-link text-dark text-decoration-none">055 208 8784</a> / <a href="tel:0549926773" class="contact-link text-dark text-decoration-none">054 992 6773</a>
+                                <h6 class="text-uppercase text-white-50 small ls-2 fw-bold mb-2">Direct Lines</h6>
+                                <a href="tel:0552088784" class="d-block text-white text-decoration-none fs-5 hover-primary mb-1">055 208 8784</a>
+                                <a href="tel:0549926773" class="d-block text-white text-decoration-none fs-5 hover-primary">054 992 6773</a>
                             </div>
                         </div>
-                         <div class="d-flex align-items-start gap-3">
-                            <i class="bi bi-whatsapp fs-5 text-primary"></i>
+
+                        <div class="d-flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="bg-white bg-opacity-10 p-3 rounded-circle text-primary">
+                                    <i class="bi bi-envelope-open"></i>
+                                </div>
+                            </div>
                             <div>
-                                <h6 class="fw-bold text-muted text-uppercase small">WhatsApp</h6>
-                                <a href="https://wa.me/233552088784" class="contact-link text-dark text-decoration-none">055 208 8784</a>
+                                <h6 class="text-uppercase text-white-50 small ls-2 fw-bold mb-2">Project Inquiries</h6>
+                                <a href="mailto:selluxplasterltd@gmail.com" class="d-block text-white text-decoration-none fs-6 hover-primary text-break">selluxplasterltd@gmail.com</a>
                             </div>
                         </div>
-                        <div class="d-flex align-items-start gap-3">
-                            <i class="bi bi-envelope fs-5 text-primary"></i>
-                            <div>
-                                <h6 class="fw-bold text-muted text-uppercase small">Electronic Correspondence</h6>
-                                <a href="mailto:selluxplasterltd@gmail.com" class="contact-link text-dark text-decoration-none">selluxplasterltd@gmail.com</a>
+
+                        <div class="d-flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="bg-white bg-opacity-10 p-3 rounded-circle text-primary">
+                                    <i class="bi bi-geo-alt"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex align-items-start gap-3">
-                            <i class="bi bi-geo-alt fs-5 text-primary"></i>
                             <div>
-                                <h6 class="fw-bold text-muted text-uppercase small">Physical Office</h6>
-                                <a href="https://www.google.com/maps/place/Sellux+Plaster+LTD(Plasterboard+and+ceiling+materials)/@5.5743229,-0.2843095,14.4z/data=!4m6!3m5!1s0xfdf9bb89bcdaccb:0x35642fad98c1e46e!8m2!3d5.5787557!4d-0.2589208!16s%2Fg%2F11lv8l344t?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="contact-link text-dark text-decoration-none">Odokor, Dr. Busia Highway, Accra, Ghana</a>
+                                <h6 class="text-uppercase text-white-50 small ls-2 fw-bold mb-2">The Studio</h6>
+                                <p class="mb-3 text-white">Odokor, Dr. Busia Highway,<br>Accra, Ghana</p>
+                                <a href="https://maps.google.com/?q=Odokor,+Dr.+Busia+Highway,+Accra,+Ghana" target="_blank" class="btn btn-outline-light rounded-pill px-4 btn-sm fw-bold">
+                                    Get Directions <i class="bi bi-arrow-up-right ms-2"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="position-relative z-1 mt-5 pt-5 border-top border-secondary border-opacity-25">
+                    <div class="d-flex align-items-center gap-2 text-white-50 small">
+                        <i class="bi bi-clock text-primary"></i>
+                        <span>Mon - Sat: 8:00 AM - 6:00 PM</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- Right Column: Contact Form -->
-            <div class="col-lg-7">
-                <div class="card border-0 shadow-lg p-4 p-lg-5 rounded-4 h-100">
-                    <h4 class="fw-bold mb-4">Send a Message</h4>
-                    <form method="post">
+            <div class="col-lg-7 bg-white p-5">
+                <div class="h-100 d-flex flex-column justify-content-center animate__animated animate__fadeInRight">
+                    <div class="mb-4">
+                        <h3 class="h2 fw-bold text-dark mb-2">Send a Message</h3>
+                        <p class="text-muted">Fill out the form below and our architectural team will get back to you within 24 hours.</p>
+                    </div>
+
+                    <form method="post" class="luxury-form">
                         {% csrf_token %}
-                        {{ form|crispy }}
-                        <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg">Send Secure Inquiry</button>
+
+                        <div class="form-wrapper">
+                            {{ form|crispy }}
+                        </div>
+
+                        <div class="d-grid mt-5">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold py-3 shadow-float">
+                                Send Secure Inquiry <i class="bi bi-send-fill ms-2"></i>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -73,12 +119,53 @@
         </div>
     </div>
 </section>
-{% endblock content %}
 
-{% block extra_css %}
+<section class="py-5 bg-light border-top">
+    <div class="container text-center">
+        <p class="small text-uppercase text-muted fw-bold ls-2 mb-3">Need an immediate response?</p>
+        <a href="https://wa.me/233552088784" class="btn btn-success rounded-pill px-5 py-3 fw-bold shadow-sm">
+            <i class="bi bi-whatsapp me-2"></i> Chat with us on WhatsApp
+        </a>
+    </div>
+</section>
+
 <style>
-    .contact-link:hover {
-        color: var(--primary-color) !important;
+    /* Typography */
+    .ls-1 { letter-spacing: 1px; }
+    .ls-2 { letter-spacing: 2px; }
+    .font-heading { font-family: 'Montserrat', sans-serif; }
+
+    /* Link Hover */
+    .hover-primary { transition: color 0.3s ease; }
+    .hover-primary:hover { color: var(--primary-color) !important; }
+
+    /* Button Hover */
+    .shadow-float { box-shadow: 0 4px 15px rgba(217, 106, 0, 0.3); transition: all 0.3s ease; }
+    .shadow-float:hover { box-shadow: 0 8px 25px rgba(217, 106, 0, 0.5); transform: translateY(-2px); }
+
+    /* --- FORM CUSTOMIZATION (Overrides Bootstrap/Crispy defaults for a cleaner look) --- */
+    .form-wrapper .form-control {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 12px 15px;
+        background-color: #f9f9f9;
+        font-size: 0.95rem;
+    }
+
+    .form-wrapper .form-control:focus {
+        background-color: #fff;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(217, 106, 0, 0.1);
+    }
+
+    .form-wrapper label {
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #666;
+        margin-bottom: 6px;
     }
 </style>
-{% endblock extra_css %}
+
+{% endblock %}

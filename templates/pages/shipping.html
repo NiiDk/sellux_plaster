@@ -1,37 +1,142 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Shipping & Delivery Policy | Sellux Plaster Ltd{% endblock %}
+{% block title %}Logistics & Delivery Policy | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<section class="py-5">
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <h1 class="display-4 fw-bold mb-5">Shipping & <span class="text-primary">Delivery</span></h1>
-                
-                <div class="card border-0 shadow-sm rounded-5 p-5 bg-white">
-                    <p class="text-muted mb-4 small">Last Updated: December 2025</p>
-                    
-                    <h3 class="fw-bold mb-3 text-dark">1. Delivery Areas</h3>
-                    <p class="text-muted mb-4">We currently offer nationwide delivery across Ghana. Primary delivery zones include Accra, Tema, Kumasi, and Takoradi. Special arrangements can be made for cross-border logistics within West Africa.</p>
 
-                    <h3 class="fw-bold mb-3 text-dark">2. Delivery Timelines</h3>
-                    <ul class="text-muted mb-4">
-                        <li><strong>Standard Materials:</strong> 2-4 business days within Accra; 5-7 business days for other regions.</li>
-                        <li><strong>Custom Mouldings:</strong> Production time varies (typically 7-14 days) plus shipping time.</li>
-                    </ul>
+<section class="bg-pattern-3d position-relative border-bottom pt-5 pb-5">
+    <div class="position-absolute bottom-0 start-0 w-100 h-75" style="background: linear-gradient(to top, #ffffff 0%, transparent 100%);"></div>
 
-                    <h3 class="fw-bold mb-3 text-dark">3. Shipping Costs</h3>
-                    <p class="text-muted mb-4">Shipping fees are calculated based on weight, volume, and destination. For large-scale architectural projects, shipping costs will be included in your formal quotation.</p>
-
-                    <h3 class="fw-bold mb-3 text-dark">4. Receiving Your Order</h3>
-                    <p class="text-muted mb-4">A representative must be present at the site to receive and sign for materials. Please inspect all boards and profiles for damage before the delivery team departs.</p>
-
-                    <h3 class="fw-bold mb-3 text-dark">5. Delays</h3>
-                    <p class="text-muted mb-0">While we maintain a high standard of punctuality, Sellux Plaster Ltd is not responsible for delays caused by roadblocks, heavy traffic, or material shortages from international suppliers.</p>
+    <div class="container position-relative z-1 pt-4">
+        <div class="row align-items-center">
+            <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                <span class="d-inline-block border border-dark px-3 py-1 rounded-pill small fw-bold text-uppercase ls-2 mb-3 bg-white">
+                    Corporate Policy
+                </span>
+                <h1 class="display-3 fw-bold text-dark mb-0">Logistics & <br><span class="text-primary">Material Delivery</span></h1>
+            </div>
+            <div class="col-lg-5 mt-4 mt-lg-0 animate__animated animate__fadeInRight text-lg-end">
+                <div class="p-3 border rounded-4 d-inline-block bg-white shadow-sm">
+                    <p class="small text-muted mb-0"><strong>Last Revision:</strong> January 10, 2026</p>
+                    <p class="small text-muted mb-0"><strong>Policy ID:</strong> SPL-LOG-2026</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<section class="py-5 bg-white">
+    <div class="container py-lg-5">
+        <div class="row g-5">
+
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="sticky-top" style="top: 100px;">
+                    <h6 class="fw-bold text-uppercase ls-2 mb-4">Sections</h6>
+                    <nav class="nav flex-column gap-2 small fw-bold">
+                        <a href="#zones" class="nav-link p-0 text-muted hover-primary">01. Delivery Zones</a>
+                        <a href="#timelines" class="nav-link p-0 text-muted hover-primary">02. Service Timelines</a>
+                        <a href="#costs" class="nav-link p-0 text-muted hover-primary">03. Calculation of Costs</a>
+                        <a href="#inspection" class="nav-link p-0 text-muted hover-primary">04. Site Inspection</a>
+                        <a href="#liability" class="nav-link p-0 text-muted hover-primary">05. Liability</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="prose max-width-700 animate__animated animate__fadeInUp">
+
+                    <div id="zones" class="mb-5 pb-5 border-bottom">
+                        <h3 class="fw-bold text-dark mb-4">01. Delivery Jurisdictions</h3>
+                        <p class="text-muted fs-6 lh-lg">
+                            Sellux Plaster Ltd provides nationwide material distribution across Ghana. Our fleet primarily services the <strong>Greater Accra, Ashanti, and Western Regions</strong>. For large-scale architectural projects in West African neighboring countries, custom cross-border logistics can be coordinated through our international freight partners.
+                        </p>
+                    </div>
+
+                    <div id="timelines" class="mb-5 pb-5 border-bottom">
+                        <h3 class="fw-bold text-dark mb-4">02. Service Timelines</h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="p-4 bg-light rounded-4 h-100">
+                                    <h6 class="fw-bold text-primary mb-2">Standard Inventory</h6>
+                                    <p class="small text-muted mb-0">Delivery within 2–4 business days for Accra/Tema. Up to 7 business days for other regional capitals.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-4 bg-light rounded-4 h-100">
+                                    <h6 class="fw-bold text-primary mb-2">Custom Castings</h6>
+                                    <p class="small text-muted mb-0">Production of bespoke mouldings typically requires 7–14 days. Logistics commence immediately upon quality certification.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="costs" class="mb-5 pb-5 border-bottom">
+                        <h3 class="fw-bold text-dark mb-4">03. Calculation of Fees</h3>
+                        <p class="text-muted fs-6 lh-lg">
+                            Fees are calculated based on a combination of <strong>volumetric weight</strong> and <strong>site distance</strong> from our Accra hub.
+                            <br><br>
+                            For full-service project clients (Design + Installation), logistics fees are integrated into the primary project quotation to simplify the billing process.
+                        </p>
+                    </div>
+
+                    <div id="inspection" class="mb-5 pb-5 border-bottom">
+                        <h3 class="fw-bold text-dark mb-4">04. Receipt and Site Inspection</h3>
+                        <div class="d-flex gap-3 align-items-start p-4 border rounded-4 bg-primary bg-opacity-10 border-primary border-opacity-25">
+                            <i class="bi bi-info-circle-fill text-primary fs-4"></i>
+                            <p class="small text-dark mb-0">
+                                <strong>Mandatory Requirement:</strong> An authorized representative must be present at the site to accept delivery.
+                                It is the recipient's responsibility to inspect all gypsum boards, cornices, and profiles for structural integrity before signing the Delivery Note. Any discrepancies must be noted immediately.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="liability" class="mb-5">
+                        <h3 class="fw-bold text-dark mb-4">05. Force Majeure and Liability</h3>
+                        <p class="text-muted fs-6 lh-lg">
+                            While we pride ourselves on punctuality, Sellux Plaster Ltd is not liable for delays resulting from external factors including but not limited to: roadblockage, civil unrest, severe weather conditions, or global supply chain disruptions affecting specialized raw materials.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="mt-5 p-5 bg-dark rounded-5 text-white text-center position-relative overflow-hidden">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-dots opacity-10"></div>
+                    <div class="position-relative z-1">
+                        <h4 class="fw-bold mb-3">Physical Records</h4>
+                        <p class="text-white-50 mb-4">Need a copy for your project files or procurement department?</p>
+                        <button class="btn btn-primary rounded-pill px-5 py-3 fw-bold shadow-sm" onclick="window.print()">
+                            Print Official Policy <i class="bi bi-printer ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Document Typography */
+    .ls-1 { letter-spacing: 1px; }
+    .ls-2 { letter-spacing: 2px; }
+    .max-width-700 { max-width: 700px; }
+
+    /* Navigation Hover */
+    .hover-primary:hover {
+        color: var(--primary-color) !important;
+        transform: translateX(5px);
+    }
+    .nav-link { transition: all 0.3s ease; }
+
+    /* Prose Styling */
+    .prose p { margin-bottom: 1.5rem; }
+
+    @media print {
+        .bg-pattern-3d, .bg-pattern-dots, .d-none-print, .sticky-top { display: none !important; }
+        .container { max-width: 100% !important; margin: 0 !important; }
+        .col-lg-9 { width: 100% !important; }
+        body { color: black !important; background: white !important; }
+    }
+</style>
+
 {% endblock %}

@@ -5,7 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e35b1a1c-568a-4159-82be-eceaafd771e8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/includes/faq_item.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sellux_plaster/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/sellux_plaster/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/about/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/about/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/blog/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/post_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/blog/post_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/post_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/cart/cart_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cart/cart_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/catalogue/catalogue_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/catalogue/catalogue_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/catalogue/catalogue_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/catalogue/catalogue_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/catalogue/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/catalogue/product_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/catalogue/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/catalogue/product_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/contact/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/contact/contact.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/contact/success.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/contact/success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/custom_requests/request_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/custom_requests/request_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/custom_requests/request_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/custom_requests/request_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/emails/order_confirmation.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/emails/order_confirmation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/estimation/estimator.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/estimation/estimator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/faq/faq_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/faq/faq_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/orders/invoice_pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/orders/invoice_pdf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/orders/order_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/orders/order_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/orders/order_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/orders/order_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/orders/order_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/orders/order_success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/shipping.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/shipping.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/portfolio/portfolio_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/portfolio/portfolio_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/portfolio/portfolio_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/portfolio/portfolio_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/services/service_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/services/service_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/services/service_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/services/service_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/team/team_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/team/team_list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

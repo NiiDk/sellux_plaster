@@ -1,65 +1,137 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}About Us | Sellux Plaster Ltd{% endblock %}
+{% block title %}Our Legacy | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
+
+<section class="py-5 bg-white position-relative overflow-hidden">
+    <div class="container pt-5 pb-4">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-9 animate__animated animate__fadeInUp">
+                <h6 class="text-primary fw-bold letter-spacing-3 text-uppercase mb-4">Since 2015</h6>
+                <h1 class="display-2 fw-bold text-dark mb-4" style="line-height: 1.1;">
+                    Crafting Architectural <br>
+                    <span class="position-relative d-inline-block">
+                        <span class="position-relative z-1">Masterpieces.</span>
+                        <span class="position-absolute bottom-0 start-0 w-100 bg-primary opacity-25" style="height: 15px; transform: rotate(-1deg);"></span>
+                    </span>
+                </h1>
+                <p class="lead text-muted col-lg-10 mx-auto fw-light fs-4">
+                    We don't just plaster walls; we define spaces. Precision, elegance, and integrity are the cornerstones of our craft.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="py-5">
-    <div class="container py-5">
-        <div class="text-center mb-5">
-            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3">OUR FIRM</span>
-            <h1 class="display-4 fw-bold">About Sellux Plaster</h1>
-        </div>
-
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6">
-                <img src="{{ about_page.image.url }}" class="img-fluid rounded-4 shadow-sm" alt="{{ about_page.title }}">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 position-relative">
+                <div class="position-absolute top-0 start-0 translate-middle bg-primary rounded-circle blur-3xl opacity-10" style="width: 300px; height: 300px; filter: blur(60px);"></div>
+                <img src="{{ about_page.image.url }}" class="img-fluid rounded-0 position-relative z-1 shadow-lg" alt="{{ about_page.title }}" style="border-bottom: 5px solid var(--primary-color);">
+                <div class="d-none d-lg-block position-absolute bottom-0 end-0 bg-pattern-dots" style="width: 150px; height: 150px; transform: translate(30%, 30%); z-index: -1;"></div>
             </div>
-            <div class="col-lg-6">
-                <div class="card border-0 shadow-sm p-4 rounded-4">
-                    <div class="card-body">
-                        <h3 class="fw-bold text-primary">{{ about_page.subtitle }}</h3>
-                        <p class="text-muted">{{ about_page.main_content }}</p>
+
+            <div class="col-lg-6 ps-lg-5">
+                <h2 class="h1 fw-bold mb-4">{{ about_page.subtitle }}</h2>
+                <div class="d-flex align-items-start mb-4">
+                    <div class="bg-primary mt-2 me-3" style="width: 2px; height: 60px;"></div>
+                    <p class="text-secondary fs-5 lh-lg mb-0">
+                        {{ about_page.main_content|linebreaksbr }}
+                    </p>
+                </div>
+
+                <div class="mt-5">
+                    <h5 class="fw-bold text-uppercase ls-1 mb-3 text-primary">Professional Pedigree</h5>
+                    <p class="text-muted small lh-lg mb-0" style="max-width: 90%;">
+                        {{ about_page.professional_pedigree }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-black text-white position-relative footer-pattern">
+    <div class="bg-pattern-dots position-absolute top-0 start-0 w-100 h-100 opacity-25"></div>
+
+    <div class="container py-5 position-relative z-1">
+        <div class="row g-5">
+            <div class="col-lg-6 border-end border-secondary border-opacity-25">
+                <div class="pe-lg-5">
+                    <div class="mb-4">
+                        <i class="bi bi-bullseye fs-1 text-primary"></i>
                     </div>
+                    <h3 class="fw-bold mb-3">Our Mission</h3>
+                    <p class="text-white-50 fs-5 lh-lg">
+                        {{ about_page.mission }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="ps-lg-5">
+                    <div class="mb-4">
+                        <i class="bi bi-eye fs-1 text-primary"></i>
+                    </div>
+                    <h3 class="fw-bold mb-3">Our Vision</h3>
+                    <p class="text-white-50 fs-5 lh-lg">
+                        {{ about_page.vision }}
+                    </p>
                 </div>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="row g-5 mt-5">
-            <div class="col-lg-8">
-                <h3 class="fw-bold mb-4">Professional Pedigree</h3>
-                <p class="text-muted">{{ about_page.professional_pedigree }}</p>
+<section class="py-5 bg-light">
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-lg-6">
+                <h2 class="display-5 fw-bold mb-3">Our Core <span class="text-primary">Values</span></h2>
+                <p class="text-muted fs-5">The guiding principles that define our commitment to excellence.</p>
             </div>
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-sm p-4 rounded-4 mb-4">
-                    <h5 class="fw-bold">Our Vision</h5>
-                    <p class="text-muted">{{ about_page.vision }}</p>
-                </div>
-                <div class="card border-0 shadow-sm p-4 rounded-4 bg-dark text-white">
-                    <h5 class="fw-bold">Our Mission</h5>
-                    <p class="text-white-50">{{ about_page.mission }}</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center my-5 pt-5">
-            <h2 class="fw-bold">Our Core Values</h2>
-            <p class="text-muted">Guiding principles that define our commitment to excellence and integrity.</p>
         </div>
 
         <div class="row g-4">
             {% for value in about_page.core_values.all %}
-            <div class="col-lg-3">
-                <div class="card border-0 shadow-sm p-4 rounded-4 text-center h-100 hover-lift">
-                    <div class="mb-3">
-                        <i class="{{ value.icon }} fs-1 text-primary"></i>
+            <div class="col-md-6 col-lg-3">
+                <div class="advantage-card h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="mb-4 text-primary">
+                            <i class="{{ value.icon }} fs-2"></i>
+                        </div>
+                        <h4 class="h5 fw-bold mb-3">{{ value.title }}</h4>
+                        <p class="text-muted small mb-0">{{ value.description }}</p>
                     </div>
-                    <h5 class="fw-bold">{{ value.title }}</h5>
-                    <p class="text-muted small">{{ value.description }}</p>
+                    <div class="mt-4 pt-3 border-top border-light-subtle">
+                        <span class="small fw-bold text-uppercase text-primary" style="font-size: 0.7rem; letter-spacing: 1px;">Principle 0{{ forloop.counter }}</span>
+                    </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
+
+<section class="py-5 bg-white border-top">
+    <div class="container py-4 text-center">
+        <p class="small text-uppercase fw-bold text-muted ls-2 mb-3">Ready to work with the best?</p>
+        <h2 class="h1 fw-bold mb-4">Let's Discuss Your Project</h2>
+        <a href="{% url 'contact:contact_us' %}" class="btn btn-primary px-5 py-3 rounded-pill fw-bold">
+            Start Conversation
+        </a>
+    </div>
+</section>
+
+<style>
+    /* Local scoped styles for specific font adjustments */
+    .letter-spacing-3 { letter-spacing: 3px; }
+    .ls-1 { letter-spacing: 1px; }
+    .ls-2 { letter-spacing: 2px; }
+    .blur-3xl { filter: blur(3rem); }
+</style>
+
 {% endblock %}

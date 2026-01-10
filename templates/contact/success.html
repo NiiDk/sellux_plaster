@@ -1,9 +1,56 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inquiry Received | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<div class="container my-5">
-  <h1>Message Sent</h1>
-  <p>Thanks for reaching out. We'll get back to you soon.</p>
-  <a href="/" class="btn btn-secondary">Home</a>
-</div>
+<section class="min-vh-100 d-flex align-items-center justify-content-center bg-pattern-3d position-relative overflow-hidden">
+    <div class="position-absolute bottom-0 start-0 w-100 h-100" style="background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,1) 70%);"></div>
+
+    <div class="container position-relative z-1">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center animate__animated animate__fadeInUp">
+
+                <div class="mb-5">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-success bg-opacity-10 p-5 shadow-sm border border-success-subtle scale-in-center">
+                        <i class="bi bi-check-lg text-success display-1"></i>
+                    </div>
+                </div>
+
+                <span class="d-block text-uppercase text-muted fw-bold ls-2 small mb-3">Confirmation</span>
+                <h1 class="display-4 fw-bold text-dark mb-4">Message Sent</h1>
+                <p class="lead text-secondary lh-lg mb-5 mx-auto" style="max-width: 600px;">
+                    Thank you for contacting Sellux Plaster Ltd. Your project details have been securely routed to our architectural team. We typically respond within 24 hours.
+                </p>
+
+                <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                    <a href="/" class="btn btn-dark btn-lg rounded-pill px-5 fw-bold shadow-float">
+                        <i class="bi bi-house me-2"></i> Return Home
+                    </a>
+                    <a href="{% url 'catalogue:product_list' %}" class="btn btn-outline-dark btn-lg rounded-pill px-5 fw-bold bg-white">
+                        Browse Materials
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Icon Pop Animation */
+    .scale-in-center {
+        animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
+    @keyframes scale-in-center {
+        0% { transform: scale(0); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Button Hover */
+    .shadow-float { box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+    .shadow-float:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+
+    .ls-2 { letter-spacing: 2px; }
+</style>
 {% endblock %}

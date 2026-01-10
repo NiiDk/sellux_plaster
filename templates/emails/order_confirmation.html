@@ -1,18 +1,83 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Order Confirmation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Order Confirmation | Sellux Plaster Ltd</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style type="text/css">
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; background-color: #F9F9F9; -webkit-font-smoothing: antialiased; }
+        .container { width: 100%; max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+        .header { background-color: #050505; padding: 40px; text-align: center; border-bottom: 4px solid #d96a00; }
+        .content { padding: 40px; color: #333333; line-height: 1.6; }
+        .order-id { font-size: 12px; font-weight: bold; color: #d96a00; text-transform: uppercase; letter-spacing: 2px; }
+        .footer { background-color: #121212; padding: 30px; text-align: center; color: #888888; font-size: 12px; }
+        .button { background-color: #d96a00; color: #ffffff; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; display: inline-block; margin-top: 20px; }
+        .item-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .item-table th { text-align: left; font-size: 12px; text-transform: uppercase; border-bottom: 1px solid #eeeeee; padding: 10px 0; color: #999999; }
+        .item-table td { padding: 15px 0; border-bottom: 1px solid #eeeeee; font-size: 14px; }
+    </style>
 </head>
 <body>
-    <h2>Thank you for your order, {{ order.first_name }}!</h2>
-    <p>Your order with ID #{{ order.id }} has been confirmed and is now being processed.</p>
-    <h4>Order Summary:</h4>
-    <ul>
-        {% for item in order.items.all %}
-            <li>{{ item.product.name }} (x{{ item.quantity }}) - GH₵{{ item.get_cost }}</li>
-        {% endfor %}
-    </ul>
-    <p><strong>Total: GH₵{{ order.total_amount }}</strong></p>
-    <p>You can view your order details in your dashboard: <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'dashboard:home' %}">My Dashboard</a></p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td style="padding: 20px 0 30px 0;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" class="container">
+                <tr>
+                    <td class="header">
+                        <h1 style="color: #ffffff; margin: 0; font-size: 24px; letter-spacing: 4px; font-weight: 800;">SELLUX <span style="color: #d96a00;">PLASTER</span></h1>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="content">
+                        <p class="order-id">Acknowledgment #{{ order.id }}</p>
+                        <h2 style="font-size: 28px; margin-top: 0; color: #121212;">Thank you for your order, {{ order.first_name }}.</h2>
+                        <p>We are pleased to confirm that your order for premium architectural finishes has been received and is currently being processed by our curation team.</p>
+
+                        <table class="item-table">
+                            <thead>
+                            <tr>
+                                <th width="70%">Project Material</th>
+                                <th width="30%" style="text-align: right;">Cost</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in order.items.all %}
+                            <tr>
+                                <td>
+                                    <span style="font-weight: bold; display: block;">{{ item.product.name }}</span>
+                                    <span style="font-size: 12px; color: #888888;">Quantity: {{ item.quantity }}</span>
+                                </td>
+                                <td style="text-align: right; font-weight: bold;">GH₵{{ item.get_cost }}</td>
+                            </tr>
+                            {% endfor %}
+                            <tr>
+                                <td style="padding-top: 20px; font-weight: 800; font-size: 18px;">Total Investment</td>
+                                <td style="padding-top: 20px; text-align: right; font-weight: 800; font-size: 18px; color: #d96a00;">GH₵{{ order.total_amount }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <p style="margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 20px; font-size: 13px; color: #666666;">
+                            Our logistics team will contact you shortly regarding delivery schedules or installation coordinates.
+                        </p>
+
+                        <center>
+                            <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'dashboard:home' %}" class="button">View Project Dashboard</a>
+                        </center>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="footer">
+                        <p style="margin: 0;">&copy; {% now "Y" %} Sellux Plaster Ltd. All Rights Reserved.</p>
+                        <p style="margin: 10px 0 0 0;">Odokor, Dr. Busia Highway, Accra, Ghana</p>
+                        <p style="color: #d96a00; margin-top: 10px; font-weight: bold;">Designed for Luxury.</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
