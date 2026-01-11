@@ -28,7 +28,11 @@ This platform represents a "Hybrid Business Model," seamlessly merging **Digital
 *   **Inventory Cross-Linking**: Projects are technically linked to specific catalogue items, showing potential clients the exact materials used in each masterpiece.
 *   **Immersive Detail**: High-resolution gallery support with mobile-optimized responsive views.
 
-### 5. Automated Communications Engine
+### 5. Corporate & Team Showcase
+*   **Dynamic "About Us" Page**: A fully admin-manageable "About" page to tell your company's story.
+*   **"Our Team" Directory**: A dedicated section to showcase your team members, complete with individual profile pages.
+
+### 6. Automated Communications Engine
 *   **Signal-Driven Notifications**: Asynchronous event handling via Django Signals for instant transactional Email and SMS updates.
 *   **Admin Feedback Loops**: Dedicated channel for admins to provide granular order updates (e.g., "In Transit", "Site Inspection Scheduled") visible on user dashboards.
 
@@ -46,12 +50,6 @@ This platform represents a "Hybrid Business Model," seamlessly merging **Digital
 *   **Asset Management**: Powered by **Whitenoise** for static file compression and **Cloudinary** for CDN-delivered media optimization.
 *   **Scalable Service Layer**: Decoupled business logic (`core/services.py`) allowing for future-proof integration of external APIs without refactoring.
 
-### 🤖 AI-Ready Foundation (GPT-4 Integrated)
-The architecture is powered by a dedicated `AIService` supporting:
-*   **Architectural Brief Enhancement**: Automatically transforming raw user descriptions into professional design specifications.
-*   **Smart Pricing Estimates**: Providing baseline architectural quotes based on localized Ghanaian market rates per Sq Ft.
-*   **Automated Insights**: Ready for AI-driven blog generation and product recommendations.
-
 ---
 
 ## 🚀 Deployment & Installation
@@ -66,23 +64,17 @@ pip install -r requirements.txt
 ```
 
 ### 2. Smart Environment Configuration
-Create a `.env` file in the root:
+This project uses `python-dotenv` to manage environment variables for local development. Create a `.env` file in the root of your project and add the following:
 ```env
-# System Branding
-COMPANY_NAME="Sellux Plaster Ltd"
-
 # Security
 SECRET_KEY=your-secure-key
 DEBUG=True
-
-# AI Architect (OpenAI)
-AI_API_KEY=sk-...
 
 # Payment (Paystack Ghana)
 PAYSTACK_PUBLIC_KEY=pk_test_...
 PAYSTACK_SECRET_KEY=sk_test_...
 
-# Storage
+# Storage (Cloudinary)
 CLOUDINARY_URL=cloudinary://...
 ```
 
