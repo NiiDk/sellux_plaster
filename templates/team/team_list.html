@@ -1,158 +1,290 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load math_filters %}
 
-{% block title %}The Artisans | Sellux Plaster Ltd{% endblock %}
+{% block title %}Our Legacy | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
 
-<section class="hero-minimal bg-charcoal position-relative overflow-hidden border-bottom border-charcoal-border">
-    <div class="container py-8 py-lg-12 position-relative z-2">
-        <div class="row align-items-center">
-            <div class="col-lg-7 text-start">
-                <div class="d-flex align-items-center mb-3">
-                    <div class="line-accent-orange me-3"></div>
-                    <span class="text-orange fs-xs fw-bold ls-3 text-uppercase">Technical Mastery</span>
+<!-- HERO -->
+<section class="section bg-white position-relative overflow-hidden">
+    <div class="container text-center">
+        <span class="section-label mb-4 d-inline-block">
+            Since 2015
+        </span>
+
+        <h1 class="display-1 fw-light text-dark mb-5">
+            Crafting Architectural<br>
+            <span class="text-orange fw-normal">Masterpieces</span>
+        </h1>
+
+        <p class="hero-subtext mx-auto">
+            We do not simply finish surfaces. We shape environments through
+            precision, restraint, and uncompromising craftsmanship.
+        </p>
+    </div>
+</section>
+
+<!-- STORY -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row align-items-center g-10">
+
+            <div class="col-lg-6 position-relative">
+                <div class="image-frame">
+                    <img src="{{ about_page.image.url }}"
+                         alt="{{ about_page.title }}"
+                         class="img-fluid">
                 </div>
-                <h1 class="display-3 fw-light text-white mb-4">
-                    The <span class="fw-normal text-orange">Artisans</span> <br class="d-none d-lg-block">
-                    Behind the Craft
-                </h1>
-                <p class="text-white-50 fw-light fs-5 col-lg-10 mb-0">
-                    Mastering the intersection of architectural rigor and traditional plastering. We transform raw space into refined environments.
+            </div>
+
+            <div class="col-lg-6 ps-lg-5">
+                <h2 class="display-2 fw-light mb-4">
+                    {{ about_page.subtitle }}
+                </h2>
+
+                <div class="content-divider mb-4"></div>
+
+                <div class="story-text mb-5">
+                    {{ about_page.main_content|linebreaksbr }}
+                </div>
+
+                <div class="pedigree-block">
+                    <span class="section-label mb-2 d-block">
+                        Professional Pedigree
+                    </span>
+                    <p class="pedigree-text">
+                        {{ about_page.professional_pedigree }}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- MISSION & VISION -->
+<section class="section bg-charcoal text-white position-relative">
+    <div class="container">
+        <div class="row g-8">
+
+            <div class="col-lg-6 border-end border-opacity-25 pe-lg-5">
+                <div class="icon-circle mb-4">
+                    <i class="bi bi-bullseye"></i>
+                </div>
+                <h3 class="fw-light mb-4">
+                    Our <span class="text-orange">Mission</span>
+                </h3>
+                <p class="dark-section-text">
+                    {{ about_page.mission }}
                 </p>
             </div>
-            <div class="col-lg-5 d-none d-lg-flex justify-content-end">
-                <div class="geo-frame p-5 border border-charcoal-border">
-                    <span class="text-white-20 fs-1 fw-serif">01</span>
+
+            <div class="col-lg-6 ps-lg-5">
+                <div class="icon-circle mb-4">
+                    <i class="bi bi-eye"></i>
                 </div>
+                <h3 class="fw-light mb-4">
+                    Our <span class="text-orange">Vision</span>
+                </h3>
+                <p class="dark-section-text">
+                    {{ about_page.vision }}
+                </p>
             </div>
+
         </div>
     </div>
 </section>
 
-<section class="bg-charcoal py-8 py-lg-10">
+<!-- CORE VALUES -->
+<section class="section bg-white">
     <div class="container">
+
         <div class="row mb-6">
-            <div class="col-12 border-start border-orange border-4 ps-4">
-                <h2 class="h6 text-white-50 ls-4 text-uppercase mb-1">Principals</h2>
-                <h3 class="h3 fw-light text-white">Firm Leadership</h3>
+            <div class="col-lg-6">
+                <h2 class="display-2 fw-light mb-3">
+                    Core <span class="text-orange">Values</span>
+                </h2>
+                <p class="section-subtext">
+                    The principles that guide every decision and every detail.
+                </p>
             </div>
         </div>
 
-        <div class="row g-4">
-            {% for member in firm_leadership %}
-            <div class="col-12 col-md-4">
-                <div class="card-artisan h-100 bg-charcoal-light border border-charcoal-border transition-smooth p-4">
-                    <div class="portrait-container mb-4 overflow-hidden border border-charcoal-border">
-                        <img src="{{ member.profile_image.url }}" alt="{{ member.get_full_name }}" class="img-fluid grayscale hover-color">
-                        <div class="exp-tag-mono fs-xs bg-orange text-white px-2 py-1 position-absolute top-0 end-0">
-                            {{ member.years_of_experience|default:"15" }}YRS XP
-                        </div>
+        <div class="row g-5">
+            {% for value in about_page.core_values.all %}
+            <div class="col-md-6 col-lg-3">
+
+                <div class="value-card h-100">
+                    <div class="value-icon mb-4">
+                        <i class="{{ value.icon }}"></i>
                     </div>
-                    <div class="card-meta">
-                        <h4 class="h5 text-white fw-normal mb-1">{{ member.get_full_name }}</h4>
-                        <p class="text-orange fs-xs fw-bold ls-2 text-uppercase mb-3">{{ member.job_title }}</p>
-                        <p class="text-white-50 small fw-light mb-4">
-                            {{ member.bio|truncatewords:22 }}
-                        </p>
-                        <a href="{{ member.get_absolute_url }}" class="link-orange-minimal">
-                            EXPLORE DOSSIER <i class="bi bi-arrow-right ms-2"></i>
-                        </a>
-                    </div>
+
+                    <h4 class="value-title mb-3">
+                        {{ value.title }}
+                    </h4>
+
+                    <p class="value-text">
+                        {{ value.description }}
+                    </p>
+
+                    <span class="value-index">
+                        0{{ forloop.counter }}
+                    </span>
                 </div>
+
             </div>
             {% endfor %}
         </div>
+
     </div>
 </section>
 
-<section class="bg-charcoal-dark py-8 py-lg-10 border-top border-charcoal-border">
-    <div class="container">
-        <div class="text-center mb-6">
-            <h2 class="h6 text-orange ls-4 text-uppercase">The Collective</h2>
-            <div class="divider-short bg-white-10 mx-auto mt-2"></div>
-        </div>
+<!-- CTA -->
+<section class="section bg-light border-top">
+    <div class="container text-center">
+        <span class="section-label mb-3 d-inline-block">
+            Begin a Conversation
+        </span>
 
-        <div class="row g-3">
-            {% for member in associates %}
-            <div class="col-6 col-md-3">
-                <div class="card-associate text-center p-3 border border-transparent hover-border-charcoal transition-smooth">
-                    <div class="avatar-sm mx-auto mb-3 border border-charcoal-border p-1 rounded-circle">
-                        <img src="{{ member.profile_image.url }}" alt="{{ member.get_full_name }}" class="rounded-circle grayscale">
-                    </div>
-                    <h6 class="text-white fs-7 mb-0">{{ member.get_full_name }}</h6>
-                    <p class="text-white-30 fs-xs text-uppercase ls-1">{{ member.job_title }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+        <h2 class="display-2 fw-light mb-5">
+            Let’s Discuss Your <span class="text-orange">Project</span>
+        </h2>
+
+        <a href="{% url 'contact:contact_us' %}" class="primary-btn">
+            Contact Sellux
+        </a>
     </div>
 </section>
 
 <style>
-    /* Professional Dark System */
-    :root {
-        --charcoal: #121212;
-        --charcoal-light: #1A1A1A;
-        --charcoal-border: #2A2A2A;
-        --orange-matte: #E65100;
-        --white-50: rgba(255,255,255,0.5);
-        --white-10: rgba(255,255,255,0.1);
-    }
+:root {
+    --orange: #ff6b35;
+    --charcoal: #1a1a1a;
+    --light-bg: #f7f7f7;
+    --text-muted: #6f6f6f;
+}
 
-    /* Core Styles */
-    .bg-charcoal { background-color: var(--charcoal); }
-    .bg-charcoal-dark { background-color: #0A0A0A; }
-    .bg-charcoal-light { background-color: var(--charcoal-light); }
-    .border-charcoal-border { border-color: var(--charcoal-border) !important; }
-    .text-orange { color: var(--orange-matte) !important; }
-    .bg-orange { background-color: var(--orange-matte) !important; }
-    .text-white-50 { color: var(--white-50); }
-    .text-white-30 { color: rgba(255,255,255,0.3); }
+/* Base */
+.section {
+    padding: 7rem 0;
+}
+.bg-charcoal {
+    background: var(--charcoal);
+}
+.text-orange {
+    color: var(--orange);
+}
 
-    /* Typography */
-    .ls-3 { letter-spacing: 3px; }
-    .ls-4 { letter-spacing: 4px; }
-    .fs-xs { font-size: 0.7rem; }
-    .fs-7 { font-size: 0.85rem; }
-    .fw-serif { font-family: 'Playfair Display', serif; }
-    .exp-tag-mono { font-family: 'Roboto Mono', monospace; font-weight: 700; }
+/* Typography */
+.display-1 {
+    font-size: 3.8rem;
+}
+.display-2 {
+    font-size: 2.6rem;
+}
+.section-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+}
+.hero-subtext,
+.section-subtext {
+    max-width: 640px;
+    margin: 0 auto;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
 
-    /* Layout Elements */
-    .line-accent-orange { width: 30px; height: 1px; background-color: var(--orange-matte); }
-    .divider-short { width: 40px; height: 1px; }
-    .geo-frame { height: 150px; width: 150px; display: flex; align-items: center; justify-content: center; opacity: 0.3; }
+/* Image */
+.image-frame {
+    border-bottom: 4px solid var(--orange);
+}
+.image-frame img {
+    width: 100%;
+    object-fit: cover;
+}
 
-    /* Card & Image Effects */
-    .card-artisan { border-radius: 0; }
-    .card-artisan:hover { border-color: var(--orange-matte) !important; background-color: #1E1E1E; }
-    .portrait-container { position: relative; aspect-ratio: 1/1; }
-    .grayscale { filter: grayscale(100%); transition: 0.4s ease; }
-    .hover-color:hover { filter: grayscale(0%); }
-    .avatar-sm { width: 60px; height: 60px; }
-    .avatar-sm img { width: 100%; height: 100%; object-fit: cover; }
+/* Story */
+.content-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--orange);
+}
+.story-text {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #444;
+    line-height: 1.9;
+}
+.pedigree-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 90%;
+}
 
-    /* Links */
-    .link-orange-minimal {
-        color: var(--orange-matte);
-        text-decoration: none;
-        font-size: 0.65rem;
-        font-weight: 800;
-        letter-spacing: 1.5px;
-        transition: 0.3s;
-    }
-    .link-orange-minimal:hover { color: white; }
+/* Dark section */
+.icon-circle {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--orange);
+}
+.dark-section-text {
+    font-weight: 300;
+    color: #cfcfcf;
+    line-height: 1.8;
+}
 
-    /* UI Optimizations */
-    .py-8 { padding-top: 4rem; padding-bottom: 4rem; }
-    .py-10 { padding-top: 6rem; padding-bottom: 6rem; }
-    .hover-border-charcoal:hover { border-color: var(--charcoal-border) !important; }
+/* Values */
+.value-card {
+    border: 1px solid #eee;
+    padding: 2.2rem;
+    position: relative;
+}
+.value-icon {
+    color: var(--orange);
+    font-size: 1.6rem;
+}
+.value-title {
+    font-weight: 500;
+}
+.value-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+.value-index {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--orange);
+}
 
-    @media (max-width: 768px) {
-        .display-3 { font-size: 2.5rem; }
-        .py-8 { padding-top: 3rem; padding-bottom: 3rem; }
-    }
+/* Button */
+.primary-btn {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    padding: 0.9rem 2.2rem;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .display-1 { font-size: 2.6rem; }
+    .display-2 { font-size: 2.1rem; }
+    .section { padding: 5rem 0; }
+}
 </style>
 
 {% endblock %}
