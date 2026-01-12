@@ -7,7 +7,7 @@
 {% block content %}
 
 <!-- HERO -->
-<section class="hero bg-charcoal text-center">
+<section class="hero bg-dark-onyx text-center bg-architectural-dots">
     <div class="container min-vh-70 d-flex align-items-center">
         <div class="mx-auto" style="max-width: 800px;">
             <span class="section-label mb-4 d-inline-block">
@@ -16,7 +16,7 @@
 
             <h1 class="display-1 fw-light mb-5 text-white">
                 The People Behind<br>
-                <span class="text-orange fw-normal">Architectural Precision</span>
+                <span class="text-primary-color fw-normal">Architectural Precision</span>
             </h1>
 
             <p class="hero-text mb-0">
@@ -28,12 +28,12 @@
 </section>
 
 <!-- LEADERSHIP -->
-<section class="section bg-charcoal-light">
+<section class="section bg-dark-charcoal bg-architectural-dots">
     <div class="container">
 
         <div class="section-header text-center mb-12">
             <h2 class="display-2 fw-light text-white mb-4">
-                Firm <span class="text-orange">Leadership</span>
+                Firm <span class="text-primary-color">Leadership</span>
             </h2>
             <p class="section-subtext">
                 Senior professionals guiding quality, execution, and architectural integrity.
@@ -79,12 +79,12 @@
 </section>
 
 <!-- SPECIALISTS -->
-<section class="section bg-charcoal">
+<section class="section bg-dark-onyx bg-architectural-dots">
     <div class="container">
 
         <div class="section-header text-center mb-12">
             <h2 class="display-2 fw-light text-white mb-4">
-                Specialist <span class="text-orange">Team</span>
+                Specialist <span class="text-primary-color">Team</span>
             </h2>
             <p class="section-subtext">
                 Dedicated professionals delivering precision across every project stage.
@@ -129,7 +129,7 @@
 </section>
 
 <!-- VALUES -->
-<section class="section bg-charcoal-dark">
+<section class="section bg-dark-charcoal bg-architectural-dots">
     <div class="container">
 
         <div class="row align-items-center g-10">
@@ -141,7 +141,7 @@
 
                 <h2 class="display-2 fw-light text-white mb-5">
                     Where Craft Meets<br>
-                    <span class="text-orange">Architectural Discipline</span>
+                    <span class="text-primary-color">Architectural Discipline</span>
                 </h2>
 
                 <p class="values-text mb-6">
@@ -183,23 +183,34 @@
 
 <style>
 :root {
-    --charcoal: #1a1a1a;
-    --charcoal-light: #262626;
-    --charcoal-dark: #0f0f0f;
+    /* Project Wide Colors (Sourced from base.html) */
+    --primary-color: #d96a00;
+    --primary-vibrant: #ff7b00;
+    --black-onyx: #050505;
+    --black-charcoal: #121212;
     --border-dark: #333;
-    --orange: #ff6b35;
     --white-soft: #e5e5e5;
     --white-muted: #cfcfcf;
+
+    /* New Local Variables for Clarity */
+    --card-bg-color: var(--black-onyx);
+    --card-radius: 12px;
+}
+
+/* Architectural Pattern Background */
+.bg-architectural-dots {
+    /* Subtle white dots on dark background */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
 }
 
 /* Base */
 .section {
     padding: 7rem 0;
 }
-.bg-charcoal { background: var(--charcoal); }
-.bg-charcoal-light { background: var(--charcoal-light); }
-.bg-charcoal-dark { background: var(--charcoal-dark); }
-.text-orange { color: var(--orange); }
+.bg-dark-onyx { background: var(--black-onyx); }
+.bg-dark-charcoal { background: var(--black-charcoal); }
+.text-primary-color { color: var(--primary-color); }
 
 /* Global Transitions */
 *, *:before, *:after {
@@ -223,22 +234,24 @@ a, .primary-btn, .leader-card, .specialist-card {
 }
 .section-label {
     font-size: 0.75rem;
-    letter-spacing: 4px; /* Increased letter spacing */
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--orange);
+    color: var(--primary-color); /* Updated to new primary color */
     font-weight: 500;
 }
 
 /* Cards - Leadership */
 .leader-card {
     border: 1px solid var(--border-dark);
-    padding: 2.5rem; /* More generous padding */
+    padding: 2.5rem;
     height: 100%;
-    background: var(--charcoal-dark); /* Darker background for depth */
+    background: var(--card-bg-color);
+    border-radius: var(--card-radius); /* Rounded Card */
+    overflow: hidden; /* Ensure image zoom stays within bounds */
 }
 .leader-card:hover {
-    transform: translateY(-8px); /* Subtle lift for a premium feel */
-    border-color: var(--orange); /* Highlight border on hover */
+    transform: translateY(-8px);
+    border-color: var(--primary-vibrant); /* Highlight with vibrant orange */
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -246,13 +259,14 @@ a, .primary-btn, .leader-card, .specialist-card {
     position: relative;
     margin-bottom: 2rem;
     overflow: hidden;
+    border-radius: 6px; /* Subtle round for image */
 }
 .leader-image {
     width: 100%;
-    aspect-ratio: 4 / 5; /* Taller portrait aspect ratio */
+    aspect-ratio: 4 / 5;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth, premium zoom */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .leader-card:hover .leader-image {
     transform: scale(1.06);
@@ -261,7 +275,7 @@ a, .primary-btn, .leader-card, .specialist-card {
     position: absolute;
     bottom: 0;
     right: 0;
-    background: var(--orange);
+    background: var(--primary-color); /* Updated to new primary color */
     color: #fff;
     font-size: 0.7rem;
     padding: 0.4rem 0.8rem;
@@ -278,7 +292,7 @@ a, .primary-btn, .leader-card, .specialist-card {
     font-size: 1.5rem;
 }
 .leader-title {
-    color: var(--orange);
+    color: var(--primary-color); /* Updated to new primary color */
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -298,7 +312,7 @@ a, .primary-btn, .leader-card, .specialist-card {
     font-weight: 500;
 }
 .text-link:hover {
-    color: var(--orange);
+    color: var(--primary-vibrant); /* Use vibrant orange for hover */
 }
 .arrow-icon {
     display: inline-block;
@@ -314,19 +328,20 @@ a, .primary-btn, .leader-card, .specialist-card {
 
 .primary-btn {
     display: inline-block;
-    background: var(--orange);
-    color: var(--charcoal-dark); /* Contrast text */
+    background: var(--primary-color); /* Updated to new primary color */
+    color: var(--black-onyx); /* Contrast text */
     padding: 1rem 2.5rem;
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-decoration: none;
-    border: 1px solid var(--orange);
+    border: 1px solid var(--primary-color);
 }
 .primary-btn:hover {
     background: transparent;
-    color: var(--orange);
+    color: var(--primary-vibrant);
+    border-color: var(--primary-vibrant);
 }
 
 /* Specialist */
@@ -334,10 +349,11 @@ a, .primary-btn, .leader-card, .specialist-card {
     border: 1px solid var(--border-dark);
     padding: 1.5rem 1rem;
     height: 100%;
-    background: var(--charcoal);
+    background: var(--black-onyx); /* Use black-onyx for consistency */
+    border-radius: var(--card-radius); /* Rounded Card */
 }
 .specialist-card:hover {
-    border-color: var(--orange);
+    border-color: var(--primary-vibrant);
     transform: translateY(-3px);
 }
 .specialist-image {
@@ -346,8 +362,8 @@ a, .primary-btn, .leader-card, .specialist-card {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 1rem;
-    border: 3px solid var(--orange); /* Eye-catching frame */
-    box-shadow: 0 0 0 4px var(--charcoal);
+    border: 3px solid var(--primary-color); /* Updated to new primary color */
+    box-shadow: 0 0 0 4px var(--black-onyx); /* Ensure shadow matches background */
 }
 .specialist-name {
     color: #fff;
@@ -356,7 +372,7 @@ a, .primary-btn, .leader-card, .specialist-card {
     font-size: 1.1rem;
 }
 .specialist-title {
-    color: var(--white-muted); /* Subtler title for specialists */
+    color: var(--white-muted);
     font-size: 0.8rem;
     margin-bottom: 0.8rem;
     font-weight: 300;
@@ -374,6 +390,7 @@ a, .primary-btn, .leader-card, .specialist-card {
     margin-bottom: 0.3rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    border-radius: 4px; /* Subtle round for tags */
 }
 
 /* Values */
@@ -381,12 +398,20 @@ a, .primary-btn, .leader-card, .specialist-card {
     border: 1px solid var(--border-dark);
     padding: 2.5rem;
     height: 100%;
-    background: var(--charcoal);
-    border-left: 4px solid var(--orange); /* Strong visual anchor */
+    background: var(--black-onyx); /* Use black-onyx for consistency */
+    border-left: 4px solid var(--primary-color); /* Strong visual anchor (updated color) */
+    border-radius: var(--card-radius); /* Rounded Card */
+    border-top: 1px solid var(--border-dark); /* Ensure all borders are consistent with radius */
+    border-right: 1px solid var(--border-dark);
+    border-bottom: 1px solid var(--border-dark);
+}
+.value-card:hover {
+    transform: translateY(-3px);
+    border-left-color: var(--primary-vibrant);
 }
 .value-number {
-    color: var(--orange);
-    font-size: 2.8rem; /* Prominent number */
+    color: var(--primary-color); /* Updated to new primary color */
+    font-size: 2.8rem;
     font-weight: 200;
     display: block;
     margin-bottom: 1rem;
@@ -413,8 +438,8 @@ a, .primary-btn, .leader-card, .specialist-card {
 }
 @media (max-width: 768px) {
     .leader-card { padding: 1.5rem; }
-    .leader-image { aspect-ratio: 16 / 9; } /* Wider image on small screens */
-    .g-10 { --bs-gutter-y: 3rem !important; } /* Reduce large gutter spacing */
+    .leader-image { aspect-ratio: 16 / 9; }
+    .g-10 { --bs-gutter-y: 3rem !important; }
 }
 </style>
 
