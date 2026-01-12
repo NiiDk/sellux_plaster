@@ -6,253 +6,185 @@
 
 {% block content %}
 
-<!-- HERO - Refined for mobile-first premium experience -->
-<section class="hero-section position-relative bg-white">
-    <div class="container-fluid g-0">
-        <div class="row g-0 min-vh-65 min-vh-lg-50 d-flex align-items-center position-relative">
+<!-- HERO -->
+<section class="hero-section bg-white">
+    <div class="container min-vh-55 d-flex align-items-center py-9 py-lg-11">
+        <div class="row justify-content-center w-100">
+            <div class="col-11 col-md-10 col-lg-8 text-center">
 
-            <!-- Subtle background elements - reduced for mobile -->
-            <div class="position-absolute top-0 end-0 w-25 w-lg-20 h-100 bg-light opacity-5 d-none d-lg-block"></div>
-            <div class="position-absolute bottom-0 start-0 w-25 h-25 rounded-circle bg-primary opacity-5 blur-3"></div>
+                <span class="badge bg-primary-soft text-primary px-4 py-2 rounded-pill fw-medium letter-spacing-1 mb-5">
+                    PRINCIPALS & TEAM
+                </span>
 
-            <div class="container position-relative z-2 py-10 py-lg-12">
-                <div class="row justify-content-center">
-                    <div class="col-11 col-md-10 col-lg-8 col-xl-7 text-center">
+                <h1 class="display-4 display-lg-3 fw-light letter-spacing-1 mb-4">
+                    The People Behind<br class="d-none d-lg-block">
+                    <span class="fw-normal text-primary">Exceptional Craft</span>
+                </h1>
 
-                        <!-- Premium badge with refined spacing -->
-                        <div class="mb-5 mb-md-6">
-                            <span class="badge bg-primary-soft text-primary px-4 py-2 rounded-pill fw-medium letter-spacing-1 border-0">
-                                PRINCIPALS & TEAM
-                            </span>
-                        </div>
+                <p class="lead text-muted fw-light lh-lg mx-auto mb-0"
+                   style="max-width: 520px;">
+                    A collective of master craftsmen and technical specialists,
+                    united by discipline, precision, and architectural integrity.
+                </p>
 
-                        <!-- Typography hierarchy optimized for mobile -->
-                        <h1 class="display-4 display-lg-3 fw-light mb-4 mb-md-5 letter-spacing-1">
-                            The <span class="fw-normal text-primary d-block d-lg-inline">Artisans</span> Behind<br class="d-none d-lg-block">
-                            <span class="fw-light">the Craft</span>
-                        </h1>
-
-                        <!-- Enhanced readability with controlled line length -->
-                        <div class="mx-auto" style="max-width: 540px;">
-                            <p class="lead text-muted fs-5 fw-light lh-lg mb-0 opacity-80">
-                                Master craftsmen and technical specialists dedicated to transforming spaces with precision, restraint, and architectural excellence.
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- LEADERSHIP - Refined card interactions -->
-<section class="leadership-section bg-light-subtle position-relative overflow-hidden">
-    <!-- Subtle pattern - visible only on larger screens -->
-    <div class="position-absolute top-0 start-0 w-100 h-100 d-none d-lg-block">
-        <div class="bg-pattern-grid opacity-5" style="--grid-size: 24px;"></div>
-    </div>
+<!-- LEADERSHIP -->
+<section class="leadership-section bg-light-subtle">
+    <div class="container py-9 py-lg-11">
 
-    <div class="container position-relative z-2 py-10 py-lg-12">
-
-        <!-- Section header with premium divider -->
-        <div class="row justify-content-center mb-8 mb-lg-10">
-            <div class="col-lg-9 col-xl-8 text-center">
-                <div class="section-divider mb-5">
-                    <div class="divider-line mx-auto bg-primary opacity-25"></div>
-                </div>
-                <h2 class="display-6 fw-light mb-3 letter-spacing-1">FIRM LEADERSHIP</h2>
-                <p class="text-muted fw-light fs-5 mb-0 opacity-75">
-                    Architectural leadership shaped by decades of specialist experience
+        <div class="row justify-content-center mb-8">
+            <div class="col-lg-8 text-center">
+                <div class="divider-line mx-auto mb-4 bg-primary opacity-25"></div>
+                <h2 class="display-6 fw-light letter-spacing-1 mb-2">Firm Leadership</h2>
+                <p class="text-muted fw-light fs-5 opacity-75 mb-0">
+                    Experience shaped by decades of specialist practice
                 </p>
             </div>
         </div>
 
-        <!-- Leadership cards with enhanced mobile spacing -->
         <div class="row justify-content-center g-4 g-lg-5">
             {% for member in firm_leadership %}
-            <div class="col-12 col-md-10 col-lg-4 mb-4 mb-lg-0">
+            <div class="col-12 col-md-10 col-lg-4">
 
-                <div class="card bg-white border-0 rounded-0 p-4 p-lg-5 h-100 text-center
-                         transition-ease-out hover-elevate"
+                <div class="card bg-white border-0 p-4 p-lg-5 h-100 text-center transition-soft"
                      data-aos="fade-up"
-                     data-aos-delay="{{ forloop.counter|add:"-1"|multiply:"100" }}">
+                     data-aos-delay="{{ forloop.counter|add:'-1'|multiply:'100' }}">
 
-                <!-- Profile image with premium frame -->
-                <div class="position-relative mb-5">
-                    <div class="profile-frame mx-auto rounded-circle overflow-hidden"
-                         style="width: 140px; height: 140px;">
-                        <div class="frame-border position-absolute top-0 start-0 w-100 h-100 rounded-circle border border-3 border-white"></div>
-                        <img src="{{ member.profile_image.url }}"
-                             alt="{{ member.get_full_name }}"
-                             class="w-100 h-100 object-fit-cover transition-ease-out scale-on-hover">
+                    <div class="mb-5">
+                        <div class="profile-frame mx-auto rounded-circle overflow-hidden"
+                             style="width: 128px; height: 128px;">
+                            <img src="{{ member.profile_image.url }}"
+                                 alt="{{ member.get_full_name }}"
+                                 class="w-100 h-100 object-fit-cover">
+                        </div>
+
+                        <span class="d-inline-block mt-3 small text-muted fw-medium letter-spacing-1">
+                            {{ member.years_of_experience|default:"15+" }} years experience
+                        </span>
                     </div>
 
-                    <!-- Experience badge - refined positioning -->
-                    <div class="position-absolute bottom-0 start-50 translate-middle-x bg-dark text-white rounded-pill px-3 py-1 small fw-medium letter-spacing-1">
-                        {{ member.years_of_experience|default:"15+" }} years
-                    </div>
-                </div>
+                    <h4 class="fs-4 fw-normal letter-spacing-1 mb-1">
+                        {{ member.get_full_name }}
+                    </h4>
 
-                <!-- Content with enhanced typography -->
-                <div class="card-body d-flex flex-column px-0">
-                    <h4 class="fs-4 fw-normal mb-2 letter-spacing-1">{{ member.get_full_name }}</h4>
-                    <p class="text-primary small fw-medium mb-4 letter-spacing-1 opacity-90">{{ member.job_title }}</p>
-
-                    <p class="text-muted fw-light lh-base mb-5 flex-grow-1 opacity-80">
-                        {{ member.bio|truncatewords:24 }}
+                    <p class="text-primary small fw-medium letter-spacing-1 mb-4 opacity-90">
+                        {{ member.job_title }}
                     </p>
 
-                    <!-- Premium button with subtle interaction -->
-                    <div class="mt-auto">
-                        <a href="{{ member.get_absolute_url }}"
-                           class="btn btn-outline-dark btn-sm rounded-pill px-4 py-2 fw-medium letter-spacing-1
-                                      border-width-1 transition-ease-out hover-transform">
-                                <span class="d-flex align-items-center justify-content-center">
-                                    View Profile
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="ms-2">
-                                        <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/>
-                                    </svg>
-                                </span>
-                        </a>
-                    </div>
+                    <p class="text-muted fw-light lh-base mb-5 opacity-80">
+                        {{ member.bio|truncatewords:22 }}
+                    </p>
+
+                    <a href="{{ member.get_absolute_url }}"
+                       class="btn btn-outline-dark btn-sm rounded-pill px-4 fw-medium letter-spacing-1">
+                        Profile
+                    </a>
+
                 </div>
 
             </div>
-
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
 
     </div>
 </section>
 
-<!-- SPECIALIST TEAM - Optimized for mobile grid -->
-<section class="specialists-section bg-white position-relative">
-    <div class="container py-10 py-lg-12">
+<!-- SPECIALISTS -->
+<section class="specialists-section bg-white">
+    <div class="container py-9 py-lg-11">
 
-        <!-- Section header -->
-        <div class="row justify-content-center mb-8 mb-lg-10">
-            <div class="col-lg-9 col-xl-8 text-center">
-                <div class="section-divider mb-5">
-                    <div class="divider-line mx-auto bg-primary opacity-25"></div>
-                </div>
-                <h2 class="display-6 fw-light mb-3 letter-spacing-1">SPECIALIST TEAM</h2>
-                <p class="text-muted fw-light fs-5 mb-0 opacity-75">
-                    Skilled professionals delivering precision on every installation
+        <div class="row justify-content-center mb-8">
+            <div class="col-lg-8 text-center">
+                <div class="divider-line mx-auto mb-4 bg-primary opacity-25"></div>
+                <h2 class="display-6 fw-light letter-spacing-1 mb-2">Specialist Team</h2>
+                <p class="text-muted fw-light fs-5 opacity-75 mb-0">
+                    Skilled professionals delivering precision on every detail
                 </p>
             </div>
         </div>
 
-        <!-- Team grid with mobile-first responsive behavior -->
         <div class="row g-3 g-md-4">
             {% for member in associates %}
-            <div class="col-6 col-md-4 col-lg-3 mb-3 mb-lg-4">
+            <div class="col-6 col-md-4 col-lg-3">
 
-                <div class="card bg-transparent border-0 p-3 text-center h-100
-                         transition-ease-out hover-lift"
-                     data-aos="fade-up"
-                     data-aos-delay="{{ forloop.counter|add:"-1"|multiply:"50" }}">
+                <a href="{{ member.get_absolute_url }}"
+                   class="card border-0 bg-transparent text-center h-100 p-3 transition-soft text-decoration-none">
 
-                <!-- Compact profile image -->
-                <div class="mb-4">
-                    <div class="profile-image mx-auto rounded-circle overflow-hidden"
-                         style="width: 96px; height: 96px;">
-                        <img src="{{ member.profile_image.url }}"
-                             alt="{{ member.get_full_name }}"
-                             class="w-100 h-100 object-fit-cover transition-ease-out">
+                    <div class="mb-4">
+                        <div class="rounded-circle overflow-hidden mx-auto"
+                             style="width: 88px; height: 88px;">
+                            <img src="{{ member.profile_image.url }}"
+                                 alt="{{ member.get_full_name }}"
+                                 class="w-100 h-100 object-fit-cover">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Content optimized for small screens -->
-                <div class="card-body p-0">
-                    <h6 class="fs-6 fw-normal mb-1 letter-spacing-1">{{ member.get_full_name }}</h6>
-                    <p class="text-primary small fw-medium mb-3 letter-spacing-1 opacity-90">{{ member.job_title }}</p>
+                    <h6 class="fw-normal letter-spacing-1 mb-1 text-dark">
+                        {{ member.get_full_name }}
+                    </h6>
+
+                    <p class="small text-primary fw-medium letter-spacing-1 opacity-90 mb-3">
+                        {{ member.job_title }}
+                    </p>
 
                     {% if member.specializations %}
-                    <div class="mb-4">
+                    <div>
                         {% for spec in member.specializations|slice:":2" %}
-                        <span class="badge bg-light text-dark border border-light-subtle small fw-light rounded-pill px-2 py-1 me-1 mb-1 opacity-80">
-                                {{ spec }}
-                            </span>
+                        <span class="badge bg-light text-dark small fw-light rounded-pill px-2 py-1 me-1 opacity-75">
+                            {{ spec }}
+                        </span>
                         {% endfor %}
                     </div>
                     {% endif %}
 
-                    <!-- Minimalist link -->
-                    <a href="{{ member.get_absolute_url }}"
-                       class="btn btn-link text-dark p-0 fw-medium letter-spacing-1
-                                  text-decoration-none transition-ease-out">
-                            <span class="d-inline-flex align-items-center">
-                                View Profile
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="ms-1">
-                                    <path d="M7 0L5.94 1.06L10.38 5.5H0V7.5H10.38L5.94 11.94L7 13L13 7L7 0Z" fill="currentColor"/>
-                                </svg>
-                            </span>
-                    </a>
-                </div>
+                </a>
 
             </div>
-
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
 
     </div>
 </section>
 
-<!-- VALUES - Premium dark section with refined spacing -->
-<section class="values-section bg-dark text-white position-relative overflow-hidden">
-    <!-- Background pattern with subtle animation -->
-    <div class="position-absolute top-0 start-0 w-100 h-100">
-        <div class="bg-pattern-dots opacity-10"></div>
-    </div>
+<!-- VALUES -->
+<section class="values-section bg-dark text-white">
+    <div class="container py-9 py-lg-11">
 
-    <div class="container position-relative z-2 py-10 py-lg-12">
-        <div class="row align-items-center g-6 g-lg-8">
+        <div class="row align-items-center g-6">
 
-            <!-- Left column - Enhanced for mobile readability -->
-            <div class="col-lg-6 mb-6 mb-lg-0">
-                <div class="pe-lg-4">
-                    <div class="mb-5">
-                        <span class="badge bg-primary-soft text-primary px-3 py-2 rounded-pill fw-medium letter-spacing-1 border-0">
-                            OUR VALUES
-                        </span>
-                    </div>
+            <div class="col-lg-6">
+                <span class="badge bg-primary-soft text-primary px-3 py-2 rounded-pill fw-medium letter-spacing-1 mb-4">
+                    OUR VALUES
+                </span>
 
-                    <h3 class="display-5 display-lg-4 fw-light mb-4 mb-lg-5 letter-spacing-1">
-                        Craftsmanship<br class="d-none d-lg-block">
-                        <span class="fw-normal text-primary">Meeting</span><br>
-                        Technical Excellence
-                    </h3>
+                <h3 class="display-5 fw-light letter-spacing-1 mb-4">
+                    Craftsmanship<br>
+                    <span class="fw-normal text-primary">With Discipline</span>
+                </h3>
 
-                    <p class="text-white-70 fw-light fs-5 lh-lg mb-6 mb-lg-7 opacity-90">
-                        Luxury is never loud. It is measured through discipline, precision, and an uncompromising respect for detail.
-                    </p>
+                <p class="text-white-70 fw-light fs-5 lh-lg mb-6">
+                    True luxury is quiet. It reveals itself through restraint,
+                    consistency, and respect for every detail.
+                </p>
 
-                    <!-- Premium CTA with proper touch target -->
-                    <a href="{% url 'contact:contact_us' %}"
-                       class="btn btn-primary rounded-pill px-5 py-3 fw-medium letter-spacing-1
-                              border-0 transition-ease-out hover-transform"
-                       style="min-height: 56px;">
-                        <span class="d-inline-flex align-items-center">
-                            Meet Our Team
-                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="ms-2">
-                                <path d="M9 0L7.94 1.06L12.88 6H0V8H12.88L7.94 12.94L9 14L15 8L9 0Z" fill="currentColor"/>
-                            </svg>
-                        </span>
-                    </a>
-                </div>
+                <a href="{% url 'contact:contact_us' %}"
+                   class="btn btn-primary rounded-pill px-5 py-3 fw-medium letter-spacing-1">
+                    Work With Us
+                </a>
             </div>
 
-            <!-- Values grid with enhanced mobile spacing -->
             <div class="col-lg-6">
                 <div class="row g-3 g-md-4">
                     {% for value in values %}
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <div class="bg-white bg-opacity-10 rounded-1 p-4 p-md-5 h-100 backdrop-blur-sm
-                                 border border-white border-opacity-10 transition-ease-out hover-opacity">
-                            <h5 class="fs-5 fw-normal mb-3 letter-spacing-1">{{ value.title }}</h5>
+                    <div class="col-md-6">
+                        <div class="border border-white border-opacity-10 p-4 p-md-5 h-100 rounded-1">
+                            <h5 class="fw-normal letter-spacing-1 mb-3">
+                                {{ value.title }}
+                            </h5>
                             <p class="text-white-70 small fw-light lh-base mb-0 opacity-80">
                                 {{ value.description }}
                             </p>
@@ -263,141 +195,82 @@
             </div>
 
         </div>
+
     </div>
 </section>
 
 <style>
-    /* Mobile-first responsive typography */
-    :root {
-        --transition-base: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+:root {
+    --transition-base: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-    /* Typography refinement */
-    .letter-spacing-1 { letter-spacing: 0.5px; }
-    @media (min-width: 992px) {
-        .letter-spacing-1 { letter-spacing: 1px; }
-    }
+.transition-soft {
+    transition: transform var(--transition-base),
+                box-shadow var(--transition-base),
+                opacity var(--transition-base);
+}
 
-    /* Section heights optimized for mobile */
-    .min-vh-65 { min-height: 65vh; }
-    @media (min-width: 992px) {
-        .min-vh-65 { min-height: 50vh; }
-    }
+.transition-soft:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
 
-    /* Enhanced spacing system */
-    .py-10 { padding-top: 6rem; padding-bottom: 6rem; }
-    .py-12 { padding-top: 8rem; padding-bottom: 8rem; }
-    .mb-8 { margin-bottom: 5rem; }
-    .mb-10 { margin-bottom: 7rem; }
+.letter-spacing-1 {
+    letter-spacing: 0.5px;
+}
 
-    /* Premium transitions */
-    .transition-ease-out {
-        transition: all var(--transition-base);
+@media (min-width: 992px) {
+    .letter-spacing-1 {
+        letter-spacing: 1px;
     }
+}
 
-    .hover-elevate:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-    }
+.min-vh-55 {
+    min-height: 55vh;
+}
 
-    .hover-lift:hover {
-        transform: translateY(-2px);
-    }
+.py-9 {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+}
 
-    .hover-transform:hover {
-        transform: translateX(4px);
-    }
+.py-11 {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
 
-    .scale-on-hover:hover {
-        transform: scale(1.05);
-    }
+.divider-line {
+    width: 56px;
+    height: 1px;
+}
 
-    .hover-opacity:hover {
-        opacity: 0.95;
-    }
+.object-fit-cover {
+    object-fit: cover;
+}
 
-    /* Premium visual effects */
-    .backdrop-blur-sm {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-    }
+.bg-primary-soft {
+    background-color: rgba(var(--primary-rgb), 0.1);
+}
 
-    .blur-3 {
-        filter: blur(3px);
-    }
+.text-white-70 {
+    color: rgba(255,255,255,0.7);
+}
 
-    /* Refined patterns */
-    .bg-pattern-grid {
-        background-image:
-            linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-        background-size: var(--grid-size, 20px) var(--grid-size, 20px);
-    }
+.bg-light-subtle {
+    background-color: #fafafa;
+}
 
-    .bg-pattern-dots {
-        background-image: radial-gradient(currentColor 1px, transparent 1px);
-        background-size: 20px 20px;
-    }
+@media (max-width: 768px) {
+    .display-4 { font-size: 2.3rem; }
+    .display-5 { font-size: 2rem; }
+    .display-6 { font-size: 1.7rem; }
+}
 
-    /* Utility classes for premium design */
-    .object-fit-cover { object-fit: cover; }
-    .border-width-1 { border-width: 1px !important; }
-    .bg-primary-soft { background-color: rgba(var(--primary-rgb), 0.1); }
-    .text-white-70 { color: rgba(255, 255, 255, 0.7); }
-    .bg-light-subtle { background-color: #fafafa; }
-    .border-light-subtle { border-color: #f0f0f0 !important; }
-
-    /* Section divider */
-    .section-divider {
-        width: 120px;
-        height: 1px;
+@media (prefers-reduced-motion: reduce) {
+    .transition-soft {
+        transition: none;
     }
-    .divider-line {
-        width: 60px;
-        height: 1px;
-    }
-
-    /* Profile frame enhancement */
-    .profile-frame {
-        position: relative;
-    }
-    .frame-border {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Ensure proper touch targets on mobile */
-    .btn,
-    .btn-link,
-    a[href] {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Mobile optimization */
-    @media (max-width: 768px) {
-        .display-4 { font-size: 2.5rem; }
-        .display-5 { font-size: 2rem; }
-        .display-6 { font-size: 1.75rem; }
-        .fs-5 { font-size: 1.125rem; }
-
-        .profile-frame {
-            width: 120px !important;
-            height: 120px !important;
-        }
-    }
-
-    /* Reduced motion preference */
-    @media (prefers-reduced-motion: reduce) {
-        .transition-ease-out,
-        .hover-elevate,
-        .hover-lift,
-        .hover-transform,
-        .scale-on-hover {
-            transition: none;
-        }
-    }
+}
 </style>
 
 {% endblock %}
