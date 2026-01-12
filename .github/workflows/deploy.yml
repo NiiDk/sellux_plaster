@@ -1,25 +1,51 @@
-name: Deploy to DigitalOcean
+name: Django Continuous Deployment
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            set -e
-            cd ~/sellux_plaster
-            git stash
-            git pull origin main
-            git stash pop || true
-            ~/sellux_plaster/venv/bin/python manage.py migrate
-            ~/sellux_plaster/venv/bin/python manage.py collectstatic --noinput
-            systemctl restart gunicorn
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Deploy using SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.DROPLET_IP }}
+        username: root
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          # 1. Navigate to your specific project directory
+          # NOTE: If your project path is different (e.g., /var/www/sellux_plaster), update this path.
+          PROJECT_ROOT="~/sellux_plaster"
+          cd $PROJECT_ROOT
+
+          # 2. Handle potential local conflicts and pull latest code
+          echo "Fetching latest code..."
+          git stash
+          git pull origin main
+          git stash pop || true
+
+          # 3. Install dependencies (uncomment if you update requirements.txt often)
+          # echo "Installing dependencies..."
+          # $PROJECT_ROOT/venv/bin/pip install -r requirements.txt
+          
+          # 4. Run migrations and collect static using the venv python directly
+          echo "Running database migrations..."
+          $PROJECT_ROOT/venv/bin/python manage.py migrate --noinput
+          
+          echo "Collecting static files..."
+          $PROJECT_ROOT/venv/bin/python manage.py collectstatic --noinput
+
+          # 5. Restart Gunicorn and Nginx
+          # NOTE: Update 'gunicorn' service name if yours is different. Use 'sudo' if necessary.
+          echo "Restarting application services..."
+          systemctl restart gunicorn
+          systemctl restart nginx
+          
+          echo "Deployment complete."
