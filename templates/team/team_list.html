@@ -7,24 +7,24 @@
 {% block content %}
 
 <!-- HERO -->
-<section class="hero-section bg-white">
-    <div class="container min-vh-55 d-flex align-items-center py-9 py-lg-11">
+<section class="hero-section bg-white position-relative overflow-hidden">
+    <div class="container min-vh-60 d-flex align-items-center py-10 py-lg-12">
         <div class="row justify-content-center w-100">
             <div class="col-11 col-md-10 col-lg-8 text-center">
 
-                <span class="badge bg-primary-soft text-primary px-4 py-2 rounded-pill fw-medium letter-spacing-1 mb-5">
-                    PRINCIPALS & TEAM
+                <span class="badge bg-primary-soft text-primary px-4 py-2 rounded-pill fw-medium letter-spacing-1 mb-6">
+                    OUR PEOPLE
                 </span>
 
-                <h1 class="display-4 display-lg-3 fw-light letter-spacing-1 mb-4">
-                    The People Behind<br class="d-none d-lg-block">
-                    <span class="fw-normal text-primary">Exceptional Craft</span>
+                <h1 class="display-3 display-lg-2 fw-light letter-spacing-1 mb-5">
+                    Precision Led<br class="d-none d-lg-block">
+                    <span class="fw-normal text-primary">By People</span>
                 </h1>
 
-                <p class="lead text-muted fw-light lh-lg mx-auto mb-0"
+                <p class="fs-5 text-muted fw-light lh-lg mx-auto mb-0 opacity-85"
                    style="max-width: 520px;">
-                    A collective of master craftsmen and technical specialists,
-                    united by discipline, precision, and architectural integrity.
+                    A carefully assembled team of craftsmen and specialists,
+                    trusted to deliver architectural finishes of the highest standard.
                 </p>
 
             </div>
@@ -34,35 +34,36 @@
 
 <!-- LEADERSHIP -->
 <section class="leadership-section bg-light-subtle">
-    <div class="container py-9 py-lg-11">
+    <div class="container py-10 py-lg-12">
 
-        <div class="row justify-content-center mb-8">
+        <div class="row justify-content-center mb-9">
             <div class="col-lg-8 text-center">
-                <div class="divider-line mx-auto mb-4 bg-primary opacity-25"></div>
-                <h2 class="display-6 fw-light letter-spacing-1 mb-2">Firm Leadership</h2>
+                <div class="divider-line mx-auto mb-4 bg-primary opacity-30"></div>
+                <h2 class="display-6 fw-light letter-spacing-1 mb-3">
+                    Leadership
+                </h2>
                 <p class="text-muted fw-light fs-5 opacity-75 mb-0">
-                    Experience shaped by decades of specialist practice
+                    Direction guided by experience, discipline, and accountability
                 </p>
             </div>
         </div>
 
-        <div class="row justify-content-center g-4 g-lg-5">
+        <div class="row justify-content-center g-4 g-lg-6">
             {% for member in firm_leadership %}
             <div class="col-12 col-md-10 col-lg-4">
 
-                <div class="card bg-white border-0 p-4 p-lg-5 h-100 text-center transition-soft"
-                     data-aos="fade-up"
-                     data-aos-delay="{{ forloop.counter|add:'-1'|multiply:'100' }}">
+                <article class="card bg-white border-0 p-5 h-100 text-center luxury-card"
+                         data-aos="fade-up"
+                         data-aos-delay="{{ forloop.counter|add:'-1'|multiply:'120' }}">
 
-                    <div class="mb-5">
-                        <div class="profile-frame mx-auto rounded-circle overflow-hidden"
-                             style="width: 128px; height: 128px;">
+                    <div class="mb-6">
+                        <div class="profile-frame mx-auto rounded-circle overflow-hidden">
                             <img src="{{ member.profile_image.url }}"
                                  alt="{{ member.get_full_name }}"
                                  class="w-100 h-100 object-fit-cover">
                         </div>
 
-                        <span class="d-inline-block mt-3 small text-muted fw-medium letter-spacing-1">
+                        <span class="d-block mt-3 small text-muted fw-medium letter-spacing-1">
                             {{ member.years_of_experience|default:"15+" }} years experience
                         </span>
                     </div>
@@ -75,16 +76,16 @@
                         {{ member.job_title }}
                     </p>
 
-                    <p class="text-muted fw-light lh-base mb-5 opacity-80">
+                    <p class="text-muted fw-light lh-base mb-6 opacity-80">
                         {{ member.bio|truncatewords:22 }}
                     </p>
 
                     <a href="{{ member.get_absolute_url }}"
-                       class="btn btn-outline-dark btn-sm rounded-pill px-4 fw-medium letter-spacing-1">
+                       class="btn btn-outline-dark btn-sm rounded-pill px-4 fw-medium letter-spacing-1 luxury-btn">
                         Profile
                     </a>
 
-                </div>
+                </article>
 
             </div>
             {% endfor %}
@@ -95,51 +96,40 @@
 
 <!-- SPECIALISTS -->
 <section class="specialists-section bg-white">
-    <div class="container py-9 py-lg-11">
+    <div class="container py-10 py-lg-12">
 
-        <div class="row justify-content-center mb-8">
+        <div class="row justify-content-center mb-9">
             <div class="col-lg-8 text-center">
-                <div class="divider-line mx-auto mb-4 bg-primary opacity-25"></div>
-                <h2 class="display-6 fw-light letter-spacing-1 mb-2">Specialist Team</h2>
+                <div class="divider-line mx-auto mb-4 bg-primary opacity-30"></div>
+                <h2 class="display-6 fw-light letter-spacing-1 mb-3">
+                    Specialist Team
+                </h2>
                 <p class="text-muted fw-light fs-5 opacity-75 mb-0">
-                    Skilled professionals delivering precision on every detail
+                    Focused professionals delivering consistency at every stage
                 </p>
             </div>
         </div>
 
-        <div class="row g-3 g-md-4">
+        <div class="row g-4 g-md-5">
             {% for member in associates %}
             <div class="col-6 col-md-4 col-lg-3">
 
                 <a href="{{ member.get_absolute_url }}"
-                   class="card border-0 bg-transparent text-center h-100 p-3 transition-soft text-decoration-none">
+                   class="specialist-card text-center text-decoration-none">
 
-                    <div class="mb-4">
-                        <div class="rounded-circle overflow-hidden mx-auto"
-                             style="width: 88px; height: 88px;">
-                            <img src="{{ member.profile_image.url }}"
-                                 alt="{{ member.get_full_name }}"
-                                 class="w-100 h-100 object-fit-cover">
-                        </div>
+                    <div class="specialist-image mx-auto mb-4">
+                        <img src="{{ member.profile_image.url }}"
+                             alt="{{ member.get_full_name }}"
+                             class="w-100 h-100 object-fit-cover">
                     </div>
 
                     <h6 class="fw-normal letter-spacing-1 mb-1 text-dark">
                         {{ member.get_full_name }}
                     </h6>
 
-                    <p class="small text-primary fw-medium letter-spacing-1 opacity-90 mb-3">
+                    <p class="small text-primary fw-medium letter-spacing-1 opacity-85 mb-2">
                         {{ member.job_title }}
                     </p>
-
-                    {% if member.specializations %}
-                    <div>
-                        {% for spec in member.specializations|slice:":2" %}
-                        <span class="badge bg-light text-dark small fw-light rounded-pill px-2 py-1 me-1 opacity-75">
-                            {{ spec }}
-                        </span>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
 
                 </a>
 
@@ -152,36 +142,36 @@
 
 <!-- VALUES -->
 <section class="values-section bg-dark text-white">
-    <div class="container py-9 py-lg-11">
+    <div class="container py-10 py-lg-12">
 
-        <div class="row align-items-center g-6">
+        <div class="row align-items-center g-7">
 
             <div class="col-lg-6">
-                <span class="badge bg-primary-soft text-primary px-3 py-2 rounded-pill fw-medium letter-spacing-1 mb-4">
+                <span class="badge bg-primary-soft text-primary px-3 py-2 rounded-pill fw-medium letter-spacing-1 mb-5">
                     OUR VALUES
                 </span>
 
                 <h3 class="display-5 fw-light letter-spacing-1 mb-4">
                     Craftsmanship<br>
-                    <span class="fw-normal text-primary">With Discipline</span>
+                    <span class="fw-normal text-primary">With Restraint</span>
                 </h3>
 
-                <p class="text-white-70 fw-light fs-5 lh-lg mb-6">
-                    True luxury is quiet. It reveals itself through restraint,
-                    consistency, and respect for every detail.
+                <p class="text-white-70 fw-light fs-5 lh-lg mb-6 opacity-90">
+                    True luxury is defined by control. Every detail considered,
+                    every decision intentional, every finish accountable.
                 </p>
 
                 <a href="{% url 'contact:contact_us' %}"
-                   class="btn btn-primary rounded-pill px-5 py-3 fw-medium letter-spacing-1">
+                   class="btn btn-primary rounded-pill px-5 py-3 fw-medium letter-spacing-1 luxury-btn-primary">
                     Work With Us
                 </a>
             </div>
 
             <div class="col-lg-6">
-                <div class="row g-3 g-md-4">
+                <div class="row g-4">
                     {% for value in values %}
                     <div class="col-md-6">
-                        <div class="border border-white border-opacity-10 p-4 p-md-5 h-100 rounded-1">
+                        <div class="value-card p-5 h-100">
                             <h5 class="fw-normal letter-spacing-1 mb-3">
                                 {{ value.title }}
                             </h5>
@@ -201,74 +191,87 @@
 
 <style>
 :root {
-    --transition-base: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-luxury: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.transition-soft {
-    transition: transform var(--transition-base),
-                box-shadow var(--transition-base),
-                opacity var(--transition-base);
-}
-
-.transition-soft:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-}
-
-.letter-spacing-1 {
-    letter-spacing: 0.5px;
-}
-
+/* Global */
+.letter-spacing-1 { letter-spacing: 0.5px; }
 @media (min-width: 992px) {
-    .letter-spacing-1 {
-        letter-spacing: 1px;
-    }
+    .letter-spacing-1 { letter-spacing: 1px; }
 }
 
-.min-vh-55 {
-    min-height: 55vh;
+/* Hero */
+.min-vh-60 { min-height: 60vh; }
+
+/* Cards */
+.luxury-card {
+    transition: transform var(--transition-luxury),
+                box-shadow var(--transition-luxury);
+}
+.luxury-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.08);
 }
 
-.py-9 {
-    padding-top: 5.5rem;
-    padding-bottom: 5.5rem;
+.profile-frame {
+    width: 132px;
+    height: 132px;
 }
 
-.py-11 {
-    padding-top: 7rem;
-    padding-bottom: 7rem;
+/* Specialists */
+.specialist-card {
+    display: block;
+    padding: 1rem;
+    transition: opacity var(--transition-luxury);
 }
+.specialist-card:hover {
+    opacity: 0.85;
+}
+.specialist-image {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* Values */
+.value-card {
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    transition: background-color var(--transition-luxury);
+}
+.value-card:hover {
+    background-color: rgba(255,255,255,0.03);
+}
+
+/* Buttons */
+.luxury-btn,
+.luxury-btn-primary {
+    transition: all var(--transition-luxury);
+}
+.luxury-btn:hover {
+    background-color: #111;
+    color: #fff;
+}
+.luxury-btn-primary:hover {
+    transform: translateY(-1px);
+}
+
+/* Utilities */
+.object-fit-cover { object-fit: cover; }
+.bg-primary-soft { background-color: rgba(var(--primary-rgb), 0.12); }
+.text-white-70 { color: rgba(255,255,255,0.7); }
+.bg-light-subtle { background-color: #fafafa; }
 
 .divider-line {
-    width: 56px;
+    width: 60px;
     height: 1px;
 }
 
-.object-fit-cover {
-    object-fit: cover;
-}
-
-.bg-primary-soft {
-    background-color: rgba(var(--primary-rgb), 0.1);
-}
-
-.text-white-70 {
-    color: rgba(255,255,255,0.7);
-}
-
-.bg-light-subtle {
-    background-color: #fafafa;
-}
-
-@media (max-width: 768px) {
-    .display-4 { font-size: 2.3rem; }
-    .display-5 { font-size: 2rem; }
-    .display-6 { font-size: 1.7rem; }
-}
-
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-    .transition-soft {
-        transition: none;
+    * {
+        transition: none !important;
     }
 }
 </style>
