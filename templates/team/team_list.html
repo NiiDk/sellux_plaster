@@ -9,7 +9,7 @@
 <!-- HERO -->
 <section class="hero bg-charcoal text-center">
     <div class="container min-vh-70 d-flex align-items-center">
-        <div class="mx-auto" style="max-width: 760px;">
+        <div class="mx-auto" style="max-width: 800px;">
             <span class="section-label mb-4 d-inline-block">
                 MASTER ARTISANS
             </span>
@@ -45,27 +45,28 @@
             <div class="col-lg-4 col-md-6">
 
                 <div class="leader-card">
-                    <div class="leader-image">
+                    <div class="leader-image-container">
                         <img src="{{ member.profile_image.url }}"
-                             alt="{{ member.get_full_name }}">
+                             alt="{{ member.get_full_name }}"
+                             class="leader-image">
                         <span class="experience-badge">
                             {{ member.years_of_experience|default:"15+" }} yrs
                         </span>
                     </div>
 
                     <div class="leader-content">
-                        <h3 class="leader-name">
-                            {{ member.get_full_name }}
-                        </h3>
                         <p class="leader-title">
                             {{ member.job_title }}
                         </p>
+                        <h3 class="leader-name">
+                            {{ member.get_full_name }}
+                        </h3>
                         <p class="leader-bio">
                             {{ member.bio|truncatewords:24 }}
                         </p>
 
-                        <a href="{{ member.get_absolute_url }}" class="text-link">
-                            View Profile →
+                        <a href="{{ member.get_absolute_url }}" class="text-link mt-3 d-block">
+                            View Profile <span class="arrow-icon">→</span>
                         </a>
                     </div>
                 </div>
@@ -92,9 +93,9 @@
 
         <div class="row g-5">
             {% for member in associates %}
-            <div class="col-lg-3 col-md-4 col-6">
+            <div class="col-xl-3 col-lg-4 col-md-4 col-6">
 
-                <div class="specialist-card">
+                <div class="specialist-card text-center">
                     <img src="{{ member.profile_image.url }}"
                          alt="{{ member.get_full_name }}"
                          class="specialist-image">
@@ -115,8 +116,8 @@
                     </div>
                     {% endif %}
 
-                    <a href="{{ member.get_absolute_url }}" class="text-link small">
-                        Details →
+                    <a href="{{ member.get_absolute_url }}" class="text-link small mt-2 d-block">
+                        Details <span class="arrow-icon small-arrow">→</span>
                     </a>
                 </div>
 
@@ -200,66 +201,90 @@
 .bg-charcoal-dark { background: var(--charcoal-dark); }
 .text-orange { color: var(--orange); }
 
+/* Global Transitions */
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+a, .primary-btn, .leader-card, .specialist-card {
+    transition: all 0.3s ease-in-out;
+}
+
 /* Typography */
-.display-1 { font-size: 3.8rem; }
-.display-2 { font-size: 2.8rem; }
+.display-1 { font-size: 4.2rem; line-height: 1.1; font-weight: 300; }
+.display-2 { font-size: 3rem; line-height: 1.2; font-weight: 300; }
 .hero-text,
 .section-subtext,
 .values-text {
     color: var(--white-muted);
     font-weight: 300;
     line-height: 1.7;
-    max-width: 560px;
+    max-width: 600px;
     margin: 0 auto;
 }
 .section-label {
     font-size: 0.75rem;
-    letter-spacing: 3px;
+    letter-spacing: 4px; /* Increased letter spacing */
     text-transform: uppercase;
     color: var(--orange);
+    font-weight: 500;
 }
 
-/* Cards */
-.leader-card,
-.specialist-card,
-.value-card {
+/* Cards - Leadership */
+.leader-card {
     border: 1px solid var(--border-dark);
-    padding: 2rem;
+    padding: 2.5rem; /* More generous padding */
     height: 100%;
+    background: var(--charcoal-dark); /* Darker background for depth */
+}
+.leader-card:hover {
+    transform: translateY(-8px); /* Subtle lift for a premium feel */
+    border-color: var(--orange); /* Highlight border on hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
-.leader-image {
+.leader-image-container {
     position: relative;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
 }
-.leader-image img {
+.leader-image {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 4 / 5; /* Taller portrait aspect ratio */
     object-fit: cover;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth, premium zoom */
+}
+.leader-card:hover .leader-image {
+    transform: scale(1.06);
 }
 .experience-badge {
     position: absolute;
-    bottom: 0.75rem;
-    right: 0.75rem;
+    bottom: 0;
+    right: 0;
     background: var(--orange);
     color: #fff;
     font-size: 0.7rem;
-    padding: 0.25rem 0.6rem;
+    padding: 0.4rem 0.8rem;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    z-index: 10;
 }
 
-.leader-name,
-.specialist-name,
-.value-title {
+.leader-name {
     color: #fff;
     font-weight: 500;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
 }
-.leader-title,
-.specialist-title {
+.leader-title {
     color: var(--orange);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.1rem;
 }
-.leader-bio,
-.value-description {
+.leader-bio {
     color: var(--white-muted);
     font-weight: 300;
     font-size: 0.95rem;
@@ -270,51 +295,126 @@
     color: var(--white-soft);
     font-size: 0.85rem;
     text-decoration: none;
+    font-weight: 500;
 }
 .text-link:hover {
     color: var(--orange);
+}
+.arrow-icon {
+    display: inline-block;
+    margin-left: 5px;
+    transition: margin-left 0.3s ease;
+}
+.text-link:hover .arrow-icon {
+    margin-left: 10px;
+}
+.small-arrow {
+    font-size: 0.8rem;
 }
 
 .primary-btn {
     display: inline-block;
     background: var(--orange);
-    color: #fff;
-    padding: 0.9rem 2rem;
+    color: var(--charcoal-dark); /* Contrast text */
+    padding: 1rem 2.5rem;
     font-size: 0.85rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-decoration: none;
+    border: 1px solid var(--orange);
+}
+.primary-btn:hover {
+    background: transparent;
+    color: var(--orange);
 }
 
 /* Specialist */
+.specialist-card {
+    border: 1px solid var(--border-dark);
+    padding: 1.5rem 1rem;
+    height: 100%;
+    background: var(--charcoal);
+}
+.specialist-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-3px);
+}
 .specialist-image {
-    width: 96px;
-    height: 96px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 1rem;
+    border: 3px solid var(--orange); /* Eye-catching frame */
+    box-shadow: 0 0 0 4px var(--charcoal);
+}
+.specialist-name {
+    color: #fff;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+}
+.specialist-title {
+    color: var(--white-muted); /* Subtler title for specialists */
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+    font-weight: 300;
+}
+.specialist-tags {
+    margin-bottom: 0.5rem;
 }
 .specialist-tags span {
     display: inline-block;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--white-muted);
     border: 1px solid var(--border-dark);
-    padding: 0.2rem 0.5rem;
+    padding: 0.15rem 0.5rem;
     margin-right: 0.3rem;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* Values */
+.value-card {
+    border: 1px solid var(--border-dark);
+    padding: 2.5rem;
+    height: 100%;
+    background: var(--charcoal);
+    border-left: 4px solid var(--orange); /* Strong visual anchor */
+}
 .value-number {
     color: var(--orange);
-    font-size: 1.6rem;
+    font-size: 2.8rem; /* Prominent number */
+    font-weight: 200;
+    display: block;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+.value-title {
+    font-size: 1.25rem;
+    color: var(--white-soft);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.value-description {
+    color: var(--white-muted);
     font-weight: 300;
+    font-size: 0.9rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .display-1 { font-size: 2.6rem; }
-    .display-2 { font-size: 2.1rem; }
+/* Responsive (Mobile-First Clarity) */
+@media (max-width: 992px) {
+    .display-1 { font-size: 3rem; }
+    .display-2 { font-size: 2.2rem; }
     .section { padding: 5rem 0; }
+    .values-text { max-width: none; }
+}
+@media (max-width: 768px) {
+    .leader-card { padding: 1.5rem; }
+    .leader-image { aspect-ratio: 16 / 9; } /* Wider image on small screens */
+    .g-10 { --bs-gutter-y: 3rem !important; } /* Reduce large gutter spacing */
 }
 </style>
 
