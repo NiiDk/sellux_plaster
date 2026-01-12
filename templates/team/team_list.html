@@ -192,9 +192,10 @@
     --white-soft: #e5e5e5;
     --white-muted: #cfcfcf;
 
-    /* New Local Variables for Clarity */
+    /* New Local Variables for Clarity and Premium Look */
     --card-bg-color: var(--black-onyx);
-    --card-radius: 12px;
+    --card-radius: 16px; /* Increased radius for modern squircle look */
+    --image-radius: 12px;
 }
 
 /* Architectural Pattern Background */
@@ -217,12 +218,12 @@
     box-sizing: border-box;
 }
 a, .primary-btn, .leader-card, .specialist-card {
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth cubic-bezier transition for luxury feel */
 }
 
 /* Typography */
-.display-1 { font-size: 4.2rem; line-height: 1.1; font-weight: 300; }
-.display-2 { font-size: 3rem; line-height: 1.2; font-weight: 300; }
+.display-1 { font-size: 4.5rem; line-height: 1.1; font-weight: 300; letter-spacing: -1px; }
+.display-2 { font-size: 3.2rem; line-height: 1.2; font-weight: 300; }
 .hero-text,
 .section-subtext,
 .values-text {
@@ -234,9 +235,9 @@ a, .primary-btn, .leader-card, .specialist-card {
 }
 .section-label {
     font-size: 0.75rem;
-    letter-spacing: 4px;
+    letter-spacing: 5px; /* Increased for premium look */
     text-transform: uppercase;
-    color: var(--primary-color); /* Updated to new primary color */
+    color: var(--primary-color);
     font-weight: 500;
 }
 
@@ -246,56 +247,56 @@ a, .primary-btn, .leader-card, .specialist-card {
     padding: 2.5rem;
     height: 100%;
     background: var(--card-bg-color);
-    border-radius: var(--card-radius); /* Rounded Card */
-    overflow: hidden; /* Ensure image zoom stays within bounds */
+    border-radius: var(--card-radius);
+    overflow: hidden;
 }
 .leader-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--primary-vibrant); /* Highlight with vibrant orange */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(-10px); /* Deeper lift on hover */
+    border-color: var(--primary-vibrant);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4); /* Stronger shadow */
 }
 
 .leader-image-container {
     position: relative;
     margin-bottom: 2rem;
     overflow: hidden;
-    border-radius: 6px; /* Subtle round for image */
+    border-radius: var(--image-radius); /* Rounded square look for image container */
 }
 .leader-image {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 5; /* Taller portrait aspect ratio for professional look */
     object-fit: cover;
     display: block;
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .leader-card:hover .leader-image {
-    transform: scale(1.06);
+    transform: scale(1.08); /* More noticeable image zoom */
 }
 .experience-badge {
     position: absolute;
     bottom: 0;
     right: 0;
-    background: var(--primary-color); /* Updated to new primary color */
-    color: #fff;
-    font-size: 0.7rem;
+    background: var(--primary-color);
+    color: var(--black-onyx); /* Contrast text against the primary color */
+    font-size: 0.75rem;
     padding: 0.4rem 0.8rem;
     letter-spacing: 0.5px;
-    font-weight: 500;
+    font-weight: 600;
     z-index: 10;
 }
 
 .leader-name {
-    color: #fff;
-    font-weight: 500;
+    color: var(--white-soft);
+    font-weight: 600; /* Slightly heavier font for name */
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
 }
 .leader-title {
-    color: var(--primary-color); /* Updated to new primary color */
+    color: var(--primary-color);
     font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px; /* Increased letter spacing */
     margin-bottom: 0.1rem;
 }
 .leader-bio {
@@ -312,24 +313,13 @@ a, .primary-btn, .leader-card, .specialist-card {
     font-weight: 500;
 }
 .text-link:hover {
-    color: var(--primary-vibrant); /* Use vibrant orange for hover */
-}
-.arrow-icon {
-    display: inline-block;
-    margin-left: 5px;
-    transition: margin-left 0.3s ease;
-}
-.text-link:hover .arrow-icon {
-    margin-left: 10px;
-}
-.small-arrow {
-    font-size: 0.8rem;
+    color: var(--primary-vibrant);
 }
 
 .primary-btn {
     display: inline-block;
-    background: var(--primary-color); /* Updated to new primary color */
-    color: var(--black-onyx); /* Contrast text */
+    background: var(--primary-color);
+    color: var(--black-onyx);
     padding: 1rem 2.5rem;
     font-size: 0.85rem;
     font-weight: 600;
@@ -349,48 +339,41 @@ a, .primary-btn, .leader-card, .specialist-card {
     border: 1px solid var(--border-dark);
     padding: 1.5rem 1rem;
     height: 100%;
-    background: var(--black-onyx); /* Use black-onyx for consistency */
-    border-radius: var(--card-radius); /* Rounded Card */
+    background: var(--black-onyx);
+    border-radius: var(--card-radius);
 }
 .specialist-card:hover {
     border-color: var(--primary-vibrant);
-    transform: translateY(-3px);
+    transform: translateY(-5px); /* More significant lift */
 }
 .specialist-image {
     width: 100px;
     height: 100px;
-    border-radius: 50%;
+    border-radius: var(--image-radius); /* Rounded square aesthetic */
     object-fit: cover;
     margin-bottom: 1rem;
-    border: 3px solid var(--primary-color); /* Updated to new primary color */
-    box-shadow: 0 0 0 4px var(--black-onyx); /* Ensure shadow matches background */
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 0 0 4px var(--black-onyx);
+    transition: transform 0.3s ease;
 }
+.specialist-card:hover .specialist-image {
+    transform: scale(1.05);
+}
+
 .specialist-name {
-    color: #fff;
-    font-weight: 500;
+    color: var(--white-soft);
+    font-weight: 600;
     margin-top: 0.5rem;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
 }
 .specialist-title {
     color: var(--white-muted);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     margin-bottom: 0.8rem;
     font-weight: 300;
 }
-.specialist-tags {
-    margin-bottom: 0.5rem;
-}
 .specialist-tags span {
-    display: inline-block;
-    font-size: 0.65rem;
-    color: var(--white-muted);
-    border: 1px solid var(--border-dark);
-    padding: 0.15rem 0.5rem;
-    margin-right: 0.3rem;
-    margin-bottom: 0.3rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-radius: 4px; /* Subtle round for tags */
+    border-radius: 6px; /* Slightly larger tag radius */
 }
 
 /* Values */
@@ -398,29 +381,30 @@ a, .primary-btn, .leader-card, .specialist-card {
     border: 1px solid var(--border-dark);
     padding: 2.5rem;
     height: 100%;
-    background: var(--black-onyx); /* Use black-onyx for consistency */
-    border-left: 4px solid var(--primary-color); /* Strong visual anchor (updated color) */
-    border-radius: var(--card-radius); /* Rounded Card */
-    border-top: 1px solid var(--border-dark); /* Ensure all borders are consistent with radius */
+    background: var(--black-onyx);
+    border-left: 4px solid var(--primary-color);
+    border-radius: var(--card-radius);
+    /* Ensuring consistent borders */
+    border-top: 1px solid var(--border-dark);
     border-right: 1px solid var(--border-dark);
     border-bottom: 1px solid var(--border-dark);
 }
 .value-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
     border-left-color: var(--primary-vibrant);
 }
 .value-number {
-    color: var(--primary-color); /* Updated to new primary color */
-    font-size: 2.8rem;
+    color: var(--primary-color);
+    font-size: 3rem; /* Larger number */
     font-weight: 200;
     display: block;
     margin-bottom: 1rem;
     line-height: 1;
 }
 .value-title {
-    font-size: 1.25rem;
+    font-size: 1.35rem; /* Slightly larger title */
     color: var(--white-soft);
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0.5rem;
 }
 .value-description {
@@ -429,16 +413,40 @@ a, .primary-btn, .leader-card, .specialist-card {
     font-size: 0.9rem;
 }
 
-/* Responsive (Mobile-First Clarity) */
+/* Responsive (Mobile-First Clarity and Card Sizing) */
 @media (max-width: 992px) {
-    .display-1 { font-size: 3rem; }
-    .display-2 { font-size: 2.2rem; }
-    .section { padding: 5rem 0; }
-    .values-text { max-width: none; }
+    .display-1 { font-size: 3.5rem; }
+    .display-2 { font-size: 2.5rem; }
+    .section { padding: 4rem 0; } /* Reduce section padding on mobile */
+    .section-header { margin-bottom: 4rem !important; } /* Tighter sections */
 }
 @media (max-width: 768px) {
-    .leader-card { padding: 1.5rem; }
-    .leader-image { aspect-ratio: 16 / 9; }
+    /* LEADERSHIP CARD MOBILE REFINEMENT */
+    .leader-card {
+        padding: 1.5rem; /* Smaller card size */
+    }
+    .leader-image {
+        aspect-ratio: 16 / 9; /* Wider image on small screens for better crop */
+    }
+    .leader-image-container {
+        margin-bottom: 1.5rem;
+    }
+    .leader-name {
+        font-size: 1.4rem;
+    }
+
+    /* SPECIALIST CARD MOBILE REFINEMENT */
+    .specialist-card {
+        padding: 1rem 0.5rem; /* Smaller padding */
+    }
+    .specialist-image {
+        width: 80px;
+        height: 80px; /* Smaller image size */
+    }
+    .specialist-name {
+        font-size: 1rem;
+    }
+    
     .g-10 { --bs-gutter-y: 3rem !important; }
 }
 </style>
