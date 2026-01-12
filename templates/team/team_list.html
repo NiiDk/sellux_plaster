@@ -1,279 +1,76 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load math_filters %}
+<!-- BACKDROP -->
+<div id="teamModalBackdrop" class="team-modal-backdrop" onclick="closeTeamModal()"></div>
 
-{% block title %}Our Team | Sellux Plaster Ltd{% endblock %}
+<!-- SLIDE-IN PANEL -->
+<aside id="teamModal" class="team-modal">
 
-{% block content %}
+    <!-- Close Button -->
+    <button class="modal-close" onclick="closeTeamModal()" aria-label="Close">
+        ✕
+    </button>
 
-<!-- HERO -->
-<section class="hero-section bg-white position-relative overflow-hidden">
-    <div class="container min-vh-60 d-flex align-items-center py-10 py-lg-12">
-        <div class="row justify-content-center w-100">
-            <div class="col-11 col-md-10 col-lg-8 text-center">
+    <div class="modal-content">
 
-                <span class="badge bg-primary-soft text-primary px-4 py-2 rounded-pill fw-medium letter-spacing-1 mb-6">
-                    OUR PEOPLE
-                </span>
-
-                <h1 class="display-3 display-lg-2 fw-light letter-spacing-1 mb-5">
-                    Precision Led<br class="d-none d-lg-block">
-                    <span class="fw-normal text-primary">By People</span>
-                </h1>
-
-                <p class="fs-5 text-muted fw-light lh-lg mx-auto mb-0 opacity-85"
-                   style="max-width: 520px;">
-                    A carefully assembled team of craftsmen and specialists,
-                    trusted to deliver architectural finishes of the highest standard.
-                </p>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- LEADERSHIP -->
-<section class="leadership-section bg-light-subtle">
-    <div class="container py-10 py-lg-12">
-
-        <div class="row justify-content-center mb-9">
-            <div class="col-lg-8 text-center">
-                <div class="divider-line mx-auto mb-4 bg-primary opacity-30"></div>
-                <h2 class="display-6 fw-light letter-spacing-1 mb-3">
-                    Leadership
-                </h2>
-                <p class="text-muted fw-light fs-5 opacity-75 mb-0">
-                    Direction guided by experience, discipline, and accountability
-                </p>
-            </div>
-        </div>
-
-        <div class="row justify-content-center g-4 g-lg-6">
-            {% for member in firm_leadership %}
-            <div class="col-12 col-md-10 col-lg-4">
-
-                <article class="card bg-white border-0 p-5 h-100 text-center luxury-card"
-                         data-aos="fade-up"
-                         data-aos-delay="{{ forloop.counter|add:'-1'|multiply:'120' }}">
-
-                    <div class="mb-6">
-                        <div class="profile-frame mx-auto rounded-circle overflow-hidden">
-                            <img src="{{ member.profile_image.url }}"
-                                 alt="{{ member.get_full_name }}"
-                                 class="w-100 h-100 object-fit-cover">
-                        </div>
-
-                        <span class="d-block mt-3 small text-muted fw-medium letter-spacing-1">
-                            {{ member.years_of_experience|default:"15+" }} years experience
-                        </span>
-                    </div>
-
-                    <h4 class="fs-4 fw-normal letter-spacing-1 mb-1">
-                        {{ member.get_full_name }}
-                    </h4>
-
-                    <p class="text-primary small fw-medium letter-spacing-1 mb-4 opacity-90">
-                        {{ member.job_title }}
-                    </p>
-
-                    <p class="text-muted fw-light lh-base mb-6 opacity-80">
-                        {{ member.bio|truncatewords:22 }}
-                    </p>
-
-                    <a href="{{ member.get_absolute_url }}"
-                       class="btn btn-outline-dark btn-sm rounded-pill px-4 fw-medium letter-spacing-1 luxury-btn">
-                        Profile
-                    </a>
-
-                </article>
-
-            </div>
-            {% endfor %}
-        </div>
-
-    </div>
-</section>
-
-<!-- SPECIALISTS -->
-<section class="specialists-section bg-white">
-    <div class="container py-10 py-lg-12">
-
-        <div class="row justify-content-center mb-9">
-            <div class="col-lg-8 text-center">
-                <div class="divider-line mx-auto mb-4 bg-primary opacity-30"></div>
-                <h2 class="display-6 fw-light letter-spacing-1 mb-3">
-                    Specialist Team
-                </h2>
-                <p class="text-muted fw-light fs-5 opacity-75 mb-0">
-                    Focused professionals delivering consistency at every stage
-                </p>
-            </div>
-        </div>
-
-        <div class="row g-4 g-md-5">
-            {% for member in associates %}
-            <div class="col-6 col-md-4 col-lg-3">
-
-                <a href="{{ member.get_absolute_url }}"
-                   class="specialist-card text-center text-decoration-none">
-
-                    <div class="specialist-image mx-auto mb-4">
-                        <img src="{{ member.profile_image.url }}"
-                             alt="{{ member.get_full_name }}"
-                             class="w-100 h-100 object-fit-cover">
-                    </div>
-
-                    <h6 class="fw-normal letter-spacing-1 mb-1 text-dark">
-                        {{ member.get_full_name }}
-                    </h6>
-
-                    <p class="small text-primary fw-medium letter-spacing-1 opacity-85 mb-2">
-                        {{ member.job_title }}
-                    </p>
-
-                </a>
-
-            </div>
-            {% endfor %}
-        </div>
-
-    </div>
-</section>
-
-<!-- VALUES -->
-<section class="values-section bg-dark text-white">
-    <div class="container py-10 py-lg-12">
-
-        <div class="row align-items-center g-7">
-
-            <div class="col-lg-6">
-                <span class="badge bg-primary-soft text-primary px-3 py-2 rounded-pill fw-medium letter-spacing-1 mb-5">
-                    OUR VALUES
-                </span>
-
-                <h3 class="display-5 fw-light letter-spacing-1 mb-4">
-                    Craftsmanship<br>
-                    <span class="fw-normal text-primary">With Restraint</span>
-                </h3>
-
-                <p class="text-white-70 fw-light fs-5 lh-lg mb-6 opacity-90">
-                    True luxury is defined by control. Every detail considered,
-                    every decision intentional, every finish accountable.
-                </p>
-
-                <a href="{% url 'contact:contact_us' %}"
-                   class="btn btn-primary rounded-pill px-5 py-3 fw-medium letter-spacing-1 luxury-btn-primary">
-                    Work With Us
-                </a>
+        <!-- Header -->
+        <div class="modal-header">
+            <div class="profile-image">
+                <img src="/media/team/sample.jpg" alt="Team Member Name">
             </div>
 
-            <div class="col-lg-6">
-                <div class="row g-4">
-                    {% for value in values %}
-                    <div class="col-md-6">
-                        <div class="value-card p-5 h-100">
-                            <h5 class="fw-normal letter-spacing-1 mb-3">
-                                {{ value.title }}
-                            </h5>
-                            <p class="text-white-70 small fw-light lh-base mb-0 opacity-80">
-                                {{ value.description }}
-                            </p>
-                        </div>
-                    </div>
-                    {% endfor %}
+            <div class="profile-meta">
+                <h2>John A. Mensah</h2>
+                <p class="job-title">Lead Architectural Finisher</p>
+
+                <div class="profile-actions">
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="mailto:john@example.com" aria-label="Email">✉</a>
                 </div>
             </div>
+        </div>
+
+        <!-- Body -->
+        <div class="modal-body">
+
+            <!-- Bio -->
+            <section>
+                <h4 class="section-title">Professional Bio</h4>
+                <p class="body-text">
+                    John brings over fifteen years of specialist experience delivering
+                    high-end architectural plaster finishes across commercial and
+                    private residential projects.
+                </p>
+            </section>
+
+            <!-- Grid -->
+            <div class="modal-grid">
+
+                <section>
+                    <h4 class="section-title">Qualifications</h4>
+                    <div class="pill-group">
+                        <span class="pill">NVQ Level 3</span>
+                        <span class="pill">Heritage Restoration</span>
+                        <span class="pill">Microcement Specialist</span>
+                    </div>
+                </section>
+
+                <section>
+                    <h4 class="section-title">Expertise</h4>
+                    <p class="body-text">
+                        Venetian plaster, polished concrete, bespoke architectural
+                        finishes.
+                    </p>
+                </section>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="modal-footer">
+                <button class="primary-cta">
+                    Consult with John
+                </button>
+            </div>
 
         </div>
 
     </div>
-</section>
-
-<style>
-:root {
-    --transition-luxury: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Global */
-.letter-spacing-1 { letter-spacing: 0.5px; }
-@media (min-width: 992px) {
-    .letter-spacing-1 { letter-spacing: 1px; }
-}
-
-/* Hero */
-.min-vh-60 { min-height: 60vh; }
-
-/* Cards */
-.luxury-card {
-    transition: transform var(--transition-luxury),
-                box-shadow var(--transition-luxury);
-}
-.luxury-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 18px 45px rgba(0,0,0,0.08);
-}
-
-.profile-frame {
-    width: 132px;
-    height: 132px;
-}
-
-/* Specialists */
-.specialist-card {
-    display: block;
-    padding: 1rem;
-    transition: opacity var(--transition-luxury);
-}
-.specialist-card:hover {
-    opacity: 0.85;
-}
-.specialist-image {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-/* Values */
-.value-card {
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 4px;
-    transition: background-color var(--transition-luxury);
-}
-.value-card:hover {
-    background-color: rgba(255,255,255,0.03);
-}
-
-/* Buttons */
-.luxury-btn,
-.luxury-btn-primary {
-    transition: all var(--transition-luxury);
-}
-.luxury-btn:hover {
-    background-color: #111;
-    color: #fff;
-}
-.luxury-btn-primary:hover {
-    transform: translateY(-1px);
-}
-
-/* Utilities */
-.object-fit-cover { object-fit: cover; }
-.bg-primary-soft { background-color: rgba(var(--primary-rgb), 0.12); }
-.text-white-70 { color: rgba(255,255,255,0.7); }
-.bg-light-subtle { background-color: #fafafa; }
-
-.divider-line {
-    width: 60px;
-    height: 1px;
-}
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        transition: none !important;
-    }
-}
-</style>
-
-{% endblock %}
+</aside>
