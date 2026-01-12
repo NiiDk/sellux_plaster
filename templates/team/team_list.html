@@ -1,76 +1,144 @@
-<!-- BACKDROP -->
-<div id="teamModalBackdrop" class="team-modal-backdrop" onclick="closeTeamModal()"></div>
+{% extends 'base.html' %}
+{% load static %}
+{% load math_filters %}
 
-<!-- SLIDE-IN PANEL -->
-<aside id="teamModal" class="team-modal">
+{% block title %}Our Team | Sellux Plaster Ltd{% endblock %}
 
-    <!-- Close Button -->
-    <button class="modal-close" onclick="closeTeamModal()" aria-label="Close">
-        ✕
-    </button>
+{% block content %}
 
-    <div class="modal-content">
+<section class="bg-white border-bottom">
+    <div class="container py-10 py-lg-12">
+        <div class="text-center">
+            <span class="text-uppercase ls-3 text-gold small fw-bold mb-3 d-block">The Partners</span>
+            <h1 class="display-4 fw-serif navy-text">Firm Leadership</h1>
+            <div class="luxury-divider mx-auto my-4"></div>
+        </div>
+    </div>
+</section>
 
-        <!-- Header -->
-        <div class="modal-header">
-            <div class="profile-image">
-                <img src="/media/team/sample.jpg" alt="Team Member Name">
-            </div>
+<section class="bg-light-subtle py-10">
+    <div class="container">
+        <div class="row justify-content-center g-5 mb-10">
+            {% for member in firm_leadership %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="luxury-card shadow-sm h-100 bg-white">
+                    <div class="card-img-container">
+                        <img src="{{ member.profile_image.url }}" alt="{{ member.get_full_name }}" class="img-fluid">
+                    </div>
+                    <div class="card-body text-center p-4">
+                        <h4 class="h5 navy-text fw-bold mb-1">{{ member.get_full_name|upper }}</h4>
+                        <p class="text-gold x-small fw-bold ls-2 mb-3">{{ member.job_title|upper }}</p>
+                        
+                        <div class="d-flex flex-wrap justify-content-center gap-1 mb-4">
+                            {% for tag in member.tags|slice:":3" %}
+                            <span class="badge-outline">{{ tag|upper }}</span>
+                            {% endfor %}
+                        </div>
 
-            <div class="profile-meta">
-                <h2>John A. Mensah</h2>
-                <p class="job-title">Lead Architectural Finisher</p>
-
-                <div class="profile-actions">
-                    <a href="#" aria-label="LinkedIn">in</a>
-                    <a href="mailto:john@example.com" aria-label="Email">✉</a>
+                        <p class="text-muted small italic-serif px-2 mb-4">
+                            "{{ member.bio|truncatewords:20 }}"
+                        </p>
+                        
+                        <a href="{{ member.get_absolute_url }}" class="view-dossier-btn">
+                            VIEW FULL PROFILE <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
 
-        <!-- Body -->
-        <div class="modal-body">
+        <div class="text-center mb-8">
+            <span class="text-uppercase ls-3 navy-text small fw-bold">Our Associates</span>
+            <div class="luxury-divider-thin mx-auto mt-2"></div>
+        </div>
 
-            <!-- Bio -->
-            <section>
-                <h4 class="section-title">Professional Bio</h4>
-                <p class="body-text">
-                    John brings over fifteen years of specialist experience delivering
-                    high-end architectural plaster finishes across commercial and
-                    private residential projects.
-                </p>
-            </section>
-
-            <!-- Grid -->
-            <div class="modal-grid">
-
-                <section>
-                    <h4 class="section-title">Qualifications</h4>
-                    <div class="pill-group">
-                        <span class="pill">NVQ Level 3</span>
-                        <span class="pill">Heritage Restoration</span>
-                        <span class="pill">Microcement Specialist</span>
+        <div class="row justify-content-center g-4">
+            {% for member in associates %}
+            <div class="col-12 col-md-4 col-lg-4">
+                <div class="luxury-card shadow-sm bg-white">
+                    <div class="card-img-container-sm">
+                        <img src="{{ member.profile_image.url }}" alt="{{ member.get_full_name }}" class="img-fluid">
                     </div>
-                </section>
-
-                <section>
-                    <h4 class="section-title">Expertise</h4>
-                    <p class="body-text">
-                        Venetian plaster, polished concrete, bespoke architectural
-                        finishes.
-                    </p>
-                </section>
-
+                    <div class="card-body text-center p-4">
+                        <h4 class="h6 navy-text fw-bold mb-1">{{ member.get_full_name }}</h4>
+                        <p class="text-gold xx-small fw-bold ls-1 mb-3">{{ member.job_title|upper }}</p>
+                        
+                        <p class="text-muted small lh-base mb-3 opacity-75">
+                            {{ member.bio|truncatewords:15 }}
+                        </p>
+                        
+                        <a href="{{ member.get_absolute_url }}" class="view-dossier-btn-sm">
+                            VIEW FULL PROFILE <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-
-            <!-- CTA -->
-            <div class="modal-footer">
-                <button class="primary-cta">
-                    Consult with John
-                </button>
-            </div>
-
+            {% endfor %}
         </div>
-
     </div>
-</aside>
+</section>
+
+<style>
+    /* Premium Branding Colors */
+    .navy-text { color: #001d3d; }
+    .text-gold { color: #c5a059; }
+    .bg-gold { background-color: #c5a059; }
+    
+    /* Typography */
+    .fw-serif { font-family: 'Playfair Display', serif; }
+    .italic-serif { font-style: italic; font-family: 'Playfair Display', serif; color: #666; }
+    .ls-3 { letter-spacing: 3px; }
+    .ls-2 { letter-spacing: 2px; }
+    .x-small { font-size: 0.7rem; }
+    .xx-small { font-size: 0.6rem; }
+
+    /* Luxury Dividers */
+    .luxury-divider { width: 60px; height: 3px; background: #c5a059; }
+    .luxury-divider-thin { width: 40px; height: 1px; background: #001d3d; opacity: 0.3; }
+
+    /* Card Styling to Match Screenshot */
+    .luxury-card {
+        border-top: 4px solid #c5a059;
+        transition: transform 0.3s ease;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    .luxury-card:hover { transform: translateY(-5px); }
+
+    .card-img-container { height: 280px; overflow: hidden; }
+    .card-img-container-sm { height: 220px; overflow: hidden; }
+    .card-img-container img, .card-img-container-sm img {
+        width: 100%; height: 100%; object-fit: cover;
+    }
+
+    /* Badge/Tag styling from image */
+    .badge-outline {
+        font-size: 0.55rem;
+        padding: 3px 8px;
+        border: 1px solid #ddd;
+        color: #555;
+        font-weight: bold;
+        border-radius: 2px;
+    }
+
+    /* Button styling from image */
+    .view-dossier-btn {
+        font-size: 0.65rem;
+        font-weight: bold;
+        color: #c5a059;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: 0.3s;
+    }
+    .view-dossier-btn:hover { border-bottom: 1px solid #c5a059; }
+    .view-dossier-btn-sm { font-size: 0.55rem; color: #c5a059; text-decoration: none; font-weight: bold;}
+
+    /* Mobile Tweaks */
+    @media (max-width: 768px) {
+        .card-img-container { height: 350px; }
+        .display-4 { font-size: 2.2rem; }
+    }
+</style>
+
+{% endblock %}
