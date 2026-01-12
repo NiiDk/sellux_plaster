@@ -6,204 +6,153 @@
 
 {% block content %}
 
-<!-- HERO -->
-<section class="py-5 bg-white position-relative overflow-hidden">
-    <div class="container pt-5 pb-4">
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-9 animate__animated animate__fadeInUp">
-
-                <h6 class="text-primary fw-bold letter-spacing-3 text-uppercase mb-4">
-                    Master Artisans
-                </h6>
-
-                <h1 class="display-2 fw-bold text-dark mb-4" style="line-height: 1.1;">
-                    The People Behind<br>
-                    <span class="position-relative d-inline-block">
-                        <span class="position-relative z-1">Architectural Precision</span>
-                        <span class="position-absolute bottom-0 start-0 w-100 bg-primary opacity-25"
-                              style="height: 14px; transform: rotate(-1deg);"></span>
-                    </span>
-                </h1>
-
-                <p class="lead text-muted col-lg-10 mx-auto fw-light fs-4">
-                    Skilled craftsmen and technical specialists delivering refined plasterwork
-                    through discipline, experience, and uncompromising standards.
-                </p>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- LEADERSHIP -->
-<section class="py-5 bg-light">
-    <div class="container py-5">
-
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-8 text-center">
-                <h2 class="display-5 fw-bold mb-3">
-                    Firm <span class="text-primary">Leadership</span>
-                </h2>
-                <p class="text-muted fs-5">
-                    Senior professionals guiding execution, quality, and architectural integrity.
-                </p>
-            </div>
-        </div>
-
-        <div class="row g-4 justify-content-center">
-            {% for member in firm_leadership %}
-            <div class="col-lg-4 col-md-6">
-
-                <div class="advantage-card h-100 text-center">
-
-                    <div class="mb-4 position-relative">
-                        <img src="{{ member.profile_image.url }}"
-                             alt="{{ member.get_full_name }}"
-                             class="img-fluid shadow-sm"
-                             style="aspect-ratio: 1 / 1; object-fit: cover;">
-
-                        <span class="badge bg-primary text-white position-absolute bottom-0 end-0 m-3">
-                            {{ member.years_of_experience|default:"15+" }} yrs
-                        </span>
-                    </div>
-
-                    <h4 class="fw-bold mb-1">
-                        {{ member.get_full_name }}
-                    </h4>
-
-                    <p class="text-primary fw-bold small mb-3 text-uppercase">
-                        {{ member.job_title }}
-                    </p>
-
-                    <p class="text-muted small mb-4">
-                        {{ member.bio|truncatewords:22 }}
-                    </p>
-
-                    <a href="{{ member.get_absolute_url }}"
-                       class="small fw-bold text-primary text-uppercase ls-1 text-decoration-none">
-                        View Profile
-                    </a>
-
+<section class="hero-minimal bg-charcoal position-relative overflow-hidden border-bottom border-charcoal-border">
+    <div class="container py-8 py-lg-12 position-relative z-2">
+        <div class="row align-items-center">
+            <div class="col-lg-7 text-start">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="line-accent-orange me-3"></div>
+                    <span class="text-orange fs-xs fw-bold ls-3 text-uppercase">Technical Mastery</span>
                 </div>
-
+                <h1 class="display-3 fw-light text-white mb-4">
+                    The <span class="fw-normal text-orange">Artisans</span> <br class="d-none d-lg-block">
+                    Behind the Craft
+                </h1>
+                <p class="text-white-50 fw-light fs-5 col-lg-10 mb-0">
+                    Mastering the intersection of architectural rigor and traditional plastering. We transform raw space into refined environments.
+                </p>
             </div>
-            {% endfor %}
+            <div class="col-lg-5 d-none d-lg-flex justify-content-end">
+                <div class="geo-frame p-5 border border-charcoal-border">
+                    <span class="text-white-20 fs-1 fw-serif">01</span>
+                </div>
+            </div>
         </div>
-
     </div>
 </section>
 
-<!-- SPECIALISTS -->
-<section class="py-5 bg-white">
-    <div class="container py-5">
-
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-8 text-center">
-                <h2 class="display-5 fw-bold mb-3">
-                    Specialist <span class="text-primary">Team</span>
-                </h2>
-                <p class="text-muted fs-5">
-                    Dedicated professionals delivering precision across every stage.
-                </p>
+<section class="bg-charcoal py-8 py-lg-10">
+    <div class="container">
+        <div class="row mb-6">
+            <div class="col-12 border-start border-orange border-4 ps-4">
+                <h2 class="h6 text-white-50 ls-4 text-uppercase mb-1">Principals</h2>
+                <h3 class="h3 fw-light text-white">Firm Leadership</h3>
             </div>
         </div>
 
         <div class="row g-4">
-            {% for member in associates %}
-            <div class="col-6 col-md-4 col-lg-3">
-
-                <a href="{{ member.get_absolute_url }}"
-                   class="advantage-card h-100 text-center text-decoration-none d-block">
-
-                    <div class="mb-4">
-                        <img src="{{ member.profile_image.url }}"
-                             alt="{{ member.get_full_name }}"
-                             class="rounded-circle"
-                             style="width: 90px; height: 90px; object-fit: cover;">
+            {% for member in firm_leadership %}
+            <div class="col-12 col-md-4">
+                <div class="card-artisan h-100 bg-charcoal-light border border-charcoal-border transition-smooth p-4">
+                    <div class="portrait-container mb-4 overflow-hidden border border-charcoal-border">
+                        <img src="{{ member.profile_image.url }}" alt="{{ member.get_full_name }}" class="img-fluid grayscale hover-color">
+                        <div class="exp-tag-mono fs-xs bg-orange text-white px-2 py-1 position-absolute top-0 end-0">
+                            {{ member.years_of_experience|default:"15" }}YRS XP
+                        </div>
                     </div>
-
-                    <h6 class="fw-bold text-dark mb-1">
-                        {{ member.get_full_name }}
-                    </h6>
-
-                    <p class="small text-primary fw-bold text-uppercase mb-3">
-                        {{ member.job_title }}
-                    </p>
-
-                    {% if member.specializations %}
-                    <div>
-                        {% for spec in member.specializations|slice:":2" %}
-                        <span class="badge bg-light text-dark small fw-light me-1">
-                            {{ spec }}
-                        </span>
-                        {% endfor %}
+                    <div class="card-meta">
+                        <h4 class="h5 text-white fw-normal mb-1">{{ member.get_full_name }}</h4>
+                        <p class="text-orange fs-xs fw-bold ls-2 text-uppercase mb-3">{{ member.job_title }}</p>
+                        <p class="text-white-50 small fw-light mb-4">
+                            {{ member.bio|truncatewords:22 }}
+                        </p>
+                        <a href="{{ member.get_absolute_url }}" class="link-orange-minimal">
+                            EXPLORE DOSSIER <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
                     </div>
-                    {% endif %}
-
-                </a>
-
+                </div>
             </div>
             {% endfor %}
         </div>
-
     </div>
 </section>
 
-<!-- VALUES -->
-<section class="py-5 bg-black text-white position-relative footer-pattern">
-    <div class="bg-pattern-dots position-absolute top-0 start-0 w-100 h-100 opacity-25"></div>
+<section class="bg-charcoal-dark py-8 py-lg-10 border-top border-charcoal-border">
+    <div class="container">
+        <div class="text-center mb-6">
+            <h2 class="h6 text-orange ls-4 text-uppercase">The Collective</h2>
+            <div class="divider-short bg-white-10 mx-auto mt-2"></div>
+        </div>
 
-    <div class="container py-5 position-relative z-1">
-        <div class="row align-items-center g-5">
-
-            <div class="col-lg-6">
-                <h6 class="text-primary fw-bold letter-spacing-3 text-uppercase mb-4">
-                    Our Philosophy
-                </h6>
-
-                <h2 class="display-5 fw-bold mb-4">
-                    Where Craft Meets <br>
-                    <span class="text-primary">Architectural Discipline</span>
-                </h2>
-
-                <p class="text-white-50 fs-5 lh-lg mb-5">
-                    True luxury is restraint. Precision in execution.
-                    Respect for material, form, and architectural intent.
-                </p>
-
-                <a href="{% url 'contact:contact_us' %}"
-                   class="btn btn-primary px-5 py-3 rounded-pill fw-bold">
-                    Consult Our Artisans
-                </a>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="row g-4">
-                    {% for value in values %}
-                    <div class="col-md-6">
-                        <div class="border border-white border-opacity-10 p-4 h-100">
-                            <span class="fw-bold text-primary fs-4 d-block mb-3">
-                                0{{ forloop.counter }}
-                            </span>
-                            <h5 class="fw-bold mb-2">
-                                {{ value.title }}
-                            </h5>
-                            <p class="text-white-50 small mb-0">
-                                {{ value.description }}
-                            </p>
-                        </div>
+        <div class="row g-3">
+            {% for member in associates %}
+            <div class="col-6 col-md-3">
+                <div class="card-associate text-center p-3 border border-transparent hover-border-charcoal transition-smooth">
+                    <div class="avatar-sm mx-auto mb-3 border border-charcoal-border p-1 rounded-circle">
+                        <img src="{{ member.profile_image.url }}" alt="{{ member.get_full_name }}" class="rounded-circle grayscale">
                     </div>
-                    {% endfor %}
+                    <h6 class="text-white fs-7 mb-0">{{ member.get_full_name }}</h6>
+                    <p class="text-white-30 fs-xs text-uppercase ls-1">{{ member.job_title }}</p>
                 </div>
             </div>
-
+            {% endfor %}
         </div>
     </div>
 </section>
 
 <style>
-.letter-spacing-3 { letter-spacing: 3px; }
-.ls-1 { letter-spacing: 1px; }
+    /* Professional Dark System */
+    :root {
+        --charcoal: #121212;
+        --charcoal-light: #1A1A1A;
+        --charcoal-border: #2A2A2A;
+        --orange-matte: #E65100;
+        --white-50: rgba(255,255,255,0.5);
+        --white-10: rgba(255,255,255,0.1);
+    }
+
+    /* Core Styles */
+    .bg-charcoal { background-color: var(--charcoal); }
+    .bg-charcoal-dark { background-color: #0A0A0A; }
+    .bg-charcoal-light { background-color: var(--charcoal-light); }
+    .border-charcoal-border { border-color: var(--charcoal-border) !important; }
+    .text-orange { color: var(--orange-matte) !important; }
+    .bg-orange { background-color: var(--orange-matte) !important; }
+    .text-white-50 { color: var(--white-50); }
+    .text-white-30 { color: rgba(255,255,255,0.3); }
+
+    /* Typography */
+    .ls-3 { letter-spacing: 3px; }
+    .ls-4 { letter-spacing: 4px; }
+    .fs-xs { font-size: 0.7rem; }
+    .fs-7 { font-size: 0.85rem; }
+    .fw-serif { font-family: 'Playfair Display', serif; }
+    .exp-tag-mono { font-family: 'Roboto Mono', monospace; font-weight: 700; }
+
+    /* Layout Elements */
+    .line-accent-orange { width: 30px; height: 1px; background-color: var(--orange-matte); }
+    .divider-short { width: 40px; height: 1px; }
+    .geo-frame { height: 150px; width: 150px; display: flex; align-items: center; justify-content: center; opacity: 0.3; }
+
+    /* Card & Image Effects */
+    .card-artisan { border-radius: 0; }
+    .card-artisan:hover { border-color: var(--orange-matte) !important; background-color: #1E1E1E; }
+    .portrait-container { position: relative; aspect-ratio: 1/1; }
+    .grayscale { filter: grayscale(100%); transition: 0.4s ease; }
+    .hover-color:hover { filter: grayscale(0%); }
+    .avatar-sm { width: 60px; height: 60px; }
+    .avatar-sm img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Links */
+    .link-orange-minimal {
+        color: var(--orange-matte);
+        text-decoration: none;
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        transition: 0.3s;
+    }
+    .link-orange-minimal:hover { color: white; }
+
+    /* UI Optimizations */
+    .py-8 { padding-top: 4rem; padding-bottom: 4rem; }
+    .py-10 { padding-top: 6rem; padding-bottom: 6rem; }
+    .hover-border-charcoal:hover { border-color: var(--charcoal-border) !important; }
+
+    @media (max-width: 768px) {
+        .display-3 { font-size: 2.5rem; }
+        .py-8 { padding-top: 3rem; padding-bottom: 3rem; }
+    }
 </style>
 
 {% endblock %}
