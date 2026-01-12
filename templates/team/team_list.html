@@ -1,135 +1,73 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load math_filters %}
 
-{% block title %}Our Legacy | Sellux Plaster Ltd{% endblock %}
+{% block title %}The Artisans | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
 
 <!-- HERO -->
-<section class="section bg-white position-relative overflow-hidden">
-    <div class="container text-center">
-        <span class="section-label mb-4 d-inline-block">
-            Since 2015
-        </span>
+<section class="hero bg-charcoal text-center">
+    <div class="container min-vh-70 d-flex align-items-center">
+        <div class="mx-auto" style="max-width: 760px;">
+            <span class="section-label mb-4 d-inline-block">
+                MASTER ARTISANS
+            </span>
 
-        <h1 class="display-1 fw-light text-dark mb-5">
-            Crafting Architectural<br>
-            <span class="text-orange fw-normal">Masterpieces</span>
-        </h1>
+            <h1 class="display-1 fw-light mb-5 text-white">
+                The People Behind<br>
+                <span class="text-orange fw-normal">Architectural Precision</span>
+            </h1>
 
-        <p class="hero-subtext mx-auto">
-            We do not simply finish surfaces. We shape environments through
-            precision, restraint, and uncompromising craftsmanship.
-        </p>
-    </div>
-</section>
-
-<!-- STORY -->
-<section class="section bg-light">
-    <div class="container">
-        <div class="row align-items-center g-10">
-
-            <div class="col-lg-6 position-relative">
-                <div class="image-frame">
-                    <img src="{{ about_page.image.url }}"
-                         alt="{{ about_page.title }}"
-                         class="img-fluid">
-                </div>
-            </div>
-
-            <div class="col-lg-6 ps-lg-5">
-                <h2 class="display-2 fw-light mb-4">
-                    {{ about_page.subtitle }}
-                </h2>
-
-                <div class="content-divider mb-4"></div>
-
-                <div class="story-text mb-5">
-                    {{ about_page.main_content|linebreaksbr }}
-                </div>
-
-                <div class="pedigree-block">
-                    <span class="section-label mb-2 d-block">
-                        Professional Pedigree
-                    </span>
-                    <p class="pedigree-text">
-                        {{ about_page.professional_pedigree }}
-                    </p>
-                </div>
-            </div>
-
+            <p class="hero-text mb-0">
+                Skilled craftsmen and technical specialists delivering refined
+                plasterwork through discipline, experience, and exacting standards.
+            </p>
         </div>
     </div>
 </section>
 
-<!-- MISSION & VISION -->
-<section class="section bg-charcoal text-white position-relative">
-    <div class="container">
-        <div class="row g-8">
-
-            <div class="col-lg-6 border-end border-opacity-25 pe-lg-5">
-                <div class="icon-circle mb-4">
-                    <i class="bi bi-bullseye"></i>
-                </div>
-                <h3 class="fw-light mb-4">
-                    Our <span class="text-orange">Mission</span>
-                </h3>
-                <p class="dark-section-text">
-                    {{ about_page.mission }}
-                </p>
-            </div>
-
-            <div class="col-lg-6 ps-lg-5">
-                <div class="icon-circle mb-4">
-                    <i class="bi bi-eye"></i>
-                </div>
-                <h3 class="fw-light mb-4">
-                    Our <span class="text-orange">Vision</span>
-                </h3>
-                <p class="dark-section-text">
-                    {{ about_page.vision }}
-                </p>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- CORE VALUES -->
-<section class="section bg-white">
+<!-- LEADERSHIP -->
+<section class="section bg-charcoal-light">
     <div class="container">
 
-        <div class="row mb-6">
-            <div class="col-lg-6">
-                <h2 class="display-2 fw-light mb-3">
-                    Core <span class="text-orange">Values</span>
-                </h2>
-                <p class="section-subtext">
-                    The principles that guide every decision and every detail.
-                </p>
-            </div>
+        <div class="section-header text-center mb-12">
+            <h2 class="display-2 fw-light text-white mb-4">
+                Firm <span class="text-orange">Leadership</span>
+            </h2>
+            <p class="section-subtext">
+                Senior professionals guiding quality, execution, and architectural integrity.
+            </p>
         </div>
 
-        <div class="row g-5">
-            {% for value in about_page.core_values.all %}
-            <div class="col-md-6 col-lg-3">
+        <div class="row g-6 justify-content-center">
+            {% for member in firm_leadership %}
+            <div class="col-lg-4 col-md-6">
 
-                <div class="value-card h-100">
-                    <div class="value-icon mb-4">
-                        <i class="{{ value.icon }}"></i>
+                <div class="leader-card">
+                    <div class="leader-image">
+                        <img src="{{ member.profile_image.url }}"
+                             alt="{{ member.get_full_name }}">
+                        <span class="experience-badge">
+                            {{ member.years_of_experience|default:"15+" }} yrs
+                        </span>
                     </div>
 
-                    <h4 class="value-title mb-3">
-                        {{ value.title }}
-                    </h4>
+                    <div class="leader-content">
+                        <h3 class="leader-name">
+                            {{ member.get_full_name }}
+                        </h3>
+                        <p class="leader-title">
+                            {{ member.job_title }}
+                        </p>
+                        <p class="leader-bio">
+                            {{ member.bio|truncatewords:24 }}
+                        </p>
 
-                    <p class="value-text">
-                        {{ value.description }}
-                    </p>
-
-                    <span class="value-index">
-                        0{{ forloop.counter }}
-                    </span>
+                        <a href="{{ member.get_absolute_url }}" class="text-link">
+                            View Profile →
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -139,144 +77,237 @@
     </div>
 </section>
 
-<!-- CTA -->
-<section class="section bg-light border-top">
-    <div class="container text-center">
-        <span class="section-label mb-3 d-inline-block">
-            Begin a Conversation
-        </span>
+<!-- SPECIALISTS -->
+<section class="section bg-charcoal">
+    <div class="container">
 
-        <h2 class="display-2 fw-light mb-5">
-            Let’s Discuss Your <span class="text-orange">Project</span>
-        </h2>
+        <div class="section-header text-center mb-12">
+            <h2 class="display-2 fw-light text-white mb-4">
+                Specialist <span class="text-orange">Team</span>
+            </h2>
+            <p class="section-subtext">
+                Dedicated professionals delivering precision across every project stage.
+            </p>
+        </div>
 
-        <a href="{% url 'contact:contact_us' %}" class="primary-btn">
-            Contact Sellux
-        </a>
+        <div class="row g-5">
+            {% for member in associates %}
+            <div class="col-lg-3 col-md-4 col-6">
+
+                <div class="specialist-card">
+                    <img src="{{ member.profile_image.url }}"
+                         alt="{{ member.get_full_name }}"
+                         class="specialist-image">
+
+                    <h4 class="specialist-name">
+                        {{ member.get_full_name }}
+                    </h4>
+
+                    <p class="specialist-title">
+                        {{ member.job_title }}
+                    </p>
+
+                    {% if member.specializations %}
+                    <div class="specialist-tags">
+                        {% for spec in member.specializations|slice:":2" %}
+                        <span>{{ spec }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <a href="{{ member.get_absolute_url }}" class="text-link small">
+                        Details →
+                    </a>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!-- VALUES -->
+<section class="section bg-charcoal-dark">
+    <div class="container">
+
+        <div class="row align-items-center g-10">
+            <div class="col-lg-6">
+
+                <span class="section-label mb-4 d-inline-block">
+                    OUR PHILOSOPHY
+                </span>
+
+                <h2 class="display-2 fw-light text-white mb-5">
+                    Where Craft Meets<br>
+                    <span class="text-orange">Architectural Discipline</span>
+                </h2>
+
+                <p class="values-text mb-6">
+                    True luxury is restraint. Precision in execution.
+                    Respect for material, form, and architectural intent.
+                </p>
+
+                <a href="{% url 'contact:contact_us' %}" class="primary-btn">
+                    Consult Our Artisans
+                </a>
+
+            </div>
+
+            <div class="col-lg-6">
+                <div class="row g-5">
+                    {% for value in values %}
+                    <div class="col-md-6">
+
+                        <div class="value-card">
+                            <span class="value-number">
+                                0{{ forloop.counter }}
+                            </span>
+                            <h5 class="value-title">
+                                {{ value.title }}
+                            </h5>
+                            <p class="value-description">
+                                {{ value.description }}
+                            </p>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 
 <style>
 :root {
-    --orange: #ff6b35;
     --charcoal: #1a1a1a;
-    --light-bg: #f7f7f7;
-    --text-muted: #6f6f6f;
+    --charcoal-light: #262626;
+    --charcoal-dark: #0f0f0f;
+    --border-dark: #333;
+    --orange: #ff6b35;
+    --white-soft: #e5e5e5;
+    --white-muted: #cfcfcf;
 }
 
 /* Base */
 .section {
     padding: 7rem 0;
 }
-.bg-charcoal {
-    background: var(--charcoal);
-}
-.text-orange {
-    color: var(--orange);
-}
+.bg-charcoal { background: var(--charcoal); }
+.bg-charcoal-light { background: var(--charcoal-light); }
+.bg-charcoal-dark { background: var(--charcoal-dark); }
+.text-orange { color: var(--orange); }
 
 /* Typography */
-.display-1 {
-    font-size: 3.8rem;
-}
-.display-2 {
-    font-size: 2.6rem;
+.display-1 { font-size: 3.8rem; }
+.display-2 { font-size: 2.8rem; }
+.hero-text,
+.section-subtext,
+.values-text {
+    color: var(--white-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto;
 }
 .section-label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--orange);
 }
-.hero-subtext,
-.section-subtext {
-    max-width: 640px;
-    margin: 0 auto;
-    font-weight: 300;
-    color: var(--text-muted);
-    line-height: 1.8;
+
+/* Cards */
+.leader-card,
+.specialist-card,
+.value-card {
+    border: 1px solid var(--border-dark);
+    padding: 2rem;
+    height: 100%;
 }
 
-/* Image */
-.image-frame {
-    border-bottom: 4px solid var(--orange);
+.leader-image {
+    position: relative;
+    margin-bottom: 1.5rem;
 }
-.image-frame img {
+.leader-image img {
     width: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
 }
-
-/* Story */
-.content-divider {
-    width: 40px;
-    height: 2px;
+.experience-badge {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
     background: var(--orange);
-}
-.story-text {
-    font-size: 1.05rem;
-    font-weight: 300;
-    color: #444;
-    line-height: 1.9;
-}
-.pedigree-text {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    max-width: 90%;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
 }
 
-/* Dark section */
-.icon-circle {
-    width: 48px;
-    height: 48px;
-    border: 1px solid var(--orange);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--orange);
-}
-.dark-section-text {
-    font-weight: 300;
-    color: #cfcfcf;
-    line-height: 1.8;
-}
-
-/* Values */
-.value-card {
-    border: 1px solid #eee;
-    padding: 2.2rem;
-    position: relative;
-}
-.value-icon {
-    color: var(--orange);
-    font-size: 1.6rem;
-}
+.leader-name,
+.specialist-name,
 .value-title {
+    color: #fff;
     font-weight: 500;
 }
-.value-text {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.7;
+.leader-title,
+.specialist-title {
+    color: var(--orange);
+    font-size: 0.85rem;
 }
-.value-index {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    font-size: 1.4rem;
+.leader-bio,
+.value-description {
+    color: var(--white-muted);
     font-weight: 300;
+    font-size: 0.95rem;
+}
+
+/* Links & Buttons */
+.text-link {
+    color: var(--white-soft);
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+.text-link:hover {
     color: var(--orange);
 }
 
-/* Button */
 .primary-btn {
     display: inline-block;
     background: var(--orange);
     color: #fff;
-    padding: 0.9rem 2.2rem;
+    padding: 0.9rem 2rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    font-size: 0.8rem;
     letter-spacing: 2px;
     text-decoration: none;
+}
+
+/* Specialist */
+.specialist-image {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+.specialist-tags span {
+    display: inline-block;
+    font-size: 0.7rem;
+    color: var(--white-muted);
+    border: 1px solid var(--border-dark);
+    padding: 0.2rem 0.5rem;
+    margin-right: 0.3rem;
+}
+
+/* Values */
+.value-number {
+    color: var(--orange);
+    font-size: 1.6rem;
+    font-weight: 300;
 }
 
 /* Responsive */
