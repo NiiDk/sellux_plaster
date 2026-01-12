@@ -2,50 +2,75 @@
 {% load static %}
 {% load math_filters %}
 
-{% block title %}Our Team | Sellux Plaster Ltd{% endblock %}
+{% block title %}Our Artisans | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
 
-<!-- HERO - Premium luxury experience -->
-<section class="hero-section position-relative" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+<!-- HERO SECTION - Luxury Opening Experience -->
+<section class="hero-section position-relative bg-charcoal">
+    <!-- Animated gradient background for premium feel -->
+    <div class="luxury-gradient-bg position-absolute top-0 start-0 w-100 h-100">
+        <div class="gradient-overlay opacity-20"></div>
+    </div>
+    
+    <!-- Geometric accent elements -->
+    <div class="position-absolute top-0 end-0 w-30 h-100 d-none d-xl-block">
+        <div class="geometric-accent opacity-5"></div>
+    </div>
+    
     <div class="container-fluid g-0">
-        <div class="row g-0 min-vh-70 min-vh-lg-60 d-flex align-items-center position-relative">
+        <div class="row g-0 min-vh-75 min-vh-lg-70 d-flex align-items-center position-relative">
 
-            <!-- Sophisticated background elements -->
-            <div class="luxury-accent position-absolute top-0 end-0"></div>
-            <div class="floating-orb position-absolute"></div>
-            
-            <!-- Animated grid overlay -->
-            <div class="position-absolute top-0 start-0 w-100 h-100 luxury-grid opacity-10"></div>
-
-            <div class="container position-relative z-3 py-12 py-lg-15">
+            <div class="container position-relative z-3 py-12 py-lg-14">
                 <div class="row justify-content-center">
                     <div class="col-11 col-md-10 col-lg-9 col-xl-8 text-center">
 
-                        <!-- Premium badge -->
-                        <div class="mb-6 mb-md-7" data-aos="fade-down" data-aos-duration="800">
-                            <span class="luxury-badge">
-                                <span class="badge-shine"></span>
-                                PRINCIPALS & TEAM
+                        <!-- Premium animated badge -->
+                        <div class="mb-6 mb-md-8 animate-fade-up" style="--animation-delay: 0.1s">
+                            <span class="badge bg-orange-soft text-orange px-5 py-2.5 rounded-none fw-medium letter-spacing-2 border-0 
+                                        border-bottom border-orange border-width-2">
+                                <span class="d-inline-flex align-items-center">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="me-2">
+                                        <path d="M12 0L14.727 9.27273L24 12L14.727 14.7273L12 24L9.27273 14.7273L0 12L9.27273 9.27273L12 0Z" 
+                                              fill="currentColor" fill-opacity="0.8"/>
+                                    </svg>
+                                    ARCHITECTURAL CRAFTSMEN
+                                </span>
                             </span>
                         </div>
 
-                        <!-- Hero typography -->
-                        <h1 class="luxury-heading mb-5 mb-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                            The <span class="text-orange glow-text">Artisans</span> Behind<br class="d-none d-lg-block">
-                            the Craft
+                        <!-- Premium typography with orange accent -->
+                        <h1 class="display-3 display-lg-2 fw-light mb-5 mb-md-6 letter-spacing-2 text-white animate-fade-up"
+                            style="--animation-delay: 0.2s">
+                            <span class="d-block fw-normal text-orange opacity-90">Master</span>
+                            <span class="d-block fw-light text-white opacity-95">Artisans &</span>
+                            <span class="d-block fw-light text-white opacity-95">Technical</span>
+                            <span class="d-block fw-normal text-orange opacity-90 mt-2">Specialists</span>
                         </h1>
 
-                        <!-- Refined description -->
-                        <div class="mx-auto" style="max-width: 600px;" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                            <p class="luxury-lead text-grey-light mb-0">
-                                Master craftsmen and technical specialists dedicated to transforming spaces with precision, restraint, and architectural excellence.
+                        <!-- Elegant divider -->
+                        <div class="divider-elegant mx-auto mb-6 mb-md-8 animate-fade-up" 
+                             style="--animation-delay: 0.3s">
+                            <div class="line-primary"></div>
+                            <div class="dot-orange"></div>
+                            <div class="line-primary"></div>
+                        </div>
+
+                        <!-- Refined paragraph with controlled line length -->
+                        <div class="mx-auto" style="max-width: 560px;">
+                            <p class="lead text-light fs-4 fw-light lh-lg mb-0 opacity-80 animate-fade-up"
+                               style="--animation-delay: 0.4s">
+                                A collective of master craftsmen and technical specialists dedicated to 
+                                transforming spaces through precision, restraint, and architectural excellence.
                             </p>
                         </div>
 
-                        <!-- Scroll indicator -->
-                        <div class="scroll-indicator mt-8" data-aos="fade" data-aos-delay="800">
-                            <div class="scroll-line"></div>
+                        <!-- Premium scroll indicator -->
+                        <div class="mt-10 d-none d-md-block animate-fade-up" style="--animation-delay: 0.6s">
+                            <div class="scroll-indicator">
+                                <div class="indicator-line"></div>
+                                <div class="indicator-dot"></div>
+                            </div>
                         </div>
 
                     </div>
@@ -55,73 +80,107 @@
     </div>
 </section>
 
-<!-- LEADERSHIP - Premium card experience -->
-<section class="leadership-section position-relative" style="background: #f5f5f5;">
-    
-    <div class="container position-relative z-3 py-12 py-lg-15">
+<!-- LEADERSHIP SECTION - Premium Card Gallery -->
+<section class="leadership-section bg-white position-relative overflow-hidden">
+    <!-- Decorative corner elements -->
+    <div class="position-absolute top-0 end-0 w-20 h-20 d-none d-lg-block">
+        <div class="corner-accent charcoal"></div>
+    </div>
+    <div class="position-absolute bottom-0 start-0 w-20 h-20 d-none d-lg-block">
+        <div class="corner-accent orange rotate-180"></div>
+    </div>
 
-        <!-- Section header -->
+    <div class="container position-relative z-2 py-12 py-lg-14">
+
+        <!-- Section header with elegant divider -->
         <div class="row justify-content-center mb-10 mb-lg-12">
-            <div class="col-lg-8 col-xl-7 text-center">
-                <div class="luxury-divider mb-6" data-aos="fade-down">
-                    <span class="divider-dot"></span>
+            <div class="col-lg-10 col-xl-9 text-center">
+                <div class="section-header-premium">
+                    <h2 class="display-4 fw-light mb-4 letter-spacing-3 text-charcoal">
+                        <span class="fw-normal">FIRM</span>
+                        <span class="d-block fw-light">LEADERSHIP</span>
+                    </h2>
+                    <div class="luxury-divider mx-auto mb-5">
+                        <span class="divider-dot"></span>
+                        <span class="divider-line"></span>
+                        <span class="divider-dot"></span>
+                    </div>
+                    <p class="text-charcoal-light fw-light fs-5 mb-0 opacity-75 max-width-md mx-auto">
+                        Architectural visionaries with decades of specialist expertise in luxury finishes
+                    </p>
                 </div>
-                <h2 class="section-heading text-charcoal mb-4" data-aos="fade-up">FIRM LEADERSHIP</h2>
-                <p class="section-subheading text-grey mb-0" data-aos="fade-up" data-aos-delay="200">
-                    Architectural leadership shaped by decades of specialist experience
-                </p>
             </div>
         </div>
 
-        <!-- Leadership cards -->
+        <!-- Premium leadership cards with enhanced interactions -->
         <div class="row justify-content-center g-5 g-lg-6">
             {% for member in firm_leadership %}
-            <div class="col-12 col-md-10 col-lg-4 mb-5 mb-lg-0">
+            <div class="col-12 col-md-6 col-lg-4">
 
-                <div class="luxury-card group"
+                <div class="luxury-card bg-white border-charcoal-subtle rounded-0 p-5 h-100 text-center
+                         transition-premium hover-lift-shadow"
                      data-aos="fade-up"
                      data-aos-delay="{{ forloop.counter|add:"-1"|multiply:"150" }}"
-                     data-aos-duration="1000">
+                     data-cursor-hover="view">
 
-                    <!-- Card shine effect -->
-                    <div class="card-shine"></div>
-
-                    <!-- Profile section -->
+                    <!-- Premium profile container with elegant border -->
                     <div class="position-relative mb-6">
-                        <div class="profile-wrapper mx-auto">
-                            <div class="profile-ring"></div>
-                            <div class="profile-image-container">
+                        <div class="profile-container-premium mx-auto">
+                            <!-- Outer decorative ring -->
+                            <div class="profile-ring profile-ring-1"></div>
+                            <div class="profile-ring profile-ring-2"></div>
+                            
+                            <!-- Profile image with elegant frame -->
+                            <div class="profile-frame-premium mx-auto rounded-circle overflow-hidden"
+                                 style="width: 160px; height: 160px;">
+                                <div class="frame-overlay"></div>
                                 <img src="{{ member.profile_image.url }}"
                                      alt="{{ member.get_full_name }}"
-                                     class="profile-image">
-                                <div class="profile-overlay"></div>
+                                     class="w-100 h-100 object-fit-cover transition-premium scale-on-hover">
                             </div>
                         </div>
 
-                        <!-- Experience badge -->
-                        <div class="experience-badge">
-                            <span class="badge-line"></span>
-                            {{ member.years_of_experience|default:"15+" }} YEARS
+                        <!-- Experience badge with premium styling -->
+                        <div class="position-absolute bottom-0 start-50 translate-middle-x 
+                                    bg-charcoal text-white px-4 py-2 fw-medium letter-spacing-1
+                                    border border-orange border-width-2">
+                            {{ member.years_of_experience|default:"20+" }} YEARS
                         </div>
                     </div>
 
-                    <!-- Content -->
-                    <div class="card-content">
-                        <h4 class="member-name">{{ member.get_full_name }}</h4>
-                        <p class="member-title text-orange mb-5">{{ member.job_title }}</p>
-
-                        <p class="member-bio text-grey mb-6">
-                            {{ member.bio|truncatewords:24 }}
+                    <!-- Card content with premium typography -->
+                    <div class="card-body d-flex flex-column px-0">
+                        <h4 class="fs-3 fw-normal mb-3 letter-spacing-2 text-charcoal">
+                            {{ member.get_full_name }}
+                        </h4>
+                        
+                        <div class="title-divider mx-auto mb-4">
+                            <svg width="24" height="2" viewBox="0 0 24 2" fill="none">
+                                <rect width="24" height="2" fill="#FF6B35" fill-opacity="0.6"/>
+                            </svg>
+                        </div>
+                        
+                        <p class="text-orange small fw-medium mb-5 letter-spacing-2 opacity-90">
+                            {{ member.job_title|upper }}
                         </p>
 
-                        <!-- CTA Button -->
+                        <!-- Truncated bio with elegant fade -->
+                        <div class="bio-preview mb-6">
+                            <p class="text-charcoal-light fw-light lh-base mb-0 opacity-80 line-clamp-3">
+                                {{ member.bio|truncatewords:30 }}
+                            </p>
+                        </div>
+
+                        <!-- Premium CTA button -->
                         <div class="mt-auto">
-                            <a href="{{ member.get_absolute_url }}" class="luxury-btn">
-                                <span class="btn-bg"></span>
-                                <span class="btn-text">
-                                    View Profile
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="btn-arrow">
-                                        <path d="M9 0L7.5 1.5L12.75 6.75H0V9.75H12.75L7.5 15L9 16.5L16.5 9L9 0Z" fill="currentColor"/>
+                            <a href="{{ member.get_absolute_url }}"
+                               class="btn-premium btn-premium-outline-charcoal px-5 py-3 fw-medium letter-spacing-1
+                                      transition-premium hover-transform-right">
+                                <span class="d-flex align-items-center justify-content-center">
+                                    <span>VIEW PROFILE</span>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="ms-3">
+                                        <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" 
+                                              fill="currentColor"/>
                                     </svg>
                                 </span>
                             </a>
@@ -137,61 +196,92 @@
     </div>
 </section>
 
-<!-- SPECIALIST TEAM - Refined grid -->
-<section class="specialists-section bg-white position-relative">
-    <div class="container py-12 py-lg-15">
+<!-- SPECIALIST TEAM - Premium Grid Layout -->
+<section class="specialists-section bg-charcoal-subtle position-relative">
+    <!-- Background pattern with subtle animation -->
+    <div class="position-absolute top-0 start-0 w-100 h-100">
+        <div class="luxury-pattern opacity-3"></div>
+    </div>
+
+    <div class="container position-relative z-2 py-12 py-lg-14">
 
         <!-- Section header -->
         <div class="row justify-content-center mb-10 mb-lg-12">
-            <div class="col-lg-8 col-xl-7 text-center">
-                <div class="luxury-divider mb-6" data-aos="fade-down">
-                    <span class="divider-dot"></span>
+            <div class="col-lg-10 col-xl-9 text-center">
+                <div class="section-header-premium">
+                    <h2 class="display-4 fw-light mb-4 letter-spacing-3 text-charcoal">
+                        <span class="fw-normal">SPECIALIST</span>
+                        <span class="d-block fw-light">ARTISANS</span>
+                    </h2>
+                    <div class="luxury-divider mx-auto mb-5">
+                        <span class="divider-dot"></span>
+                        <span class="divider-line"></span>
+                        <span class="divider-dot"></span>
+                    </div>
+                    <p class="text-charcoal-light fw-light fs-5 mb-0 opacity-75 max-width-md mx-auto">
+                        Master craftsmen delivering precision and perfection in every installation
+                    </p>
                 </div>
-                <h2 class="section-heading text-charcoal mb-4" data-aos="fade-up">SPECIALIST TEAM</h2>
-                <p class="section-subheading text-grey mb-0" data-aos="fade-up" data-aos-delay="200">
-                    Skilled professionals delivering precision on every installation
-                </p>
             </div>
         </div>
 
-        <!-- Team grid -->
+        <!-- Premium team grid with enhanced interactions -->
         <div class="row g-4 g-md-5">
             {% for member in associates %}
             <div class="col-6 col-md-4 col-lg-3">
 
-                <div class="specialist-card"
+                <div class="specialist-card bg-white border-0 p-4 text-center h-100
+                         transition-premium hover-lift"
                      data-aos="fade-up"
                      data-aos-delay="{{ forloop.counter|add:"-1"|multiply:"75" }}"
-                     data-aos-duration="800">
+                     data-cursor-hover="preview">
 
-                    <!-- Profile -->
-                    <div class="specialist-image-wrapper mb-4">
-                        <div class="specialist-ring"></div>
-                        <img src="{{ member.profile_image.url }}"
-                             alt="{{ member.get_full_name }}"
-                             class="specialist-image">
-                        <div class="specialist-overlay"></div>
+                    <!-- Profile image with premium overlay -->
+                    <div class="mb-5 position-relative">
+                        <div class="specialist-image-container mx-auto">
+                            <div class="image-frame"></div>
+                            <div class="specialist-image mx-auto rounded-circle overflow-hidden"
+                                 style="width: 120px; height: 120px;">
+                                <img src="{{ member.profile_image.url }}"
+                                     alt="{{ member.get_full_name }}"
+                                     class="w-100 h-100 object-fit-cover transition-premium">
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Content -->
-                    <div class="specialist-content">
-                        <h6 class="specialist-name">{{ member.get_full_name }}</h6>
-                        <p class="specialist-title text-orange mb-4">{{ member.job_title }}</p>
+                    <!-- Content with premium typography -->
+                    <div class="card-body p-0">
+                        <h6 class="fs-5 fw-normal mb-2 letter-spacing-2 text-charcoal">
+                            {{ member.get_full_name }}
+                        </h6>
+                        
+                        <p class="text-orange small fw-medium mb-4 letter-spacing-1 opacity-90">
+                            {{ member.job_title|upper }}
+                        </p>
 
+                        <!-- Specializations with premium chips -->
                         {% if member.specializations %}
-                        <div class="specialization-tags mb-5">
-                            {% for spec in member.specializations|slice:":2" %}
-                            <span class="spec-tag">{{ spec }}</span>
+                        <div class="specializations mb-5">
+                            {% for spec in member.specializations|slice:":3" %}
+                            <span class="specialization-chip bg-charcoal-soft text-charcoal border-0 
+                                         small fw-light rounded-none px-3 py-1 me-1 mb-1 opacity-90">
+                                {{ spec }}
+                            </span>
                             {% endfor %}
                         </div>
                         {% endif %}
 
-                        <!-- Link -->
-                        <a href="{{ member.get_absolute_url }}" class="specialist-link">
-                            <span>View Profile</span>
-                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="link-arrow">
-                                <path d="M7 0L5.8 1.2L10.2 5.6H0V7.6H10.2L5.8 12L7 13.2L13.2 7L7 0Z" fill="currentColor"/>
-                            </svg>
+                        <!-- Elegant view profile link -->
+                        <a href="{{ member.get_absolute_url }}"
+                           class="view-profile-link text-charcoal p-0 fw-medium letter-spacing-1
+                                  text-decoration-none transition-premium hover-orange">
+                            <span class="d-inline-flex align-items-center">
+                                <span>VIEW PROFILE</span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="ms-2">
+                                    <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" 
+                                          fill="currentColor"/>
+                                </svg>
+                            </span>
                         </a>
                     </div>
 
@@ -204,66 +294,92 @@
     </div>
 </section>
 
-<!-- VALUES - Premium dark section -->
-<section class="values-section position-relative overflow-hidden" style="background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);">
+<!-- VALUES SECTION - Premium Dark Experience -->
+<section class="values-section bg-charcoal text-white position-relative overflow-hidden">
+    <!-- Animated gradient background -->
+    <div class="luxury-gradient-dark position-absolute top-0 start-0 w-100 h-100"></div>
     
-    <!-- Animated background -->
-    <div class="position-absolute top-0 start-0 w-100 h-100">
-        <div class="luxury-dots-pattern"></div>
+    <!-- Decorative geometric shapes -->
+    <div class="position-absolute top-0 end-0 w-30 h-100 opacity-5">
+        <div class="geometric-shapes"></div>
     </div>
 
-    <!-- Orange accent gradient -->
-    <div class="orange-gradient-accent"></div>
-
-    <div class="container position-relative z-3 py-12 py-lg-15">
+    <div class="container position-relative z-2 py-12 py-lg-14">
         <div class="row align-items-center g-8 g-lg-10">
 
-            <!-- Left column -->
-            <div class="col-lg-6 mb-8 mb-lg-0">
-                <div class="pe-lg-5" data-aos="fade-right" data-aos-duration="1000">
-                    
+            <!-- Left column with premium content -->
+            <div class="col-lg-5 mb-8 mb-lg-0">
+                <div class="pe-lg-6">
+                    <!-- Premium badge -->
                     <div class="mb-6">
-                        <span class="luxury-badge">
-                            <span class="badge-shine"></span>
-                            OUR VALUES
+                        <span class="badge-premium bg-orange-soft text-orange px-4 py-2.5 rounded-none 
+                                     fw-medium letter-spacing-2 border-0 border-bottom border-orange border-width-2">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="me-2">
+                                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
+                                      fill="currentColor" fill-opacity="0.8"/>
+                            </svg>
+                            CORE VALUES
                         </span>
                     </div>
 
-                    <h3 class="values-heading text-white mb-5 mb-lg-6">
-                        Craftsmanship<br>
-                        <span class="text-orange glow-text">Meeting</span><br>
-                        Technical Excellence
+                    <!-- Premium headline -->
+                    <h3 class="display-4 display-lg-3 fw-light mb-5 mb-lg-6 letter-spacing-3">
+                        <span class="d-block fw-light opacity-95">WHERE</span>
+                        <span class="d-block fw-normal text-orange mt-2">MASTERY</span>
+                        <span class="d-block fw-light opacity-95 mt-2">MEETS</span>
+                        <span class="d-block fw-normal text-orange mt-2">INNOVATION</span>
                     </h3>
 
-                    <p class="values-description text-grey-light mb-7 mb-lg-8">
-                        Luxury is never loud. It is measured through discipline, precision, and an uncompromising respect for detail.
-                    </p>
+                    <!-- Elegant quote -->
+                    <div class="luxury-quote mb-6 mb-lg-7">
+                        <p class="text-white-80 fw-light fs-5 lh-lg mb-0 opacity-90">
+                            True luxury resides in the unseen details—the disciplined precision, 
+                            uncompromising standards, and profound respect for craftsmanship that 
+                            elevate spaces beyond the ordinary.
+                        </p>
+                    </div>
 
-                    <!-- Premium CTA -->
-                    <a href="{% url 'contact:contact_us' %}" class="luxury-btn-primary">
-                        <span class="btn-glow"></span>
-                        <span class="btn-content">
-                            Meet Our Team
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="ms-2">
-                                <path d="M10 0L8.5 1.5L14 7H0V9H14L8.5 14.5L10 16L17 9L10 0Z" fill="currentColor"/>
+                    <!-- Premium CTA button with hover effect -->
+                    <a href="{% url 'contact:contact_us' %}"
+                       class="btn-premium btn-premium-orange px-6 py-3.5 fw-medium letter-spacing-2
+                              transition-premium hover-glow"
+                       style="min-height: 60px;">
+                        <span class="d-inline-flex align-items-center">
+                            <span>CONNECT WITH OUR TEAM</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="ms-3">
+                                <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" 
+                                      fill="currentColor"/>
                             </svg>
                         </span>
                     </a>
                 </div>
             </div>
 
-            <!-- Values grid -->
-            <div class="col-lg-6">
+            <!-- Values grid with premium cards -->
+            <div class="col-lg-7">
                 <div class="row g-4 g-md-5">
                     {% for value in values %}
-                    <div class="col-md-6" data-aos="fade-left" data-aos-delay="{{ forloop.counter|multiply:"150" }}" data-aos-duration="1000">
-                        <div class="value-card">
-                            <div class="value-card-border"></div>
-                            <div class="value-card-glow"></div>
-                            <h5 class="value-title text-white mb-4">{{ value.title }}</h5>
-                            <p class="value-description text-grey-light mb-0">
+                    <div class="col-md-6">
+                        <div class="value-card bg-white bg-opacity-5 rounded-0 p-5 h-100 
+                                 border border-white border-opacity-10 transition-premium hover-glow-soft"
+                             data-aos="fade-left"
+                             data-aos-delay="{{ forloop.counter|add:"-1"|multiply:"100" }}">
+                            
+                            <!-- Value number with premium styling -->
+                            <div class="value-number mb-4">
+                                <span class="text-orange opacity-80 fw-light display-6">0{{ forloop.counter }}</span>
+                            </div>
+                            
+                            <h5 class="fs-4 fw-normal mb-4 letter-spacing-2 text-white">
+                                {{ value.title|upper }}
+                            </h5>
+                            
+                            <p class="text-white-70 small fw-light lh-base mb-0 opacity-80">
                                 {{ value.description }}
                             </p>
+                            
+                            <!-- Subtle accent line -->
+                            <div class="accent-line mt-5"></div>
                         </div>
                     </div>
                     {% endfor %}
@@ -275,584 +391,424 @@
 </section>
 
 <style>
-    /* ============================================
-       LUXURY COLOR SYSTEM - CHARCOAL & ORANGE
-       ============================================ */
+    /* ===== LUXURY COLOR SYSTEM ===== */
     :root {
-        --charcoal: #1a1a1a;
-        --charcoal-light: #2d2d2d;
-        --charcoal-dark: #0d0d0d;
+        --charcoal: #1A1A1A;
+        --charcoal-light: #2D2D2D;
+        --charcoal-subtle: #F5F5F5;
+        --charcoal-soft: rgba(26, 26, 26, 0.05);
         --orange: #FF6B35;
-        --orange-light: #FF8C61;
-        --orange-dark: #E55A2B;
-        --grey: #666666;
-        --grey-light: #999999;
-        --grey-lighter: #cccccc;
-        --white: #ffffff;
-        
-        /* Premium transitions */
-        --transition-smooth: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        --transition-swift: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        --orange-light: #FF8B5C;
+        --orange-soft: rgba(255, 107, 53, 0.1);
+        --orange-glow: rgba(255, 107, 53, 0.3);
+        --transition-premium: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* ============================================
-       TYPOGRAPHY - LUXURY HIERARCHY
-       ============================================ */
-    .luxury-heading {
-        font-size: clamp(2.5rem, 5vw, 4.5rem);
-        font-weight: 300;
-        letter-spacing: -0.02em;
-        line-height: 1.1;
-        color: var(--white);
-        margin: 0;
+    /* ===== PREMIUM TYPOGRAPHY ===== */
+    .letter-spacing-1 { letter-spacing: 0.5px; }
+    .letter-spacing-2 { letter-spacing: 1px; }
+    .letter-spacing-3 { letter-spacing: 1.5px; }
+    
+    .text-white-80 { color: rgba(255, 255, 255, 0.8); }
+    .text-white-70 { color: rgba(255, 255, 255, 0.7); }
+    .text-charcoal { color: var(--charcoal); }
+    .text-charcoal-light { color: var(--charcoal-light); }
+    .text-orange { color: var(--orange); }
+    
+    .bg-charcoal { background-color: var(--charcoal); }
+    .bg-charcoal-subtle { background-color: var(--charcoal-subtle); }
+    .bg-charcoal-soft { background-color: var(--charcoal-soft); }
+    .bg-orange-soft { background-color: var(--orange-soft); }
+    
+    .border-charcoal-subtle { border-color: rgba(26, 26, 26, 0.1); }
+    .border-orange { border-color: var(--orange); }
+
+    /* ===== PREMIUM ANIMATIONS ===== */
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
-    .section-heading {
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 300;
-        letter-spacing: 0.05em;
-        line-height: 1.2;
-        margin: 0;
+    .animate-fade-up {
+        opacity: 0;
+        animation: fadeUp 0.8s var(--transition-premium) forwards;
+        animation-delay: var(--animation-delay, 0s);
     }
 
-    .values-heading {
-        font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-        font-weight: 300;
-        letter-spacing: -0.01em;
-        line-height: 1.15;
+    /* ===== LUXURY GRADIENTS & BACKGROUNDS ===== */
+    .luxury-gradient-bg {
+        background: linear-gradient(135deg, var(--charcoal) 0%, #0A0A0A 100%);
+    }
+    
+    .luxury-gradient-dark {
+        background: linear-gradient(135deg, #0A0A0A 0%, var(--charcoal) 100%);
+    }
+    
+    .gradient-overlay {
+        background: linear-gradient(90deg, transparent 0%, var(--orange-glow) 50%, transparent 100%);
+        opacity: 0.1;
+        height: 100%;
     }
 
-    .luxury-lead {
-        font-size: clamp(1.125rem, 2vw, 1.375rem);
-        font-weight: 300;
-        line-height: 1.7;
-        letter-spacing: 0.01em;
+    .geometric-accent {
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            var(--orange) 10px,
+            var(--orange) 20px
+        );
+        height: 100%;
+        opacity: 0.03;
     }
 
-    .section-subheading {
-        font-size: clamp(1rem, 1.5vw, 1.25rem);
-        font-weight: 300;
-        line-height: 1.6;
-    }
-
-    .values-description {
-        font-size: clamp(1.125rem, 2vw, 1.375rem);
-        font-weight: 300;
-        line-height: 1.7;
-    }
-
-    /* ============================================
-       PREMIUM EFFECTS
-       ============================================ */
-    .text-orange {
-        color: var(--orange);
-    }
-
-    .text-charcoal {
-        color: var(--charcoal);
-    }
-
-    .text-grey {
-        color: var(--grey);
-    }
-
-    .text-grey-light {
-        color: var(--grey-light);
-    }
-
-    .glow-text {
-        text-shadow: 0 0 40px rgba(255, 107, 53, 0.3);
-        animation: pulseGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes pulseGlow {
-        0%, 100% { text-shadow: 0 0 40px rgba(255, 107, 53, 0.3); }
-        50% { text-shadow: 0 0 60px rgba(255, 107, 53, 0.5); }
-    }
-
-    /* ============================================
-       HERO SECTION
-       ============================================ */
-    .luxury-accent {
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
-        filter: blur(60px);
-        animation: floatAccent 8s ease-in-out infinite;
-    }
-
-    .floating-orb {
-        width: 300px;
-        height: 300px;
-        bottom: -100px;
-        left: -100px;
-        background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-        border-radius: 50%;
-        filter: blur(50px);
-        animation: floatOrb 10s ease-in-out infinite;
-    }
-
-    @keyframes floatAccent {
-        0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(-30px, 30px); }
-    }
-
-    @keyframes floatOrb {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        50% { transform: translate(20px, -20px) scale(1.1); }
-    }
-
-    .luxury-grid {
+    .luxury-pattern {
         background-image: 
-            linear-gradient(rgba(255, 107, 53, 0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 107, 53, 0.05) 1px, transparent 1px);
-        background-size: 50px 50px;
-        animation: gridMove 20s linear infinite;
+            radial-gradient(circle at 1px 1px, rgba(26, 26, 26, 0.1) 1px, transparent 0);
+        background-size: 24px 24px;
     }
 
-    @keyframes gridMove {
-        0% { background-position: 0 0; }
-        100% { background-position: 50px 50px; }
-    }
-
-    /* Premium badge */
-    .luxury-badge {
-        display: inline-block;
-        position: relative;
-        padding: 12px 32px;
-        background: rgba(255, 107, 53, 0.1);
-        border: 1px solid rgba(255, 107, 53, 0.3);
-        border-radius: 100px;
-        font-size: 0.75rem;
-        font-weight: 500;
-        letter-spacing: 0.15em;
-        color: var(--orange);
-        overflow: hidden;
-    }
-
-    .badge-shine {
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        animation: shine 3s ease-in-out infinite;
-    }
-
-    @keyframes shine {
-        0% { left: -100%; }
-        100% { left: 200%; }
-    }
-
-    /* Scroll indicator */
-    .scroll-indicator {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        opacity: 0.5;
-        animation: scrollBounce 2s ease-in-out infinite;
-    }
-
-    .scroll-line {
-        width: 1px;
-        height: 60px;
-        background: linear-gradient(to bottom, var(--orange), transparent);
-    }
-
-    @keyframes scrollBounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(10px); }
-    }
-
-    /* ============================================
-       SECTION DIVIDER
-       ============================================ */
-    .luxury-divider {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-    }
-
-    .divider-dot {
-        width: 8px;
-        height: 8px;
-        background: var(--orange);
-        border-radius: 50%;
-        box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
-        animation: dotPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes dotPulse {
-        0%, 100% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.3); opacity: 0.7; }
-    }
-
-    /* ============================================
-       LEADERSHIP CARDS
-       ============================================ */
+    /* ===== PREMIUM CARDS ===== */
     .luxury-card {
-        position: relative;
-        background: var(--white);
-        border-radius: 0;
-        padding: 3rem 2.5rem;
-        height: 100%;
-        overflow: hidden;
-        transition: all var(--transition-smooth);
-        border: 1px solid rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(26, 26, 26, 0.08);
+        transition: all var(--transition-premium);
     }
 
     .luxury-card:hover {
-        transform: translateY(-12px);
-        box-shadow: 
-            0 30px 60px rgba(0, 0, 0, 0.12),
-            0 0 0 1px rgba(255, 107, 53, 0.1);
+        border-color: var(--orange);
+        box-shadow: 0 20px 60px rgba(26, 26, 26, 0.1);
     }
 
-    .card-shine {
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.05), transparent);
-        transition: all 0.8s ease;
-        z-index: 1;
+    .hover-lift-shadow:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 30px 80px rgba(26, 26, 26, 0.15);
     }
 
-    .luxury-card:hover .card-shine {
-        left: 150%;
+    .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px rgba(26, 26, 26, 0.1);
     }
 
-    /* Profile styling */
-    .profile-wrapper {
+    .hover-glow:hover {
+        box-shadow: 0 0 30px var(--orange-glow);
+    }
+
+    .hover-glow-soft:hover {
+        box-shadow: 0 0 40px rgba(255, 107, 53, 0.2);
+    }
+
+    /* ===== PREMIUM PROFILE ELEMENTS ===== */
+    .profile-container-premium {
         position: relative;
-        width: 160px;
-        height: 160px;
+        width: 180px;
+        height: 180px;
     }
 
     .profile-ring {
         position: absolute;
-        inset: -4px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--orange), var(--orange-light));
-        opacity: 0;
-        transition: all var(--transition-smooth);
-        animation: rotate 10s linear infinite;
-    }
-
-    @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-
-    .luxury-card:hover .profile-ring {
-        opacity: 1;
-        filter: blur(8px);
-    }
-
-    .profile-image-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        overflow: hidden;
-        z-index: 2;
-    }
-
-    .profile-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: all var(--transition-smooth);
-    }
-
-    .luxury-card:hover .profile-image {
-        transform: scale(1.08);
-    }
-
-    .profile-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), transparent);
-        opacity: 0;
-        transition: all var(--transition-smooth);
-    }
-
-    .luxury-card:hover .profile-overlay {
-        opacity: 1;
-    }
-
-    /* Experience badge */
-    .experience-badge {
-        position: absolute;
-        bottom: -10px;
+        top: 50%;
         left: 50%;
-        transform: translateX(-50%);
-        background: var(--charcoal);
-        color: var(--white);
-        padding: 8px 24px;
-        border-radius: 100px;
-        font-size: 0.7rem;
-        font-weight: 600;
-        letter-spacing: 0.1em;
-        white-space: nowrap;
-        z-index: 3;
-        overflow: hidden;
+        transform: translate(-50%, -50%);
+        border: 1px solid var(--orange);
+        border-radius: 50%;
+        opacity: 0.3;
     }
 
-    .badge-line {
+    .profile-ring-1 {
+        width: 180px;
+        height: 180px;
+        animation: pulse-ring 4s ease-in-out infinite;
+    }
+
+    .profile-ring-2 {
+        width: 200px;
+        height: 200px;
+        opacity: 0.1;
+        animation: pulse-ring 4s ease-in-out infinite 0.5s;
+    }
+
+    .profile-frame-premium {
+        position: relative;
+        z-index: 2;
+        border: 2px solid white;
+        box-shadow: 0 10px 40px rgba(26, 26, 26, 0.2);
+    }
+
+    .frame-overlay {
         position: absolute;
-        bottom: 0;
+        top: 0;
         left: 0;
         width: 100%;
-        height: 2px;
-        background: var(--orange);
-        transform: translateX(-100%);
-        transition: transform var(--transition-smooth);
+        height: 100%;
+        background: linear-gradient(45deg, transparent 0%, rgba(255, 107, 53, 0.1) 100%);
+        z-index: 1;
     }
 
-    .luxury-card:hover .badge-line {
-        transform: translateX(0);
-    }
-
-    /* Card content */
-    .card-content {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        height: calc(100% - 160px);
-    }
-
-    .member-name {
-        font-size: 1.5rem;
-        font-weight: 400;
-        letter-spacing: 0.02em;
-        color: var(--charcoal);
-        margin-bottom: 0.75rem;
-    }
-
-    .member-title {
+    /* ===== PREMIUM BUTTONS ===== */
+    .btn-premium {
+        border: 1px solid;
+        background: transparent;
         font-size: 0.875rem;
-        font-weight: 500;
-        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transition: all var(--transition-premium);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-premium-orange {
+        border-color: var(--orange);
+        color: white;
+        background: var(--orange);
+    }
+
+    .btn-premium-orange:hover {
+        background: var(--orange-light);
+        border-color: var(--orange-light);
+        color: white;
+    }
+
+    .btn-premium-outline-charcoal {
+        border-color: var(--charcoal);
+        color: var(--charcoal);
+    }
+
+    .btn-premium-outline-charcoal:hover {
+        background: var(--charcoal);
+        color: white;
+        border-color: var(--charcoal);
+    }
+
+    .hover-transform-right:hover {
+        transform: translateX(8px);
+    }
+
+    /* ===== PREMIUM DIVIDERS & DECORATIONS ===== */
+    .divider-elegant {
+        display: flex;
+        align-items: center;
+        width: 120px;
+    }
+
+    .line-primary {
+        flex: 1;
+        height: 1px;
+        background: var(--charcoal);
+        opacity: 0.2;
+    }
+
+    .dot-orange {
+        width: 6px;
+        height: 6px;
+        background: var(--orange);
+        border-radius: 50%;
+        margin: 0 12px;
+    }
+
+    .luxury-divider {
+        display: flex;
+        align-items: center;
+        width: 100px;
+    }
+
+    .luxury-divider .divider-dot {
+        width: 4px;
+        height: 4px;
+        background: var(--orange);
+        border-radius: 50%;
+    }
+
+    .luxury-divider .divider-line {
+        flex: 1;
+        height: 1px;
+        background: var(--charcoal);
+        opacity: 0.2;
+        margin: 0 8px;
+    }
+
+    /* ===== PREMIUM BADGES ===== */
+    .badge-premium {
+        font-size: 0.75rem;
         text-transform: uppercase;
     }
 
-    .member-bio {
-        font-size: 0.95rem;
-        line-height: 1.7;
-        flex-grow: 1;
-    }
-
-    /* Luxury button */
-    .luxury-btn {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        padding: 14px 32px;
-        background: transparent;
-        border: 1px solid var(--charcoal);
-        border-radius: 100px;
-        text-decoration: none;
-        overflow: hidden;
+    /* ===== SPECIALIZATION CHIPS ===== */
+    .specialization-chip {
+        display: inline-block;
+        font-size: 0.75rem;
         transition: all var(--transition-smooth);
     }
 
-    .btn-bg {
-        position: absolute;
-        inset: 0;
-        background: var(--charcoal);
-        transform: translateY(100%);
-        transition: transform var(--transition-smooth);
+    .specialization-chip:hover {
+        background: var(--orange) !important;
+        color: white !important;
     }
 
-    .luxury-btn:hover .btn-bg {
-        transform: translateY(0);
-    }
-
-    .btn-text {
+    /* ===== VIEW PROFILE LINK ===== */
+    .view-profile-link {
         position: relative;
-        display: flex;
-        align-items: center;
-        gap: 8px;
         font-size: 0.875rem;
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        color: var(--charcoal);
-        transition: color var(--transition-smooth);
+        text-transform: uppercase;
     }
 
-    .luxury-btn:hover .btn-text {
-        color: var(--white);
+    .view-profile-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--orange);
+        transition: width var(--transition-premium);
     }
 
-    .btn-arrow {
-        transition: transform var(--transition-swift);
+    .view-profile-link:hover::after {
+        width: 100%;
     }
 
-    .luxury-btn:hover .btn-arrow {
-        transform: translateX(4px);
+    .hover-orange:hover {
+        color: var(--orange) !important;
     }
 
-    /* ============================================
-       SPECIALIST CARDS
-       ============================================ */
-    .specialist-card {
-        text-align: center;
-        transition: all var(--transition-smooth);
-    }
-
-    .specialist-card:hover {
-        transform: translateY(-8px);
-    }
-
-    .specialist-image-wrapper {
+    /* ===== VALUE CARDS ===== */
+    .value-card {
         position: relative;
-        width: 110px;
-        height: 110px;
+        transition: all var(--transition-premium);
+    }
+
+    .value-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(255, 107, 53, 0.3) !important;
+    }
+
+    .accent-line {
+        width: 40px;
+        height: 1px;
+        background: var(--orange);
+        opacity: 0.6;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes pulse-ring {
+        0%, 100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.3;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.05);
+            opacity: 0.5;
+        }
+    }
+
+    /* ===== SCROLL INDICATOR ===== */
+    .scroll-indicator {
+        position: relative;
+        width: 1px;
+        height: 60px;
         margin: 0 auto;
     }
 
-    .specialist-ring {
+    .indicator-line {
         position: absolute;
-        inset: -3px;
-        border-radius: 50%;
-        border: 2px solid var(--orange);
-        opacity: 0;
-        transform: scale(0.9);
-        transition: all var(--transition-smooth);
-    }
-
-    .specialist-card:hover .specialist-ring {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    .specialist-image {
-        width: 100%;
+        top: 0;
+        left: 50%;
+        width: 1px;
         height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-        transition: all var(--transition-smooth);
-        border: 3px solid var(--white);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        background: var(--orange);
+        opacity: 0.3;
     }
 
-    .specialist-card:hover .specialist-image {
-        transform: scale(1.05);
-        border-color: var(--orange);
-    }
-
-    .specialist-overlay {
+    .indicator-dot {
         position: absolute;
-        inset: 0;
+        top: 0;
+        left: 50%;
+        width: 3px;
+        height: 3px;
+        background: var(--orange);
         border-radius: 50%;
-        background: linear-gradient(135deg, rgba(255, 107, 53, 0.3), transparent);
-        opacity: 0;
-        transition: all var(--transition-smooth);
+        transform: translateX(-50%);
+        animation: scroll-indicator 2s ease-in-out infinite;
     }
 
-    .specialist-card:hover .specialist-overlay {
-        opacity: 1;
+    @keyframes scroll-indicator {
+        0% {
+            top: 0;
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            top: 100%;
+            opacity: 0;
+        }
     }
 
-    .specialist-name {
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--charcoal);
-        margin-bottom: 0.5rem;
-        letter-spacing: 0.01em;
+    /* ===== UTILITY CLASSES ===== */
+    .rounded-none { border-radius: 0 !important; }
+    .border-width-2 { border-width: 2px !important; }
+    .max-width-md { max-width: 500px; }
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
-    .specialist-title {
-        font-size: 0.8rem;
-        font-weight: 500;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+    .py-12 { padding-top: 6rem; padding-bottom: 6rem; }
+    .py-14 { padding-top: 8rem; padding-bottom: 8rem; }
+    .mb-10 { margin-bottom: 6rem; }
+    .mb-12 { margin-bottom: 8rem; }
+
+    /* ===== MOBILE OPTIMIZATION ===== */
+    @media (max-width: 768px) {
+        .display-3 { font-size: 2.25rem; }
+        .display-4 { font-size: 1.875rem; }
+        .letter-spacing-2 { letter-spacing: 0.75px; }
+        .letter-spacing-3 { letter-spacing: 1px; }
+        
+        .profile-container-premium {
+            width: 140px;
+            height: 140px;
+        }
+        
+        .profile-ring-1 {
+            width: 140px;
+            height: 140px;
+        }
+        
+        .profile-ring-2 {
+            width: 160px;
+            height: 160px;
+        }
+        
+        .luxury-card {
+            padding: 2rem !important;
+        }
     }
 
-    /* Specialization tags */
-    .specialization-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        justify-content: center;
+    /* ===== REDUCED MOTION ===== */
+    @media (prefers-reduced-motion: reduce) {
+        .transition-premium,
+        .hover-lift-shadow,
+        .hover-lift,
+        .hover-transform-right,
+        .scale-on-hover {
+            transition: none;
+        }
+        
+        .animate-fade-up,
+        .scroll-indicator,
+        .profile-ring {
+            animation: none;
+        }
     }
+</style>
 
-    .spec-tag {
-        display: inline-block;
-        padding: 4px 12px;
-        background: rgba(0, 0, 0, 0.03);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 100px;
-        font-size: 0.7rem;
-        font-weight: 500;
-        letter-spacing: 0.05em;
-        color: var(--grey);
-        transition: all var(--transition-swift);
-    }
-
-    .specialist-card:hover .spec-tag {
-        background: rgba(255, 107, 53, 0.1);
-        border-color: rgba(255, 107, 53, 0.3);
-        color: var(--orange);
-    }
-
-    /* Specialist link */
-    .specialist-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: var(--charcoal);
-        text-decoration: none;
-        letter-spacing: 0.03em;
-        transition: all var(--transition-swift);
-    }
-
-    .specialist-link:hover {
-        color: var(--orange);
-        gap: 10px;
-    }
-
-    .link-arrow {
-        transition: transform var(--transition-swift);
-    }
-
-    .specialist-link:hover .link-arrow {
-        transform: translateX(3px);
-    }
-
-    /* ============================================
-       VALUES SECTION
-       ============================================ */
-    .luxury-dots-pattern {
-        background-image: radial-gradient(circle, rgba(255, 107, 53, 0.05) 1px, transparent 1px);
-        background-size: 30px 30px;
-        animation: dotsMove 30s linear infinite;
-    }
-
-    @keyframes dotsMove {
-        0% { background-position: 0 0; }
-        100% { background-position: 30px 30px; }
-    }
-
-    .orange-gradient-accent {
-        position: absolute;
-        bottom: -200px;
-        right: -200px;
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
-        filter: blur(80px);
-        pointer-events: none;
-    }
-
-    /* Primary CTA button */
-    .luxury-btn-primary {
-        position: relative;
-        display: inline-flex
+{% endblock %}
