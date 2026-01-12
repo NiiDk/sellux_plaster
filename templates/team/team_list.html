@@ -2,62 +2,52 @@
 {% load static %}
 {% load math_filters %}
 
-{% block title %}The Artisans | Sellux Plaster Ltd{% endblock %}
+{% block title %}Our Team | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
 
-<!-- LUXURY HERO - Charcoal & Orange Premium Experience -->
-<section class="luxury-hero position-relative bg-charcoal overflow-hidden">
-    <!-- Animated gradient background -->
-    <div class="position-absolute top-0 start-0 w-100 h-100">
-        <div class="luxury-gradient-charcoal opacity-10"></div>
-    </div>
-    
-    <!-- Geometric accents in orange -->
-    <div class="position-absolute top-20 end-15 w-16 h-16 border border-orange opacity-10 d-none d-lg-block luxury-float-slow"></div>
-    <div class="position-absolute bottom-30 start-10 w-8 h-8 bg-orange opacity-15 d-none d-lg-block luxury-float"></div>
-    
+<!-- HERO - Premium luxury experience -->
+<section class="hero-section position-relative" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
     <div class="container-fluid g-0">
-        <div class="row g-0 min-vh-85 min-vh-lg-75 d-flex align-items-center position-relative">
-            <div class="container position-relative z-10 py-16 py-lg-24">
+        <div class="row g-0 min-vh-70 min-vh-lg-60 d-flex align-items-center position-relative">
+
+            <!-- Sophisticated background elements -->
+            <div class="luxury-accent position-absolute top-0 end-0"></div>
+            <div class="floating-orb position-absolute"></div>
+            
+            <!-- Animated grid overlay -->
+            <div class="position-absolute top-0 start-0 w-100 h-100 luxury-grid opacity-10"></div>
+
+            <div class="container position-relative z-3 py-12 py-lg-15">
                 <div class="row justify-content-center">
-                    <div class="col-11 col-md-10 col-lg-9 text-center">
-                        
-                        <!-- Premium orange label -->
-                        <div class="mb-7 mb-md-9" data-aos="fade-up" data-aos-delay="100">
-                            <span class="luxury-label-orange d-inline-block fs-7 fw-medium letter-spacing-3">
-                                <span class="luxury-label-line-orange"></span>
-                                <span class="luxury-label-text px-5">MASTER ARTISANS</span>
-                                <span class="luxury-label-line-orange"></span>
+                    <div class="col-11 col-md-10 col-lg-9 col-xl-8 text-center">
+
+                        <!-- Premium badge -->
+                        <div class="mb-6 mb-md-7" data-aos="fade-down" data-aos-duration="800">
+                            <span class="luxury-badge">
+                                <span class="badge-shine"></span>
+                                PRINCIPALS & TEAM
                             </span>
                         </div>
-                        
-                        <!-- Dramatic typography with orange accent -->
-                        <h1 class="display-0 fw-light mb-6 mb-md-8 luxury-heading-charcoal"
-                            data-aos="fade-up" 
-                            data-aos-delay="200">
-                            <span class="d-block luxury-text-reveal-orange">The Hands</span>
-                            <span class="d-block fw-light text-white-80 mt-4">That Forge</span>
-                            <span class="d-block text-orange fw-normal mt-4">Perfection</span>
+
+                        <!-- Hero typography -->
+                        <h1 class="luxury-heading mb-5 mb-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            The <span class="text-orange glow-text">Artisans</span> Behind<br class="d-none d-lg-block">
+                            the Craft
                         </h1>
-                        
-                        <!-- Refined paragraph -->
-                        <div class="mx-auto" style="max-width: 620px;">
-                            <p class="text-white-70 fs-4 fw-light lh-lg mb-0 opacity-90 luxury-paragraph-reveal"
-                               data-aos="fade-up" 
-                               data-aos-delay="300">
-                                Master craftsmen and technical specialists dedicated to transforming spaces with precision, restraint, and uncompromising architectural excellence.
+
+                        <!-- Refined description -->
+                        <div class="mx-auto" style="max-width: 600px;" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                            <p class="luxury-lead text-grey-light mb-0">
+                                Master craftsmen and technical specialists dedicated to transforming spaces with precision, restraint, and architectural excellence.
                             </p>
                         </div>
-                        
-                        <!-- Orange scroll indicator -->
-                        <div class="mt-16 mt-lg-20" data-aos="fade-up" data-aos-delay="400">
-                            <div class="luxury-scroll-orange">
-                                <div class="scroll-orange-line"></div>
-                                <span class="scroll-orange-text fs-8 fw-medium letter-spacing-2 text-white-60 mt-4">EXPLORE</span>
-                            </div>
+
+                        <!-- Scroll indicator -->
+                        <div class="scroll-indicator mt-8" data-aos="fade" data-aos-delay="800">
+                            <div class="scroll-line"></div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -65,894 +55,804 @@
     </div>
 </section>
 
-<!-- LEADERSHIP - Premium Gallery with Orange Accents -->
-<section class="leadership-gallery position-relative overflow-hidden bg-charcoal-light">
-    <!-- Subtle grid pattern -->
-    <div class="position-absolute top-0 start-0 w-100 h-100 luxury-grid-texture opacity-5"></div>
+<!-- LEADERSHIP - Premium card experience -->
+<section class="leadership-section position-relative" style="background: #f5f5f5;">
     
-    <div class="container position-relative z-2 py-16 py-lg-24">
-        
-        <!-- Section header with orange divider -->
-        <div class="row justify-content-center mb-14 mb-lg-18">
-            <div class="col-lg-10 col-xl-8">
-                <div class="text-center">
-                    <div class="luxury-divider-orange-center mb-7" data-aos="fade-up">
-                        <div class="divider-orange-dot"></div>
-                        <div class="divider-orange-line mx-5"></div>
-                        <div class="divider-orange-dot"></div>
-                    </div>
-                    <h2 class="display-1 fw-light mb-6 luxury-heading-white" 
-                        data-aos="fade-up" 
-                        data-aos-delay="100">
-                        Architectural <span class="luxury-text-underline-orange">Leadership</span>
-                    </h2>
-                    <p class="text-white-70 fs-5 fw-light mx-auto opacity-80 luxury-paragraph-subtle"
-                       style="max-width: 560px;"
-                       data-aos="fade-up" 
-                       data-aos-delay="200">
-                        Visionary leadership shaped by decades of specialist experience and uncompromising standards in architectural plasterwork.
-                    </p>
+    <div class="container position-relative z-3 py-12 py-lg-15">
+
+        <!-- Section header -->
+        <div class="row justify-content-center mb-10 mb-lg-12">
+            <div class="col-lg-8 col-xl-7 text-center">
+                <div class="luxury-divider mb-6" data-aos="fade-down">
+                    <span class="divider-dot"></span>
                 </div>
+                <h2 class="section-heading text-charcoal mb-4" data-aos="fade-up">FIRM LEADERSHIP</h2>
+                <p class="section-subheading text-grey mb-0" data-aos="fade-up" data-aos-delay="200">
+                    Architectural leadership shaped by decades of specialist experience
+                </p>
             </div>
         </div>
-        
-        <!-- Premium leadership cards with orange interactions -->
-        <div class="row g-7 g-lg-9 justify-content-center">
+
+        <!-- Leadership cards -->
+        <div class="row justify-content-center g-5 g-lg-6">
             {% for member in firm_leadership %}
-            <div class="col-12 col-md-10 col-lg-4">
-                
-                <div class="luxury-leadership-card position-relative overflow-hidden
-                           bg-charcoal-dark border border-charcoal-border rounded-0
-                           transition-premium hover-card-transform-orange"
+            <div class="col-12 col-md-10 col-lg-4 mb-5 mb-lg-0">
+
+                <div class="luxury-card group"
                      data-aos="fade-up"
-                     data-aos-delay="{{ forloop.counter|add:"-1"|multiply:"150" }}">
-                    
-                    <!-- Premium image container with orange glow -->
-                    <div class="luxury-card-image-container position-relative mb-9">
-                        <div class="luxury-portrait-frame-orange mx-auto position-relative">
-                            <div class="portrait-inner-frame rounded-circle overflow-hidden
-                                      border border-3 border-charcoal-dark luxury-shadow-charcoal">
+                     data-aos-delay="{{ forloop.counter|add:"-1"|multiply:"150" }}"
+                     data-aos-duration="1000">
+
+                    <!-- Card shine effect -->
+                    <div class="card-shine"></div>
+
+                    <!-- Profile section -->
+                    <div class="position-relative mb-6">
+                        <div class="profile-wrapper mx-auto">
+                            <div class="profile-ring"></div>
+                            <div class="profile-image-container">
                                 <img src="{{ member.profile_image.url }}"
                                      alt="{{ member.get_full_name }}"
-                                     class="w-100 h-100 object-fit-cover transition-premium
-                                            scale-on-hover-delayed">
-                            </div>
-                            
-                            <!-- Orange experience badge -->
-                            <div class="position-absolute bottom-0 start-50 translate-middle-x z-3">
-                                <div class="luxury-experience-badge-orange bg-orange text-white px-5 py-2
-                                          fs-7 fw-medium letter-spacing-2 transition-premium
-                                          hover-badge-lift-orange">
-                                    {{ member.years_of_experience|default:"15+" }} years
-                                </div>
+                                     class="profile-image">
+                                <div class="profile-overlay"></div>
                             </div>
                         </div>
-                        
-                        <!-- Orange hover overlay -->
-                        <div class="luxury-image-overlay-orange"></div>
+
+                        <!-- Experience badge -->
+                        <div class="experience-badge">
+                            <span class="badge-line"></span>
+                            {{ member.years_of_experience|default:"15+" }} YEARS
+                        </div>
                     </div>
-                    
-                    <!-- Content with premium typography -->
-                    <div class="luxury-card-content px-6 pb-9">
-                        <div class="mb-5">
-                            <h3 class="fs-2 fw-normal mb-3 letter-spacing-1 luxury-name-white">
-                                {{ member.get_full_name }}
-                            </h3>
-                            <p class="text-orange fs-6 fw-medium mb-5 letter-spacing-2 opacity-90 luxury-title-orange">
-                                {{ member.job_title }}
-                            </p>
-                        </div>
-                        
-                        <p class="text-white-70 fw-light lh-lg mb-8 opacity-80 luxury-bio-white">
-                            {{ member.bio|truncatewords:32 }}
+
+                    <!-- Content -->
+                    <div class="card-content">
+                        <h4 class="member-name">{{ member.get_full_name }}</h4>
+                        <p class="member-title text-orange mb-5">{{ member.job_title }}</p>
+
+                        <p class="member-bio text-grey mb-6">
+                            {{ member.bio|truncatewords:24 }}
                         </p>
-                        
-                        <!-- Orange button with animated arrow -->
-                        <div class="mt-3">
-                            <a href="{{ member.get_absolute_url }}"
-                               class="luxury-btn luxury-btn-orange px-6 py-3 fw-medium letter-spacing-2
-                                      border-0 transition-premium hover-btn-slide-orange">
-                                <span class="d-flex align-items-center justify-content-center">
-                                    <span class="luxury-btn-text me-3">Explore Profile</span>
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="luxury-btn-arrow-orange">
-                                        <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="currentColor"/>
+
+                        <!-- CTA Button -->
+                        <div class="mt-auto">
+                            <a href="{{ member.get_absolute_url }}" class="luxury-btn">
+                                <span class="btn-bg"></span>
+                                <span class="btn-text">
+                                    View Profile
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" class="btn-arrow">
+                                        <path d="M9 0L7.5 1.5L12.75 6.75H0V9.75H12.75L7.5 15L9 16.5L16.5 9L9 0Z" fill="currentColor"/>
                                     </svg>
                                 </span>
                             </a>
                         </div>
                     </div>
-                    
-                    <!-- Orange border animation -->
-                    <div class="luxury-card-border-orange luxury-border-orange-top"></div>
-                    <div class="luxury-card-border-orange luxury-border-orange-right"></div>
-                    <div class="luxury-card-border-orange luxury-border-orange-bottom"></div>
-                    <div class="luxury-card-border-orange luxury-border-orange-left"></div>
-                    
+
                 </div>
-                
+
             </div>
             {% endfor %}
         </div>
-        
+
     </div>
 </section>
 
-<!-- SPECIALIST TEAM - Mosaic Grid with Orange Highlights -->
-<section class="specialist-mosaic bg-charcoal position-relative overflow-hidden">
-    <div class="container py-16 py-lg-24">
-        
-        <!-- Section header with orange elements -->
-        <div class="row justify-content-center mb-14 mb-lg-18">
-            <div class="col-lg-10 col-xl-8">
-                <div class="text-center">
-                    <span class="luxury-section-label-orange d-inline-block mb-6" 
-                          data-aos="fade-up"
-                          data-aos-delay="100">
-                        CRAFTSMEN & SPECIALISTS
-                    </span>
-                    <h2 class="display-1 fw-light mb-6 luxury-heading-white"
-                        data-aos="fade-up"
-                        data-aos-delay="200">
-                        Masters of <span class="text-orange">Precision</span>
-                    </h2>
-                    <div class="luxury-divider-orange-short mx-auto mb-7" data-aos="fade-up" data-aos-delay="250">
-                        <div class="divider-orange-line-short"></div>
-                    </div>
-                    <p class="text-white-70 fs-5 fw-light mx-auto opacity-80"
-                       style="max-width: 560px;"
-                       data-aos="fade-up" 
-                       data-aos-delay="300">
-                        Our specialist team brings unparalleled expertise to every project, ensuring flawless execution from concept to completion.
-                    </p>
+<!-- SPECIALIST TEAM - Refined grid -->
+<section class="specialists-section bg-white position-relative">
+    <div class="container py-12 py-lg-15">
+
+        <!-- Section header -->
+        <div class="row justify-content-center mb-10 mb-lg-12">
+            <div class="col-lg-8 col-xl-7 text-center">
+                <div class="luxury-divider mb-6" data-aos="fade-down">
+                    <span class="divider-dot"></span>
                 </div>
+                <h2 class="section-heading text-charcoal mb-4" data-aos="fade-up">SPECIALIST TEAM</h2>
+                <p class="section-subheading text-grey mb-0" data-aos="fade-up" data-aos-delay="200">
+                    Skilled professionals delivering precision on every installation
+                </p>
             </div>
         </div>
-        
-        <!-- Premium mosaic grid with orange interactions -->
-        <div class="row g-5 g-lg-6">
+
+        <!-- Team grid -->
+        <div class="row g-4 g-md-5">
             {% for member in associates %}
             <div class="col-6 col-md-4 col-lg-3">
-                
-                <div class="luxury-mosaic-card position-relative overflow-hidden
-                           bg-charcoal-light border border-charcoal-border
-                           transition-premium hover-mosaic-transform-orange"
+
+                <div class="specialist-card"
                      data-aos="fade-up"
-                     data-aos-delay="{{ forloop.counter|add:"-1"|multiply:"75" }}">
-                    
-                    <!-- Image with orange hover effect -->
-                    <div class="luxury-mosaic-image-container position-relative mb-6">
-                        <div class="mosaic-image-frame-orange mx-auto rounded-circle overflow-hidden
-                                  border border-2 border-orange border-opacity-20 luxury-shadow-charcoal">
-                            <img src="{{ member.profile_image.url }}"
-                                 alt="{{ member.get_full_name }}"
-                                 class="w-100 h-100 object-fit-cover transition-premium
-                                        mosaic-image-hover">
-                        </div>
-                        
-                        <!-- Orange gradient overlay -->
-                        <div class="luxury-mosaic-overlay-orange"></div>
+                     data-aos-delay="{{ forloop.counter|add:"-1"|multiply:"75" }}"
+                     data-aos-duration="800">
+
+                    <!-- Profile -->
+                    <div class="specialist-image-wrapper mb-4">
+                        <div class="specialist-ring"></div>
+                        <img src="{{ member.profile_image.url }}"
+                             alt="{{ member.get_full_name }}"
+                             class="specialist-image">
+                        <div class="specialist-overlay"></div>
                     </div>
-                    
-                    <!-- Content with orange accents -->
-                    <div class="luxury-mosaic-content text-center px-4">
-                        <h4 class="fs-5 fw-normal mb-3 letter-spacing-1 luxury-mosaic-name-white">
-                            {{ member.get_full_name }}
-                        </h4>
-                        <p class="text-orange fs-7 fw-medium mb-4 letter-spacing-2 opacity-90 luxury-mosaic-title-orange">
-                            {{ member.job_title }}
-                        </p>
-                        
+
+                    <!-- Content -->
+                    <div class="specialist-content">
+                        <h6 class="specialist-name">{{ member.get_full_name }}</h6>
+                        <p class="specialist-title text-orange mb-4">{{ member.job_title }}</p>
+
                         {% if member.specializations %}
-                        <div class="mb-6">
+                        <div class="specialization-tags mb-5">
                             {% for spec in member.specializations|slice:":2" %}
-                            <span class="luxury-specialty-tag-orange d-inline-block bg-charcoal-dark text-white-80 
-                                      border border-1 border-orange border-opacity-20 rounded-0 px-3 py-1 me-1 mb-1 
-                                      fs-8 fw-light letter-spacing-1 transition-premium
-                                      hover-tag-highlight-orange">
-                                {{ spec }}
-                            </span>
+                            <span class="spec-tag">{{ spec }}</span>
                             {% endfor %}
                         </div>
                         {% endif %}
-                        
-                        <!-- Orange animated link -->
-                        <a href="{{ member.get_absolute_url }}"
-                           class="luxury-mosaic-link-orange text-white-80 p-0 fw-medium letter-spacing-1
-                                  text-decoration-none transition-premium hover-link-extend-orange">
-                            <span class="d-inline-flex align-items-center luxury-link-content-orange">
-                                <span class="luxury-link-text">View Details</span>
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="luxury-link-arrow-orange ms-2">
-                                    <path d="M7 0L5.94 1.06L10.38 5.5H0V7.5H10.38L5.94 11.94L7 13L13 7L7 0Z" fill="currentColor"/>
-                                </svg>
-                            </span>
-                            <span class="luxury-link-underline-orange"></span>
+
+                        <!-- Link -->
+                        <a href="{{ member.get_absolute_url }}" class="specialist-link">
+                            <span>View Profile</span>
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="link-arrow">
+                                <path d="M7 0L5.8 1.2L10.2 5.6H0V7.6H10.2L5.8 12L7 13.2L13.2 7L7 0Z" fill="currentColor"/>
+                            </svg>
                         </a>
                     </div>
-                    
+
                 </div>
-                
+
             </div>
             {% endfor %}
         </div>
-        
+
     </div>
 </section>
 
-<!-- VALUES - Premium Dark Section with Orange Glow -->
-<section class="luxury-values-section bg-charcoal-dark text-white position-relative overflow-hidden">
-    <!-- Animated charcoal-orange background -->
-    <div class="position-absolute top-0 start-0 w-100 h-100 luxury-values-background-orange"></div>
+<!-- VALUES - Premium dark section -->
+<section class="values-section position-relative overflow-hidden" style="background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);">
     
-    <!-- Floating orange elements -->
-    <div class="position-absolute top-30 start-15 w-12 h-12 border border-orange opacity-10 luxury-float-slow d-none d-lg-block"></div>
-    <div class="position-absolute bottom-25 end-20 w-6 h-6 bg-orange opacity-20 luxury-float d-none d-lg-block"></div>
-    
-    <div class="container position-relative z-2 py-16 py-lg-24">
-        <div class="row align-items-center g-12 g-lg-16">
-            
-            <!-- Left column with orange typography -->
-            <div class="col-lg-6 mb-12 mb-lg-0">
-                <div class="pe-lg-10">
-                    <div class="mb-8" data-aos="fade-right">
-                        <span class="luxury-values-label-orange d-inline-block text-white-70">
-                            OUR PHILOSOPHY
+    <!-- Animated background -->
+    <div class="position-absolute top-0 start-0 w-100 h-100">
+        <div class="luxury-dots-pattern"></div>
+    </div>
+
+    <!-- Orange accent gradient -->
+    <div class="orange-gradient-accent"></div>
+
+    <div class="container position-relative z-3 py-12 py-lg-15">
+        <div class="row align-items-center g-8 g-lg-10">
+
+            <!-- Left column -->
+            <div class="col-lg-6 mb-8 mb-lg-0">
+                <div class="pe-lg-5" data-aos="fade-right" data-aos-duration="1000">
+                    
+                    <div class="mb-6">
+                        <span class="luxury-badge">
+                            <span class="badge-shine"></span>
+                            OUR VALUES
                         </span>
                     </div>
-                    
-                    <h3 class="display-1 fw-light mb-7 luxury-values-heading text-white"
-                        data-aos="fade-right"
-                        data-aos-delay="100">
-                        <span class="d-block">Where Artistry</span>
-                        <span class="text-orange">Meets</span>
-                        <span>Architectural Rigor</span>
+
+                    <h3 class="values-heading text-white mb-5 mb-lg-6">
+                        Craftsmanship<br>
+                        <span class="text-orange glow-text">Meeting</span><br>
+                        Technical Excellence
                     </h3>
-                    
-                    <p class="text-white-80 fs-4 fw-light lh-lg mb-10 luxury-values-paragraph opacity-90"
-                       data-aos="fade-right"
-                       data-aos-delay="200">
-                        True luxury is measured in whispers, not shouts. It is the discipline of precision, the restraint of execution, and an uncompromising respect for material, form, and space.
+
+                    <p class="values-description text-grey-light mb-7 mb-lg-8">
+                        Luxury is never loud. It is measured through discipline, precision, and an uncompromising respect for detail.
                     </p>
-                    
-                    <!-- Premium Orange CTA -->
-                    <div data-aos="fade-right" data-aos-delay="300">
-                        <a href="{% url 'contact:contact_us' %}"
-                           class="luxury-btn luxury-btn-orange-glow px-7 py-5 fw-medium letter-spacing-2
-                                  border-0 transition-premium hover-btn-glow-orange">
-                            <span class="d-inline-flex align-items-center">
-                                <span class="luxury-btn-icon-orange me-4">⟶</span>
-                                <span class="luxury-btn-text">Consult Our Artisans</span>
-                            </span>
-                        </a>
-                    </div>
+
+                    <!-- Premium CTA -->
+                    <a href="{% url 'contact:contact_us' %}" class="luxury-btn-primary">
+                        <span class="btn-glow"></span>
+                        <span class="btn-content">
+                            Meet Our Team
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="ms-2">
+                                <path d="M10 0L8.5 1.5L14 7H0V9H14L8.5 14.5L10 16L17 9L10 0Z" fill="currentColor"/>
+                            </svg>
+                        </span>
+                    </a>
                 </div>
             </div>
-            
-            <!-- Values grid with orange glass effect -->
+
+            <!-- Values grid -->
             <div class="col-lg-6">
-                <div class="row g-5 g-md-6">
+                <div class="row g-4 g-md-5">
                     {% for value in values %}
-                    <div class="col-md-6">
-                        <div class="luxury-value-card-orange position-relative
-                                 transition-premium hover-value-lift-orange"
-                             data-aos="fade-up"
-                             data-aos-delay="{{ forloop.counter|add:"-1"|multiply:"100" }}">
-                            <div class="luxury-glass-effect-orange rounded-0 p-6 h-100">
-                                <div class="position-relative z-2">
-                                    <div class="luxury-value-number-orange mb-5 text-orange fs-2 fw-light opacity-80">
-                                        0{{ forloop.counter }}
-                                    </div>
-                                    <h5 class="fs-3 fw-normal mb-5 letter-spacing-1 text-white luxury-value-title">
-                                        {{ value.title }}
-                                    </h5>
-                                    <p class="text-white-70 small fw-light lh-base mb-0 opacity-80 luxury-value-description">
-                                        {{ value.description }}
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <!-- Orange glow effect -->
-                            <div class="luxury-value-glow-orange"></div>
+                    <div class="col-md-6" data-aos="fade-left" data-aos-delay="{{ forloop.counter|multiply:"150" }}" data-aos-duration="1000">
+                        <div class="value-card">
+                            <div class="value-card-border"></div>
+                            <div class="value-card-glow"></div>
+                            <h5 class="value-title text-white mb-4">{{ value.title }}</h5>
+                            <p class="value-description text-grey-light mb-0">
+                                {{ value.description }}
+                            </p>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
             </div>
-            
+
         </div>
     </div>
 </section>
 
 <style>
-    /* Luxury Charcoal & Orange Design System */
+    /* ============================================
+       LUXURY COLOR SYSTEM - CHARCOAL & ORANGE
+       ============================================ */
     :root {
-        --transition-premium: 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-        --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        --charcoal: #1a1a1a;
+        --charcoal-light: #2d2d2d;
+        --charcoal-dark: #0d0d0d;
+        --orange: #FF6B35;
+        --orange-light: #FF8C61;
+        --orange-dark: #E55A2B;
+        --grey: #666666;
+        --grey-light: #999999;
+        --grey-lighter: #cccccc;
+        --white: #ffffff;
         
-        /* Charcoal & Orange Color Palette */
-        --color-charcoal: #1A1A1A;
-        --color-charcoal-dark: #0D0D0D;
-        --color-charcoal-light: #2A2A2A;
-        --color-charcoal-border: #333333;
-        
-        --color-orange: #FF6B35;
-        --color-orange-dark: #D85A2B;
-        --color-orange-light: #FF8B5C;
-        --color-orange-glow: rgba(255, 107, 53, 0.3);
-        
-        --color-white: #FFFFFF;
-        --color-white-60: rgba(255, 255, 255, 0.6);
-        --color-white-70: rgba(255, 255, 255, 0.7);
-        --color-white-80: rgba(255, 255, 255, 0.8);
-        --color-white-90: rgba(255, 255, 255, 0.9);
+        /* Premium transitions */
+        --transition-smooth: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        --transition-swift: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    
-    /* Luxury Typography */
-    .luxury-heading-charcoal,
-    .luxury-heading-white,
-    .luxury-values-heading {
-        font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+
+    /* ============================================
+       TYPOGRAPHY - LUXURY HIERARCHY
+       ============================================ */
+    .luxury-heading {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
         font-weight: 300;
-        letter-spacing: -1px;
-        line-height: 0.95;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        color: var(--white);
+        margin: 0;
     }
-    
-    .display-0 { font-size: 4.5rem; }
-    .display-1 { font-size: 3.5rem; }
-    
-    @media (min-width: 992px) {
-        .display-0 { font-size: 6rem; }
-        .display-1 { font-size: 5rem; }
-    }
-    
-    .luxury-paragraph-reveal,
-    .luxury-paragraph-subtle {
-        font-family: 'Inter', -apple-system, sans-serif;
+
+    .section-heading {
+        font-size: clamp(2rem, 4vw, 3rem);
         font-weight: 300;
-        letter-spacing: 0.15px;
+        letter-spacing: 0.05em;
+        line-height: 1.2;
+        margin: 0;
     }
-    
-    .fs-7 { font-size: 0.875rem; }
-    .fs-8 { font-size: 0.75rem; }
-    
-    /* Color Utilities */
-    .bg-charcoal { background-color: var(--color-charcoal); }
-    .bg-charcoal-dark { background-color: var(--color-charcoal-dark); }
-    .bg-charcoal-light { background-color: var(--color-charcoal-light); }
-    .border-charcoal-border { border-color: var(--color-charcoal-border); }
-    
-    .text-orange { color: var(--color-orange); }
-    .bg-orange { background-color: var(--color-orange); }
-    .border-orange { border-color: var(--color-orange); }
-    
-    .text-white-60 { color: var(--color-white-60); }
-    .text-white-70 { color: var(--color-white-70); }
-    .text-white-80 { color: var(--color-white-80); }
-    .text-white-90 { color: var(--color-white-90); }
-    
-    /* Premium Spacing */
-    .py-16 { padding-top: 10rem; padding-bottom: 10rem; }
-    .py-24 { padding-top: 14rem; padding-bottom: 14rem; }
-    .mb-14 { margin-bottom: 9rem; }
-    .mb-18 { margin-bottom: 12rem; }
-    .mt-16 { margin-top: 10rem; }
-    .mt-20 { margin-top: 12rem; }
-    
-    .min-vh-85 { min-height: 85vh; }
-    .min-vh-lg-75 { min-height: 75vh; }
-    
-    /* Luxury Transitions */
-    .transition-premium {
-        transition: all var(--transition-premium);
+
+    .values-heading {
+        font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+        font-weight: 300;
+        letter-spacing: -0.01em;
+        line-height: 1.15;
     }
-    
-    /* Orange Label */
-    .luxury-label-orange {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
+
+    .luxury-lead {
+        font-size: clamp(1.125rem, 2vw, 1.375rem);
+        font-weight: 300;
+        line-height: 1.7;
+        letter-spacing: 0.01em;
     }
-    
-    .luxury-label-line-orange {
-        width: 48px;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--color-orange));
-        opacity: 0.7;
+
+    .section-subheading {
+        font-size: clamp(1rem, 1.5vw, 1.25rem);
+        font-weight: 300;
+        line-height: 1.6;
     }
-    
-    .luxury-label-text {
-        font-size: 0.75rem;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: var(--color-orange);
+
+    .values-description {
+        font-size: clamp(1.125rem, 2vw, 1.375rem);
+        font-weight: 300;
+        line-height: 1.7;
     }
-    
-    /* Orange Divider */
-    .luxury-divider-orange-center {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+
+    /* ============================================
+       PREMIUM EFFECTS
+       ============================================ */
+    .text-orange {
+        color: var(--orange);
     }
-    
-    .divider-orange-dot {
-        width: 6px;
-        height: 6px;
-        background-color: var(--color-orange);
+
+    .text-charcoal {
+        color: var(--charcoal);
+    }
+
+    .text-grey {
+        color: var(--grey);
+    }
+
+    .text-grey-light {
+        color: var(--grey-light);
+    }
+
+    .glow-text {
+        text-shadow: 0 0 40px rgba(255, 107, 53, 0.3);
+        animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+        0%, 100% { text-shadow: 0 0 40px rgba(255, 107, 53, 0.3); }
+        50% { text-shadow: 0 0 60px rgba(255, 107, 53, 0.5); }
+    }
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .luxury-accent {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+        filter: blur(60px);
+        animation: floatAccent 8s ease-in-out infinite;
+    }
+
+    .floating-orb {
+        width: 300px;
+        height: 300px;
+        bottom: -100px;
+        left: -100px;
+        background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
         border-radius: 50%;
-        opacity: 0.7;
+        filter: blur(50px);
+        animation: floatOrb 10s ease-in-out infinite;
     }
-    
-    .divider-orange-line {
-        width: 80px;
-        height: 1px;
-        background: linear-gradient(90deg, var(--color-orange), transparent, var(--color-orange));
-        opacity: 0.5;
+
+    @keyframes floatAccent {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-30px, 30px); }
     }
-    
-    .luxury-divider-orange-short {
-        width: 100px;
+
+    @keyframes floatOrb {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(20px, -20px) scale(1.1); }
     }
-    
-    .divider-orange-line-short {
-        width: 60px;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--color-orange), transparent);
-        margin: 0 auto;
+
+    .luxury-grid {
+        background-image: 
+            linear-gradient(rgba(255, 107, 53, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 107, 53, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: gridMove 20s linear infinite;
     }
-    
-    /* Orange Button */
-    .luxury-btn {
+
+    @keyframes gridMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 50px 50px; }
+    }
+
+    /* Premium badge */
+    .luxury-badge {
+        display: inline-block;
         position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid transparent;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 0.875rem;
+        padding: 12px 32px;
+        background: rgba(255, 107, 53, 0.1);
+        border: 1px solid rgba(255, 107, 53, 0.3);
+        border-radius: 100px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        color: var(--orange);
         overflow: hidden;
-        min-height: 56px;
     }
-    
-    .luxury-btn::before {
-        content: '';
+
+    .badge-shine {
         position: absolute;
         top: 0;
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, 
-            transparent, 
-            rgba(255, 255, 255, 0.2), 
-            transparent);
-        transition: left 0.8s ease;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        animation: shine 3s ease-in-out infinite;
     }
-    
-    .luxury-btn:hover::before {
-        left: 100%;
+
+    @keyframes shine {
+        0% { left: -100%; }
+        100% { left: 200%; }
     }
-    
-    .luxury-btn-orange {
-        background-color: var(--color-orange);
-        color: white;
-    }
-    
-    .luxury-btn-orange:hover {
-        background-color: var(--color-orange-dark);
-        transform: translateY(-2px);
-    }
-    
-    .luxury-btn-orange-glow {
-        background-color: var(--color-orange);
-        color: white;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    /* Orange Card */
-    .luxury-leadership-card {
-        padding: 4rem 0;
-    }
-    
-    .luxury-card-border-orange {
-        position: absolute;
-        background-color: var(--color-orange);
-        opacity: 0;
-        transition: opacity var(--transition-premium);
-    }
-    
-    .luxury-border-orange-top,
-    .luxury-border-orange-bottom {
-        height: 1px;
-        width: 0;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    
-    .luxury-border-orange-top {
-        top: 0;
-    }
-    
-    .luxury-border-orange-bottom {
-        bottom: 0;
-    }
-    
-    .luxury-border-orange-left,
-    .luxury-border-orange-right {
-        width: 1px;
-        height: 0;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .luxury-border-orange-left {
-        left: 0;
-    }
-    
-    .luxury-border-orange-right {
-        right: 0;
-    }
-    
-    .hover-card-transform-orange:hover .luxury-border-orange-top,
-    .hover-card-transform-orange:hover .luxury-border-orange-bottom {
-        width: 100%;
-        opacity: 1;
-    }
-    
-    .hover-card-transform-orange:hover .luxury-border-orange-left,
-    .hover-card-transform-orange:hover .luxury-border-orange-right {
-        height: 100%;
-        opacity: 1;
-    }
-    
-    /* Orange Image Effects */
-    .luxury-portrait-frame-orange {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .portrait-inner-frame {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .luxury-image-overlay-orange {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle at center, 
-            transparent 40%, 
-            rgba(255, 107, 53, 0.08) 100%);
-        opacity: 0;
-        transition: opacity var(--transition-premium);
-        pointer-events: none;
-        z-index: 1;
-    }
-    
-    .hover-card-transform-orange:hover .luxury-image-overlay-orange {
-        opacity: 1;
-    }
-    
-    /* Orange Badge */
-    .luxury-experience-badge-orange {
-        border-radius: 0;
-        min-width: 140px;
-        background: linear-gradient(135deg, var(--color-orange), var(--color-orange-dark));
-    }
-    
-    .hover-badge-lift-orange:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 32px rgba(255, 107, 53, 0.25);
-    }
-    
-    /* Orange Mosaic Card */
-    .luxury-mosaic-card {
-        padding: 2.5rem 0;
-    }
-    
-    .mosaic-image-frame-orange {
-        width: 120px;
-        height: 120px;
-    }
-    
-    .luxury-mosaic-overlay-orange {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, 
-            rgba(255, 107, 53, 0.1) 0%, 
-            transparent 100%);
-        opacity: 0;
-        transition: opacity var(--transition-premium);
-        pointer-events: none;
-    }
-    
-    .hover-mosaic-transform-orange:hover .luxury-mosaic-overlay-orange {
-        opacity: 1;
-    }
-    
-    /* Orange Link */
-    .luxury-mosaic-link-orange {
-        position: relative;
-        display: inline-block;
-    }
-    
-    .luxury-link-underline-orange {
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background-color: var(--color-orange);
-        transition: width var(--transition-premium);
-    }
-    
-    .hover-link-extend-orange:hover .luxury-link-underline-orange {
-        width: 100%;
-    }
-    
-    /* Orange Tag */
-    .luxury-specialty-tag-orange {
-        border-radius: 0;
-    }
-    
-    .hover-tag-highlight-orange:hover {
-        background-color: var(--color-orange) !important;
-        color: white !important;
-        border-color: var(--color-orange) !important;
-        transform: translateY(-1px);
-    }
-    
-    /* Orange Values Section */
-    .luxury-values-background-orange {
-        background: linear-gradient(135deg, 
-            var(--color-charcoal-dark) 0%, 
-            #1A0D0A 50%, 
-            var(--color-charcoal-dark) 100%);
-        animation: gradientShiftOrange 20s ease infinite;
-        background-size: 300% 300%;
-    }
-    
-    @keyframes gradientShiftOrange {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    
-    /* Orange Glass Effect */
-    .luxury-glass-effect-orange {
-        background: rgba(255, 107, 53, 0.05);
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        border: 1px solid rgba(255, 107, 53, 0.1);
-    }
-    
-    .luxury-value-glow-orange {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle at center, 
-            rgba(255, 107, 53, 0.15) 0%, 
-            transparent 70%);
-        opacity: 0;
-        transition: opacity var(--transition-premium);
-        pointer-events: none;
-        z-index: 1;
-    }
-    
-    .hover-value-lift-orange:hover .luxury-value-glow-orange {
-        opacity: 1;
-    }
-    
-    /* Orange Scroll Hint */
-    .luxury-scroll-orange {
-        display: flex;
+
+    /* Scroll indicator */
+    .scroll-indicator {
+        display: inline-flex;
         flex-direction: column;
         align-items: center;
+        opacity: 0.5;
+        animation: scrollBounce 2s ease-in-out infinite;
     }
-    
-    .scroll-orange-line {
+
+    .scroll-line {
         width: 1px;
-        height: 80px;
-        background: linear-gradient(to bottom, 
-            var(--color-orange), 
-            transparent);
+        height: 60px;
+        background: linear-gradient(to bottom, var(--orange), transparent);
     }
-    
-    .scroll-orange-text {
-        opacity: 0.7;
+
+    @keyframes scrollBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(10px); }
     }
-    
-    /* Orange Shadows */
-    .luxury-shadow-charcoal {
-        box-shadow: 0 24px 72px rgba(0, 0, 0, 0.25),
-                    0 12px 40px rgba(0, 0, 0, 0.15);
+
+    /* ============================================
+       SECTION DIVIDER
+       ============================================ */
+    .luxury-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
     }
-    
-    /* Orange Animations */
-    .luxury-float {
-        animation: floatOrange 6s ease-in-out infinite;
+
+    .divider-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--orange);
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+        animation: dotPulse 2s ease-in-out infinite;
     }
-    
-    .luxury-float-slow {
-        animation: floatOrange 8s ease-in-out infinite;
+
+    @keyframes dotPulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.3); opacity: 0.7; }
     }
-    
-    @keyframes floatOrange {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-24px) rotate(2deg); }
-    }
-    
-    /* Orange Text Reveal */
-    .luxury-text-reveal-orange {
+
+    /* ============================================
+       LEADERSHIP CARDS
+       ============================================ */
+    .luxury-card {
         position: relative;
-        display: inline-block;
+        background: var(--white);
+        border-radius: 0;
+        padding: 3rem 2.5rem;
+        height: 100%;
         overflow: hidden;
+        transition: all var(--transition-smooth);
+        border: 1px solid rgba(0, 0, 0, 0.05);
     }
-    
-    .luxury-text-reveal-orange::after {
-        content: '';
+
+    .luxury-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 
+            0 30px 60px rgba(0, 0, 0, 0.12),
+            0 0 0 1px rgba(255, 107, 53, 0.1);
+    }
+
+    .card-shine {
         position: absolute;
         top: 0;
-        right: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.05), transparent);
+        transition: all 0.8s ease;
+        z-index: 1;
+    }
+
+    .luxury-card:hover .card-shine {
+        left: 150%;
+    }
+
+    /* Profile styling */
+    .profile-wrapper {
+        position: relative;
+        width: 160px;
+        height: 160px;
+    }
+
+    .profile-ring {
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--orange), var(--orange-light));
+        opacity: 0;
+        transition: all var(--transition-smooth);
+        animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .luxury-card:hover .profile-ring {
+        opacity: 1;
+        filter: blur(8px);
+    }
+
+    .profile-image-container {
+        position: relative;
         width: 100%;
         height: 100%;
-        background: var(--color-charcoal);
-        animation: textRevealOrange 1.8s cubic-bezier(0.77, 0, 0.18, 1) forwards;
+        border-radius: 50%;
+        overflow: hidden;
+        z-index: 2;
     }
-    
-    @keyframes textRevealOrange {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(100%); }
+
+    .profile-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all var(--transition-smooth);
     }
-    
-    /* Orange Underline */
-    .luxury-text-underline-orange {
-        position: relative;
-        display: inline-block;
+
+    .luxury-card:hover .profile-image {
+        transform: scale(1.08);
     }
-    
-    .luxury-text-underline-orange::after {
-        content: '';
+
+    .profile-overlay {
         position: absolute;
-        bottom: -12px;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), transparent);
+        opacity: 0;
+        transition: all var(--transition-smooth);
+    }
+
+    .luxury-card:hover .profile-overlay {
+        opacity: 1;
+    }
+
+    /* Experience badge */
+    .experience-badge {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--charcoal);
+        color: var(--white);
+        padding: 8px 24px;
+        border-radius: 100px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+        z-index: 3;
+        overflow: hidden;
+    }
+
+    .badge-line {
+        position: absolute;
+        bottom: 0;
         left: 0;
         width: 100%;
         height: 2px;
-        background: linear-gradient(90deg, transparent, var(--color-orange), transparent);
-        transform: scaleX(0);
-        transform-origin: center;
-        transition: transform var(--transition-premium);
+        background: var(--orange);
+        transform: translateX(-100%);
+        transition: transform var(--transition-smooth);
     }
-    
-    .luxury-heading-white:hover .luxury-text-underline-orange::after {
-        transform: scaleX(1);
-    }
-    
-    /* Orange Section Label */
-    .luxury-section-label-orange {
-        font-size: 0.75rem;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: var(--color-orange);
-        font-weight: 500;
-        position: relative;
-        padding-bottom: 12px;
-    }
-    
-    .luxury-section-label-orange::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--color-orange), transparent);
-        opacity: 0.7;
-    }
-    
-    /* Orange Values Label */
-    .luxury-values-label-orange {
-        font-size: 0.75rem;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        font-weight: 500;
-        color: var(--color-orange);
-    }
-    
-    /* Orange Button Glow */
-    .hover-btn-glow-orange:hover {
-        box-shadow: 0 0 80px rgba(255, 107, 53, 0.5);
-    }
-    
-    /* Orange Button Slide */
-    .hover-btn-slide-orange:hover .luxury-btn-arrow-orange {
-        transform: translateX(8px);
-    }
-    
-    /* Orange Image Hover */
-    .scale-on-hover-delayed:hover {
-        transform: scale(1.1);
-        transition-delay: 0.1s;
-    }
-    
-    /* Orange Grid Texture */
-    .luxury-grid-texture {
-        background-image: 
-            linear-gradient(rgba(255, 107, 53, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 107, 53, 0.03) 1px, transparent 1px);
-        background-size: 40px 40px;
-    }
-    
-    /* Orange Gradient Background */
-    .luxury-gradient-charcoal {
-        background: linear-gradient(135deg, 
-            rgba(255, 107, 53, 0.05) 0%, 
-            rgba(26, 26, 26, 0.8) 50%, 
-            rgba(255, 107, 53, 0.05) 100%);
-    }
-    
-    /* Orange Button Icon */
-    .luxury-btn-icon-orange {
-        font-size: 1.25rem;
-        transform: translateX(0);
-        transition: transform var(--transition-premium);
-    }
-    
-    .luxury-btn-orange-glow:hover .luxury-btn-icon-orange {
-        transform: translateX(6px);
-    }
-    
-    /* Mobile Optimizations */
-    @media (max-width: 768px) {
-        .display-0 { font-size: 3.25rem; }
-        .display-1 { font-size: 2.75rem; }
-        .fs-4 { font-size: 1.125rem; }
-        .fs-5 { font-size: 1rem; }
-        
-        .py-16 { padding-top: 6rem; padding-bottom: 6rem; }
-        .py-24 { padding-top: 9rem; padding-bottom: 9rem; }
-        .mb-14 { margin-bottom: 6rem; }
-        .mb-18 { margin-bottom: 8rem; }
-        
-        .min-vh-85 { min-height: 75vh; }
-        
-        .luxury-portrait-frame-orange {
-            width: 160px;
-            height: 160px;
-        }
-        
-        .mosaic-image-frame-orange {
-            width: 100px;
-            height: 100px;
-        }
-        
-        .luxury-btn {
-            min-height: 52px;
-            padding: 1rem 1.5rem;
-        }
-    }
-    
-    /* Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
-        .transition-premium,
-        .transition-smooth,
-        .luxury-float,
-        .luxury-float-slow,
-        .luxury-text-reveal-orange::after,
-        .luxury-values-background-orange {
-            animation: none;
-            transition: none;
-        }
-    }
-</style>
 
-{% endblock %}
+    .luxury-card:hover .badge-line {
+        transform: translateX(0);
+    }
+
+    /* Card content */
+    .card-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 160px);
+    }
+
+    .member-name {
+        font-size: 1.5rem;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        color: var(--charcoal);
+        margin-bottom: 0.75rem;
+    }
+
+    .member-title {
+        font-size: 0.875rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .member-bio {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        flex-grow: 1;
+    }
+
+    /* Luxury button */
+    .luxury-btn {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        padding: 14px 32px;
+        background: transparent;
+        border: 1px solid var(--charcoal);
+        border-radius: 100px;
+        text-decoration: none;
+        overflow: hidden;
+        transition: all var(--transition-smooth);
+    }
+
+    .btn-bg {
+        position: absolute;
+        inset: 0;
+        background: var(--charcoal);
+        transform: translateY(100%);
+        transition: transform var(--transition-smooth);
+    }
+
+    .luxury-btn:hover .btn-bg {
+        transform: translateY(0);
+    }
+
+    .btn-text {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        color: var(--charcoal);
+        transition: color var(--transition-smooth);
+    }
+
+    .luxury-btn:hover .btn-text {
+        color: var(--white);
+    }
+
+    .btn-arrow {
+        transition: transform var(--transition-swift);
+    }
+
+    .luxury-btn:hover .btn-arrow {
+        transform: translateX(4px);
+    }
+
+    /* ============================================
+       SPECIALIST CARDS
+       ============================================ */
+    .specialist-card {
+        text-align: center;
+        transition: all var(--transition-smooth);
+    }
+
+    .specialist-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .specialist-image-wrapper {
+        position: relative;
+        width: 110px;
+        height: 110px;
+        margin: 0 auto;
+    }
+
+    .specialist-ring {
+        position: absolute;
+        inset: -3px;
+        border-radius: 50%;
+        border: 2px solid var(--orange);
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all var(--transition-smooth);
+    }
+
+    .specialist-card:hover .specialist-ring {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .specialist-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        transition: all var(--transition-smooth);
+        border: 3px solid var(--white);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .specialist-card:hover .specialist-image {
+        transform: scale(1.05);
+        border-color: var(--orange);
+    }
+
+    .specialist-overlay {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(255, 107, 53, 0.3), transparent);
+        opacity: 0;
+        transition: all var(--transition-smooth);
+    }
+
+    .specialist-card:hover .specialist-overlay {
+        opacity: 1;
+    }
+
+    .specialist-name {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--charcoal);
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.01em;
+    }
+
+    .specialist-title {
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    /* Specialization tags */
+    .specialization-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: center;
+    }
+
+    .spec-tag {
+        display: inline-block;
+        padding: 4px 12px;
+        background: rgba(0, 0, 0, 0.03);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 100px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        color: var(--grey);
+        transition: all var(--transition-swift);
+    }
+
+    .specialist-card:hover .spec-tag {
+        background: rgba(255, 107, 53, 0.1);
+        border-color: rgba(255, 107, 53, 0.3);
+        color: var(--orange);
+    }
+
+    /* Specialist link */
+    .specialist-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--charcoal);
+        text-decoration: none;
+        letter-spacing: 0.03em;
+        transition: all var(--transition-swift);
+    }
+
+    .specialist-link:hover {
+        color: var(--orange);
+        gap: 10px;
+    }
+
+    .link-arrow {
+        transition: transform var(--transition-swift);
+    }
+
+    .specialist-link:hover .link-arrow {
+        transform: translateX(3px);
+    }
+
+    /* ============================================
+       VALUES SECTION
+       ============================================ */
+    .luxury-dots-pattern {
+        background-image: radial-gradient(circle, rgba(255, 107, 53, 0.05) 1px, transparent 1px);
+        background-size: 30px 30px;
+        animation: dotsMove 30s linear infinite;
+    }
+
+    @keyframes dotsMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 30px 30px; }
+    }
+
+    .orange-gradient-accent {
+        position: absolute;
+        bottom: -200px;
+        right: -200px;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+        filter: blur(80px);
+        pointer-events: none;
+    }
+
+    /* Primary CTA button */
+    .luxury-btn-primary {
+        position: relative;
+        display: inline-flex
