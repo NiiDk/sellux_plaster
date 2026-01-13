@@ -18,7 +18,6 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('', include('pages.urls')),
     path('services/', include('services.urls')),
     path('portfolio/', include('portfolio.urls')),
     path('shop/', include('catalogue.urls')), 
@@ -33,6 +32,7 @@ urlpatterns = [
     path('promotions/', include('promotions.urls')),
     path('about/', include('about.urls')),
     path('team/', include('team.urls')),
+    path('', include('pages.urls')),
     
     # Sitemap and Robots.txt (Corrected Integration)
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
