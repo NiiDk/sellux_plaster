@@ -3,7 +3,7 @@ from .models import AboutPage
 
 def about_view(request):
     # 1. Fetch the data from the database
-    about_page = AboutPage.objects.first()
+    about_page = AboutPage.objects.last()
     
     # 2. Package it into a "context" dictionary
     context = {
