@@ -1,97 +1,135 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ about_page.title|default:"Our Legacy" }} | Sellux Plaster Ltd{% endblock %}
+{% block title %}Our Story | Sellux Plaster Ltd - Home of Affordable Luxury{% endblock %}
 
 {% block content %}
 
-<section class="py-5 bg-white position-relative overflow-hidden">
-    <div class="container pt-5 pb-4">
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-9 animate__animated animate__fadeInUp">
-                <h6 class="text-primary fw-bold letter-spacing-3 text-uppercase mb-4">Since 2015</h6>
+<section class="bg-pattern-3d position-relative border-bottom pt-5 pb-5">
+    <div class="position-absolute bottom-0 start-0 w-100 h-75" style="background: linear-gradient(to top, #ffffff 0%, transparent 100%);"></div>
+
+    <div class="container position-relative z-1 pt-4 text-center">
+        <div class="animate__animated animate__fadeInUp">
+            <span class="d-inline-block border border-dark px-3 py-1 rounded-pill small fw-bold text-uppercase ls-2 mb-3 bg-white">
+                Established 2015
+            </span>
+            <h1 class="display-2 fw-bold text-dark mb-4">Crafting Refined <br><span class="text-primary">Interior Finishes.</span></h1>
+            
+            <p class="lead text-muted fs-5 opacity-75 col-lg-7 mx-auto">
+                {{ about_page.main_content|default:"Sellux Plaster Ltd is an Accra-based architectural finishing firm. For over seven years, we have redefined luxury by making it accessible through precision and master craftsmanship."|linebreaksbr }}
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-white overflow-hidden">
+    <div class="container py-5 my-lg-5">
+        <div class="row g-0 shadow-lg rounded-5 overflow-hidden border border-light-subtle">
+            <div class="col-md-6 bg-light p-5 border-end border-light">
+                <div class="p-lg-4">
+                    <span class="text-primary fw-bold text-uppercase ls-1 small d-block mb-3">Our Mission</span>
+                    <h2 class="h1 fw-bold mb-4">Timely. Precise. <br>Exemplary.</h2>
+                    <p class="text-muted fs-6 lh-lg">
+                        {{ about_page.mission|default:"To deliver exceptional drywall and interior finishing services on time and within budget." }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 bg-dark text-white p-5 position-relative">
+                <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-dots opacity-10"></div>
+                <div class="p-lg-4 position-relative z-1">
+                    <span class="text-primary fw-bold text-uppercase ls-1 small d-block mb-3">Our Vision</span>
+                    <h2 class="h1 fw-bold mb-4 text-white">The Standard <br>For Africa.</h2>
+                    <p class="text-white-50 fs-6 lh-lg">
+                        {{ about_page.vision|default:"To become the leading provider of innovative interior construction solutions across the African continent." }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if about_page.core_values.all %}
+<section class="py-5 bg-light border-bottom">
+    <div class="container py-4">
+        <div class="text-center mb-5">
+            <h6 class="text-primary fw-bold text-uppercase ls-2 mb-3">Our Principles</h6>
+            <h2 class="display-6 fw-bold">The Core <span class="text-primary">Values</span></h2>
+        </div>
+        <div class="row g-4 justify-content-center">
+            {% for value in about_page.core_values.all %}
+            <div class="col-md-6 col-lg-4">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100 border border-light-subtle transition-all hover-shadow-lg text-center">
+                    <div class="mb-3 text-primary">
+                        <i class="{{ value.icon }} fs-1"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">{{ value.title }}</h5>
+                    <p class="text-muted small mb-0">{{ value.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section class="py-5 bg-white">
+    <div class="container py-5">
+        <div class="row align-items-center g-5 mb-5 pb-5 border-bottom border-light">
+            <div class="col-lg-6">
+                <h6 class="text-primary fw-bold text-uppercase ls-2 mb-3">Our Expertise</h6>
+                <h2 class="display-5 fw-bold mb-4">Décor & Technical <br>Finishing Services</h2>
                 
-                <h1 class="display-2 fw-bold text-dark mb-4" style="line-height: 1.1;">
-                    Crafting Architectural <br>
-                    <span class="position-relative d-inline-block">
-                        <span class="position-relative z-1">Masterpieces.</span>
-                        <span class="position-absolute bottom-0 start-0 w-100 bg-primary opacity-25" style="height: 15px; transform: rotate(-1deg);"></span>
-                    </span>
-                </h1>
-                
-                <p class="lead text-muted col-lg-10 mx-auto fw-light fs-4">
-                    We don't just plaster walls; we define spaces. Precision, elegance, and integrity are the cornerstones of our craft.
+                <p class="text-muted lead fs-6">
+                    {{ about_page.professional_pedigree|default:"Our services are engineered for those who demand excellence in residential, commercial, and retail environments." }}
                 </p>
             </div>
-        </div>
-    </div>
-</section>
-
-<section class="py-5">
-    <div class="container py-4">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6 position-relative">
-                <div class="position-absolute top-0 start-0 translate-middle bg-primary rounded-circle blur-3xl opacity-10" style="width: 300px; height: 300px; filter: blur(60px);"></div>
-                
-                {% if about_page and about_page.image %}
-                    <img src="{{ about_page.image.url }}" class="img-fluid rounded-0 position-relative z-1 shadow-lg" alt="{{ about_page.title }}" style="border-bottom: 5px solid var(--primary-color);">
-                {% else %}
-                    <div class="bg-light d-flex align-items-center justify-content-center text-muted border" style="height: 400px; width: 100%;">
-                        <span class="small">Upload Image in Admin</span>
+            <div class="col-lg-6 text-center">
+                <div class="position-relative d-inline-block w-100">
+                    {% if about_page.image %}
+                        <img src="{{ about_page.image.url }}" class="rounded-5 shadow-lg w-100 grayscale-hover transition-all" alt="Sellux Expertise" style="max-height: 500px; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'images/about.png' %}" class="rounded-5 shadow-lg w-100 grayscale-hover transition-all" alt="Default Expertise">
+                    {% endif %}
+                    
+                    <div class="position-absolute bottom-0 start-0 m-4 bg-white p-3 rounded-4 shadow-sm d-none d-md-block border">
+                        <span class="d-block fw-bold text-dark">Verified Excellence</span>
+                        <small class="text-muted">Certified Plaster Specialists</small>
                     </div>
-                {% endif %}
-                
-                <div class="d-none d-lg-block position-absolute bottom-0 end-0 bg-pattern-dots" style="width: 150px; height: 150px; transform: translate(30%, 30%); z-index: -1;"></div>
-            </div>
-
-            <div class="col-lg-6 ps-lg-5">
-                <h2 class="h1 fw-bold mb-4">{{ about_page.subtitle }}</h2>
-                
-                <div class="d-flex align-items-start mb-4">
-                    <div class="bg-primary mt-2 me-3" style="width: 2px; height: 60px;"></div>
-                    <p class="text-secondary fs-5 lh-lg mb-0">
-                        {{ about_page.main_content|linebreaksbr }}
-                    </p>
                 </div>
+            </div>
+        </div>
 
-                <div class="mt-5">
-                    <h5 class="fw-bold text-uppercase ls-1 mb-3 text-primary">Professional Pedigree</h5>
-                    <p class="text-muted small lh-lg mb-0" style="max-width: 90%;">
-                        {{ about_page.professional_pedigree }}
-                    </p>
+        <div class="row g-4 mt-2">
+            <div class="col-md-4">
+                <div class="group-hover p-4 rounded-4 border border-light-subtle h-100 transition-all hover-shadow-lg">
+                    <h5 class="fw-bold text-dark mb-3 group-hover-primary">Plasterboard Systems</h5>
+                    <p class="small text-muted mb-0">High-quality gypsum boards including fire-rated, moisture-resistant, and acoustic solutions tailored for your climate.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="group-hover p-4 rounded-4 border border-light-subtle h-100 transition-all hover-shadow-lg">
+                    <h5 class="fw-bold text-dark mb-3 group-hover-primary">Acoustic Ceilings</h5>
+                    <p class="small text-muted mb-0">Custom-engineered systems designed to control reverberation and enhance visual depth in commercial or studio spaces.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="group-hover p-4 rounded-4 border border-light-subtle h-100 transition-all hover-shadow-lg">
+                    <h5 class="fw-bold text-dark mb-3 group-hover-primary">Skimming & Texturing</h5>
+                    <p class="small text-muted mb-0">Precision wall and ceiling skimming using premium compounds for a glass-smooth, paint-ready architectural finish.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-black text-white position-relative footer-pattern">
-    <div class="bg-pattern-dots position-absolute top-0 start-0 w-100 h-100 opacity-25"></div>
-
+<section class="py-5 bg-black text-white text-center position-relative">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-dots opacity-10"></div>
     <div class="container py-5 position-relative z-1">
-        <div class="row g-5">
-            <div class="col-lg-6 border-end border-secondary border-opacity-25">
-                <div class="pe-lg-5">
-                    <div class="mb-4">
-                        <i class="bi bi-bullseye fs-1 text-primary"></i>
-                    </div>
-                    <h3 class="fw-bold mb-3">Our Mission</h3>
-                    <p class="text-white-50 fs-5 lh-lg">
-                        {{ about_page.mission }}
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="ps-lg-5">
-                    <div class="mb-4">
-                        <i class="bi bi-eye fs-1 text-primary"></i>
-                    </div>
-                    <h3 class="fw-bold mb-3">Our Vision</h3>
-                    <p class="text-white-50 fs-5 lh-lg">
-                        {{ about_page.vision }}
-                    </p>
-                </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <i class="bi bi-quote fs-1 text-primary mb-4"></i>
+                <h2 class="display-6 fw-bold mb-4 italic">"The details are not the details. They make the design."</h2>
+                <span class="d-inline-block border-top border-primary pt-3 text-primary fw-bold text-uppercase ls-2">Charles Eames</span>
             </div>
         </div>
     </div>
@@ -99,78 +137,75 @@
 
 <section class="py-5 bg-light">
     <div class="container py-5">
-        <div class="row mb-5">
-            <div class="col-lg-6">
-                <h2 class="display-5 fw-bold mb-3">Our Core <span class="text-primary">Values</span></h2>
-                <p class="text-muted fs-5">The guiding principles that define our commitment to excellence.</p>
-            </div>
+        <div class="text-center mb-5 pb-4">
+            <h2 class="display-5 fw-bold">The Project <span class="text-primary">Lifecycle</span></h2>
+            <p class="text-muted">How we transition from initial concept to a finished masterpiece.</p>
         </div>
-
         <div class="row g-4">
-            {% if about_page %}
-                {% for value in about_page.core_values.all %}
-                <div class="col-md-6 col-lg-3">
-                    <div class="advantage-card h-100 d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="mb-4 text-primary">
-                                <i class="{{ value.icon }} fs-2"></i>
-                            </div>
-                            <h4 class="h5 fw-bold mb-3">{{ value.title }}</h4>
-                            <p class="text-muted small mb-0">{{ value.description }}</p>
-                        </div>
-                        <div class="mt-4 pt-3 border-top border-light-subtle">
-                            <span class="small fw-bold text-uppercase text-primary" style="font-size: 0.7rem; letter-spacing: 1px;">Principle 0{{ forloop.counter }}</span>
-                        </div>
-                    </div>
+            <div class="col-md-3">
+                <div class="h-100 p-4">
+                    <h1 class="display-1 fw-bold text-primary opacity-10 mb-0">01</h1>
+                    <h5 class="fw-bold mt-n3">Assessment</h5>
+                    <p class="small text-muted">Detailed site inspection to recommend the most durable and cost-effective materials.</p>
                 </div>
-                {% empty %}
-                <div class="col-12 text-center text-muted">
-                    <p>No core values added yet in Admin.</p>
+            </div>
+            <div class="col-md-3">
+                <div class="h-100 p-4">
+                    <h1 class="display-1 fw-bold text-primary opacity-10 mb-0">02</h1>
+                    <h5 class="fw-bold mt-n3">Foundation</h5>
+                    <p class="small text-muted">Leveling and structural preparation using galvanised metal profiles for lifelong stability.</p>
                 </div>
-                {% endfor %}
-            {% endif %}
+            </div>
+            <div class="col-md-3">
+                <div class="h-100 p-4">
+                    <h1 class="display-1 fw-bold text-primary opacity-10 mb-0">03</h1>
+                    <h5 class="fw-bold mt-n3">Installation</h5>
+                    <p class="small text-muted">Precision mounting of boards or moldings by our team of 15+ trained plaster artisans.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="h-100 p-4">
+                    <h1 class="display-1 fw-bold text-primary opacity-10 mb-0">04</h1>
+                    <h5 class="fw-bold mt-n3">Authorization</h5>
+                    <p class="small text-muted">Final quality inspection and hand-over of a paint-ready, architecturally sound space.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-white border-top">
-    <div class="container py-4 text-center">
-        <p class="small text-uppercase fw-bold text-muted ls-2 mb-3">Ready to work with the best?</p>
-        <h2 class="h1 fw-bold mb-4">Let's Discuss Your Project</h2>
-        <a href="{% url 'contact:contact_us' %}" class="btn btn-primary px-5 py-3 rounded-pill fw-bold">
-            Start Conversation
-        </a>
+<section class="py-5 mb-5 bg-white">
+    <div class="container">
+        <div class="bg-primary p-5 rounded-5 shadow-lg text-center position-relative overflow-hidden">
+            <div class="position-relative z-1">
+                <h2 class="display-6 fw-bold text-dark mb-4">Experience Affordable Luxury.</h2>
+                <p class="text-dark opacity-75 mb-5 fs-5">Join hundreds of property owners in Accra who have elevated their spaces with Sellux.</p>
+                <a href="{% url 'contact:contact_us' %}" class="btn btn-dark btn-lg rounded-pill px-5 py-3 fw-bold shadow-sm">
+                    Begin Your Transformation
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 
 <style>
-    /* Spacing & Typography */
-    .letter-spacing-3 { letter-spacing: 3px; }
     .ls-1 { letter-spacing: 1px; }
     .ls-2 { letter-spacing: 2px; }
-    .blur-3xl { filter: blur(3rem); }
-
-    /* Custom Card Style */
-    .advantage-card {
-        background: #fff;
-        padding: 2rem;
-        border: 1px solid rgba(0,0,0,0.05);
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-    }
-    .advantage-card:hover {
+    .transition-all { transition: all 0.4s ease; }
+    .grayscale-hover { filter: grayscale(100%); transition: filter 0.5s ease; }
+    .grayscale-hover:hover { filter: grayscale(0%); }
+    .hover-shadow-lg:hover {
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.08) !important;
+        border-color: var(--primary-color) !important;
         transform: translateY(-5px);
-        border-color: var(--primary-color);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
     }
-
-    /* Pattern Dots */
+    .group-hover:hover .group-hover-primary { color: var(--primary-color) !important; }
+    .mt-n3 { margin-top: -1.5rem; }
+    
+    /* Ensure pattern dots work */
     .bg-pattern-dots {
-        background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-        background-size: 20px 20px;
-    }
-    .footer-pattern .bg-pattern-dots {
         background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
     }
 </style>
 
