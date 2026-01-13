@@ -17,6 +17,8 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 # 3. ALLOWED HOSTS (Fixed the missing quote here)
 ALLOWED_HOSTS = ['.selluxplaster.com', '178.128.40.175', 'localhost', '127.0.0.1']
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # CSRF Trusted Origins (Vital for forms to work on the live site)
 CSRF_TRUSTED_ORIGINS = [
     'https://selluxplaster.com', 

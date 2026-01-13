@@ -30,23 +30,31 @@
         <div class="row align-items-center g-5">
             <div class="col-lg-6 position-relative">
                 <div class="position-absolute top-0 start-0 translate-middle bg-primary rounded-circle blur-3xl opacity-10" style="width: 300px; height: 300px; filter: blur(60px);"></div>
-                <img src="{{ about_page.image.url }}" class="img-fluid rounded-0 position-relative z-1 shadow-lg" alt="{{ about_page.title }}" style="border-bottom: 5px solid var(--primary-color);">
+                
+                {% if about_page and about_page.image %}
+                    <img src="{{ about_page.image.url }}" class="img-fluid rounded-0 position-relative z-1 shadow-lg" alt="{{ about_page.title }}" style="border-bottom: 5px solid var(--primary-color);">
+                {% else %}
+                    <div class="bg-light d-flex align-items-center justify-content-center text-muted border" style="height: 400px; width: 100%;">
+                        <span class="small">Upload Image in Admin</span>
+                    </div>
+                {% endif %}
+                
                 <div class="d-none d-lg-block position-absolute bottom-0 end-0 bg-pattern-dots" style="width: 150px; height: 150px; transform: translate(30%, 30%); z-index: -1;"></div>
             </div>
 
             <div class="col-lg-6 ps-lg-5">
-                <h2 class="h1 fw-bold mb-4">{{ about_page.subtitle }}</h2>
+                <h2 class="h1 fw-bold mb-4">{{ about_page.subtitle|default:"About Sellux Plaster" }}</h2>
                 <div class="d-flex align-items-start mb-4">
                     <div class="bg-primary mt-2 me-3" style="width: 2px; height: 60px;"></div>
                     <p class="text-secondary fs-5 lh-lg mb-0">
-                        {{ about_page.main_content|linebreaksbr }}
+                        {{ about_page.main_content|default:"Content coming soon..."|linebreaksbr }}
                     </p>
                 </div>
 
                 <div class="mt-5">
                     <h5 class="fw-bold text-uppercase ls-1 mb-3 text-primary">Professional Pedigree</h5>
                     <p class="text-muted small lh-lg mb-0" style="max-width: 90%;">
-                        {{ about_page.professional_pedigree }}
+                        {{ about_page.professional_pedigree|default:"Information updating..." }}
                     </p>
                 </div>
             </div>
@@ -66,7 +74,7 @@
                     </div>
                     <h3 class="fw-bold mb-3">Our Mission</h3>
                     <p class="text-white-50 fs-5 lh-lg">
-                        {{ about_page.mission }}
+                        {{ about_page.mission|default:"Our mission is to deliver excellence." }}
                     </p>
                 </div>
             </div>
@@ -78,7 +86,7 @@
                     </div>
                     <h3 class="fw-bold mb-3">Our Vision</h3>
                     <p class="text-white-50 fs-5 lh-lg">
-                        {{ about_page.vision }}
+                        {{ about_page.vision|default:"To be the leading provider in Africa." }}
                     </p>
                 </div>
             </div>
@@ -96,22 +104,28 @@
         </div>
 
         <div class="row g-4">
-            {% for value in about_page.core_values.all %}
-            <div class="col-md-6 col-lg-3">
-                <div class="advantage-card h-100 d-flex flex-column justify-content-between">
-                    <div>
-                        <div class="mb-4 text-primary">
-                            <i class="{{ value.icon }} fs-2"></i>
+            {% if about_page %}
+                {% for value in about_page.core_values.all %}
+                <div class="col-md-6 col-lg-3">
+                    <div class="advantage-card h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="mb-4 text-primary">
+                                <i class="{{ value.icon }} fs-2"></i>
+                            </div>
+                            <h4 class="h5 fw-bold mb-3">{{ value.title }}</h4>
+                            <p class="text-muted small mb-0">{{ value.description }}</p>
                         </div>
-                        <h4 class="h5 fw-bold mb-3">{{ value.title }}</h4>
-                        <p class="text-muted small mb-0">{{ value.description }}</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-top border-light-subtle">
-                        <span class="small fw-bold text-uppercase text-primary" style="font-size: 0.7rem; letter-spacing: 1px;">Principle 0{{ forloop.counter }}</span>
+                        <div class="mt-4 pt-3 border-top border-light-subtle">
+                            <span class="small fw-bold text-uppercase text-primary" style="font-size: 0.7rem; letter-spacing: 1px;">Principle 0{{ forloop.counter }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% endfor %}
+                {% empty %}
+                <div class="col-12 text-center text-muted">
+                    <p>No core values added yet in Admin.</p>
+                </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 </section>
@@ -127,11 +141,34 @@
 </section>
 
 <style>
-    /* Local scoped styles for specific font adjustments */
+    /* Spacing & Typography */
     .letter-spacing-3 { letter-spacing: 3px; }
     .ls-1 { letter-spacing: 1px; }
     .ls-2 { letter-spacing: 2px; }
     .blur-3xl { filter: blur(3rem); }
+
+    /* Custom Card Style (Missing in original) */
+    .advantage-card {
+        background: #fff;
+        padding: 2rem;
+        border: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    }
+    .advantage-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary-color);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    /* Pattern Dots (Missing in original) */
+    .bg-pattern-dots {
+        background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+    .footer-pattern .bg-pattern-dots {
+        background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    }
 </style>
 
 {% endblock %}
