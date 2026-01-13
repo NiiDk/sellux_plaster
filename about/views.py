@@ -2,10 +2,13 @@ from django.shortcuts import render
 from .models import AboutPage
 
 def about_view(request):
-    # Get the first AboutPage object, or None if it doesn't exist
+    # 1. Fetch the data from the database
     about_page = AboutPage.objects.first()
     
+    # 2. Package it into a "context" dictionary
     context = {
         'about_page': about_page,
     }
+    
+    # 3. Send that context to the template
     return render(request, 'about/about.html', context)
