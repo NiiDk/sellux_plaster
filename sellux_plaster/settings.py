@@ -15,10 +15,14 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-sellux-plaster-key-123')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # 3. ALLOWED HOSTS (Fixed the missing quote here)
-ALLOWED_HOSTS = ['178.128.40.175', 'selluxplaster.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.selluxplaster.com', '178.128.40.175', 'localhost', '127.0.0.1']
 
 # CSRF Trusted Origins (Vital for forms to work on the live site)
-CSRF_TRUSTED_ORIGINS = ['https://selluxplaster.com', 'http://178.128.40.175']
+CSRF_TRUSTED_ORIGINS = [
+    'https://selluxplaster.com', 
+    'https://www.selluxplaster.com',
+    'http://178.128.40.175'
+]
 
 # 4. Production Security Headers (Active when DEBUG is False)
 if not DEBUG:
