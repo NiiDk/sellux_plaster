@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
-from django.views.generic.base import TemplateView
+from django.http import HttpResponse
 from .sitemaps import StaticViewSitemap
 
 # Custom Branding
@@ -14,6 +14,15 @@ admin.site.index_title = "Welcome to Sellux Plaster Business Manager"
 sitemaps = {
     'static': StaticViewSitemap,
 }
+
+def robots_txt(request):
+    content = (
+        "User-agent: *\n"
+        "Disallow: /admin/\n"
+        "Disallow: /dashboard/\n\n"
+        "Sitemap: https://selluxplaster.com/sitemap.xml"
+    )
+    return HttpResponse(content, content_type="text/plain")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,11 +42,9 @@ urlpatterns = [
     path('about/', include('about.urls')),
     path('team/', include('team.urls')),
     path('', include('pages.urls')),
-    
+    path('robots.txt', robots_txt),
     # Sitemap and Robots.txt (Corrected Integration)
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
-]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
