@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInUp">Home of Affordable <span class="text-primary">Luxury.</span></h1>
-                <p class="lead mb-5 fst-italic animate__animated animate__fadeInUp" style="animation-delay: 0.2s; font-size: 1.4rem;">Delivering architectural mastery and luxury finishes with integrity since 2017.</p>
+                <p class="lead mb-5 fst-italic animate__animated animate__fadeInUp" style="animation-delay: 0.2s; font-size: 1.4rem;">Delivering architectural mastery and luxury finishes with integrity since 2015.</p>
                 <div class="d-flex justify-content-center flex-wrap gap-3 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
                     <a href="{% url 'services:service_list' %}" class="btn btn-primary btn-lg px-5">Explore Services</a>
                     <a href="{% url 'contact:contact_us' %}" class="btn btn-outline-light btn-lg px-5">Book Consultation</a>
@@ -82,28 +82,28 @@
                 <div class="advantage-card text-center">
                     <div class="mb-3 text-primary"><i class="bi bi-award fs-1"></i></div>
                     <h4 class="h5 fw-bold">Quality Service</h4>
-                    <p class="text-muted small mb-0">We uphold the highest standards of accuracy and ethical practice in every project.</p>
+                    <p class="text-muted small mb-0">We uphold the highest standards of accuracy and ethical practice.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="advantage-card text-center">
                     <div class="mb-3 text-primary"><i class="bi bi-lightning-charge fs-1"></i></div>
                     <h4 class="h5 fw-bold">Agile Strategy</h4>
-                    <p class="text-muted small mb-0">We combine innovative techniques with traditional precision to deliver exceptional results.</p>
+                    <p class="text-muted small mb-0">Innovative techniques combined with traditional precision.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="advantage-card text-center">
                     <div class="mb-3 text-primary"><i class="bi bi-person-heart fs-1"></i></div>
                     <h4 class="h5 fw-bold">Client-Centric</h4>
-                    <p class="text-muted small mb-0">We provide tailored solutions that align with our clients' unique vision and requirements.</p>
+                    <p class="text-muted small mb-0">Tailored solutions aligning with your unique vision.</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="advantage-card text-center">
                     <div class="mb-3 text-primary"><i class="bi bi-graph-up-arrow fs-1"></i></div>
                     <h4 class="h5 fw-bold">Data-Driven</h4>
-                    <p class="text-muted small mb-0">Our approach is informed by data and analytics to ensure optimal outcomes.</p>
+                    <p class="text-muted small mb-0">Our approach is informed by data for optimal outcomes.</p>
                 </div>
             </div>
         </div>
@@ -166,7 +166,45 @@
     </div>
 </section>
 
-<section class="py-5 bg-white border-top">
+<section class="py-5 bg-light position-relative">
+    <div class="container py-4">
+        <div class="text-center mb-5">
+            <h2 class="h1 fw-bold mb-3">What Our <span class="text-primary">Clients Say</span></h2>
+            <p class="text-muted col-lg-6 mx-auto fs-5">Don't just take our word for it. Hear from our satisfied partners.</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            {% for testimonial in testimonials %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center">
+                    <div class="mb-3">
+                        <i class="bi bi-quote fs-1 text-primary opacity-25"></i>
+                    </div>
+                    <p class="text-muted mb-4 fst-italic">"{{ testimonial.description|truncatewords:30 }}"</p>
+                    <div class="d-flex align-items-center justify-content-center mt-auto">
+                        {% if testimonial.image %}
+                        <img src="{{ testimonial.image.url }}" alt="{{ testimonial.title }}" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        {% else %}
+                        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        {% endif %}
+                        <div class="text-start">
+                            <h5 class="h6 fw-bold mb-0">{{ testimonial.title }}</h5>
+                            <small class="text-primary small">Verified Client</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">
+                <p>Client testimonials will appear here.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-white">
     <div class="container py-4">
         <div class="row align-items-end mb-5">
             <div class="col-md-8">
@@ -214,20 +252,57 @@
         </div>
     </div>
 </section>
+
+{% if active_promotion %}
+<div class="modal fade" id="promoModal" tabindex="-1" aria-labelledby="promoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content overflow-hidden border-0 rounded-4 shadow-lg">
+            <div class="row g-0">
+                <div class="col-md-5 d-none d-md-block position-relative">
+                    {% if active_promotion.image %}
+                    <img src="{{ active_promotion.image.url }}" class="w-100 h-100 object-fit-cover" style="min-height: 400px; object-fit: cover;" alt="{{ active_promotion.title }}">
+                    {% else %}
+                    <div class="w-100 h-100 bg-primary d-flex align-items-center justify-content-center">
+                        <span class="text-white fw-bold">Special Offer</span>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-7">
+                    <div class="modal-header border-0 p-4">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body px-5 pb-5 pt-0 text-center text-md-start">
+                        <h6 class="text-primary text-uppercase fw-bold ls-1 mb-2">Exclusive Offer</h6>
+                        <h2 class="display-6 fw-bold mb-3">{{ active_promotion.title }}</h2>
+                        <p class="text-muted mb-4">{{ active_promotion.description }}</p>
+                        
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'catalogue:product_list' %}" class="btn btn-dark btn-lg w-100 rounded-pill">Shop Now</a>
+                        {% else %}
+                            <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg w-100 rounded-pill mb-2">Register to Claim</a>
+                            <p class="small text-muted text-center mt-2">Already have an account? <a href="{% url 'account_login' %}" class="text-primary">Login</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 {% endblock content %}
 
 {% block extra_js %}
 <script>
+    // Counter Animation Logic
     const counters = document.querySelectorAll('.count-up');
-
     const runCounter = (counter) => {
         const target = +counter.dataset.target;
         let current = 0;
-        const duration = 2000; // 2 seconds
-        const stepTime = 20; // update every 20ms
+        const duration = 2000; 
+        const stepTime = 20; 
         const steps = duration / stepTime;
         const increment = target / steps;
-
         const updateCount = () => {
             current += increment;
             if (current < target) {
@@ -239,7 +314,6 @@
         };
         updateCount();
     };
-
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -248,9 +322,22 @@
             }
         });
     }, { threshold: 0.5 });
+    counters.forEach(counter => observer.observe(counter));
 
-    counters.forEach(counter => {
-        observer.observe(counter);
+    // PROMOTION MODAL LOGIC (ADDED)
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if modal element exists (it only exists if active_promotion is true in backend)
+        const promoModalEl = document.getElementById('promoModal');
+        if (promoModalEl) {
+            // Check if user has already seen it this session (optional, remove if you want it every time)
+            if (!sessionStorage.getItem('promoSeen')) {
+                setTimeout(function() {
+                    const promoModal = new bootstrap.Modal(promoModalEl);
+                    promoModal.show();
+                    sessionStorage.setItem('promoSeen', 'true');
+                }, 3000); // 3 second delay
+            }
+        }
     });
 </script>
 {% endblock extra_js %}
