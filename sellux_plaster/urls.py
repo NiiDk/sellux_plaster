@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
-from django.views.generic import TemplateView  # Added for robots.txt
+from django.views.generic.base import TemplateView
 from .sitemaps import StaticViewSitemap
 
 # Custom Branding
