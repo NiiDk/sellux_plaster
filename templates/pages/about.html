@@ -5,43 +5,58 @@
 
 {% block content %}
 
-<section class="bg-pattern-3d position-relative border-bottom pt-5 pb-5">
-    <div class="position-absolute bottom-0 start-0 w-100 h-75" style="background: linear-gradient(to top, #ffffff 0%, transparent 100%);"></div>
-
-    <div class="container position-relative z-1 pt-4 text-center">
-        <div class="animate__animated animate__fadeInUp">
-            <span class="d-inline-block border border-dark px-3 py-1 rounded-pill small fw-bold text-uppercase ls-2 mb-3 bg-white">
-                Established 2015
-            </span>
-            <h1 class="display-2 fw-bold text-dark mb-4">Crafting Refined <br><span class="text-primary">Interior Finishes.</span></h1>
-            
-            <p class="lead text-muted fs-5 opacity-75 col-lg-7 mx-auto">
-                {{ about_page.main_content|default:"Sellux Plaster Ltd is an Accra-based architectural finishing firm. For over seven years, we have redefined luxury by making it accessible through precision and master craftsmanship."|linebreaksbr }}
-            </p>
+<!-- Premium Hero Section -->
+<section class="about-hero position-relative overflow-hidden" style="min-height: 70vh; display: flex; align-items: center; background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
+    <div class="hero-pattern position-absolute w-100 h-100"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <span class="premium-badge animate__animated animate__fadeIn">
+                    <i class="bi bi-award me-2"></i>
+                    ESTABLISHED 2017
+                </span>
+                <h1 class="about-hero-title mt-4 mb-4 animate__animated animate__fadeInUp">
+                    Crafting Refined<br>
+                    <span class="title-gradient">Interior Finishes</span>
+                </h1>
+               <p class="about-hero-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    {{ about_page.main_content|default:"An Accra-based architectural finishing firm redefining luxury through precision, master craftsmanship, and unwavering dedication to excellence."|linebreaksbr }}
+                </p>
+                <div class="hero-divider animate__animated animate__fadeIn" style="animation-delay: 0.4s;"></div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="section bg-white overflow-hidden">
-    <div class="container py-5 my-lg-5">
-        <div class="row g-0 shadow-lg rounded-5 overflow-hidden border border-light-subtle">
-            <div class="col-md-6 bg-light p-5 border-end border-light">
+<!-- Mission & Vision Section -->
+<section class="mission-vision-section py-5 my-5">
+    <div class="container py-4">
+        <div class="row g-0 shadow-premium rounded-4 overflow-hidden">
+            <div class="col-md-6 mission-card p-5">
                 <div class="p-lg-4">
-                    <span class="text-primary fw-bold text-uppercase ls-1 small d-block mb-3">Our Mission</span>
-                    <h2 class="h1 fw-bold mb-4">Timely. Precise. <br>Exemplary.</h2>
-                    <p class="text-muted fs-6 lh-lg">
-                        {{ about_page.mission|default:"To deliver exceptional drywall and interior finishing services on time and within budget." }}
+                    <div class="section-icon-wrapper mb-4">
+                        <i class="bi bi-bullseye"></i>
+                    </div>
+                    <span class="mini-badge mb-3">OUR MISSION</span>
+                    <h2 class="mission-title mb-4">Timely. Precise.<br>Exemplary.</h2>
+                    <p class="mission-text">
+                        {{ about_page.mission|default:"To deliver exceptional drywall and interior finishing services on time and within budget, exceeding client expectations through innovation and craftsmanship." }}
                     </p>
+                    <div class="mission-accent-line"></div>
                 </div>
             </div>
-            <div class="col-md-6 bg-dark text-white p-5 position-relative">
-                <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-dots opacity-10"></div>
-                <div class="p-lg-4 position-relative z-1">
-                    <span class="text-primary fw-bold text-uppercase ls-1 small d-block mb-3">Our Vision</span>
-                    <h2 class="h1 fw-bold mb-4 text-white">The Standard <br>For Africa.</h2>
-                    <p class="text-white-50 fs-6 lh-lg">
-                        {{ about_page.vision|default:"To become the leading provider of innovative interior construction solutions across the African continent." }}
+            <div class="col-md-6 vision-card p-5 position-relative">
+                <div class="vision-bg-pattern"></div>
+                <div class="p-lg-4 position-relative" style="z-index: 2;">
+                    <div class="section-icon-wrapper-light mb-4">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
+                    <span class="mini-badge-light mb-3">OUR VISION</span>
+                    <h2 class="vision-title mb-4">The Standard<br>For Africa.</h2>
+                    <p class="vision-text">
+                        {{ about_page.vision|default:"To become the leading provider of innovative interior construction solutions across the African continent, setting benchmarks for quality and excellence." }}
                     </p>
+                    <div class="vision-accent-line"></div>
                 </div>
             </div>
         </div>
@@ -49,21 +64,24 @@
 </section>
 
 {% if about_page.core_values.all %}
-<section class="py-5 bg-light border-bottom">
-    <div class="container py-4">
-        <div class="text-center mb-5">
-            <h6 class="text-primary fw-bold text-uppercase ls-2 mb-3">Our Principles</h6>
-            <h2 class="display-6 fw-bold">The Core <span class="text-primary">Values</span></h2>
+<!-- Core Values Section -->
+<section class="values-section py-5" style="background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);">
+    <div class="container py-5">
+        <div class="text-center mb-5 pb-3">
+            <span class="section-badge">OUR PRINCIPLES</span>
+            <h2 class="section-title mt-3 mb-4">The Core <span class="gradient-text">Values</span></h2>
+            <p class="section-subtitle mx-auto">Guiding principles that define our commitment to excellence</p>
         </div>
         <div class="row g-4 justify-content-center">
             {% for value in about_page.core_values.all %}
             <div class="col-md-6 col-lg-4">
-                <div class="bg-white p-4 rounded-4 shadow-sm h-100 border border-light-subtle transition-all hover-shadow-lg text-center">
-                    <div class="mb-3 text-primary">
-                        <i class="{{ value.icon }} fs-1"></i>
+                <div class="premium-value-card h-100">
+                    <div class="value-icon-wrapper">
+                        <i class="{{ value.icon }}"></i>
                     </div>
-                    <h5 class="fw-bold mb-2">{{ value.title }}</h5>
-                    <p class="text-muted small mb-0">{{ value.description }}</p>
+                    <h5 class="value-title">{{ value.title }}</h5>
+                    <p class="value-text">{{ value.description }}</p>
+                 <div class="value-shine"></div>
                 </div>
             </div>
             {% endfor %}
@@ -72,140 +90,780 @@
 </section>
 {% endif %}
 
-<section class="py-5 bg-white">
+<!-- Expertise Section -->
+<section class="expertise-section py-5 bg-white">
     <div class="container py-5">
-        <div class="row align-items-center g-5 mb-5 pb-5 border-bottom border-light">
+        <div class="row align-items-center g-5 mb-5">
             <div class="col-lg-6">
-                <h6 class="text-primary fw-bold text-uppercase ls-2 mb-3">Our Expertise</h6>
-                <h2 class="display-5 fw-bold mb-4">Décor & Technical <br>Finishing Services</h2>
-                
-                <p class="text-muted lead fs-6">
-                    {{ about_page.professional_pedigree|default:"Our services are engineered for those who demand excellence in residential, commercial, and retail environments." }}
+                <span class="section-badge">OUR EXPERTISE</span>
+                <h2 class="section-title mt-3 mb-4">Décor & Technical<br>Finishing Services</h2>
+                <p class="expertise-text">
+                    {{ about_page.professional_pedigree|default:"Our services are engineered for those who demand excellence in residential, commercial, and retail environments. We combine traditional craftsmanship with modern innovation." }}
                 </p>
+                <div class="expertise-features mt-4">
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                        <span>Certified Professional Team</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                        <span>Premium Quality Materials</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                        <span>On-Time Project Delivery</span>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6 text-center">
-                <div class="position-relative d-inline-block w-100">
+            <div class="col-lg-6">
+                <div class="expertise-image-wrapper">
                     {% if about_page.image %}
-                        <img src="{{ about_page.image.url }}" class="rounded-5 shadow-lg w-100 grayscale-hover transition-all" alt="Sellux Expertise" style="max-height: 500px; object-fit: cover;">
+                        <img src="{{ about_page.image.url }}" class="expertise-image" alt="Sellux Expertise">
                     {% else %}
-                        <img src="{% static 'images/about.png' %}" class="rounded-5 shadow-lg w-100 grayscale-hover transition-all" alt="Default Expertise">
+                        <img src="{% static 'images/about.png' %}" class="expertise-image" alt="Default Expertise">
                     {% endif %}
-                    
-                    <div class="position-absolute bottom-0 start-0 m-4 bg-white p-3 rounded-4 shadow-sm d-none d-md-block border">
-                        <span class="d-block fw-bold text-dark">Verified Excellence</span>
-                        <small class="text-muted">Certified Plaster Specialists</small>
+                    <div class="expertise-badge">
+                        <div class="badge-icon">
+                            <i class="bi bi-patch-check-fill"></i>
+                        </div>
+                        <div class="badge-content">
+                            <span class="badge-title">Verified Excellence</span>
+                            <small class="badge-subtitle">Certified Specialists</small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row g-4 mt-2">
+        <div class="row g-4 mt-4">
             <div class="col-md-4">
-                <div class="group-hover p-4 rounded-4 border border-light-subtle h-100 transition-all hover-shadow-lg">
-                    <h5 class="fw-bold text-dark mb-3 group-hover-primary">Plasterboard Systems</h5>
-                    <p class="small text-muted mb-0">High-quality gypsum boards including fire-rated, moisture-resistant, and acoustic solutions tailored for your climate.</p>
+                <div class="service-highlight-card h-100">
+                    <div class="highlight-number">01</div>
+                    <h5 class="highlight-title">Plasterboard Systems</h5>
+                    <p class="highlight-text">High-quality gypsum boards including fire-rated, moisture-resistant, and acoustic solutions tailored for your climate.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="group-hover p-4 rounded-4 border border-light-subtle h-100 transition-all hover-shadow-lg">
-                    <h5 class="fw-bold text-dark mb-3 group-hover-primary">Acoustic Ceilings</h5>
-                    <p class="small text-muted mb-0">Custom-engineered systems designed to control reverberation and enhance visual depth in commercial or studio spaces.</p>
+                <div class="service-highlight-card h-100">
+                    <div class="highlight-number">02</div>
+                    <h5 class="highlight-title">Acoustic Ceilings</h5>
+                    <p class="highlight-text">Custom-engineered systems designed to control reverberation and enhance visual depth in commercial or studio spaces.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="group-hover p-4 rounded-4 border border-light-subtle h-100 transition-all hover-shadow-lg">
-                    <h5 class="fw-bold text-dark mb-3 group-hover-primary">Skimming & Texturing</h5>
-                    <p class="small text-muted mb-0">Precision wall and ceiling skimming using premium compounds for a glass-smooth, paint-ready architectural finish.</p>
+                <div class="service-highlight-card h-100">
+                    <div class="highlight-number">03</div>
+                    <h5 class="highlight-title">Skimming & Texturing</h5>
+                    <p class="highlight-text">Precision wall and ceiling skimming using premium compounds for a glass-smooth, paint-ready architectural finish.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-black text-white text-center position-relative">
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-dots opacity-10"></div>
-    <div class="container py-5 position-relative z-1">
+<!-- Quote Section -->
+<section class="quote-section py-5 position-relative overflow-hidden" style="background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
+    <div class="quote-bg-pattern"></div>
+    <div class="container py-5 position-relative" style="z-index: 2;">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <i class="bi bi-quote fs-1 text-primary mb-4"></i>
-                <h2 class="display-6 fw-bold mb-4 italic">"The details are not the details. They make the design."</h2>
-                <span class="d-inline-block border-top border-primary pt-3 text-primary fw-bold text-uppercase ls-2">Charles Eames</span>
+            <div class="col-lg-9 text-center">
+                <div class="quote-icon-wrapper mb-4">
+                    <i class="bi bi-quote"></i>
+                </div>
+                <h2 class="quote-text">"The details are not the details. They make the design."</h2>
+                <div class="quote-divider my-4"></div>
+                <p class="quote-author">
+                    <span class="author-name">Charles Eames</span>
+                    <span class="author-title">Design Pioneer</span>
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-light">
+<!-- Project Lifecycle Section -->
+<section class="lifecycle-section py-5" style="background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);">
     <div class="container py-5">
         <div class="text-center mb-5 pb-4">
-            <h2 class="display-5 fw-bold">The Project <span class="text-primary">Lifecycle</span></h2>
-            <p class="text-muted">How we transition from initial concept to a finished masterpiece.</p>
+            <span class="section-badge">OUR PROCESS</span>
+            <h2 class="section-title mt-3 mb-4">The Project <span class="gradient-text">Lifecycle</span></h2>
+            <p class="section-subtitle mx-auto">How we transition from initial concept to a finished masterpiece</p>
         </div>
         <div class="row g-4">
-            <div class="col-md-3">
-                <div class="h-100 p-4">
-                    <h1 class="display-1 fw-bold text-primary opacity-10 mb-0">01</h1>
-                    <h5 class="fw-bold mt-n3">Assessment</h5>
-                    <p class="small text-muted">Detailed site inspection to recommend the most durable and cost-effective materials.</p>
+            <div class="col-md-6 col-lg-3">
+                <div class="lifecycle-card h-100">
+                    <div class="lifecycle-number">01</div>
+                    <h5 class="lifecycle-title">Assessment</h5>
+                    <p class="lifecycle-text">Detailed site inspection to recommend the most durable and cost-effective materials.</p>
+                    <div class="lifecycle-icon">
+                        <i class="bi bi-search"></i>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="h-100 p-4">
-                    <h1 class="display-1 fw-bold text-primary opacity-10 mb-0">02</h1>
-                    <h5 class="fw-bold mt-n3">Foundation</h5>
-                    <p class="small text-muted">Leveling and structural preparation using galvanised metal profiles for lifelong stability.</p>
+            <div class="col-md-6 col-lg-3">
+                <div class="lifecycle-card h-100">
+                    <div class="lifecycle-number">02</div>
+                    <h5 class="lifecycle-title">Foundation</h5>
+                    <p class="lifecycle-text">Leveling and structural preparation using galvanised metal profiles for lifelong stability.</p>
+                    <div class="lifecycle-icon">
+                        <i class="bi bi-tools"></i>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="h-100 p-4">
-                    <h1 class="display-1 fw-bold text-primary opacity-10 mb-0">03</h1>
-                    <h5 class="fw-bold mt-n3">Installation</h5>
-                    <p class="small text-muted">Precision mounting of boards or moldings by our team of 15+ trained plaster artisans.</p>
+            <div class="col-md-6 col-lg-3">
+                <div class="lifecycle-card h-100">
+                    <div class="lifecycle-number">03</div>
+                    <h5 class="lifecycle-title">Installation</h5>
+                    <p class="lifecycle-text">Precision mounting of boards or moldings by our team of 15+ trained plaster artisans.</p>
+                    <div class="lifecycle-icon">
+                        <i class="bi bi-hammer"></i>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="h-100 p-4">
-                    <h1 class="display-1 fw-bold text-primary opacity-10 mb-0">04</h1>
-                    <h5 class="fw-bold mt-n3">Authorization</h5>
-                    <p class="small text-muted">Final quality inspection and hand-over of a paint-ready, architecturally sound space.</p>
+            <div class="col-md-6 col-lg-3">
+                <div class="lifecycle-card h-100">
+                    <div class="lifecycle-number">04</div>
+                    <h5 class="lifecycle-title">Authorization</h5>
+                    <p class="lifecycle-text">Final quality inspection and hand-over of a paint-ready, architecturally sound space.</p>
+                    <div class="lifecycle-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 mb-5 bg-white">
+<!-- Final CTA Section -->
+<section class="about-cta-section py-5 my-5">
     <div class="container">
-        <div class="bg-primary p-5 rounded-5 shadow-lg text-center position-relative overflow-hidden">
-            <div class="position-relative z-1">
-                <h2 class="display-6 fw-bold text-dark mb-4">Experience Affordable Luxury.</h2>
-                <p class="text-dark opacity-75 mb-5 fs-5">Join hundreds of property owners in Accra who have elevated their spaces with Sellux.</p>
-                <a href="{% url 'contact:contact_us' %}" class="btn btn-dark btn-lg rounded-pill px-5 py-3 fw-bold shadow-sm">
-                    Begin Your Transformation
-                </a>
+        <div class="about-cta-box position-relative overflow-hidden">
+            <div class="cta-pattern"></div>
+            <div class="position-relative" style="z-index: 2;">
+                <div class="text-center py-5 px-4">
+                    <h2 class="cta-title mb-4">Experience Affordable<br>Luxury</h2>
+                    <p class="cta-subtitle mb-5">Join hundreds of property owners in Accra who have elevated their spaces with Sellux.</p>
+                    <a href="{% url 'contact:contact_us' %}" class="cta-button">
+                        <span>Begin Your Transformation</span>
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <style>
-    .ls-1 { letter-spacing: 1px; }
-    .ls-2 { letter-spacing: 2px; }
-    .transition-all { transition: all 0.4s ease; }
-    .grayscale-hover { filter: grayscale(100%); transition: filter 0.5s ease; }
-    .grayscale-hover:hover { filter: grayscale(0%); }
-    .hover-shadow-lg:hover {
-        box-shadow: 0 1rem 3rem rgba(0,0,0,.08) !important;
-        border-color: var(--primary-color) !important;
-        transform: translateY(-5px);
-    }
-    .group-hover:hover .group-hover-primary { color: var(--primary-color) !important; }
-    .mt-n3 { margin-top: -1.5rem; }
+    /* Premium About Page Styles */
     
-    /* Ensure pattern dots work */
-    .bg-pattern-dots {
-        background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    /* Hero Styles */
+    .hero-pattern {
+        background-image: 
+            radial-gradient(circle at 20% 30%, rgba(217, 106, 0, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(255, 123, 0, 0.06) 0%, transparent 50%);
+        z-index: 1;
+    }
+    
+    .premium-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 28px;
+        background: rgba(217, 106, 0, 0.15);
+        border: 1px solid rgba(217, 106, 0, 0.3);
+        border-radius: 50px;
+        color: #ff7b00;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        backdrop-filter: blur(10px);
+    }
+    
+    .about-hero-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.1;
+        letter-spacing: -2px;
+    }
+    
+    .title-gradient {
+        background: linear-gradient(135deg, #d96a00 0%, #ff9933 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .about-hero-subtitle {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        max-width: 750px;
+        margin: 0 auto;
+        font-weight: 300;
+    }
+    
+    .hero-divider {
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, #d96a00, transparent);
+        margin: 40px auto 0;
+        border-radius: 2px;
+    }
+    
+    /* Mission & Vision Styles */
+    .shadow-premium {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    }
+    
+    .mission-card {
+        background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .vision-card {
+        background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);
+    }
+    
+    .vision-bg-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(rgba(217, 106, 0, 0.1) 1px, transparent 1px);
         background-size: 20px 20px;
+        z-index: 1;
+    }
+    
+    .section-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.1) 0%, rgba(255, 123, 0, 0.05) 100%);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: #d96a00;
+    }
+    
+    .section-icon-wrapper-light {
+        width: 60px;
+        height: 60px;
+        background: rgba(217, 106, 0, 0.2);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: #ff7b00;
+    }
+    
+    .mini-badge {
+        display: inline-block;
+        padding: 6px 14px;
+        background: rgba(217, 106, 0, 0.1);
+        border-radius: 50px;
+        color: #d96a00;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    }
+    
+    .mini-badge-light {
+        display: inline-block;
+        padding: 6px 14px;
+        background: rgba(217, 106, 0, 0.2);
+        border-radius: 50px;
+        color: #ff7b00;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    }
+    
+    .mission-title, .vision-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+    
+    .mission-title {
+        color: #050505;
+    }
+    
+    .vision-title {
+        color: #fff;
+    }
+    
+    .mission-text {
+        color: #666;
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+    
+    .vision-text {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+    
+    .mission-accent-line, .vision-accent-line {
+        width: 60px;
+        height: 3px;
+        background: #d96a00;
+        margin-top: 25px;
+        border-radius: 2px;
+    }
+    
+    /* Core Values Styles */
+    .premium-value-card {
+        position: relative;
+        padding: 40px 30px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+        overflow: hidden;
+    }
+    
+    .premium-value-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(217, 106, 0, 0.15);
+    }
+    
+    .value-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.1) 0%, rgba(255, 123, 0, 0.05) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+        font-size: 2.2rem;
+        color: #d96a00;
+        transition: all 0.4s ease;
+    }
+    
+    .premium-value-card:hover .value-icon-wrapper {
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        color: #fff;
+        transform: scale(1.1) rotate(5deg);
+    }
+    
+    .value-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 15px;
+    }
+    
+    .value-text {
+        color: #666;
+        line-height: 1.7;
+        font-size: 0.95rem;
+        margin: 0;
+    }
+    
+    .value-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.6s ease;
+    }
+    
+    .premium-value-card:hover .value-shine {
+        left: 100%;
+    }
+    
+    /* Expertise Section Styles */
+    .expertise-text {
+        color: #666;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 25px;
+    }
+    
+    .expertise-features {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .feature-item {
+        display: flex;
+        align-items: center;
+        font-size: 1.05rem;
+        color: #333;
+        font-weight: 500;
+    }
+    
+    .expertise-image-wrapper {
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+    
+    .expertise-image {
+        width: 100%;
+        height: auto;
+        min-height: 500px;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+    
+    .expertise-image-wrapper:hover .expertise-image {
+        transform: scale(1.05);
+    }
+    
+    .expertise-badge {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .badge-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: #fff;
+        flex-shrink: 0;
+    }
+    
+    .badge-content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .badge-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        color: #050505;
+        font-size: 1rem;
+    }
+    
+    .badge-subtitle {
+        color: #666;
+        font-size: 0.85rem;
+    }
+    
+    .service-highlight-card {
+        position: relative;
+        padding: 35px 30px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+    }
+    
+    .service-highlight-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 0;
+        background: linear-gradient(180deg, #d96a00, #ff7b00);
+        transition: height 0.4s ease;
+    }
+    
+    .service-highlight-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        border-color: rgba(217, 106, 0, 0.2);
+    }
+    
+    .service-highlight-card:hover::before {
+        height: 100%;
+    }
+    
+    .highlight-number {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 3rem;
+        font-weight: 800;
+        color: rgba(217, 106, 0, 0.1);
+        margin-bottom: 15px;
+    }
+    
+    .highlight-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 15px;
+    }
+    
+    .highlight-text {
+        color: #666;
+        line-height: 1.7;
+        font-size: 0.95rem;
+        margin: 0;
+    }
+    
+    /* Quote Section Styles */
+    .quote-bg-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(rgba(217, 106, 0, 0.08) 1px, transparent 1px);
+        background-size: 30px 30px;
+        z-index: 1;
+    }
+    
+    .quote-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        background: rgba(217, 106, 0, 0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        font-size: 2.5rem;
+        color: #d96a00;
+    }
+    
+    .quote-text {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(1.5rem, 4vw, 2.8rem);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.4;
+        font-style: italic;
+    }
+    
+    .quote-divider {
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #d96a00, transparent);
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+    
+    .quote-author {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .author-name {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #d96a00;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    
+    .author-title {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+    }
+    
+    /* Lifecycle Section Styles */
+    .lifecycle-card {
+        position: relative;
+        padding: 40px 30px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+    }
+    
+    .lifecycle-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(217, 106, 0, 0.15);
+    }
+    
+    .lifecycle-number {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 4rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #d96a00 0%, #ff9933 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 20px;
+    }
+    
+    .lifecycle-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 15px;
+    }
+    
+    .lifecycle-text {
+        color: #666;
+        line-height: 1.7;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+    
+    .lifecycle-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.1) 0%, rgba(255, 123, 0, 0.05) 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        font-size: 1.5rem;
+        color: #d96a00;
+        transition: all 0.4s ease;
+    }
+    
+    .lifecycle-card:hover .lifecycle-icon {
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        color: #fff;
+        transform: scale(1.2);
+    }
+    
+    /* CTA Section Styles */
+    .about-cta-box {
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        border-radius: 30px;
+        box-shadow: 0 20px 60px rgba(217, 106, 0, 0.3);
+    }
+    
+    .cta-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.1) 0%, transparent 40%);
+        z-index: 1;
+    }
+    
+    .cta-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.2;
+    }
+    
+    .cta-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.7;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .cta-button {
+        display: inline-flex;
+        align-items: center;
+        padding: 18px 42px;
+        background: #050505;
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .cta-button:hover {
+        background: #1a1a1a;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        color: #fff;
+    }
+    
+    /* Global Section Styles */
+    .section-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        background: rgba(217, 106, 0, 0.1);
+        border: 1px solid rgba(217, 106, 0, 0.2);
+        border-radius: 50px;
+        color: #d96a00;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    
+    .section-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        color: #050505;
+        letter-spacing: -1px;
+    }
+    
+    .gradient-text {
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .section-subtitle {
+        font-size: 1.125rem;
+        color: #666;
+        max-width: 650px;
+        line-height: 1.8;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .premium-badge {
+            font-size: 0.65rem;
+            padding: 10px 20px;
+        }
+        
+        .mission-card, .vision-card {
+            border-right: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .expertise-badge {
+            bottom: 15px;
+            left: 15px;
+            padding: 15px;
+        }
+        
+        .about-cta-box {
+            border-radius: 20px;
+        }
     }
 </style>
 
