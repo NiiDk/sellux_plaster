@@ -205,6 +205,9 @@ LOGOUT_REDIRECT_URL = 'pages:home'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Django Sites Framework
+SITE_ID = 1
+
 # Logging
 if DEBUG:
     LOGGING = {
