@@ -597,24 +597,28 @@
     }
 </style>
 
-<section class="py-5">
-    <div class="container py-4">
-        <div class="text-center mb-5">
-            <h2 class="h1 fw-bold mb-3">Core <span class="text-primary">Services</span></h2>
-            <p class="text-muted col-lg-6 mx-auto fs-5">We provide a wide range of services to meet your needs.</p>
+<!-- Core Services Section -->
+<section class="services-section py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5 pb-3">
+            <span class="section-badge">WHAT WE OFFER</span>
+            <h2 class="section-title mt-3 mb-4">Core <span class="gradient-text">Services</span></h2>
+            <p class="section-subtitle mx-auto">Comprehensive architectural solutions crafted with precision and excellence</p>
         </div>
         <div class="row g-4">
             {% for service in featured_services %}
             <div class="col-md-6 col-lg-3">
-                <div class="card h-100 text-center p-4 rounded-4 shadow-sm border-0 hover-lift" style="transition: transform 0.3s ease;">
-                    <div class="mb-4">
-                        <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                            <i class="bi {{ service.icon }} fs-1 text-primary"></i>
-                        </div>
+                <div class="luxury-service-card h-100">
+                    <div class="service-icon-wrapper">
+                        <div class="service-icon-bg"></div>
+                        <i class="bi {{ service.icon }} service-icon"></i>
                     </div>
-                    <h3 class="h4 fw-bold mb-3">{{ service.title }}</h3>
-                    <p class="text-muted mb-4">{{ service.short_description }}</p>
-                    <a href="{{ service.get_absolute_url }}" class="btn btn-outline-primary rounded-pill mt-auto px-4">View Details</a>
+                    <h3 class="service-card-title">{{ service.title }}</h3>
+                    <p class="service-card-text">{{ service.short_description }}</p>
+                    <a href="{{ service.get_absolute_url }}" class="service-link">
+                        <span>Learn More</span>
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
                 </div>
             </div>
             {% empty %}
@@ -626,91 +630,459 @@
     </div>
 </section>
 
-<section class="py-5 bg-light">
-    <div class="container py-4">
-        <div class="text-center mb-5">
-            <h2 class="h1 fw-bold mb-3">The Sellux Plaster <span class="text-primary">Advantage</span></h2>
-            <p class="text-muted col-lg-6 mx-auto fs-5">Why discerning clients choose us for their luxury spaces.</p>
+<style>
+    /* Section Global Styles */
+    .section-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        background: rgba(217, 106, 0, 0.1);
+        border: 1px solid rgba(217, 106, 0, 0.2);
+        border-radius: 50px;
+        color: #d96a00;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    
+    .section-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        color: #050505;
+        letter-spacing: -1px;
+    }
+    
+    .gradient-text {
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .section-subtitle {
+        font-size: 1.125rem;
+        color: #666;
+        max-width: 650px;
+        line-height: 1.8;
+    }
+    
+    /* Luxury Service Cards */
+    .luxury-service-card {
+        position: relative;
+        padding: 40px 30px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 24px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+    }
+    
+    .luxury-service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.03) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    
+    .luxury-service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(217, 106, 0, 0.15);
+        border-color: rgba(217, 106, 0, 0.2);
+    }
+    
+    .luxury-service-card:hover::before {
+        opacity: 1;
+    }
+    
+    .service-icon-wrapper {
+        position: relative;
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .service-icon-bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.1) 0%, rgba(255, 123, 0, 0.05) 100%);
+        border-radius: 50%;
+        transition: all 0.4s ease;
+    }
+    
+    .luxury-service-card:hover .service-icon-bg {
+        transform: scale(1.2) rotate(90deg);
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.2) 0%, rgba(255, 123, 0, 0.1) 100%);
+    }
+    
+    .service-icon {
+        position: relative;
+        font-size: 2.5rem;
+        color: #d96a00;
+        transition: transform 0.4s ease;
+        z-index: 1;
+    }
+    
+    .luxury-service-card:hover .service-icon {
+        transform: scale(1.1);
+    }
+    
+    .service-card-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 15px;
+    }
+    
+    .service-card-text {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 25px;
+        font-size: 0.95rem;
+    }
+    
+    .service-link {
+        display: inline-flex;
+        align-items: center;
+        color: #d96a00;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+    
+    .service-link:hover {
+        gap: 8px;
+        color: #ff7b00;
+    }
+    
+    .service-link i {
+        transition: transform 0.3s ease;
+    }
+    
+    .service-link:hover i {
+        transform: translateX(5px);
+    }
+</style>
+
+<!-- The Advantage Section -->
+<section class="advantage-section py-5" style="background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);">
+    <div class="container py-5">
+        <div class="text-center mb-5 pb-3">
+            <span class="section-badge">WHY CHOOSE US</span>
+            <h2 class="section-title mt-3 mb-4">The Sellux Plaster <span class="gradient-text">Advantage</span></h2>
+            <p class="section-subtitle mx-auto">Why discerning clients trust us with their most ambitious projects</p>
         </div>
         <div class="row g-4">
             <div class="col-md-6 col-lg-3">
-                <div class="advantage-card text-center">
-                    <div class="mb-3 text-primary"><i class="bi bi-award fs-1"></i></div>
-                    <h4 class="h5 fw-bold">Quality Service</h4>
-                    <p class="text-muted small mb-0">We uphold the highest standards of accuracy and ethical practice.</p>
+                <div class="premium-advantage-card">
+                    <div class="advantage-icon-wrapper">
+                        <i class="bi bi-award advantage-icon"></i>
+                    </div>
+                    <h4 class="advantage-title">Quality Service</h4>
+                    <p class="advantage-text">We uphold the highest standards of accuracy and ethical practice.</p>
+                    <div class="advantage-number">01</div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
-                <div class="advantage-card text-center">
-                    <div class="mb-3 text-primary"><i class="bi bi-lightning-charge fs-1"></i></div>
-                    <h4 class="h5 fw-bold">Agile Strategy</h4>
-                    <p class="text-muted small mb-0">Innovative techniques combined with traditional precision.</p>
+                <div class="premium-advantage-card">
+                    <div class="advantage-icon-wrapper">
+                        <i class="bi bi-lightning-charge advantage-icon"></i>
+                    </div>
+                    <h4 class="advantage-title">Agile Strategy</h4>
+                    <p class="advantage-text">Innovative techniques combined with traditional precision.</p>
+                    <div class="advantage-number">02</div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
-                <div class="advantage-card text-center">
-                    <div class="mb-3 text-primary"><i class="bi bi-person-heart fs-1"></i></div>
-                    <h4 class="h5 fw-bold">Client-Centric</h4>
-                    <p class="text-muted small mb-0">Tailored solutions aligning with your unique vision.</p>
+                <div class="premium-advantage-card">
+                    <div class="advantage-icon-wrapper">
+                        <i class="bi bi-person-heart advantage-icon"></i>
+                    </div>
+                    <h4 class="advantage-title">Client-Centric</h4>
+                    <p class="advantage-text">Tailored solutions aligning with your unique vision.</p>
+                    <div class="advantage-number">03</div>
                 </div>
             </div>
             <div class="col-md-6 col-lg-3">
-                <div class="advantage-card text-center">
-                    <div class="mb-3 text-primary"><i class="bi bi-graph-up-arrow fs-1"></i></div>
-                    <h4 class="h5 fw-bold">Data-Driven</h4>
-                    <p class="text-muted small mb-0">Our approach is informed by data for optimal outcomes.</p>
+                <div class="premium-advantage-card">
+                    <div class="advantage-icon-wrapper">
+                        <i class="bi bi-graph-up-arrow advantage-icon"></i>
+                    </div>
+                    <h4 class="advantage-title">Data-Driven</h4>
+                    <p class="advantage-text">Our approach is informed by data for optimal outcomes.</p>
+                    <div class="advantage-number">04</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-dark text-white">
-    <div class="container">
-        <div class="row g-5 text-center">
-            <div class="col-6 col-md-3 border-end border-secondary">
-                <h2 class="display-4 fw-bold text-primary mb-0"><span class="count-up" data-target="8">0</span>+</h2>
-                <p class="text-white-50 mt-2">Years of Experience</p>
-            </div>
-            <div class="col-6 col-md-3 border-end border-secondary">
-                <h2 class="display-4 fw-bold text-primary mb-0"><span class="count-up" data-target="500">0</span>+</h2>
-                <p class="text-white-50 mt-2">Projects Completed</p>
-            </div>
-            <div class="col-6 col-md-3 border-end border-secondary">
-                <h2 class="display-4 fw-bold text-primary mb-0"><span class="count-up" data-target="99">0</span>%</h2>
-                <p class="text-white-50 mt-2">Client Satisfaction</p>
+<style>
+    /* Premium Advantage Cards */
+    .premium-advantage-card {
+        position: relative;
+        padding: 40px 30px;
+        background: #fff;
+        border-radius: 20px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+    
+    .premium-advantage-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 0;
+        background: linear-gradient(180deg, #d96a00, #ff7b00);
+        transition: height 0.4s ease;
+    }
+    
+    .premium-advantage-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        border-color: rgba(217, 106, 0, 0.2);
+    }
+    
+    .premium-advantage-card:hover::before {
+        height: 100%;
+    }
+    
+    .advantage-icon-wrapper {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.1) 0%, rgba(255, 123, 0, 0.05) 100%);
+        border-radius: 18px;
+        transition: all 0.4s ease;
+    }
+    
+    .premium-advantage-card:hover .advantage-icon-wrapper {
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        transform: scale(1.1) rotate(-5deg);
+    }
+    
+    .advantage-icon {
+        font-size: 2rem;
+        color: #d96a00;
+        transition: all 0.4s ease;
+    }
+    
+    .premium-advantage-card:hover .advantage-icon {
+        color: #fff;
+        transform: scale(1.1);
+    }
+    
+    .advantage-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 15px;
+    }
+    
+    .advantage-text {
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 0;
+    }
+    
+    .advantage-number {
+        position: absolute;
+        bottom: 20px;
+        right: 25px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 3rem;
+        font-weight: 800;
+        color: rgba(217, 106, 0, 0.08);
+        transition: all 0.4s ease;
+    }
+    
+    .premium-advantage-card:hover .advantage-number {
+        color: rgba(217, 106, 0, 0.15);
+        transform: scale(1.2);
+    }
+</style>
+
+<!-- Stats Section -->
+<section class="stats-section py-5 position-relative overflow-hidden" style="background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
+    <div class="stats-bg-pattern"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row g-5 text-center py-4">
+            <div class="col-6 col-md-3">
+                <div class="premium-stat-item">
+                    <div class="stat-icon-wrapper mb-3">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <h2 class="premium-stat-number mb-2"><span class="count-up" data-target="8">0</span>+</h2>
+                    <p class="premium-stat-label">Years of Excellence</p>
+                    <div class="stat-line"></div>
+                </div>
             </div>
             <div class="col-6 col-md-3">
-                <h2 class="display-4 fw-bold text-primary mb-0"><span class="count-up" data-target="150">0</span>+</h2>
-                <p class="text-white-50 mt-2">Unique Designs</p>
+                <div class="premium-stat-item">
+                    <div class="stat-icon-wrapper mb-3">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <h2 class="premium-stat-number mb-2"><span class="count-up" data-target="500">0</span>+</h2>
+                    <p class="premium-stat-label">Projects Completed</p>
+                    <div class="stat-line"></div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="premium-stat-item">
+                    <div class="stat-icon-wrapper mb-3">
+                        <i class="bi bi-heart-fill"></i>
+                    </div>
+                    <h2 class="premium-stat-number mb-2"><span class="count-up" data-target="99">0</span>%</h2>
+                    <p class="premium-stat-label">Client Satisfaction</p>
+                    <div class="stat-line"></div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="premium-stat-item">
+                    <div class="stat-icon-wrapper mb-3">
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <h2 class="premium-stat-number mb-2"><span class="count-up" data-target="150">0</span>+</h2>
+                    <p class="premium-stat-label">Unique Designs</p>
+                    <div class="stat-line"></div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 my-4">
-    <div class="container">
+<style>
+    /* Stats Section */
+    .stats-bg-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 20% 20%, rgba(217, 106, 0, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 123, 0, 0.08) 0%, transparent 50%);
+        z-index: 1;
+    }
+    
+    .premium-stat-item {
+        padding: 20px;
+        transition: all 0.4s ease;
+    }
+    
+    .premium-stat-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .stat-icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: rgba(217, 106, 0, 0.15);
+        border-radius: 12px;
+        color: #d96a00;
+        font-size: 1.5rem;
+        transition: all 0.4s ease;
+    }
+    
+    .premium-stat-item:hover .stat-icon-wrapper {
+        background: rgba(217, 106, 0, 0.25);
+        transform: scale(1.1);
+    }
+    
+    .premium-stat-number {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 800;
+        background: linear-gradient(135deg, #d96a00 0%, #ff9933 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0;
+    }
+    
+    .premium-stat-label {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+        font-weight: 500;
+        margin: 0;
+        letter-spacing: 0.5px;
+    }
+    
+    .stat-line {
+        width: 40px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #d96a00, transparent);
+        margin: 20px auto 0;
+        border-radius: 2px;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    
+    .premium-stat-item:hover .stat-line {
+        opacity: 1;
+    }
+</style>
+
+<!-- Portfolio Section -->
+<section class="portfolio-section py-5 my-4">
+    <div class="container py-4">
         <div class="row align-items-end mb-5">
             <div class="col-md-8">
-                <h2 class="h1 fw-bold">Recent Architectural <span class="text-primary">Works</span></h2>
-                <p class="text-muted fs-5">Take a look at some of our lately completed luxury projects in Accra.</p>
+                <span class="section-badge">OUR PORTFOLIO</span>
+                <h2 class="section-title mt-3 mb-3">Recent Architectural <span class="gradient-text">Works</span></h2>
+                <p class="section-subtitle">Explore our latest luxury projects that define architectural excellence in Accra</p>
             </div>
             <div class="col-md-4 text-md-end">
-                <a href="{% url 'portfolio:project_list' %}" class="btn btn-outline-dark rounded-pill px-4">View Full Portfolio</a>
+                <a href="{% url 'portfolio:project_list' %}" class="premium-outline-btn">
+                    <span>View Full Portfolio</span>
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
         <div class="row g-4">
             {% for project in latest_projects %}
             <div class="col-md-4">
-                <div class="card border-0 shadow-sm h-100 overflow-hidden rounded-4 group-hover">
-                    <div class="overflow-hidden position-relative">
+                <div class="premium-portfolio-card">
+                    <div class="portfolio-image-wrapper">
                         {% if project.image %}
-                        <img src="{{ project.image.url }}" class="w-100" style="height: 350px; object-fit: cover; transition: transform 0.5s ease;">
+                        <img src="{{ project.image.url }}" class="portfolio-image" alt="{{ project.title }}">
                         {% endif %}
-                        <div class="position-absolute bottom-0 start-0 w-100 p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
-                            <h5 class="h4 fw-bold text-white mb-1">{{ project.title }}</h5>
-                            <small class="text-primary fw-bold">{{ project.completion_date|date:"F Y" }}</small>
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-icon">
+                                <i class="bi bi-arrow-right"></i>
+                            </div>
                         </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h5 class="portfolio-title">{{ project.title }}</h5>
+                        <p class="portfolio-date">
+                            <i class="bi bi-calendar3 me-2"></i>
+                            {{ project.completion_date|date:"F Y" }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -721,32 +1093,165 @@
     </div>
 </section>
 
-<section class="py-5 bg-light position-relative">
-    <div class="container py-4">
-        <div class="text-center mb-5">
-            <h2 class="h1 fw-bold mb-3">What Our <span class="text-primary">Clients Say</span></h2>
-            <p class="text-muted col-lg-6 mx-auto fs-5">Don't just take our word for it. Hear from our satisfied clients.</p>
+<style>
+    /* Premium Portfolio Cards */
+    .premium-portfolio-card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .premium-portfolio-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+    
+    .portfolio-image-wrapper {
+        position: relative;
+        overflow: hidden;
+        height: 350px;
+    }
+    
+    .portfolio-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+    
+    .premium-portfolio-card:hover .portfolio-image {
+        transform: scale(1.1);
+    }
+    
+    .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(217, 106, 0, 0.4) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .premium-portfolio-card:hover .portfolio-overlay {
+        opacity: 1;
+    }
+    
+    .portfolio-icon {
+        width: 60px;
+        height: 60px;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #d96a00;
+        font-size: 1.5rem;
+        transform: scale(0);
+        transition: transform 0.4s ease 0.1s;
+    }
+    
+    .premium-portfolio-card:hover .portfolio-icon {
+        transform: scale(1);
+    }
+    
+    .portfolio-content {
+        padding: 30px;
+    }
+    
+    .portfolio-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 12px;
+    }
+    
+    .portfolio-date {
+        display: flex;
+        align-items: center;
+        color: #d96a00;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .premium-outline-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 14px 32px;
+        background: transparent;
+        border: 2px solid #050505;
+        border-radius: 50px;
+        color: #050505;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+    }
+    
+    .premium-outline-btn:hover {
+        background: #050505;
+        color: #fff;
+        transform: translateX(5px);
+    }
+    
+    .premium-outline-btn i {
+        transition: transform 0.3s ease;
+    }
+    
+    .premium-outline-btn:hover i {
+        transform: translateX(5px);
+    }
+</style>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section py-5 position-relative" style="background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);">
+    <div class="container py-5">
+        <div class="text-center mb-5 pb-3">
+            <span class="section-badge">TESTIMONIALS</span>
+            <h2 class="section-title mt-3 mb-4">What Our <span class="gradient-text">Clients Say</span></h2>
+            <p class="section-subtitle mx-auto">Real experiences from those who trusted us with their vision</p>
         </div>
         <div class="row g-4 justify-content-center">
             {% for testimonial in testimonials %}
             <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center">
-                    <div class="mb-3">
-                        <i class="bi bi-quote fs-1 text-primary opacity-25"></i>
+                <div class="premium-testimonial-card">
+                    <div class="quote-icon-wrapper">
+                        <i class="bi bi-quote"></i>
                     </div>
-                    <p class="text-muted mb-4 fst-italic">"{{ testimonial.description|truncatewords:30 }}"</p>
-                    <div class="d-flex align-items-center justify-content-center mt-auto">
-                        {% if testimonial.image %}
-                        <img src="{{ testimonial.image.url }}" alt="{{ testimonial.title }}" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-                        {% else %}
-                        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
-                            <i class="bi bi-person-fill"></i>
+                    <p class="testimonial-text">"{{ testimonial.description|truncatewords:30 }}"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            {% if testimonial.image %}
+                            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.title }}">
+                            {% else %}
+                            <div class="avatar-placeholder">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
-                        <div class="text-start">
-                            <h5 class="h6 fw-bold mb-0">{{ testimonial.title }}</h5>
-                            <small class="text-primary small">Verified Client</small>
+                        <div class="author-info">
+                            <h5 class="author-name">{{ testimonial.title }}</h5>
+                            <p class="author-label">
+                                <i class="bi bi-patch-check-fill me-1"></i>
+                                Verified Client
+                            </p>
                         </div>
+                    </div>
+                    <div class="testimonial-stars">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
                     </div>
                 </div>
             </div>
@@ -759,30 +1264,144 @@
     </div>
 </section>
 
-<section class="py-5 bg-white">
-    <div class="container py-4">
+<style>
+    /* Premium Testimonial Cards */
+    .premium-testimonial-card {
+        position: relative;
+        padding: 40px;
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .premium-testimonial-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 50px rgba(217, 106, 0, 0.15);
+    }
+    
+    .quote-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.1) 0%, rgba(255, 123, 0, 0.05) 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+    }
+    
+    .quote-icon-wrapper i {
+        font-size: 1.5rem;
+        color: #d96a00;
+    }
+    
+    .testimonial-text {
+        color: #333;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        font-style: italic;
+        margin-bottom: 30px;
+        flex: 1;
+    }
+    
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .author-avatar {
+        flex-shrink: 0;
+    }
+    
+    .author-avatar img {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid rgba(217, 106, 0, 0.2);
+    }
+    
+    .avatar-placeholder {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #d96a00, #ff7b00);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1.5rem;
+    }
+    
+    .author-info {
+        flex: 1;
+        text-align: left;
+    }
+    
+    .author-name {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #050505;
+        margin: 0 0 5px 0;
+    }
+    
+    .author-label {
+        display: flex;
+        align-items: center;
+        color: #d96a00;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .testimonial-stars {
+        display: flex;
+        gap: 5px;
+        color: #ffc107;
+        font-size: 0.9rem;
+    }
+</style>
+
+<!-- Blog Section -->
+<section class="blog-section py-5 bg-white">
+    <div class="container py-5">
         <div class="row align-items-end mb-5">
             <div class="col-md-8">
-                <span class="badge bg-primary text-white rounded-pill px-3 py-2 mb-3 fw-bold tracking-wide">DESIGN INSIGHTS</span>
-                <h2 class="h1 fw-bold text-dark">Latest From Our <span class="text-primary">Journal</span></h2>
-                <p class="text-muted fs-5">Expert tips and trends in modern interior finishing.</p>
+                <span class="section-badge">DESIGN INSIGHTS</span>
+                <h2 class="section-title mt-3 mb-3">Latest From Our <span class="gradient-text">Journal</span></h2>
+                <p class="section-subtitle">Expert tips and trends in modern architectural finishing</p>
             </div>
             <div class="col-md-4 text-md-end">
-                <a href="{% url 'blog:post_list' %}" class="btn btn-dark rounded-pill px-4">Read More Insights</a>
+                <a href="{% url 'blog:post_list' %}" class="premium-dark-btn">
+                    <span>Read More Insights</span>
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
         <div class="row g-4">
             {% for post in latest_posts %}
             <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100 hover-lift">
-                    {% if post.featured_image %}
-                    <img src="{{ post.featured_image.url }}" class="card-img-top" style="height: 240px; object-fit: cover;">
-                    {% endif %}
-                    <div class="card-body p-4">
-                        <small class="text-primary fw-bold text-uppercase ls-1">{{ post.category.name }}</small>
-                        <h5 class="h4 fw-bold my-3">{{ post.title }}</h5>
-                        <p class="text-muted mb-4">{{ post.excerpt|truncatewords:15 }}</p>
-                        <a href="{{ post.get_absolute_url }}" class="text-dark fw-bold text-decoration-none">Read Article <i class="bi bi-arrow-right ms-1 text-primary"></i></a>
+                <div class="premium-blog-card">
+                    <div class="blog-image-wrapper">
+                        {% if post.featured_image %}
+                        <img src="{{ post.featured_image.url }}" class="blog-image" alt="{{ post.title }}">
+                        {% endif %}
+                        <div class="blog-category-badge">{{ post.category.name }}</div>
+                    </div>
+                    <div class="blog-content">
+                        <h5 class="blog-title">{{ post.title }}</h5>
+                        <p class="blog-excerpt">{{ post.excerpt|truncatewords:15 }}</p>
+                        <a href="{{ post.get_absolute_url }}" class="blog-read-more">
+                            <span>Read Article</span>
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -793,20 +1412,316 @@
     </div>
 </section>
 
-<section class="py-5 mb-5">
+<style>
+    /* Premium Blog Cards */
+    .premium-blog-card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .premium-blog-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+    }
+    
+    .blog-image-wrapper {
+        position: relative;
+        height: 240px;
+        overflow: hidden;
+    }
+    
+    .blog-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+    
+    .premium-blog-card:hover .blog-image {
+        transform: scale(1.1);
+    }
+    
+    .blog-category-badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        color: #d96a00;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .blog-content {
+        padding: 30px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .blog-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+    
+    .blog-excerpt {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        flex: 1;
+        font-size: 0.95rem;
+    }
+    
+    .blog-read-more {
+        display: inline-flex;
+        align-items: center;
+        color: #050505;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+    
+    .blog-read-more:hover {
+        color: #d96a00;
+        gap: 8px;
+    }
+    
+    .blog-read-more i {
+        color: #d96a00;
+        transition: transform 0.3s ease;
+    }
+    
+    .blog-read-more:hover i {
+        transform: translateX(5px);
+    }
+    
+    .premium-dark-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 14px 32px;
+        background: #050505;
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+    }
+    
+    .premium-dark-btn:hover {
+        background: #d96a00;
+        transform: translateX(5px);
+    }
+    
+    .premium-dark-btn i {
+        transition: transform 0.3s ease;
+    }
+    
+    .premium-dark-btn:hover i {
+        transform: translateX(5px);
+    }
+</style>
+
+<!-- Final CTA Section -->
+<section class="cta-section py-5 my-5">
     <div class="container">
-        <div class="bg-black text-white rounded-5 p-5 text-center position-relative overflow-hidden shadow-lg" style="border: 1px solid rgba(255,255,255,0.1);">
-            <div class="position-relative z-1 py-4">
-                <h2 class="display-5 fw-bold mb-4">Ready to transform your home?</h2>
-                <p class="lead mb-5 opacity-75 col-lg-8 mx-auto">Let us help you create a space that reflects your personality and luxury. Consultations are free and professional.</p>
-                <div class="d-flex justify-content-center gap-3">
-                    <a href="{% url 'contact:contact_us' %}" class="btn btn-primary btn-lg px-5">Consult Now</a>
-                    <a href="{% url 'faq:faq_list' %}" class="btn btn-outline-light btn-lg px-5">View FAQ</a>
+        <div class="premium-cta-box position-relative overflow-hidden">
+            <div class="cta-bg-pattern"></div>
+            <div class="cta-floating-elements">
+                <div class="cta-float cta-float-1"></div>
+                <div class="cta-float cta-float-2"></div>
+            </div>
+            <div class="position-relative" style="z-index: 2;">
+                <div class="text-center py-5">
+                    <span class="cta-badge">START YOUR PROJECT</span>
+                    <h2 class="cta-title mt-4 mb-4">Ready to Transform<br>Your Space?</h2>
+                    <p class="cta-subtitle mb-5">Let us bring your vision to life with unparalleled craftsmanship and design excellence.<br class="d-none d-md-block">Consultations are complimentary and completely professional.</p>
+                    <div class="d-flex justify-content-center flex-wrap gap-4">
+                        <a href="{% url 'contact:contact_us' %}" class="cta-primary-btn">
+                            <span>Start Consultation</span>
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                        <a href="{% url 'faq:faq_list' %}" class="cta-secondary-btn">
+                            <span>Browse FAQ</span>
+                            <i class="bi bi-question-circle ms-2"></i>
+                        </a>
+                    </div>
+                    <p class="cta-trust-text mt-4">
+                        <i class="bi bi-shield-check me-2"></i>
+                        Free consultation • No obligation • Professional advice
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    /* Premium CTA Box */
+    .premium-cta-box {
+        background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);
+        border-radius: 30px;
+        padding: 60px 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(217, 106, 0, 0.2);
+    }
+    
+    .cta-bg-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 10% 20%, rgba(217, 106, 0, 0.15) 0%, transparent 40%),
+            radial-gradient(circle at 90% 80%, rgba(255, 123, 0, 0.1) 0%, transparent 40%);
+        z-index: 1;
+    }
+    
+    .cta-floating-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    
+    .cta-float {
+        position: absolute;
+        border: 1px solid rgba(217, 106, 0, 0.2);
+        border-radius: 50%;
+        animation: float 10s ease-in-out infinite;
+    }
+    
+    .cta-float-1 {
+        width: 200px;
+        height: 200px;
+        top: -50px;
+        right: -50px;
+    }
+    
+    .cta-float-2 {
+        width: 150px;
+        height: 150px;
+        bottom: -40px;
+        left: -40px;
+        animation-delay: 2s;
+    }
+    
+    .cta-badge {
+        display: inline-block;
+        padding: 10px 24px;
+        background: rgba(217, 106, 0, 0.15);
+        border: 1px solid rgba(217, 106, 0, 0.3);
+        border-radius: 50px;
+        color: #ff7b00;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    
+    .cta-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.2;
+    }
+    
+    .cta-subtitle {
+        font-size: 1.125rem;
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.8;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .cta-primary-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 18px 42px;
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px rgba(217, 106, 0, 0.4);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .cta-primary-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(217, 106, 0, 0.6);
+        background: linear-gradient(135deg, #ff7b00 0%, #d96a00 100%);
+    }
+    
+    .cta-secondary-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 18px 42px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .cta-secondary-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-3px);
+    }
+    
+    .cta-trust-text {
+        display: inline-flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+        .premium-cta-box {
+            padding: 40px 25px;
+            border-radius: 20px;
+        }
+        
+        .cta-primary-btn,
+        .cta-secondary-btn {
+            padding: 16px 32px;
+            font-size: 0.9rem;
+        }
+    }
+</style>
 
 {% if active_promotion %}
 <div class="modal fade" id="promoModal" tabindex="-1" aria-labelledby="promoModalLabel" aria-hidden="true">
