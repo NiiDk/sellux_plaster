@@ -5,98 +5,112 @@
 
 {% block content %}
 
-<!-- Hero -->
-<section class="service-hero bg-black text-white">
-    <div class="container">
-        <div class="row align-items-center">
-
+<!-- Premium Hero Section -->
+<section class="service-detail-hero position-relative" style="min-height: 75vh; background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
+    <div class="container h-100">
+        <div class="row align-items-center h-100 g-5">
             <!-- Content -->
             <div class="col-lg-6">
                 <nav aria-label="breadcrumb" class="mb-4">
-                    <ol class="breadcrumb small text-uppercase">
-                        <li class="breadcrumb-item">
-                            <a href="{% url 'services:service_list' %}" class="text-primary text-decoration-none">
+                    <ol class="breadcrumb-custom">
+                        <li>
+                            <a href="{% url 'services:service_list' %}" class="breadcrumb-link">
+                                <i class="bi bi-arrow-left me-2"></i>
                                 Services
                             </a>
                         </li>
-                        <li class="breadcrumb-item active text-white-50" aria-current="page">
-                            {{ service.title }}
-                        </li>
+                        <li class="breadcrumb-separator">/</li>
+                        <li class="breadcrumb-active">{{ service.title }}</li>
                     </ol>
                 </nav>
 
-                <span class="badge bg-primary text-black fw-semibold mb-3">
-                    Premium Service
+                <span class="premium-service-badge animate__animated animate__fadeIn">
+                    <i class="bi bi-patch-check-fill me-2"></i>
+                    PREMIUM SERVICE
                 </span>
 
-                <h1 class="display-4 fw-light mt-3 mb-4">
+                <h1 class="service-detail-title mt-4 mb-4 animate__animated animate__fadeInUp">
                     {{ service.title }}
                 </h1>
 
-                <p class="lead text-white-50 mb-5">
+                <p class="service-detail-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
                     {{ service.short_description }}
                 </p>
 
-                <div class="d-flex flex-column flex-sm-row gap-3">
-                    <a href="{% url 'contact:contact_us' %}" class="btn btn-primary btn-lg fw-semibold text-black">
-                        Request Consultation
+                <div class="service-detail-actions mt-5 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    <a href="{% url 'contact:contact_us' %}" class="btn-service-primary">
+                        <span>Request Consultation</span>
+                        <i class="bi bi-arrow-right ms-2"></i>
                     </a>
-                    <a href="#details" class="btn btn-outline-light btn-lg fw-light">
-                        Learn More
+                    <a href="#details" class="btn-service-outline">
+                        <span>Learn More</span>
+                        <i class="bi bi-chevron-down ms-2"></i>
                     </a>
                 </div>
 
-                <div class="d-flex gap-4 mt-5 small text-white-50">
-                    <span>Architectural grade finish</span>
-                    <span>Trusted by professionals</span>
+                <div class="service-badges mt-5">
+                    <span class="service-badge-item">
+                        <i class="bi bi-award-fill me-2"></i>
+                        Architectural Grade
+                    </span>
+                    <span class="service-badge-item">
+                        <i class="bi bi-people-fill me-2"></i>
+                        Trusted by Professionals
+                    </span>
                 </div>
             </div>
 
             <!-- Image -->
-            <div class="col-lg-6 mt-5 mt-lg-0">
-                <div class="service-hero-image">
+            <div class="col-lg-6 animate__animated animate__fadeInRight">
+                <div class="service-hero-image-wrapper">
                     {% if service.image %}
-                    <img src="{{ service.image.url }}" alt="{{ service.title }}" class="img-fluid">
+                        <img src="{{ service.image.url }}" alt="{{ service.title }}" class="service-hero-image">
+                        <div class="image-glow"></div>
                     {% else %}
-                    <div class="placeholder-icon">
-                        <i class="bi {{ service.icon|default:'bi-layers' }}"></i>
-                    </div>
+                        <div class="service-hero-placeholder">
+                            <i class="bi {{ service.icon|default:'bi-layers' }}"></i>
+                        </div>
                     {% endif %}
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
-<!-- Details -->
-<section id="details" class="service-details">
-    <div class="container">
-        <div class="row">
+<!-- Details Section -->
+<section id="details" class="service-details-section py-5 my-5">
+    <div class="container py-4">
+        <div class="row g-5">
 
-            <!-- Main -->
+            <!-- Main Content -->
             <div class="col-lg-8">
-                <h2 class="section-title">
-                    Our Approach
-                </h2>
+                <span class="section-badge mb-3 d-inline-block">OUR APPROACH</span>
+                <h2 class="details-section-title mb-4">Service <span class="gradient-text">Excellence</span></h2>
 
-                <div class="service-description">
+                <div class="service-description-content">
                     {{ service.description|linebreaks }}
                 </div>
 
-                <div class="row mt-5 g-4">
+                <!-- Feature Cards -->
+                <div class="row g-4 mt-4">
                     <div class="col-md-6">
-                        <div class="feature-card">
-                            <h5>Structural Integrity</h5>
-                            <p>
+                        <div class="detail-feature-card h-100">
+                            <div class="feature-icon-box">
+                                <i class="bi bi-shield-fill-check"></i>
+                            </div>
+                            <h5 class="feature-card-title">Structural Integrity</h5>
+                            <p class="feature-card-text">
                                 Heavy gauge metal framing systems engineered for long term durability and precision.
                             </p>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="feature-card">
-                            <h5>Material Selection</h5>
-                            <p>
+                        <div class="detail-feature-card h-100">
+                            <div class="feature-icon-box">
+ <i class="bi bi-box-seam-fill"></i>
+                            </div>
+                            <h5 class="feature-card-title">Material Selection</h5>
+                            <p class="feature-card-text">
                                 Fire rated and moisture resistant boards selected to match project conditions.
                             </p>
                         </div>
@@ -105,36 +119,47 @@
             </div>
 
             <!-- Sidebar -->
-            <div class="col-lg-4 mt-5 mt-lg-0">
-                <div class="service-sidebar">
+            <div class="col-lg-4">
+                <div class="service-sidebar-wrapper">
 
                     {% if service.recommended_products.all %}
-                    <div class="sidebar-card dark">
-                        <h5>Recommended Materials</h5>
+                    <div class="sidebar-products-card mb-4">
+                        <h5 class="sidebar-card-title">
+                            <i class="bi bi-box-seam me-2"></i>
+                            Recommended Materials
+                        </h5>
 
-                        {% for product in service.recommended_products.all %}
-                        <a href="{{ product.get_absolute_url }}" class="product-row">
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                            <div>
-                                <span class="product-name">{{ product.name }}</span>
-                                <span class="product-price">GHS {{ product.price|floatformat:2 }}</span>
-                            </div>
-                        </a>
-                        {% endfor %}
+                        <div class="products-list">
+                            {% for product in service.recommended_products.all %}
+                            <a href="{{ product.get_absolute_url }}" class="product-item">
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-thumb">
+                                <div class="product-info">
+                                    <span class="product-name">{{ product.name }}</span>
+                                    <span class="product-price">GHS {{ product.price|floatformat:2 }}</span>
+                                </div>
+                                <i class="bi bi-arrow-right product-arrow"></i>
+                            </a>
+                            {% endfor %}
+                        </div>
 
-                        <a href="{% url 'catalogue:product_list' %}" class="btn btn-primary w-100 text-black fw-semibold mt-4">
-                            View All Materials
+                        <a href="{% url 'catalogue:product_list' %}" class="btn-view-materials">
+                            <span>View All Materials</span>
+                            <i class="bi bi-arrow-right ms-2"></i>
                         </a>
                     </div>
                     {% endif %}
 
-                    <div class="sidebar-card light text-center">
-                        <h4>Affordable Luxury</h4>
-                        <p>
+                    <div class="sidebar-cta-card">
+                        <div class="cta-card-icon">
+                            <i class="bi bi-chat-dots-fill"></i>
+                        </div>
+                        <h4 class="cta-card-title">Affordable Luxury</h4>
+                        <p class="cta-card-text">
                             World class plaster solutions tailored to practical project budgets.
                         </p>
-                        <a href="{% url 'contact:contact_us' %}" class="btn btn-dark w-100 fw-semibold">
-                            Start a Conversation
+                        <a href="{% url 'contact:contact_us' %}" class="btn-cta-dark">
+                            <span>Start a Conversation</span>
+                            <i class="bi bi-arrow-right ms-2"></i>
                         </a>
                     </div>
 
@@ -146,112 +171,487 @@
 </section>
 
 <style>
-    /* Layout */
-    .service-hero {
-        padding: 4rem 0;
+    /* Premium Service Detail Styles */
+    
+    /* Hero Section Styles */
+    .service-detail-hero {
+        padding: 100px 0;
+        position: relative;
+        overflow: hidden;
     }
-    .service-details {
-        padding: 4rem 0;
-    }
-
-    /* Typography */
-    .section-title {
-        font-size: 2.2rem;
-        font-weight: 300;
-        margin-bottom: 2rem;
-    }
-    .service-description {
-        font-size: 1.05rem;
-        line-height: 1.8;
-        color: #555;
-    }
-
-    /* Hero image */
-    .service-hero-image img {
+    
+    .service-detail-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 520px;
-        object-fit: cover;
-        border-radius: 1rem;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 20% 30%, rgba(217, 106, 0, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(255, 123, 0, 0.06) 0%, transparent 50%);
+        z-index: 1;
     }
-    .placeholder-icon {
-        height: 520px;
+    
+    .service-detail-hero .container {
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Breadcrumb Styles */
+    .breadcrumb-custom {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.9rem;
+    }
+    
+    .breadcrumb-link {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+    
+    .breadcrumb-link:hover {
+        color: #ff7b00;
+    }
+    
+    .breadcrumb-separator {
+        color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .breadcrumb-active {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Premium Badge */
+    .premium-service-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 24px;
+        background: rgba(217, 106, 0, 0.15);
+        border: 1px solid rgba(217, 106, 0, 0.3);
+        border-radius: 50px;
+        color: #ff7b00;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Hero Title */
+    .service-detail-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.1;
+        letter-spacing: -1px;
+    }
+    
+    .service-detail-subtitle {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.7;
+        font-weight: 300;
+        max-width: 550px;
+    }
+    
+    /* Hero Actions */
+    .service-detail-actions {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .btn-service-primary {
+        display: inline-flex;
+        align-items: center;
+        padding: 16px 36px;
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 10px 30px rgba(217, 106, 0, 0.3);
+    }
+    
+    .btn-service-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(217, 106, 0, 0.5);
+        color: #fff;
+    }
+    
+    .btn-service-outline {
+        display: inline-flex;
+        align-items: center;
+        padding: 16px 36px;
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .btn-service-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.4);
+        transform: translateY(-3px);
+        color: #fff;
+    }
+    
+    /* Service Badges */
+    .service-badges {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .service-badge-item {
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    /* Hero Image */
+    .service-hero-image-wrapper {
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    }
+    
+    .service-hero-image {
+        width: 100%;
+        height: 600px;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+    
+    .service-hero-image-wrapper:hover .service-hero-image {
+        transform: scale(1.05);
+    }
+    
+    .image-glow {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(217, 106, 0, 0.2) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.6s ease;
+    }
+    
+    .service-hero-image-wrapper:hover .image-glow {
+        opacity: 1;
+    }
+    
+    .service-hero-placeholder {
+        width: 100%;
+        height: 600px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #111;
-        border-radius: 1rem;
+        background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        font-size: 6rem;
+        color: rgba(217, 106, 0, 0.2);
     }
-    .placeholder-icon i {
-        font-size: 4rem;
-        color: rgba(255,255,255,0.2);
+    
+    /* Details Section Styles */
+    .section-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        background: rgba(217, 106, 0, 0.1);
+        border: 1px solid rgba(217, 106, 0, 0.2);
+        border-radius: 50px;
+        color: #d96a00;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
     }
-
-    /* Feature cards */
-    .feature-card {
-        padding: 2rem;
-        background: #f8f8f8;
-        border-radius: 1rem;
+    
+    .details-section-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 800;
+        color: #050505;
+        letter-spacing: -1px;
     }
-    .feature-card h5 {
-        margin-bottom: 0.75rem;
+    
+    .gradient-text {
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
-    .feature-card p {
-        margin: 0;
+    
+    .service-description-content {
+        color: #555;
+        font-size: 1.05rem;
+        line-height: 1.8;
+    }
+    
+    /* Feature Cards */
+    .detail-feature-card {
+        padding: 35px 30px;
+        background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .detail-feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        border-color: rgba(217, 106, 0, 0.2);
+    }
+    
+    .feature-icon-box {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.1) 0%, rgba(255, 123, 0, 0.05) 100%);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: #d96a00;
+        margin-bottom: 20px;
+        transition: all 0.4s ease;
+    }
+    
+    .detail-feature-card:hover .feature-icon-box {
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        color: #fff;
+        transform: scale(1.1);
+    }
+    
+    .feature-card-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 12px;
+    }
+    
+    .feature-card-text {
         color: #666;
+        line-height: 1.7;
         font-size: 0.95rem;
+        margin: 0;
     }
-
-    /* Sidebar */
-    .service-sidebar {
+    
+    /* Sidebar Styles */
+    .service-sidebar-wrapper {
         position: sticky;
         top: 100px;
     }
-    .sidebar-card {
-        padding: 2.5rem;
-        border-radius: 1rem;
-        margin-bottom: 2rem;
+    
+    /* Products Card */
+    .sidebar-products-card {
+        padding: 35px 30px;
+        background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);
+        border-radius: 24px;
+        color: #fff;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
     }
-    .sidebar-card.dark {
-        background: #000;
+    
+    .sidebar-card-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 25px;
         color: #fff;
     }
-    .sidebar-card.light {
-        background: #f5f5f5;
+    
+    .products-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 25px;
     }
-    .sidebar-card h5 {
-        margin-bottom: 1.5rem;
-    }
-
-    /* Products */
-    .product-row {
+    
+    .product-item {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
+        gap: 15px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
         text-decoration: none;
         color: inherit;
+        transition: all 0.3s ease;
     }
-    .product-row img {
-        width: 48px;
-        height: 48px;
+    
+    .product-item:hover {
+        background: rgba(217, 106, 0, 0.1);
+        transform: translateX(5px);
+    }
+    
+    .product-thumb {
+        width: 50px;
+        height: 50px;
         object-fit: cover;
-        border-radius: 0.5rem;
+        border-radius: 8px;
+        flex-shrink: 0;
     }
+    
+    .product-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    
     .product-name {
-        display: block;
         font-weight: 600;
         font-size: 0.9rem;
+        color: #fff;
     }
+    
     .product-price {
         font-size: 0.85rem;
-        color: #f0c36d;
+        color: #ff7b00;
     }
-
-    /* Mobile refinement */
+    
+    .product-arrow {
+        color: rgba(255, 255, 255, 0.4);
+        transition: all 0.3s ease;
+    }
+    
+    .product-item:hover .product-arrow {
+        color: #ff7b00;
+        transform: translateX(3px);
+    }
+    
+    .btn-view-materials {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 14px 24px;
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .btn-view-materials:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(217, 106, 0, 0.4);
+        color: #fff;
+    }
+    
+    /* CTA Card */
+    .sidebar-cta-card {
+        padding: 40px 30px;
+        background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+        border-radius: 24px;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+    
+    .cta-card-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.1) 0%, rgba(255, 123, 0, 0.05) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 2rem;
+        color: #d96a00;
+    }
+    
+    .cta-card-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #050505;
+        margin-bottom: 15px;
+    }
+    
+    .cta-card-text {
+        color: #666;
+        line-height: 1.7;
+        margin-bottom: 25px;
+    }
+    
+    .btn-cta-dark {
+        display: inline-flex;
+        align-items: center;
+        padding: 14px 28px;
+        background: #050505;
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .btn-cta-dark:hover {
+        background: #1a1a1a;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        color: #fff;
+    }
+    
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
-        .service-hero-image img,
-        .placeholder-icon {
-            height: 360px;
+        .service-detail-hero {
+            padding: 60px 0;
+        }
+        
+        .service-hero-image,
+        .service-hero-placeholder {
+            height: 400px;
+        }
+        
+        .service-detail-actions {
+            flex-direction: column;
+        }
+        
+        .btn-service-primary,
+        .btn-service-outline {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .service-sidebar-wrapper {
+            position: static;
         }
     }
 </style>
