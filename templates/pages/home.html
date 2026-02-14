@@ -4,43 +4,598 @@
 {% block title %}Exquisite Interior Design | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<section class="hero-section position-relative py-5 mb-4 text-white" style="background: url('{% static 'images/hero-main.jpeg' %}') center/cover no-repeat; min-height: 80vh; display: flex; align-items: center;">
-    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(5, 5, 5, 0.7);"></div>
-    <div class="container position-relative text-center">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInUp">Home of Affordable <span class="text-primary">Luxury.</span></h1>
-                <p class="lead mb-5 fst-italic animate__animated animate__fadeInUp" style="animation-delay: 0.2s; font-size: 1.4rem;">Delivering architectural mastery and luxury finishes with integrity since 2017.</p>
-                <div class="d-flex justify-content-center flex-wrap gap-3 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
-                    <a href="{% url 'services:service_list' %}" class="btn btn-primary btn-lg px-5">Explore Services</a>
-                    <a href="{% url 'contact:contact_us' %}" class="btn btn-outline-light btn-lg px-5">Book Consultation</a>
+<section class="luxury-hero position-relative overflow-hidden" style="min-height: 100vh;">
+    <!-- Animated Background -->
+    <div class="hero-bg position-absolute w-100 h-100 top-0 start-0">
+        <div class="hero-image" style="background: url('{% static 'images/hero-main.jpeg' %}') center/cover no-repeat; width: 100%; height: 100%; position: absolute;"></div>
+        <div class="hero-overlay position-absolute w-100 h-100 top-0 start-0"></div>
+        <div class="hero-gradient position-absolute w-100 h-100 top-0 start-0"></div>
+    </div>
+    
+    <!-- Floating Geometric Elements -->
+    <div class="floating-elements position-absolute w-100 h-100 top-0 start-0 overflow-hidden" style="z-index: 1;">
+        <div class="float-element float-element-1"></div>
+        <div class="float-element float-element-2"></div>
+        <div class="float-element float-element-3"></div>
+    </div>
+    
+    <!-- Main Hero Content -->
+    <div class="container position-relative d-flex align-items-center" style="min-height: 100vh; z-index: 2;">
+        <div class="row w-100 justify-content-center">
+            <div class="col-lg-11 col-xl-10">
+                <!-- Premium Badge -->
+                <div class="hero-badge mb-4 animate__animated animate__fadeIn">
+                    <span class="badge-text">SINCE 2017</span>
+                    <span class="badge-divider">—</span>
+                    <span class="badge-subtitle">Architectural Excellence</span>
                 </div>
+                
+                <!-- Main Headline -->
+                <div class="hero-title-wrapper mb-5">
+                    <h1 class="hero-title animate__animated animate__fadeInUp mb-4">
+                        <span class="title-line">Where</span>
+                        <span class="title-line title-accent">Luxury</span>
+                        <span class="title-line">Meets Affordability</span>
+                    </h1>
+                    <div class="hero-accent-line animate__animated animate__fadeInLeft" style="animation-delay: 0.3s;"></div>
+                </div>
+                
+                <!-- Subtitle -->
+                <p class="hero-subtitle animate__animated animate__fadeInUp mx-auto" style="animation-delay: 0.4s;">
+                    Transforming spaces through masterful craftsmanship, innovative design,<br class="d-none d-lg-block">
+                    and unwavering dedication to architectural perfection.
+                </p>
+                
+                <!-- CTA Buttons -->
+                <div class="hero-cta d-flex justify-content-center flex-wrap gap-4 animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                    <a href="{% url 'services:service_list' %}" class="btn-luxury btn-luxury-primary">
+                        <span class="btn-text">Explore Services</span>
+                        <span class="btn-icon"><i class="bi bi-arrow-right"></i></span>
+                    </a>
+                    <a href="{% url 'contact:contact_us' %}" class="btn-luxury btn-luxury-glass">
+                        <span class="btn-text">Book Consultation</span>
+                        <span class="btn-icon"><i class="bi bi-calendar-check"></i></span>
+                    </a>
+                </div>
+                
+                <!-- Trust Indicators -->
+                <div class="hero-stats mt-5 pt-4 animate__animated animate__fadeIn" style="animation-delay: 0.8s;">
+                    <div class="row g-4 text-center">
+                        <div class="col-6 col-md-3">
+                            <div class="stat-item">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="stat-item">
+                                <div class="stat-number">8+</div>
+                                <div class="stat-label">Years</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="stat-item">
+                                <div class="stat-number">99%</div>
+                                <div class="stat-label">Satisfied</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="stat-item">
+                                <div class="stat-number">150+</div>
+                                <div class="stat-label">Designs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator position-absolute bottom-0 start-50 translate-middle-x mb-5 animate__animated animate__fadeIn animate__delay-2s" style="z-index: 2;">
+        <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+        </div>
+        <p class="scroll-text mt-2 text-white-50 small">Scroll to explore</p>
+    </div>
+</section>
+
+<style>
+    /* ===== LUXURY HERO STYLES ===== */
+    .luxury-hero {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: #000;
+    }
+    
+    /* Background & Overlays */
+    .hero-bg {
+        z-index: 0;
+    }
+    
+    .hero-image {
+        animation: slowZoom 20s ease-in-out infinite alternate;
+        transform-origin: center;
+    }
+    
+    @keyframes slowZoom {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.1); }
+    }
+    
+    .hero-overlay {
+        background: linear-gradient(135deg, rgba(5, 5, 5, 0.85) 0%, rgba(18, 18, 18, 0.75) 100%);
+    }
+    
+    .hero-gradient {
+        background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+    }
+    
+    /* Floating Elements */
+    .float-element {
+        position: absolute;
+        border: 1px solid rgba(217, 106, 0, 0.15);
+        border-radius: 50%;
+        animation: float 15s ease-in-out infinite;
+    }
+    
+    .float-element-1 {
+        width: 400px;
+        height: 400px;
+        top: 10%;
+        right: -100px;
+        animation-delay: 0s;
+    }
+    
+    .float-element-2 {
+        width: 300px;
+        height: 300px;
+        bottom: 15%;
+        left: -80px;
+        animation-delay: 3s;
+    }
+    
+    .float-element-3 {
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation-delay: 6s;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+        50% { transform: translateY(-30px) scale(1.1); opacity: 0.6; }
+    }
+    
+    /* Premium Badge */
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 24px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50px;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    
+    .badge-divider {
+        color: #d96a00;
+        font-weight: 300;
+    }
+    
+    .badge-subtitle {
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 400;
+    }
+    
+    /* Hero Title */
+    .hero-title-wrapper {
+        position: relative;
+    }
+    
+    .hero-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2.5rem, 8vw, 6rem);
+        font-weight: 800;
+        line-height: 1.1;
+        color: #fff;
+        text-align: center;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2em;
+    }
+    
+    .title-line {
+        display: block;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    .title-accent {
+        background: linear-gradient(135deg, #ff7b00 0%, #d96a00 50%, #ff9933 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+        display: inline-block;
+        animation: shimmer 3s ease-in-out infinite;
+    }
+    
+    @keyframes shimmer {
+        0%, 100% { filter: brightness(1); }
+        50% { filter: brightness(1.3); }
+    }
+    
+    .hero-accent-line {
+        width: 120px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, #d96a00, transparent);
+        margin: 0 auto;
+        border-radius: 2px;
+        box-shadow: 0 0 20px rgba(217, 106, 0, 0.6);
+    }
+    
+    /* Subtitle */
+    .hero-subtitle {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 300;
+        text-align: center;
+        max-width: 750px;
+        margin-bottom: 2rem;
+        letter-spacing: 0.3px;
+    }
+    
+    /* Luxury Buttons */
+    .btn-luxury {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 18px 40px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 50px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .btn-luxury-primary {
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        color: #fff;
+        border: 2px solid transparent;
+        box-shadow: 0 10px 30px rgba(217, 106, 0, 0.4);
+    }
+    
+    .btn-luxury-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(217, 106, 0, 0.6);
+        background: linear-gradient(135deg, #ff7b00 0%, #d96a00 100%);
+    }
+    
+    .btn-luxury-glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .btn-luxury-glass:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
+    }
+    
+    .btn-icon {
+        transition: transform 0.3s ease;
+    }
+    
+    .btn-luxury:hover .btn-icon {
+        transform: translateX(5px);
+    }
+    
+    /* Stats */
+    .hero-stats {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .stat-item {
+        padding: 15px;
+    }
+    
+    .stat-number {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(1.75rem, 3vw, 2.5rem);
+        font-weight: 800;
+        color: #d96a00;
+        margin-bottom: 8px;
+        text-shadow: 0 0 20px rgba(217, 106, 0, 0.4);
+    }
+    
+    .stat-label {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 500;
+    }
+    
+    /* Scroll Indicator */
+    .scroll-indicator {
+        z-index: 10;
+    }
+    
+    .scroll-mouse {
+        width: 30px;
+        height: 50px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        position: relative;
+        margin: 0 auto;
+    }
+    
+    .scroll-wheel {
+        width: 4px;
+        height: 10px;
+        background: #d96a00;
+        border-radius: 2px;
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: scrollWheel 2s ease-in-out infinite;
+    }
+    
+    @keyframes scrollWheel {
+        0% { opacity: 1; top: 8px; }
+        100% { opacity: 0; top: 28px; }
+    }
+    
+    .scroll-text {
+        font-size: 0.75rem;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .hero-badge {
+            font-size: 0.65rem;
+            padding: 8px 16px;
+        }
+        
+        .hero-subtitle br {
+            display: none;
+        }
+        
+        .btn-luxury {
+            padding: 16px 32px;
+            font-size: 0.9rem;
+        }
+        
+        .float-element {
+            display: none;
+        }
+        
+        .hero-stats {
+            margin-top: 3rem !important;
+        }
+    }
+</style>
+
+<!-- Premium Quick Actions -->
+<section class="quick-actions-section py-5" style="margin-top: -80px; position: relative; z-index: 10;">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <a href="{% url 'catalogue:product_list' %}" class="premium-action-card">
+                    <div class="card-icon-wrapper">
+                        <i class="bi bi-cart card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Shop Materials</h3>
+                        <p class="card-description">Premium architectural products</p>
+                    </div>
+                    <div class="card-arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4">
+                <a href="{% url 'portfolio:project_list' %}" class="premium-action-card premium-action-featured">
+                    <div class="card-icon-wrapper">
+                        <i class="bi bi-images card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">View Portfolio</h3>
+                        <p class="card-description">Experience our masterpieces</p>
+                    </div>
+                    <div class="card-arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4">
+                <a href="{% url 'estimation:estimator' %}" class="premium-action-card">
+                    <div class="card-icon-wrapper">
+                        <i class="bi bi-calculator card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Get Estimate</h3>
+                        <p class="card-description">Instant project calculations</p>
+                    </div>
+                    <div class="card-arrow">
+                        <i class="bi bi-arrow-right"></i>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-5" style="margin-top: -60px; position: relative; z-index: 10;">
-    <div class="container">
-        <div class="row g-3 text-center">
-            <div class="col-lg-4">
-                <a href="{% url 'catalogue:product_list' %}" class="btn btn-dark w-100 p-4 rounded-4 fs-5 fw-bold shadow-lg border border-secondary">
-                    <i class="bi bi-cart me-2 text-primary"></i> Shop Materials
-                </a>
-            </div>
-            <div class="col-lg-4">
-                <a href="{% url 'portfolio:project_list' %}" class="btn btn-dark w-100 p-4 rounded-4 fs-5 fw-bold shadow-lg border border-secondary">
-                    <i class="bi bi-images me-2 text-primary"></i> View Portfolio
-                </a>
-            </div>
-            <div class="col-lg-4">
-                <a href="{% url 'estimation:estimator' %}" class="btn btn-dark w-100 p-4 rounded-4 fs-5 fw-bold shadow-lg border border-secondary">
-                    <i class="bi bi-calculator me-2 text-primary"></i> Get an Estimate
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+<style>
+    /* Premium Action Cards */
+    .premium-action-card {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(217, 106, 0, 0.1);
+        border-radius: 20px;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .premium-action-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.05) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    
+    .premium-action-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 60px rgba(217, 106, 0, 0.2);
+        border-color: rgba(217, 106, 0, 0.3);
+    }
+    
+    .premium-action-card:hover::before {
+        opacity: 1;
+    }
+    
+    .premium-action-featured {
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        border: none;
+    }
+    
+    .premium-action-featured .card-icon,
+    .premium-action-featured .card-title,
+    .premium-action-featured .card-description,
+    .premium-action-featured .card-arrow {
+        color: #fff !important;
+    }
+    
+    .premium-action-featured::before {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    }
+    
+    .card-icon-wrapper {
+        flex-shrink: 0;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(217, 106, 0, 0.1);
+        border-radius: 15px;
+        transition: all 0.4s ease;
+    }
+    
+    .premium-action-featured .card-icon-wrapper {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .card-icon {
+        font-size: 1.8rem;
+        color: #d96a00;
+        transition: transform 0.4s ease;
+    }
+    
+    .premium-action-card:hover .card-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
+    
+    .card-content {
+        flex: 1;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .card-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #050505;
+        margin: 0 0 5px 0;
+        transition: color 0.3s ease;
+    }
+    
+    .card-description {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 0;
+        transition: color 0.3s ease;
+    }
+    
+    .premium-action-featured .card-description {
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .card-arrow {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(217, 106, 0, 0.1);
+        border-radius: 50%;
+        color: #d96a00;
+        font-size: 1.2rem;
+        transition: all 0.4s ease;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .premium-action-featured .card-arrow {
+        background: rgba(255, 255, 255, 0.2);
+        color: #fff;
+    }
+    
+    .premium-action-card:hover .card-arrow {
+        transform: translateX(5px);
+        background: rgba(217, 106, 0, 0.2);
+    }
+    
+    .premium-action-featured:hover .card-arrow {
+        background: rgba(255, 255, 255, 0.3);
+    }
+    
+    @media (max-width: 991px) {
+        .quick-actions-section {
+            margin-top: 0;
+        }
+        
+        .premium-action-card {
+            padding: 25px;
+        }
+    }
+</style>
 
 <section class="py-5">
     <div class="container py-4">
