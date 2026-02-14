@@ -6,78 +6,550 @@
 
 {% block content %}
 
-<section class="bg-pattern-3d position-relative border-bottom pt-5 pb-5">
-    <div class="position-absolute bottom-0 start-0 w-100 h-75" style="background: linear-gradient(to top, #ffffff 0%, transparent 100%);"></div>
-
-    <div class="container position-relative z-1 pt-4 text-center">
-        <div class="animate__animated animate__fadeInUp">
-            <span class="d-inline-block border border-dark px-3 py-1 rounded-pill small fw-bold text-uppercase ls-2 mb-3 bg-white">
-                Contact Us
-            </span>
-            <h1 class="display-3 fw-bold text-dark mb-4">Let's Build Something <br><span class="text-primary">Exceptional.</span></h1>
-            <p class="lead text-muted fs-5 opacity-75 col-lg-6 mx-auto">
-                Whether it's a residential masterpiece or a commercial landmark, our team is ready to bring your vision to life.
-            </p>
+<!-- Premium Contact Hero -->
+<section class="contact-hero position-relative overflow-hidden" style="min-height: 60vh; display: flex; align-items: center; background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
+    <div class="hero-pattern-contact position-absolute w-100 h-100"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <span class="premium-badge animate__animated animate__fadeIn">
+                    <i class="bi bi-envelope-heart me-2"></i>
+                    GET IN TOUCH
+                </span>
+                <h1 class="contact-hero-title mt-4 mb-4 animate__animated animate__fadeInUp">
+                    Let's Build Something<br>
+                    <span class="title-gradient">Exceptional</span>
+                </h1>
+                <p class="contact-hero-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    Whether it's a residential masterpiece or a commercial landmark,<br class="d-none d-md-block">
+                    our team is ready to bring your vision to life
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="section bg-white">
-    <div class="container py-5 my-lg-5">
-        <div class="row g-0 shadow-lg rounded-5 overflow-hidden border border-light-subtle">
+<style>
+    .hero-pattern-contact {
+        background-image: 
+            radial-gradient(circle at 15% 25%, rgba(217, 106, 0, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 85% 75%, rgba(255, 123, 0, 0.06) 0%, transparent 50%);
+        z-index: 1;
+    }
+    
+    .contact-hero-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.1;
+        letter-spacing: -2px;
+    }
+    
+    .contact-hero-subtitle {
+        font-size: 1.15rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.7;
+        max-width: 700px;
+        margin: 0 auto;
+        font-weight: 300;
+    }
+</style>
 
-            <div class="col-lg-5 bg-black text-white p-5 position-relative d-flex flex-column justify-content-between min-vh-50">
-                <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-dots opacity-25"></div>
-
-                <div class="position-relative z-1 animate__animated animate__fadeInLeft">
-
-                    <div class="d-flex align-items-center gap-3 mb-5">
-                        <div class="p-1 rounded-circle border border-primary border-opacity-50">
-                            <img src="{% static 'images/support_avatar.png' %}" class="rounded-circle shadow-lg" alt="Support Team" style="width: 60px; height: 60px; object-fit: cover;">
+<!-- Contact Form Section -->
+<section class="contact-form-section py-5 my-5">
+    <div class="container">
+        <div class="row g-0 shadow-premium rounded-4 overflow-hidden">
+            <!-- Contact Info Sidebar -->
+            <div class="col-lg-5 contact-sidebar position-relative d-flex flex-column justify-content-between p-5">
+                <div class="sidebar-pattern"></div>
+                <div class="position-relative" style="z-index: 2;">
+                    <!-- Support Badge -->
+                    <div class="support-badge mb-5 animate__animated animate__fadeInLeft">
+                        <div class="support-avatar">
+                            <img src="{% static 'images/support_avatar.png' %}" alt="Support Team">
+                            <div class="online-indicator"></div>
                         </div>
-                        <div>
-                            <span class="d-block fw-bold text-white small">Professional Support</span>
-                            <span class="d-block text-primary small text-uppercase ls-1" style="font-size: 0.7rem;">Online Now</span>
+                        <div class="support-info">
+                            <span class="support-title">Professional Support</span>
+                            <span class="support-status">
+                                <i class="bi bi-circle-fill me-1"></i>
+                                Online Now
+                            </span>
                         </div>
                     </div>
 
-                    <h3 class="h4 fw-bold font-heading mb-5">Contact Directory</h3>
+                    <h3 class="sidebar-title mb-5">Contact Information</h3>
 
-                    <div class="d-flex flex-column gap-5">
-                        <div class="d-flex gap-4">
-                            <div class="flex-shrink-0">
-                                <div class="bg-white bg-opacity-10 p-3 rounded-circle text-primary">
-                                    <i class="bi bi-telephone"></i>
-                                </div>
+                    <!-- Contact Items -->
+                    <div class="contact-items">
+                        <div class="contact-item mb-4">
+                            <div class="contact-icon-wrapper">
+                                <i class="bi bi-telephone"></i>
                             </div>
-                            <div>
-                                <h6 class="text-uppercase text-white-50 small ls-2 fw-bold mb-2">Direct Lines</h6>
-                                <a href="tel:0552088784" class="d-block text-white text-decoration-none fs-5 hover-primary mb-1">055 208 8784</a>
-                                <a href="tel:0549926773" class="d-block text-white text-decoration-none fs-5 hover-primary">054 992 6773</a>
+                            <div class="contact-content">
+                                <span class="contact-label">Direct Lines</span>
+                                <a href="tel:0552088784" class="contact-link">055 208 8784</a>
+                                <a href="tel:0549926773" class="contact-link">054 992 6773</a>
                             </div>
                         </div>
 
-                        <div class="d-flex gap-4">
-                            <div class="flex-shrink-0">
-                                <div class="bg-white bg-opacity-10 p-3 rounded-circle text-primary">
-                                    <i class="bi bi-envelope-open"></i>
-                                </div>
+                        <div class="contact-item mb-4">
+                            <div class="contact-icon-wrapper">
+                                <i class="bi bi-envelope-open"></i>
                             </div>
-                            <div>
-                                <h6 class="text-uppercase text-white-50 small ls-2 fw-bold mb-2">Project Inquiries</h6>
-                                <a href="mailto:selluxplasterltd@gmail.com" class="d-block text-white text-decoration-none fs-6 hover-primary text-break">selluxplasterltd@gmail.com</a>
+                            <div class="contact-content">
+                                <span class="contact-label">Project Inquiries</span>
+                                <a href="mailto:selluxplasterltd@gmail.com" class="contact-link">selluxplasterltd@gmail.com</a>
+                           </div>
+                        </div>
+
+                        <div class="contact-item mb-4">
+                            <div class="contact-icon-wrapper">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div class="contact-content">
+                                <span class="contact-label">The Studio</span>
+                                <p class="contact-address">Odokor, Dr. Busia Highway,<br>Accra, Ghana</p>
+                                <a href="https://maps.google.com/?q=Odokor,+Dr.+Busia+Highway,+Accra,+Ghana" target="_blank" class="contact-directions">
+                                    <span>Get Directions</span>
+                                    <i class="bi bi-arrow-up-right ms-2"></i>
+                                </a>
                             </div>
                         </div>
 
-                        <div class="d-flex gap-4">
-                            <div class="flex-shrink-0">
-                                <div class="bg-white bg-opacity-10 p-3 rounded-circle text-primary">
-                                    <i class="bi bi-geo-alt"></i>
-                                </div>
+                        <div class="contact-item">
+                            <div class="contact-icon-wrapper">
+                                <i class="bi bi-clock"></i>
                             </div>
-                            <div>
-                                <h6 class="text-uppercase text-white-50 small ls-2 fw-bold mb-2">The Studio</h6>
-                                <p class="mb-3 text-white">Odokor, Dr. Busia Highway,<br>Accra, Ghana</p>
+                            <div class="contact-content">
+                                <span class="contact-label">Working Hours</span>
+                                <p class="contact-hours">Mon - Sat: 8:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-7 contact-form-wrapper p-5">
+                <div class="h-100 d-flex flex-column justify-content-center animate__animated animate__fadeInRight">
+                    <div class="form-header mb-5">
+                        <h3 class="form-title mb-3">Send a Message</h3>
+                        <p class="form-subtitle">Fill out the form below and our architectural team will get back to you within 24 hours.</p>
+                    </div>
+
+                    <form method="post" class="luxury-premium-form">
+                        {% csrf_token %}
+
+                        <div class="premium-form-wrapper">
+                            {{ form|crispy }}
+                        </div>
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn-premium-submit">
+                                <span>Send Secure Inquiry</span>
+                                <i class="bi bi-send-fill ms-2"></i>
+                            </button>
+                        </div>
+
+                        <p class="form-note mt-3">
+                            <i class="bi bi-shield-check me-2"></i>
+                            Your information is secure and will never be shared
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WhatsApp CTA -->
+<section class="whatsapp-cta-section py-5" style="background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);">
+    <div class="container text-center py-4">
+        <div class="whatsapp-cta-box">
+            <div class="whatsapp-icon mb-3">
+                <i class="bi bi-whatsapp"></i>
+            </div>
+            <h3 class="whatsapp-title mb-3">Need an Immediate Response?</h3>
+            <p class="whatsapp-text mb-4">Chat with our team instantly on WhatsApp for quick answers</p>
+            <a href="https://wa.me/233552088784" class="btn-whatsapp">
+                <i class="bi bi-whatsapp me-2"></i>
+                <span>Chat on WhatsApp</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Premium Contact Styles */
+    .shadow-premium {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    }
+    
+    .premium-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 28px;
+        background: rgba(217, 106, 0, 0.15);
+        border: 1px solid rgba(217, 106, 0, 0.3);
+        border-radius: 50px;
+        color: #ff7b00;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        backdrop-filter: blur(10px);
+    }
+    
+    .title-gradient {
+        background: linear-gradient(135deg, #d96a00 0%, #ff9933 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    /* Contact Sidebar */
+    .contact-sidebar {
+        background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);
+        color: #fff;
+    }
+    
+    .sidebar-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(rgba(217, 106, 0, 0.08) 1px, transparent 1px);
+        background-size: 20px 20px;
+        z-index: 1;
+    }
+    
+    .support-badge {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .support-avatar {
+        position: relative;
+        flex-shrink: 0;
+    }
+    
+    .support-avatar img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(217, 106, 0, 0.3);
+    }
+    
+    .online-indicator {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 14px;
+        height: 14px;
+        background: #10b981;
+        border: 2px solid #050505;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+    }
+    
+    .support-info {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .support-title {
+        font" -weight: 700;
+        font-size: 0.95rem;
+    }
+    
+    .support-status {
+        color: #d96a00;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        mt: 4px;
+    }
+    
+    .support-status i {
+        font-size: 0.4rem;
+        animation: blink 1.5s infinite;
+    }
+    
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+    }
+    
+    .sidebar-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #fff;
+    }
+    
+    .contact-item {
+        display: flex;
+        gap: 20px;
+    }
+    
+    .contact-icon-wrapper {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        background: rgba(217, 106, 0, 0.15);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        color: #d96a00;
+    }
+    
+    .contact-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .contact-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+    }
+    
+    .contact-link {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.05rem;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        display: block;
+        margin-bottom: 4px;
+    }
+    
+    .contact-link:hover {
+        color: #d96a00;
+    }
+    
+    .contact-address,
+    .contact-hours {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin: 0 0 12px 0;
+    }
+    
+    .contact-directions {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 18px;
+        background: rgba(217, 106, 0, 0.2);
+        border-radius: 50px;
+        color: #ff7b00;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .contact-directions:hover {
+        background: rgba(217, 106, 0, 0.3);
+        transform: translateX(3px);
+    }
+    
+    /* Contact Form Wrapper */
+    .contact-form-wrapper {
+        background: #fff;
+    }
+    
+    .form-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding-bottom: 25px;
+    }
+    
+    .form-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2rem;
+        font-weight: 800;
+        color: #050505;
+        margin: 0;
+    }
+    
+    .form-subtitle {
+        color: #666;
+        font-size: 1rem;
+        line-height: 1.7;
+        margin: 0;
+    }
+    
+    /* Premium Form Styles */
+    .premium-form-wrapper .form-control,
+    .premium-form-wrapper textarea,
+    .premium-form-wrapper select {
+        border: 2px solid #e5e5e5;
+        border-radius: 12px;
+        padding: 14px 18px;
+        background-color: #f9f9f9;
+        font-size: 0.95rem;
+        color: #333;
+        transition: all 0.3s ease;
+    }
+    
+    .premium-form-wrapper .form-control:focus,
+    .premium-form-wrapper textarea:focus,
+    .premium-form-wrapper select:focus {
+        background-color: #fff;
+        border-color: #d96a00;
+        box-shadow: 0 0 0 4px rgba(217, 106, 0, 0.1);
+        outline: none;
+    }
+    
+    .premium-form-wrapper label {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #333;
+        margin-bottom: 8px;
+    }
+    
+    .premium-form-wrapper textarea {
+        min-height: 140px;
+        resize: vertical;
+    }
+    
+    .btn-premium-submit {
+        width: 100%;
+        padding: 18px 40px;
+       background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        border: none;
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px rgba(217, 106, 0, 0.3);
+        cursor: pointer;
+    }
+    
+    .btn-premium-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(217, 106, 0, 0.5);
+        background: linear-gradient(135deg, #ff7b00 0%, #d96a00 100%);
+    }
+    
+    .form-note {
+        text-align: center;
+        color: #666;
+        font-size: 0.85rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .form-note i {
+        color: #10b981;
+    }
+    
+    /* WhatsApp CTA */
+    .whatsapp-cta-box {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px;
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+    
+    .whatsapp-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        font-size: 2.5rem;
+        color: #fff;
+        box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+    }
+    
+    .whatsapp-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #050505;
+    }
+    
+    .whatsapp-text {
+        color: #666;
+        font-size: 1.05rem;
+        margin: 0;
+    }
+    
+    .btn-whatsapp {
+        display: inline-flex;
+        align-items: center;
+        padding: 16px 36px;
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
+    }
+    
+    .btn-whatsapp:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+        color: #fff;
+    }
+    
+    /* Responsive */
+    @media (max-width: 991px) {
+        .contact-sidebar {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .support-badge {
+            margin-bottom: 30px;
+        }
+    }
+</style>
+
+{% endblock %}
                                 <a href="https://maps.google.com/?q=Odokor,+Dr.+Busia+Highway,+Accra,+Ghana" target="_blank" class="btn btn-outline-light rounded-pill px-4 btn-sm fw-bold">
                                     Get Directions <i class="bi bi-arrow-up-right ms-2"></i>
                                 </a>
