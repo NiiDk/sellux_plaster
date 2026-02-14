@@ -4,112 +4,120 @@
 {% block title %}Architectural Services | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<section class="bg-pattern-3d position-relative border-bottom pt-5 pb-5">
-    <div class="position-absolute bottom-0 start-0 w-100 h-75" style="background: linear-gradient(to top, #ffffff 0%, transparent 100%);"></div>
-    <div class="container position-relative z-1 pt-4">
-        <div class="row align-items-end">
-            <div class="col-lg-7 animate__animated animate__fadeInLeft">
-                <span class="d-inline-block border border-dark px-3 py-1 rounded-pill small fw-bold text-uppercase ls-2 mb-3 bg-white">
-                    Our Expertise
-                </span>
-                <h1 class="display-3 fw-bold text-dark mb-0">Architectural <br><span class="text-primary">Engineering & Décor</span></h1>
-            </div>
-            <div class="col-lg-5 text-lg-end mt-4 mt-lg-0 animate__animated animate__fadeInRight">
-                <p class="lead text-muted fs-6 mb-0 opacity-75">
-                    From precision drywall engineering to bespoke ornamental plastering, we provide the technical foundation for luxury interiors.
-                </p>
+
+<!-- Premium Hero Section -->
+<section class="services-hero position-relative overflow-hidden" style="min-height: 60vh; display: flex; align-items: center; background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
+    <div class="hero-pattern position-absolute w-100 h-100"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center text-lg-start">
+                    <span class="premium-badge animate__animated animate__fadeIn">
+                        <i class="bi bi-tools me-2"></i>
+                        OUR EXPERTISE
+                    </span>
+                    <h1 class="services-hero-title mt-4 mb-4 animate__animated animate__fadeInUp">
+                        Architectural<br>
+                        <span class="title-gradient">Engineering & Décor</span>
+                    </h1>
+                    <p class="services-hero-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.2s; max-width: 650px;">
+                        From precision drywall engineering to bespoke ornamental plastering, we provide the technical foundation for luxury interiors.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-white min-vh-100">
-    <div class="container py-5">
+<!-- Services Grid Section -->
+<section class="services-grid-section py-5 my-5">
+    <div class="container py-4">
         <div class="row g-4 g-lg-5">
             {% for service in services %}
             <div class="col-md-6 col-lg-4 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0 }}00ms;">
-
-                <div class="service-card-premium h-100">
-                    <div class="card-inner shadow-sm border rounded-5 overflow-hidden bg-white h-100 d-flex flex-column transition-all">
-
-                        <div class="image-box position-relative overflow-hidden" style="height: 250px;">
-                            {% if service.image %}
-                            <img src="{{ service.image.url }}" class="w-100 h-100 object-fit-cover transition-transform" alt="{{ service.title }}">
-                            {% else %}
-                            <div class="w-100 h-100 bg-light d-flex align-items-center justify-content-center">
-                                <i class="bi bi-layers text-muted opacity-25 fs-1"></i>
+                <div class="premium-service-card h-100">
+                    <div class="service-image-wrapper">
+                        {% if service.image %}
+                            <img src="{{ service.image.url }}" class="service-image" alt="{{ service.title }}">
+                            <div class="image-overlay"></div>
+                        {% else %}
+                            <div class="service-image-placeholder">
+                                <i class="bi bi-layers"></i>
                             </div>
-                            {% endif %}
-
-                            <div class="icon-floating-glass">
-                                <i class="bi {{ service.icon|default:'bi-check-all' }} fs-4"></i>
-                            </div>
+                        {% endif %}
+                        <div class="service-icon-badge">
+                            <i class="bi {{ service.icon|default:'bi-check-all' }}"></i>
                         </div>
+                    </div>
 
-                        <div class="card-body p-4 d-flex flex-column">
-                            <h3 class="h4 fw-bold text-dark mb-3">{{ service.title }}</h3>
-                            <p class="text-muted small lh-base flex-grow-1">
-                                {{ service.short_description|default:"Professional architectural installation tailored for luxury residential and commercial environments." }}
-                            </p>
+                    <div class="service-content">
+                        <h3 class="service-title">{{ service.title }}</h3>
+                        <p class="service-description">
+                            {{ service.short_description|default:"Professional architectural installation tailored for luxury residential and commercial environments." }}
+                        </p>
 
-                            <div class="mt-4 pt-3 border-top border-light">
-                                <a href="{{ service.get_absolute_url }}" class="btn-architectural-link">
-                                    View Technical Specs <i class="bi bi-arrow-right-short ms-1"></i>
-                                </a>
-                            </div>
+                        <div class="service-footer">
+                            <a href="{{ service.get_absolute_url }}" class="service-link">
+                                <span>View Details</span>
+                                <i class="bi bi-arrow-right ms-2"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-
             </div>
             {% empty %}
             <div class="col-12 text-center py-5">
-                <p class="text-muted">Our technical team is updating our service specifications.</p>
+                <div class="empty-state">
+                    <i class="bi bi-tools fs-1 text-muted mb-3"></i>
+                    <p class="text-muted">Our technical team is updating our service specifications.</p>
+                </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-black text-white position-relative overflow-hidden">
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-dots opacity-10"></div>
-
-    <div class="container py-5 position-relative z-1">
+<!-- Standards Section -->
+<section class="standards-section py-5 position-relative overflow-hidden" style="background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
+    <div class="standards-pattern"></div>
+    <div class="container py-5 position-relative" style="z-index: 2;">
         <div class="row align-items-center g-5">
             <div class="col-lg-6">
-                <h2 class="display-5 fw-bold mb-4">Uncompromising <br><span class="text-primary">Standards</span></h2>
-                <div class="d-flex flex-column gap-4">
-                    <div class="d-flex gap-4">
-                        <div class="bg-primary text-black rounded-circle d-flex align-items-center justify-content-center shadow" style="width: 48px; height: 48px; flex-shrink: 0;">
-                            <i class="bi bi-shield-check fs-4"></i>
+                <span class="section-badge-light mb-3 d-inline-block">QUALITY COMMITMENT</span>
+                <h2 class="standards-title mb-5">Uncompromising<br><span class="title-gradient">Standards</span></h2>
+                <div class="standards-features">
+                    <div class="standard-item">
+                        <div class="standard-icon">
+                            <i class="bi bi-shield-check"></i>
                         </div>
-                        <div>
-                            <h6 class="fw-bold mb-1 fs-5">Structural Integrity</h6>
-                            <p class="small text-white-50 mb-0 lh-base">Every installation is reinforced with galvanized metal profiles, ensuring your ceilings never sag or warp over time.</p>
+                        <div class="standard-content">
+                            <h5 class="standard-title">Structural Integrity</h5>
+                            <p class="standard-text">Every installation is reinforced with galvanized metal profiles, ensuring your ceilings never sag or warp over time.</p>
                         </div>
                     </div>
-                    <div class="d-flex gap-4">
-                        <div class="bg-primary text-black rounded-circle d-flex align-items-center justify-content-center shadow" style="width: 48px; height: 48px; flex-shrink: 0;">
-                            <i class="bi bi-droplet-half fs-4"></i>
+                    <div class="standard-item">
+                        <div class="standard-icon">
+                            <i class="bi bi-droplet-half"></i>
                         </div>
-                        <div>
-                            <h6 class="fw-bold mb-1 fs-5">Advanced Protection</h6>
-                            <p class="small text-white-50 mb-0 lh-base">We utilize moisture-resistant and fire-rated gypsum based on specific room requirements for maximum safety.</p>
+                        <div class="standard-content">
+                            <h5 class="standard-title">Advanced Protection</h5>
+                            <p class="standard-text">We utilize moisture-resistant and fire-rated gypsum based on specific room requirements for maximum safety.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-6">
-                <div class="p-5 bg-black rounded-5 border border-white border-opacity-25 text-center shadow-lg animate__animated animate__pulse animate__infinite animate__slower">
-                    <h3 class="fw-bold mb-3 text-white display-6">Home of Affordable Luxury</h3>
-                    <p class="text-white-50 mb-5 fs-6 px-lg-4">
-                        We bridge the gap between world-class finishes and practical project budgets. Excellence is now a standard, not a luxury.
-                    </p>
-
-                    <a href="{% url 'contact:contact_us' %}" class="btn btn-primary rounded-pill px-5 py-3 fw-bold shadow-float text-black" style="color: #000 !important; font-size: 1.1rem;">
-                        Request Site Evaluation <i class="bi bi-calendar-check ms-2"></i>
-                    </a>
+                <div class="luxury-cta-box">
+                    <div class="cta-box-pattern"></div>
+                    <div class="position-relative" style="z-index: 2;">
+                        <h3 class="cta-box-title">Home of Affordable Luxury</h3>
+                        <p class="cta-box-text">We bridge the gap between world-class finishes and practical project budgets. Excellence is now a standard, not a luxury.</p>
+                        <a href="{% url 'contact:contact_us' %}" class="btn-luxury-cta">
+                            <span>Request Site Evaluation</span>
+                            <i class="bi bi-calendar-check ms-2"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
