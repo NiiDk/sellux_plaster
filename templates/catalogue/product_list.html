@@ -4,89 +4,157 @@
 {% block title %}Our Shop | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<!-- Catalogue Header -->
-<section class="py-5 bg-white border-bottom">
-    <div class="container py-4">
-        <div class="row align-items-center">
-            <div class="col-lg-7">
-                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-3 animate__animated animate__fadeIn">PREMIUM MATERIALS</span>
-                <h1 class="display-4 fw-bold mb-3">Material Shop</h1>
-                <p class="lead text-muted">Discover a curated selection of high-performance boards, structural metal profiles, and architectural finishes designed to deliver affordable luxury to every project.</p>
-            </div>
-            <div class="col-lg-5">
-                <form action="{% url 'pages:global_search' %}" method="get" class="nav-search">
-                    <i class="bi bi-search"></i>
-                    <input type="text" name="q" class="form-control form-control-lg" placeholder="Search for products..." required>
-                </form>
+
+<!-- Premium Luxury Hero Section -->
+<section class="premium-shop-hero position-relative overflow-hidden" style="min-height: 70vh; display: flex; align-items: center;">
+    <div class="hero-bg-container"></div>
+    <div class="premium-hero-pattern position-absolute w-100 h-100"></div>
+    
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-xxl-10 col-xl-11 text-center">
+                <div class="hero-badge-container animate__animated animate__fadeIn">
+                    <span class="luxury-badge">
+                        <svg class="badge-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        PREMIUM COLLECTION
+                    </span>
+                </div>
+                
+                <h1 class="luxury-hero-title mt-5 mb-4 animate__animated animate__fadeInUp">
+                    Curated Materials
+                    <span class="gradient-accent">For Refined Spaces</span>
+                </h1>
+                
+                <p class="luxury-hero-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.15s;">
+                    High-performance boards, architectural finishes, and premium materials selected to deliver luxury and durability to every project.
+                </p>
+
+                <div class="shop-search-wrapper mt-5 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <form action="{% url 'pages:global_search' %}" method="get" class="luxury-search-form">
+                        <input type="text" name="q" class="search-input" placeholder="Search materials, finishes, products...">
+                        <button type="submit" class="search-button">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Product Grid Section -->
-<section class="py-5">
-    <div class="container py-4">
-        <div class="row g-4">
-            {% for product in products %}
-            <div class="col-sm-6 col-lg-4 col-xl-3 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0|add:1 }}00ms;">
-                <div class="card h-100 border-0 shadow-sm hover-lift overflow-hidden">
-                    <!-- Product Image -->
-                    <div class="position-relative overflow-hidden bg-light" style="height: 240px;">
-                        {% if product.image %}
-                        <img src="{{ product.image.url }}" class="card-img-top w-100 h-100" alt="{{ product.name }}" style="object-fit: cover; transition: transform 0.5s ease;" loading="lazy">
-                        {% else %}
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                            <i class="bi bi-image text-muted fs-1"></i>
-                        </div>
-                        {% endif %}
+<!-- Products Grid Section -->
+<section class="products-grid-section py-6">
+    <div class="container py-5">
+        <!-- Section Header -->
+        <div class="section-header text-center mb-5 pb-3 animate__animated animate__fadeInUp">
+            <span class="luxury-section-badge">
+                <span class="badge-dot"></span>
+                MATERIALS LIBRARY
+            </span>
+            <h2 class="luxury-section-title mt-4 mb-3">
+                Premium <span class="gradient-accent">Selection</span>
+            </h2>
+            <p class="luxury-section-subtitle">
+                Browse our comprehensive range of architectural materials and finishes.
+            </p>
+        </div>
 
-                        <!-- Stock Badge -->
-                        <div class="position-absolute top-0 start-0 m-3">
-                            {% if product.stock > 0 %}
-                            <span class="badge bg-success bg-opacity-75 rounded-pill px-3">In Stock</span>
+        <!-- Products Grid -->
+        {% if products %}
+        <div class="row g-4 g-xl-5 mt-4">
+            {% for product in products %}
+            <div class="col-lg-4 col-md-6 col-12 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0 }}0ms;">
+                <div class="luxury-product-card h-100">
+                    <!-- Image Container -->
+                    <div class="product-image-wrapper">
+                        <div class="image-container">
+                            {% if product.image %}
+                            <img src="{{ product.image.url }}"
+                                 alt="{{ product.name }}"
+                                 class="product-image"
+                                 loading="lazy">
                             {% else %}
-                            <span class="badge bg-danger bg-opacity-75 rounded-pill px-3">Out of Stock</span>
+                            <div class="no-image-placeholder">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <path d="M21 15l-5-5L5 21"></path>
+                                </svg>
+                            </div>
+                            {% endif %}
+                            <div class="image-overlay"></div>
+                        </div>
+                        
+                        <!-- Stock Badge -->
+                        {% if product.stock > 0 %}
+                        <span class="stock-badge available">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                            </svg>
+                            <span>In Stock</span>
+                        </span>
+                        {% else %}
+                        <span class="stock-badge unavailable">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                            </svg>
+                            <span>Out of Stock</span>
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Card Content -->
+                    <div class="card-content">
+                        <span class="product-category">{{ product.category.name }}</span>
+                        <h3 class="product-name">{{ product.name }}</h3>
+                        
+                        <p class="product-description">{{ product.description|truncatewords:15 }}</p>
+
+                        <!-- Price Section -->
+                        <div class="price-section mt-auto mb-4">
+                            <div class="price-display">
+                                <span class="currency">GH₵</span>
+                                <span class="amount">{{ product.price }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="product-actions">
+                            <a href="{{ product.get_absolute_url }}" class="action-button secondary">
+                                <span>Details</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                            {% if product.is_available and product.stock > 0 %}
+                            <form action="{% url 'cart:cart_add' product.id %}" method="post" class="add-cart-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="action-button primary">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="9" cy="21" r="1"></circle>
+                                        <circle cx="20" cy="21" r="1"></circle>
+                                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                    </svg>
+                                    <span>Add</span>
+                                </button>
+                            </form>
+                            {% else %}
+                            <button class="action-button disabled" disabled>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                                <span>Unavailable</span>
+                            </button>
                             {% endif %}
                         </div>
                     </div>
-
-                    <!-- Card Body -->
-                    <div class="card-body p-4 d-flex flex-column">
-                        <div class="mb-2">
-                            <small class="text-primary fw-bold text-uppercase tracking-wider" style="font-size: 0.7rem;">{{ product.category.name }}</small>
-                        </div>
-                        <h5 class="card-title fw-bold mb-3">{{ product.name }}</h5>
-
-                        <div class="mt-auto">
-                            <div class="d-flex align-items-center justify-content-between mb-3">
-                                <span class="fs-4 fw-bold text-dark">GH₵{{ product.price }}</span>
-                                <small class="text-muted">Per Unit</small>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <a href="{{ product.get_absolute_url }}" class="btn btn-outline-dark rounded-pill py-2 fw-semibold">
-                                    View Details
-                                </a>
-                                {% if product.is_available and product.stock > 0 %}
-                                <form action="{% url 'cart:cart_add' product.id %}" method="post" class="d-grid">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="quantity" value="1">
-                                    <button type="submit" class="btn btn-primary rounded-pill py-2 fw-semibold text-black">Add to Cart</button>
-                                </form>
-                                {% else %}
-                                <button class="btn btn-outline-secondary rounded-pill py-2 fw-semibold" disabled>Out of Stock</button>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <div class="col-12 text-center py-5">
-                <div class="bg-white rounded-5 p-5 shadow-sm">
-                    <i class="bi bi-search text-muted display-1 mb-4"></i>
-                    <h3 class="fw-bold">No products found</h3>
-                    <p class="text-muted">Our master craftsmen are currently updating our digital inventory. Please check back shortly.</p>
-                    <a href="{% url 'contact:contact_us' %}" class="btn btn-primary mt-3 px-5 rounded-pill py-3 text-black">Inquire Directly</a>
                 </div>
             </div>
             {% endfor %}
@@ -94,19 +162,76 @@
 
         <!-- Pagination -->
         {% if is_paginated %}
-        <div class="row mt-5">
+        <div class="row mt-6">
             <div class="col-12">
-                <nav>
-                    <ul class="pagination justify-content-center">
+                <nav class="pagination-wrapper">
+                    <ul class="pagination-list">
                         {% if page_obj.has_previous %}
-                        <li class="page-item"><a class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm" href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+                        <li>
+                            <a href="?page=1" class="pagination-item" aria-label="First page">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="11 19 4 12 11 5"></polyline>
+                                    <polyline points="20 19 13 12 20 5"></polyline>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page={{ page_obj.previous_page_number }}" class="pagination-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15 19l-7-7 7-7"></polyline>
+                                </svg>
+                            </a>
+                        </li>
                         {% endif %}
-                        <li class="page-item active"><span class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm">{{ page_obj.number }}</span></li>
+
+                        <li class="pagination-number">
+                            <span class="page-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                        </li>
+
                         {% if page_obj.has_next %}
-                        <li class="page-item"><a class="page-link rounded-pill px-4 mx-1 border-0 shadow-sm" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                        <li>
+                            <a href="?page={{ page_obj.next_page_number }}" class="pagination-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9 18l7-7-7-7"></polyline>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-item" aria-label="Last page">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="4 19l7-7-7-7"></polyline>
+                                    <polyline points="13 19l7-7-7-7"></polyline>
+                                </svg>
+                            </a>
+                        </li>
                         {% endif %}
                     </ul>
                 </nav>
+            </div>
+        </div>
+        {% endif %}
+
+        {% else %}
+        <!-- Empty State -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <path d="M21 15l-5-5L5 21"></path>
+                        </svg>
+                    </div>
+                    <h3 class="empty-title">No Products Available</h3>
+                    <p class="empty-text">Our master craftsmen are currently updating our digital inventory. Please check back shortly.</p>
+                    <a href="{% url 'contact:contact_us' %}" class="luxury-cta-button primary">
+                        <span>Inquire Now</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
         {% endif %}
@@ -114,9 +239,664 @@
 </section>
 
 <style>
-    .tracking-wider { letter-spacing: 0.05em; }
-    .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .hover-lift:hover { transform: translateY(-10px); box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important; }
-    .card-img-top:hover { transform: scale(1.05); }
+:root {
+    --primary: #d96a00;
+    --primary-light: #ff7b00;
+    --dark-bg: #050505;
+    --dark-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.75);
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --light-bg: #f9f9f9;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.premium-shop-hero {
+    background: var(--dark-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 50%, #0f0f0f 100%);
+    z-index: 0;
+}
+
+.premium-hero-pattern {
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(217, 106, 0, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(255, 123, 0, 0.08) 0%, transparent 35%);
+    z-index: 1;
+}
+
+.luxury-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    background: rgba(217, 106, 0, 0.12);
+    border: 1px solid rgba(217, 106, 0, 0.25);
+    border-radius: 50px;
+    color: var(--primary-light);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.luxury-badge:hover {
+    border-color: rgba(217, 106, 0, 0.45);
+    background: rgba(217, 106, 0, 0.18);
+}
+
+.badge-icon {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.luxury-hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin: 0;
+}
+
+.gradient-accent {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.luxury-hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+}
+
+/* Search Form */
+.shop-search-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.luxury-search-form {
+    display: flex;
+    border-radius: 50px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(217, 106, 0, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.luxury-search-form:focus-within {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px rgba(217, 106, 0, 0.15);
+}
+
+.search-input {
+    flex: 1;
+    padding: 16px 28px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-button {
+    padding: 0 24px;
+    background: transparent;
+    border: none;
+    color: var(--primary-light);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button:hover {
+    color: var(--primary);
+}
+
+/* ============================================
+   SECTION HEADER
+   ============================================ */
+
+.section-header {
+    position: relative;
+}
+
+.luxury-section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px;
+    background: rgba(217, 106, 0, 0.1);
+    border: 1px solid rgba(217, 106, 0, 0.15);
+    border-radius: 50px;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-light);
+    border-radius: 50%;
+    display: inline-block;
+    animation: dot-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.luxury-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 15px;
+}
+
+.luxury-section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* ============================================
+   PRODUCT CARDS
+   ============================================ */
+
+.luxury-product-card {
+    background: var(--dark-secondary);
+    border: 1px solid rgba(217, 106, 0, 0.12);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.luxury-product-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--primary-light);
+    box-shadow: 0 25px 50px rgba(217, 106, 0, 0.25);
+}
+
+/* Product Image */
+.product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark-secondary);
+    aspect-ratio: 1 / 1;
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.luxury-product-card:hover .product-image {
+    transform: scale(1.08);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent 0%, rgba(5, 5, 5, 0.4) 100%);
+    z-index: 2;
+}
+
+.no-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Stock Badge */
+.stock-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(10px);
+    z-index: 3;
+    transition: all 0.3s ease;
+}
+
+.stock-badge.available {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.4);
+    color: #4caf50;
+}
+
+.stock-badge.unavailable {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.4);
+    color: #f44336;
+}
+
+/* Card Content */
+.card-content {
+    padding: 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-category {
+    display: block;
+    padding: 6px 12px;
+    background: rgba(217, 106, 0, 0.15);
+    border-radius: 8px;
+    color: var(--primary-light);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    width: fit-content;
+}
+
+.product-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 12px 0;
+    line-height: 1.2;
+}
+
+.product-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 15px;
+    font-weight: 300;
+}
+
+/* Price Section */
+.price-section {
+    padding-top: 12px;
+    border-top: 1px solid rgba(217, 106, 0, 0.12);
+}
+
+.price-display {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.currency {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.amount {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+/* Product Actions */
+.product-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-button {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.action-button.primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(217, 106, 0, 0.3);
+}
+
+.action-button.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(217, 106, 0, 0.5);
+}
+
+.action-button.secondary {
+    background: rgba(217, 106, 0, 0.12);
+    color: var(--primary-light);
+    border: 1px solid rgba(217, 106, 0, 0.25);
+}
+
+.action-button.secondary:hover {
+    background: rgba(217, 106, 0, 0.2);
+    border-color: var(--primary-light);
+}
+
+.action-button.disabled {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.add-cart-form {
+    flex: 1;
+}
+
+/* ============================================
+   PAGINATION
+   ============================================ */
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-list {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(217, 106, 0, 0.1);
+    border: 1px solid rgba(217, 106, 0, 0.2);
+    border-radius: 10px;
+    color: var(--primary-light);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.pagination-item:hover {
+    background: rgba(217, 106, 0, 0.2);
+    border-color: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.pagination-number {
+    padding: 0 20px;
+}
+
+.page-info {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(217, 106, 0, 0.05);
+    border: 1px solid rgba(217, 106, 0, 0.12);
+    border-radius: 24px;
+}
+
+.empty-icon {
+    color: rgba(217, 106, 0, 0.3);
+    margin-bottom: 20px;
+}
+
+.empty-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.empty-text {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    max-width: 400px;
+    margin: 0 auto 25px;
+    font-weight: 300;
+}
+
+.luxury-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid transparent;
+}
+
+.luxury-cta-button.primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(217, 106, 0, 0.3);
+}
+
+.luxury-cta-button.primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(217, 106, 0, 0.5);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1200px) {
+    .luxury-hero-title {
+        font-size: clamp(2rem, 5vw, 4rem);
+    }
+    
+    .luxury-section-title {
+        font-size: clamp(1.6rem, 4vw, 2.8rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .premium-shop-hero {
+        min-height: 60vh;
+        padding: 40px 0;
+    }
+    
+    .luxury-hero-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .luxury-hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .shop-search-wrapper {
+        margin: 30px auto 0;
+    }
+    
+    .section-header {
+        margin-bottom: 30px;
+    }
+    
+    .luxury-section-title {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .luxury-section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .product-name {
+        font-size: 1.15rem;
+    }
+    
+    .product-description {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .luxury-hero-title {
+        font-size: 1.6rem;
+        line-height: 1.2;
+    }
+    
+    .luxury-hero-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .luxury-search-form {
+        flex-direction: column;
+    }
+    
+    .search-input {
+        padding: 12px 20px;
+    }
+    
+    .search-button {
+        padding: 12px 20px;
+        border-top: 1px solid rgba(217, 106, 0, 0.2);
+    }
+    
+    .luxury-section-title {
+        font-size: 1.5rem;
+    }
+    
+    .card-content {
+        padding: 16px;
+    }
+    
+    .product-name {
+        font-size: 1rem;
+    }
+    
+    .amount {
+        font-size: 1.4rem;
+    }
+    
+    .action-button {
+        font-size: 0.7rem;
+        padding: 10px 12px;
+    }
+    
+    .pagination-list {
+        gap: 5px;
+    }
+    
+    .pagination-item {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+.py-6 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+@media (max-width: 768px) {
+    .py-6 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+}
+
+.mt-6 {
+    margin-top: 5rem;
+}
+
 </style>
+
 {% endblock %}

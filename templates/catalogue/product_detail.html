@@ -6,160 +6,224 @@
 
 {% block content %}
 
-<div class="bg-white border-bottom py-3">
+<!-- Breadcrumb Navigation -->
+<section class="breadcrumb-section py-3" style="background: var(--dark-bg);">
     <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 small text-uppercase ls-1">
-                <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted hover-primary">Home</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'catalogue:product_list' %}" class="text-decoration-none text-muted hover-primary">Material Library</a></li>
-                <li class="breadcrumb-item active text-dark fw-bold" aria-current="page">{{ product.name }}</li>
-            </ol>
+        <nav class="breadcrumb-nav" aria-label="breadcrumb">
+            <a href="/" class="breadcrumb-nav-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                </svg>
+                <span>Home</span>
+            </a>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <a href="{% url 'catalogue:product_list' %}" class="breadcrumb-nav-item">
+                <span>Shop</span>
+            </a>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <span class="breadcrumb-nav-item active">{{ product.name }}</span>
         </nav>
     </div>
-</div>
+</section>
 
-<section class="py-5 bg-white position-relative">
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-grid opacity-50"></div>
+<!-- Product Detail Section -->
+<section class="product-detail-section py-5 py-lg-6">
+    <div class="container py-5">
+        <div class="row g-5 g-xl-6">
+            <!-- Product Gallery -->
+            <div class="col-lg-5 col-xl-6">
+                <div class="product-gallery-wrapper animate__animated animate__fadeInLeft">
+                    <!-- Main Image -->
+                    <div class="main-image-container">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" 
+                             id="mainProductImage"
+                             alt="{{ product.name }}"
+                             class="main-product-image"
+                             loading="lazy">
+                        {% else %}
+                        <div class="no-image-placeholder-large">
+                            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <path d="M21 15l-5-5L5 21"></path>
+                            </svg>
+                        </div>
+                        {% endif %}
+                    </div>
 
-    <div class="container position-relative z-1 py-4">
-        <div class="row g-5 align-items-start">
-
-            <div class="col-lg-6 animate__animated animate__fadeInLeft">
-                <div class="position-relative mb-4 bg-light rounded-4 overflow-hidden shadow-sm border border-light-subtle ratio ratio-1x1">
-                    {% if product.image %}
-                    <img src="{{ product.image.url }}" id="mainProductImage" class="object-fit-cover w-100 h-100 transition-opacity" alt="{{ product.name }}">
-                    {% else %}
-                    <div class="d-flex align-items-center justify-content-center h-100">
-                        <i class="bi bi-image text-muted opacity-25 display-1"></i>
+                    <!-- Thumbnail Gallery -->
+                    {% if product.additional_images.all or product.image %}
+                    <div class="thumbnail-gallery mt-4">
+                        <div class="thumbnail-item" onclick="changeMainImage('{{ product.image.url }}', this)">
+                            <img src="{{ product.image.url }}" alt="Thumbnail" loading="lazy">
+                        </div>
+                        {% for gallery_item in product.additional_images.all %}
+                        <div class="thumbnail-item" onclick="changeMainImage('{{ gallery_item.image.url }}', this)">
+                            <img src="{{ gallery_item.image.url }}" alt="Thumbnail" loading="lazy">
+                        </div>
+                        {% endfor %}
                     </div>
                     {% endif %}
-
-                    <div class="position-absolute bottom-0 end-0 m-3">
-                        <button class="btn btn-white rounded-circle shadow-sm p-2 lh-1" onclick="openLightbox()">
-                            <i class="bi bi-arrows-fullscreen"></i>
-                        </button>
-                    </div>
                 </div>
-
-                {% if product.additional_images.all or product.image %}
-                <div class="d-flex gap-2 overflow-x-auto pb-2 scrollbar-hide justify-content-center">
-                    <div class="flex-shrink-0 cursor-pointer thumbnail-wrapper active" onclick="changeMainImage('{{ product.image.url }}', this)">
-                        <img src="{{ product.image.url }}" class="rounded-3 object-fit-cover" width="70" height="70">
-                    </div>
-                    {% for gallery_item in product.additional_images.all %}
-                    <div class="flex-shrink-0 cursor-pointer thumbnail-wrapper" onclick="changeMainImage('{{ gallery_item.image.url }}', this)">
-                        <img src="{{ gallery_item.image.url }}" class="rounded-3 object-fit-cover" width="70" height="70">
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
             </div>
 
-            <div class="col-lg-6 animate__animated animate__fadeInRight">
-                <div class="sticky-top" style="top: 100px;">
+            <!-- Product Info -->
+            <div class="col-lg-7 col-xl-6">
+                <div class="product-info-wrapper animate__animated animate__fadeInRight">
+                    <!-- Category Badge -->
+                    <span class="product-category-badge">{{ product.category.name }}</span>
 
-                    <div class="mb-4">
-                        <span class="d-block text-uppercase text-primary fw-bold ls-2 small mb-2">{{ product.category.name }}</span>
-                        <h1 class="display-5 fw-bold text-dark mb-3">{{ product.name }}</h1>
+                    <!-- Title -->
+                    <h1 class="product-detail-title">{{ product.name }}</h1>
 
-                        <div class="d-flex align-items-center justify-content-between border-bottom pb-4">
-                            <h2 class="h3 mb-0 fw-bold">GH₵{{ product.price|intcomma }}</h2>
-
-                            {% if product.stock > 0 %}
-                            <span class="badge bg-success-subtle text-success rounded-pill px-3 py-2 border border-success-subtle">
-                                <span class="dot bg-success me-2"></span>In Stock
-                            </span>
-                            {% else %}
-                            <span class="badge bg-danger-subtle text-danger rounded-pill px-3 py-2 border border-danger-subtle">
-                                <span class="dot bg-danger me-2"></span>Out of Stock
-                            </span>
-                            {% endif %}
+                    <!-- Price & Stock -->
+                    <div class="price-stock-section">
+                        <div class="price-box">
+                            <span class="currency-symbol">GH₵</span>
+                            <span class="price-amount">{{ product.price|intcomma }}</span>
                         </div>
+                        {% if product.stock > 0 %}
+                        <span class="stock-badge-detail available">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                            </svg>
+                            <span>{{ product.stock }} In Stock</span>
+                        </span>
+                        {% else %}
+                        <span class="stock-badge-detail unavailable">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                            </svg>
+                            <span>Out of Stock</span>
+                        </span>
+                        {% endif %}
                     </div>
 
-                    <p class="text-secondary lh-lg mb-5">
+                    <!-- Description -->
+                    <div class="product-description-box">
                         {{ product.description|linebreaks }}
-                    </p>
+                    </div>
 
-                    <div class="bg-light p-4 rounded-4 mb-4 border border-light-subtle">
+                    <!-- Add to Cart Section -->
+                    <div class="add-to-cart-section">
                         <form action="{% url 'cart:cart_add' product.id %}" method="post" id="addToCartForm">
                             {% csrf_token %}
 
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <span class="fw-bold text-dark small text-uppercase ls-1">Quantity</span>
-
-                                <div class="d-flex align-items-center bg-white rounded-pill border px-2 py-1 shadow-sm">
-                                    <button type="button" class="btn btn-link text-dark text-decoration-none p-2" onclick="updateQty(-1)">
-                                        <i class="bi bi-dash"></i>
+                            <!-- Quantity Selector -->
+                            <div class="quantity-selector mb-4">
+                                <label for="qty">Quantity</label>
+                                <div class="qty-controls">
+                                    <button type="button" class="qty-btn qty-minus" onclick="updateQty(-1)">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        </svg>
                                     </button>
-
-                                    <input type="number" name="quantity" id="realQtyInput" value="1" min="1" max="50" class="d-none">
-                                    <span id="displayQty" class="fw-bold px-3" style="min-width: 40px; text-align: center;">1</span>
-
-                                    <button type="button" class="btn btn-link text-dark text-decoration-none p-2" onclick="updateQty(1)">
-                                        <i class="bi bi-plus"></i>
+                                    <input type="number" name="quantity" id="realQtyInput" value="1" min="1" max="50" class="qty-input" readonly>
+                                    <button type="button" class="qty-btn qty-plus" onclick="updateQty(1)">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        </svg>
                                     </button>
                                 </div>
                             </div>
 
                             {{ cart_product_form.override }}
 
-                            <div class="d-grid">
-                                {% if product.stock > 0 %}
-                                <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold py-3 shadow-float transition-transform">
-                                    Add to Cart <i class="bi bi-bag-plus ms-2"></i>
-                                </button>
-                                {% else %}
-                                <button type="button" class="btn btn-secondary btn-lg rounded-pill fw-bold py-3" disabled>
-                                    Sold Out
-                                </button>
-                                {% endif %}
-                            </div>
+                            <!-- CTA Buttons -->
+                            {% if product.stock > 0 %}
+                            <button type="submit" class="btn-add-to-cart primary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <circle cx="9" cy="21" r="1"></circle>
+                                    <circle cx="20" cy="21" r="1"></circle>
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                </svg>
+                                <span>Add to Cart</span>
+                            </button>
+                            {% else %}
+                            <button type="button" class="btn-add-to-cart disabled" disabled>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                                </svg>
+                                <span>Sold Out</span>
+                            </button>
+                            {% endif %}
+
+                            <a href="{% url 'catalogue:product_list' %}" class="btn-add-to-cart secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15 18l-6-6 6-6"></polyline>
+                                </svg>
+                                <span>Back to Shop</span>
+                            </a>
                         </form>
                     </div>
 
-                    <div class="accordion accordion-flush" id="productDetails">
-                        <div class="accordion-item bg-transparent border-bottom">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed bg-transparent fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-delivery">
-                                    <i class="bi bi-truck me-3 text-primary"></i> Delivery & Logistics
-                                </button>
-                            </h2>
-                            <div id="flush-delivery" class="accordion-collapse collapse" data-bs-parent="#productDetails">
-                                <div class="accordion-body text-muted small lh-lg">
-                                    Nationwide delivery available. Typical lead time is 3-5 working days.
-                                </div>
+                    <!-- Product Details Accordion -->
+                    <div class="product-details-accordion mt-5">
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion(this)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+                                </svg>
+                                <span>Delivery & Logistics</span>
+                            </button>
+                            <div class="accordion-body">
+                                <p>Nationwide delivery available. Standard lead time is 3-5 working days. Express delivery options available.</p>
                             </div>
                         </div>
-                        <div class="accordion-item bg-transparent border-bottom">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed bg-transparent fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-install">
-                                    <i class="bi bi-tools me-3 text-primary"></i> Installation
-                                </button>
-                            </h2>
-                            <div id="flush-install" class="accordion-collapse collapse" data-bs-parent="#productDetails">
-                                <div class="accordion-body text-muted small lh-lg">
-                                    We offer professional installation. Contact our team for a quote.
-                                </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion(this)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M21.5 2h-19C1.12 2 0 3.12 0 4.5v15C0 20.88 1.12 22 2.5 22h19c1.38 0 2.5-1.12 2.5-2.5v-15C24 3.12 22.88 2 21.5 2zm-7 6h3.5v4h-3.5V8zM11 8h3.5v4H11V8zM5 8h3.5v4H5V8zm0 9h3.5v4H5v-4zm6 4h-3.5v-4h3.5v4zm6 0h-3.5v-4h3.5v4z"/>
+                                </svg>
+                                <span>Installation Services</span>
+                            </button>
+                            <div class="accordion-body">
+                                <p>Professional installation available. Contact our team for detailed pricing and scheduling information.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header" onclick="toggleAccordion(this)">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                                </svg>
+                                <span>Product Specifications</span>
+                            </button>
+                            <div class="accordion-body">
+                                <p>For detailed product specifications, material composition, and technical data, please contact our team or request our technical documentation.</p>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-light border-top">
-    <div class="container py-4">
-        <h3 class="h4 fw-bold mb-4">You may also require</h3>
-        <p class="text-muted">Related architectural finishes will appear here.</p>
+<!-- Related Products Section -->
+<section class="related-products-section py-5 py-lg-6" style="background: var(--dark-bg);">
+    <div class="container py-5">
+        <h2 class="section-title-small mb-4">
+            Browse <span class="gradient-accent">Other Materials</span>
+        </h2>
+        <p class="section-subtitle-small">Return to our full material library to explore additional products and finishes.</p>
+        <div class="mt-4">
+            <a href="{% url 'catalogue:product_list' %}" class="luxury-cta-button primary">
+                <span>View All Products</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
     </div>
 </section>
 
 <script>
-    // 1. Image Swapping
     function changeMainImage(src, thumb) {
         const mainImg = document.getElementById('mainProductImage');
         mainImg.style.opacity = '0.5';
@@ -167,63 +231,576 @@
             mainImg.src = src;
             mainImg.style.opacity = '1';
         }, 200);
-
-        document.querySelectorAll('.thumbnail-wrapper').forEach(el => {
+        
+        document.querySelectorAll('.thumbnail-item').forEach(el => {
             el.classList.remove('active');
-            el.style.opacity = '0.6';
         });
-        thumb.classList.add('active');
-        thumb.style.opacity = '1';
+        if (thumb) thumb.classList.add('active');
     }
 
-    // 2. Quantity Logic
     function updateQty(change) {
         const input = document.getElementById('realQtyInput');
-        const display = document.getElementById('displayQty');
         let newVal = parseInt(input.value) + change;
         if (newVal >= 1 && newVal <= 50) {
             input.value = newVal;
-            display.innerText = newVal;
+        }
+    }
+
+    function toggleAccordion(header) {
+        const body = header.nextElementSibling;
+        const item = header.parentElement;
+        
+        document.querySelectorAll('.accordion-item').forEach(el => {
+            if (el !== item) {
+                el.classList.remove('active');
+                el.querySelector('.accordion-body').style.maxHeight = '0';
+            }
+        });
+        
+        item.classList.toggle('active');
+        if (item.classList.contains('active')) {
+            body.style.maxHeight = body.scrollHeight + 'px';
+        } else {
+            body.style.maxHeight = '0';
         }
     }
 </script>
 
 <style>
-    /* Typography */
-    .ls-1 { letter-spacing: 1px; }
-    .ls-2 { letter-spacing: 2px; }
+:root {
+    --primary: #d96a00;
+    --primary-light: #ff7b00;
+    --dark-bg: #050505;
+    --dark-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.75);
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --light-bg: #f9f9f9;
+}
 
-    /* Object Fit */
-    .object-fit-cover { object-fit: cover; }
-    .transition-opacity { transition: opacity 0.3s ease; }
+/* ============================================
+   BREADCRUMB
+   ============================================ */
 
-    /* Thumbnails */
-    .thumbnail-wrapper {
-        border: 2px solid transparent;
-        transition: all 0.3s ease;
-        opacity: 0.6;
+.breadcrumb-section {
+    background: var(--dark-bg);
+    border-bottom: 1px solid rgba(217, 106, 0, 0.1);
+}
+
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-nav-item:hover {
+    color: var(--primary-light);
+}
+
+.breadcrumb-nav-item.active {
+    color: var(--primary-light);
+    font-weight: 700;
+}
+
+/* ============================================
+   PRODUCT DETAIL SECTION
+   ============================================ */
+
+.product-detail-section {
+    background: var(--dark-bg);
+}
+
+/* Product Gallery */
+.product-gallery-wrapper {
+    position: relative;
+}
+
+.main-image-container {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--dark-secondary);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(217, 106, 0, 0.12);
+    margin-bottom: 20px;
+}
+
+.main-product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.main-image-container:hover .main-product-image {
+    transform: scale(1.05);
+}
+
+.no-image-placeholder-large {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.thumbnail-item {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(217, 106, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-item:hover {
+    border-color: var(--primary);
+}
+
+.thumbnail-item.active {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 2px var(--dark-bg), 0 0 0 4px var(--primary-light);
+}
+
+/* Product Info */
+.product-info-wrapper {
+    position: relative;
+}
+
+.product-category-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(217, 106, 0, 0.15);
+    border-radius: 8px;
+    color: var(--primary-light);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.product-detail-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+}
+
+.price-stock-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 0;
+    border-top: 1px solid rgba(217, 106, 0, 0.12);
+    border-bottom: 1px solid rgba(217, 106, 0, 0.12);
+    margin-bottom: 24px;
+}
+
+.price-box {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.currency-symbol {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.price-amount {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.stock-badge-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stock-badge-detail.available {
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    color: #4caf50;
+}
+
+.stock-badge-detail.unavailable {
+    background: rgba(244, 67, 54, 0.15);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: #f44336;
+}
+
+.product-description-box {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 24px 0;
+    font-weight: 300;
+}
+
+/* Add to Cart */
+.add-to-cart-section {
+    margin: 32px 0;
+}
+
+.quantity-selector {
+    margin-bottom: 20px;
+}
+
+.quantity-selector label {
+    display: block;
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.qty-controls {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(217, 106, 0, 0.15);
+    border-radius: 12px;
+    padding: 8px;
+    gap: 8px;
+}
+
+.qty-btn {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: var(--primary-light);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+.qty-btn:hover {
+    background: rgba(217, 106, 0, 0.2);
+}
+
+.qty-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    outline: none;
+}
+
+/* CTA Buttons */
+.btn-add-to-cart {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 32px;
+    margin-bottom: 12px;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-add-to-cart.primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(217, 106, 0, 0.3);
+}
+
+.btn-add-to-cart.primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(217, 106, 0, 0.5);
+}
+
+.btn-add-to-cart.secondary {
+    background: rgba(217, 106, 0, 0.12);
+    color: var(--primary-light);
+    border: 1px solid rgba(217, 106, 0, 0.25);
+}
+
+.btn-add-to-cart.secondary:hover {
+    background: rgba(217, 106, 0, 0.2);
+    border-color: var(--primary-light);
+}
+
+.btn-add-to-cart.disabled {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Accordion */
+.product-details-accordion {
+    border-top: 1px solid rgba(217, 106, 0, 0.12);
+    padding-top: 24px;
+}
+
+.accordion-item {
+    border-bottom: 1px solid rgba(217, 106, 0, 0.12);
+    overflow: hidden;
+}
+
+.accordion-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 0;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-align: left;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.accordion-header:hover {
+    color: var(--primary-light);
+}
+
+.accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0 0 16px 28px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+.accordion-body p {
+    margin: 0;
+}
+
+.accordion-item.active .accordion-header {
+    color: var(--primary-light);
+}
+
+/* ============================================
+   RELATED PRODUCTS
+   ============================================ */
+
+.related-products-section {
+    position: relative;
+}
+
+.section-title-small {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.section-subtitle-small {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+.gradient-accent {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.luxury-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid transparent;
+}
+
+.luxury-cta-button.primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(217, 106, 0, 0.3);
+}
+
+.luxury-cta-button.primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(217, 106, 0, 0.5);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .breadcrumb-nav {
+        gap: 8px;
     }
-    .thumbnail-wrapper:hover { opacity: 1; }
-    .thumbnail-wrapper.active {
-        border-color: var(--primary-color);
-        opacity: 1;
+
+    .product-detail-title {
+        font-size: 1.8rem;
     }
 
-    /* Utilities */
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-
-    .shadow-float { box-shadow: 0 4px 15px rgba(217, 106, 0, 0.3); }
-    .shadow-float:hover { box-shadow: 0 8px 25px rgba(217, 106, 0, 0.5); transform: translateY(-2px); }
-
-    .transition-transform { transition: all 0.3s ease; }
-
-    .dot {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
+    .price-amount {
+        font-size: 1.8rem;
     }
+
+    .product-description-box {
+        font-size: 0.95rem;
+    }
+
+    .thumbnail-item {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 576px) {
+    .breadcrumb-nav {
+        font-size: 0.8rem;
+    }
+
+    .breadcrumb-nav-item svg {
+        display: none;
+    }
+
+    .product-detail-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .price-stock-section {
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 16px 0;
+    }
+
+    .price-amount {
+        font-size: 1.6rem;
+    }
+
+    .btn-add-to-cart {
+        padding: 14px 24px;
+        font-size: 0.85rem;
+    }
+
+    .quantity-selector label {
+        font-size: 0.65rem;
+    }
+
+    .qty-controls {
+        padding: 6px;
+    }
+
+    .qty-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .quantity-selector {
+        margin-bottom: 16px;
+    }
+
+    .accordion-header {
+        font-size: 0.9rem;
+        padding: 12px 0;
+    }
+
+    .accordion-body {
+        font-size: 0.9rem;
+        padding: 0 0 12px 24px;
+    }
+
+    .section-title-small {
+        font-size: 1.5rem;
+    }
+}
+
+.py-lg-6 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+@media (max-width: 768px) {
+    .py-lg-6 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+}
+
+.g-xl-6 {
+    --bs-gutter-x: 4rem;
+}
+
 </style>
 
 {% endblock %}
