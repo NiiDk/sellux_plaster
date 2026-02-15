@@ -4,84 +4,119 @@
 {% block title %}Service Cost Estimator | Sellux Plaster Ltd{% endblock %}
 
 {% block content %}
-<section class="bg-pattern-3d position-relative border-bottom pt-5 pb-5">
-    <div class="position-absolute bottom-0 start-0 w-100 h-75" style="background: linear-gradient(to top, #ffffff 0%, transparent 100%);"></div>
-    <div class="container position-relative z-1 pt-4 text-center">
-        <div class="animate__animated animate__fadeInDown">
-            <span class="d-inline-block border border-dark px-3 py-1 rounded-pill small fw-bold text-uppercase ls-2 mb-3 bg-white">
-                Project Planning
-            </span>
-            <h1 class="display-3 fw-bold text-dark mb-3">Cost Estimator</h1>
-            <p class="lead text-muted fs-5 opacity-75 col-lg-6 mx-auto">
-                Calculate a preliminary investment figure for your interior project based on surface area and finish type.
-            </p>
+
+<!-- Premium Hero Section -->
+<section class="estimator-hero position-relative overflow-hidden" style="min-height: 60vh; display: flex; align-items: center; background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
+    <div class="hero-pattern position-absolute w-100 h-100"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 text-center">
+                <span class="premium-badge animate__animated animate__fadeIn">
+                    <i class="bi bi-calculator me-2"></i>
+                    PROJECT PLANNING
+                </span>
+                <h1 class="estimator-hero-title mt-4 mb-4 animate__animated animate__fadeInUp">
+                    Investment<br>
+                    <span class="title-gradient">Estimator</span>
+                </h1>
+                <p class="estimator-hero-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    Calculate a preliminary investment figure for your interior project based on surface area and finish type. Get instant pricing transparency.
+                </p>
+                <div class="hero-divider animate__animated animate__fadeIn" style="animation-delay: 0.4s;"></div>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="py-5 bg-white">
-    <div class="container py-lg-5">
-        <div class="row g-0 shadow-lg rounded-5 overflow-hidden border border-light-subtle animate__animated animate__fadeInUp">
+<!-- Estimator Section -->
+<section class="estimator-section py-5 my-5">
+    <div class="container py-4">
+        <div class="row g-0 shadow-premium rounded-4 overflow-hidden animate__animated animate__fadeInUp">
 
-            <div class="col-lg-5 bg-black text-white p-5 position-relative">
-                <div class="position-absolute top-0 start-0 w-100 h-100 bg-pattern-dots opacity-25"></div>
+            <div class="col-lg-5 estimator-form-side p-5 position-relative">
+                <div class="form-bg-pattern"></div>
 
-                <div class="position-relative z-1">
-                    <h3 class="h4 fw-bold font-heading mb-4 text-primary">Specifications</h3>
+                <div class="position-relative" style="z-index: 2;">
+                    <div class="form-header mb-4">
+                        <span class="form-badge">INPUT PARAMETERS</span>
+                        <h3 class="form-title mt-3">Project Specifications</h3>
+                    </div>
 
-                    <form id="estimation-form" method="post" class="estimator-form">
+                    <form id="estimation-form" method="post" class="premium-estimator-form">
                         {% csrf_token %}
-                        <div id="error-container" class="alert alert-danger small py-2" style="display: none; background: rgba(220, 53, 69, 0.2); border-color: #dc3545; color: #ff8e98;"></div>
+                        <div id="error-container" class="premium-alert" style="display: none;"></div>
 
-                        <div class="mb-4">
-                            <label for="id_service" class="form-label small fw-bold text-uppercase ls-1 opacity-75">Material/Service Type</label>
-                            <div class="select-wrapper">
+                        <div class="form-group-premium mb-4">
+                            <label for="id_service" class="premium-label">
+                                <i class="bi bi-list-ul me-2"></i>
+                                Material/Service Type
+                            </label>
+                            <div class="premium-select-wrapper">
                                 {{ form.service }}
+                                <i class="bi bi-chevron-down select-icon"></i>
                             </div>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="id_area" class="form-label small fw-bold text-uppercase ls-1 opacity-75">Total Surface Area (m²)</label>
-                            <div class="input-group-custom">
+                        <div class="form-group-premium mb-5">
+                            <label for="id_area" class="premium-label">
+                                <i class="bi bi-rulers me-2"></i>
+                                Total Surface Area
+                            </label>
+                            <div class="premium-input-wrapper">
                                 {{ form.area }}
-                                <span class="unit-label">m²</span>
+                                <span class="input-unit">m²</span>
                             </div>
-                            <small class="text-white-50 mt-2 d-block fst-italic">Enter the total wall or ceiling measurement.</small>
+                            <small class="form-hint">Enter the total wall or ceiling measurement for accurate pricing.</small>
                         </div>
 
                         <div class="d-grid mt-5">
-                            <button type="submit" class="btn btn-primary btn-lg rounded-pill fw-bold py-3 shadow-float transition-all">
-                                Calculate Investment <i class="bi bi-arrow-right-circle ms-2"></i>
+                            <button type="submit" class="btn-estimator-calculate">
+                                <span>Calculate Investment</span>
+                                <i class="bi bi-arrow-right ms-2"></i>
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <div class="col-lg-7 bg-white p-5 d-flex align-items-center justify-content-center border-start border-light position-relative">
+            <div class="col-lg-7 estimator-result-side p-5 d-flex align-items-center justify-content-center position-relative">
+                <div class="result-bg-glow"></div>
 
-                <div id="result-placeholder" class="text-center opacity-25">
-                    <i class="bi bi-calculator display-1 mb-3 d-block"></i>
-                    <p class="fs-5 fw-medium">Input project specs to view valuation</p>
+                <div id="result-placeholder" class="result-placeholder">
+                    <div class="placeholder-icon-wrapper">
+                        <i class="bi bi-calculator"></i>
+                    </div>
+                    <h4 class="placeholder-title">Awaiting Input</h4>
+                    <p class="placeholder-text">Enter your project specifications to calculate estimated investment</p>
                 </div>
 
-                <div id="result-container" class="text-center w-100 animate__animated animate__fadeIn" style="display: none;">
-                    <span class="text-uppercase text-muted fw-bold ls-2 small mb-2 d-block">Estimated Total</span>
-                    <h2 id="estimated-cost" class="display-1 fw-bold text-dark mb-4"></h2>
+                <div id="result-container" class="result-container w-100 animate__animated animate__fadeIn" style="display: none;">
+                    <div class="result-header mb-4">
+                        <span class="result-badge">ESTIMATED INVESTMENT</span>
+                    </div>
+                    
+                    <div class="result-amount-wrapper">
+                        <span class="currency-symbol">GH₵</span>
+                        <h2 id="estimated-cost" class="result-amount"></h2>
+                    </div>
 
-                    <div class="col-lg-9 mx-auto">
-                        <div class="p-3 bg-light rounded-4 mb-4 border border-light-subtle">
-                            <p class="text-muted small mb-0 lh-lg">
-                                <strong>Disclaimer:</strong> This figure represents a baseline professional estimate.
-                                Final costs may vary based on site complexity, decorative additions, and transportation.
+                    <div class="result-disclaimer">
+                        <div class="disclaimer-icon">
+                            <i class="bi bi-info-circle"></i>
+                        </div>
+                        <div class="disclaimer-content">
+                            <p class="disclaimer-title">Important Notice</p>
+                            <p class="disclaimer-text">
+                                This figure represents a baseline professional estimate. Final costs may vary based on site complexity, decorative additions, and transportation requirements.
                             </p>
                         </div>
+                    </div>
 
-                        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-5">
-                            <a href="{% url 'contact:contact_us' %}" class="btn btn-dark rounded-pill px-5 py-3 fw-bold shadow-sm">
-                                Request Precise Quote
-                            </a>
-                        </div>
+                    <div class="result-actions mt-5">
+                        <a href="{% url 'contact:contact_us' %}" class="btn-result-cta">
+                            <span>Request Precise Quote</span>
+                            <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -90,52 +125,455 @@
 </section>
 
 <style>
-    /* Typography & Core Styles */
-    .ls-1 { letter-spacing: 1px; }
-    .ls-2 { letter-spacing: 2px; }
-    .font-heading { font-family: 'Montserrat', sans-serif; }
-
-    /* --- INPUT VISIBILITY FIX --- */
-    .estimator-form select,
-    .estimator-form input {
+    /* Premium Estimator Styles */
+    
+    /* Hero Styles */
+    .hero-pattern {
+        background-image: 
+            radial-gradient(circle at 20% 30%, rgba(217, 106, 0, 0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(255, 123, 0, 0.06) 0%, transparent 50%);
+        z-index: 1;
+    }
+    
+    .premium-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 28px;
+        background: rgba(217, 106, 0, 0.15);
+        border: 1px solid rgba(217, 106, 0, 0.3);
+        border-radius: 50px;
+        color: #ff7b00;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        backdrop-filter: blur(10px);
+    }
+    
+    .estimator-hero-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.1;
+        letter-spacing: -2px;
+    }
+    
+    .title-gradient {
+        background: linear-gradient(135deg, #d96a00 0%, #ff9933 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .estimator-hero-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        max-width: 700px;
+        margin: 0 auto;
+        font-weight: 300;
+    }
+    
+    .hero-divider {
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, #d96a00, transparent);
+        margin: 40px auto 0;
+        border-radius: 2px;
+    }
+    
+    /* Estimator Section */
+    .shadow-premium {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    }
+    
+    /* Form Side */
+    .estimator-form-side {
+        background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .form-bg-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        background: rgba(255, 255, 255, 0.08) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        color: #ffffff !important; /* Forces text visibility while typing */
-        padding: 15px 20px;
+        height: 100%;
+        background-image: radial-gradient(rgba(217, 106, 0, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+        z-index: 1;
+    }
+    
+    .form-badge {
+        display: inline-block;
+        padding: 6px 14px;
+        background: rgba(217, 106, 0, 0.15);
+        border-radius: 50px;
+        color: #ff7b00;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    }
+    
+    .form-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: #fff;
+    }
+    
+    /* Form Styles */
+    .premium-estimator-form {
+        position: relative;
+    }
+    
+    .premium-alert {
+        padding: 12px 18px;
+        background: rgba(220, 53, 69, 0.15);
+        border: 1px solid rgba(220, 53, 69, 0.3);
         border-radius: 12px;
+        color: #ff6b7a;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+    
+    .form-group-premium {
+        position: relative;
+    }
+    
+    .premium-label {
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.8);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    /* Select Wrapper */
+    .premium-select-wrapper {
+        position: relative;
+    }
+    
+    .premium-select-wrapper select {
+        width: 100%;
+        padding: 16px 50px 16px 20px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
+        color: #fff;
+        font-size: 1.05rem;
+        font-weight: 600;
         outline: none;
         transition: all 0.3s ease;
-        font-size: 1.15rem;
-        font-weight: 600;
+        appearance: none;
+        cursor: pointer;
     }
-
-    /* Style for the Input wrapper to hold the unit */
-    .input-group-custom { position: relative; }
-    .unit-label {
+    
+    .premium-select-wrapper select:focus {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: #d96a00;
+        box-shadow: 0 0 0 4px rgba(217, 106, 0, 0.15);
+    }
+    
+    .premium-select-wrapper select option {
+        background: #1a1a1a;
+        color: #fff;
+        padding: 12px;
+    }
+    
+    .select-icon {
         position: absolute;
         right: 20px;
         top: 50%;
         transform: translateY(-50%);
-        color: rgba(255,255,255,0.4);
-        font-weight: bold;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1.1rem;
         pointer-events: none;
     }
-
-    /* Input Focus States */
-    .estimator-form select:focus,
-    .estimator-form input:focus {
-        background: rgba(255, 255, 255, 0.15) !important;
-        border-color: var(--primary-color) !important;
-        box-shadow: 0 0 0 4px rgba(217, 106, 0, 0.2) !important;
+    
+    /* Input Wrapper */
+    .premium-input-wrapper {
+        position: relative;
     }
-
-    /* Select Dropdown Fix */
-    .estimator-form select option { background: #000; color: #fff; }
-
-    /* Button Styling */
-    .shadow-float { box-shadow: 0 4px 15px rgba(217, 106, 0, 0.3); }
-    .shadow-float:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(217, 106, 0, 0.5); }
+    
+    .premium-input-wrapper input {
+        width: 100%;
+        padding: 16px 60px 16px 20px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
+        color: #fff;
+        font-size: 1.05rem;
+        font-weight: 600;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+    
+    .premium-input-wrapper input:focus {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: #d96a00;
+        box-shadow: 0 0 0 4px rgba(217, 106, 0, 0.15);
+    }
+    
+    .input-unit {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.5);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        pointer-events: none;
+    }
+    
+    .form-hint {
+        display: block;
+        margin-top: 10px;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+        font-style: italic;
+        line-height: 1.5;
+    }
+    
+    /* Calculate Button */
+    .btn-estimator-calculate {
+        width: 100%;
+        padding: 18px 36px;
+        background: linear-gradient(135deg, #d96a00 0%, #ff7b00 100%);
+        border: none;
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px rgba(217, 106, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .btn-estimator-calculate:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(217, 106, 0, 0.5);
+    }
+    
+    /* Result Side */
+    .estimator-result-side {
+        background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .result-bg-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(217, 106, 0, 0.08) 0%, transparent 70%);
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+    
+    /* Placeholder */
+    .result-placeholder {
+        text-align: center;
+        opacity: 0.3;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .placeholder-icon-wrapper {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, rgba(217, 106, 0, 0.1) 0%, rgba(255, 123, 0, 0.05) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+        font-size: 3.5rem;
+        color: #d96a00;
+    }
+    
+    .placeholder-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 12px;
+    }
+    
+    .placeholder-text {
+        color: #666;
+        font-size: 1rem;
+        line-height: 1.6;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    /* Result Container */
+    .result-container {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .result-header {
+        margin-bottom: 20px;
+    }
+    
+    .result-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        background: rgba(217, 106, 0, 0.1);
+        border: 1px solid rgba(217, 106, 0, 0.2);
+        border-radius: 50px;
+        color: #d96a00;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    
+    .result-amount-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 40px;
+    }
+    
+    .currency-symbol {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #d96a00;
+    }
+    
+    .result-amount {
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(3rem, 8vw, 5rem);
+        font-weight: 800;
+        color: #050505;
+        line-height: 1;
+        margin: 0;
+    }
+    
+    /* Disclaimer */
+    .result-disclaimer {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 25px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 20px;
+        display: flex;
+        gap: 18px;
+        text-align: left;
+    }
+    
+    .disclaimer-icon {
+        width: 40px;
+        height: 40px;
+        background: rgba(217, 106, 0, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: #d96a00;
+        flex-shrink: 0;
+    }
+    
+    .disclaimer-content {
+        flex: 1;
+    }
+    
+    .disclaimer-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #050505;
+        margin-bottom: 8px;
+    }
+    
+    .disclaimer-text {
+        color: #666;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    /* Result Actions */
+    .result-actions {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .btn-result-cta {
+        display: inline-flex;
+        align-items: center;
+        padding: 16px 40px;
+        background: #050505;
+        border-radius: 50px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .btn-result-cta:hover {
+        background: #1a1a1a;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        color: #fff;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+        .estimator-form-side,
+        .estimator-result-side {
+            min-height: 500px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .premium-badge {
+            font-size: 0.65rem;
+            padding: 10px 20px;
+        }
+        
+        .result-amount-wrapper {
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .result-disclaimer {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .disclaimer-icon {
+            margin: 0 auto;
+        }
+    }
 </style>
 
 {% endblock content %}
@@ -146,7 +584,7 @@
     const areaInput = document.querySelector('input[name="area"]');
     const serviceSelect = document.querySelector('select[name="service"]');
 
-    // Function to handle the AJAX call
+    // Function to handle the AJAX calculation
     function performCalculation() {
         const formData = new FormData(form);
         const url = form.action;
@@ -154,8 +592,12 @@
         const resultContainer = document.getElementById('result-container');
         const resultPlaceholder = document.getElementById('result-placeholder');
 
-        // Don't calculate if input is empty to avoid unnecessary errors
-        if(!areaInput.value) return;
+        // Don't calculate if input is empty
+        if(!areaInput.value) {
+            resultContainer.style.display = 'none';
+            resultPlaceholder.style.display = 'block';
+            return;
+        }
 
         fetch(url, {
             method: 'POST',
@@ -168,23 +610,33 @@
         })
         .then(data => {
             if (data.estimated_cost) {
-                document.getElementById('estimated-cost').textContent = `GH₵${data.estimated_cost}`;
+                // Format the cost with commas
+                const formattedCost = parseFloat(data.estimated_cost).toLocaleString('en-GH', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+                document.getElementById('estimated-cost').textContent = formattedCost;
                 resultPlaceholder.style.display = 'none';
                 resultContainer.style.display = 'block';
+                errorContainer.style.display = 'none';
             }
         })
         .catch(error => {
             console.error('Calculation Error:', error);
+            if (error.errors) {
+                errorContainer.textContent = Object.values(error.errors).flat().join(', ');
+                errorContainer.style.display = 'block';
+            }
         });
     }
 
-    // Trigger calculation as user types (Input Event)
+    // Trigger calculation as user types
     areaInput.addEventListener('input', performCalculation);
 
     // Trigger calculation when service changes
     serviceSelect.addEventListener('change', performCalculation);
 
-    // Also handle standard submit for accessibility
+    // Handle standard form submit
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         performCalculation();
