@@ -6,460 +6,974 @@
 
 {% block content %}
 
-<!-- Premium Hero Section -->
-<section class="team-hero position-relative overflow-hidden" style="min-height: 70vh; display: flex; align-items: center; background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
-    <div class="hero-pattern position-absolute w-100 h-100"></div>
+<!-- Premium Luxury Hero Section -->
+<section class="premium-hero position-relative overflow-hidden" style="min-height: 75vh; display: flex; align-items: center;">
+    <div class="hero-bg-container"></div>
+    <div class="premium-hero-pattern position-absolute w-100 h-100"></div>
+    
     <div class="container position-relative" style="z-index: 2;">
         <div class="row justify-content-center">
-            <div class="col-lg-10 text-center">
-                <span class="premium-badge animate__animated animate__fadeIn">
-                    <i class="bi bi-people me-2"></i>
-                    MASTER ARTISANS
-                </span>
-                <h1 class="team-hero-title mt-4 mb-4 animate__animated animate__fadeInUp">
-                    Meet the<br>
-                    <span class="title-gradient">Craftsmen</span>
+            <div class="col-xxl-10 col-xl-11 text-center">
+                <div class="hero-badge-container animate__animated animate__fadeIn">
+                    <span class="luxury-badge">
+                        <svg class="badge-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        MASTER ARTISANS
+                    </span>
+                </div>
+                
+                <h1 class="luxury-hero-title mt-5 mb-4 animate__animated animate__fadeInUp">
+                    Meet the Visionaries
+                    <span class="gradient-accent">Behind Every Surface</span>
                 </h1>
-               <p class="team-hero-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
-                    Skilled craftsmen and technical specialists delivering refined plasterwork through discipline, experience, and exacting standards.
+                
+                <p class="luxury-hero-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.15s;">
+                    Highly-skilled craftsmen and technical specialists delivering architectural excellence through precision, discipline, and decades of refined expertise.
                 </p>
-                <div class="hero-divider animate__animated animate__fadeIn" style="animation-delay: 0.4s;"></div>
+                
+                <div class="hero-cta-group mt-6 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                    <a href="#leadership" class="luxury-cta-button primary">
+                        <span>Explore Leadership</span>
+                        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Leadership Section -->
-<section class="leadership-section py-5 my-5">
-    <div class="container py-4">
-
-        <div class="text-center mb-5 pb-3">
-            <span class="section-badge">FIRM LEADERSHIP</span>
-            <h2 class="section-title mt-3 mb-4">Executive <span class="gradient-text">Team</span></h2>
-            <p class="section-subtitle mx-auto">
-                Senior professionals guiding quality, execution, and architectural integrity.
+<section class="leadership-section py-6 position-relative" id="leadership">
+    <div class="container py-5">
+        <div class="section-header text-center mb-5 pb-3 animate__animated animate__fadeInUp">
+            <span class="luxury-section-badge">
+                <span class="badge-dot"></span>
+                FIRM LEADERSHIP
+            </span>
+            <h2 class="luxury-section-title mt-4 mb-3">
+                Executive <span class="gradient-accent">Team</span>
+            </h2>
+            <p class="luxury-section-subtitle">
+                Senior visionaries guiding architectural integrity and execution excellence across every project.
             </p>
         </div>
 
-        <div class="row g-4 g-lg-5 justify-content-center">
+        <div class="row g-5 justify-content-center mt-5">
             {% for member in firm_leadership %}
-            <div class="col-lg-4 col-md-6 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0 }}00ms;">
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0 }}00ms;">
+                <a href="{{ member.get_absolute_url }}" class="leadership-card-link" style="text-decoration: none; color: inherit;">
+                    <div class="luxury-leadership-card h-100">
+                        <div class="card-image-wrapper">
+                            <div class="image-container">
+                                <img src="{{ member.profile_image.url }}"
+                                     alt="{{ member.get_full_name }}"
+                                     class="member-image"
+                                     loading="lazy">
+                                <div class="image-overlay"></div>
+                            </div>
+                            <span class="expertise-badge">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                                <span class="badge-text">Specialization</span>
+                            </span>
+                        </div>
 
-                <div class="premium-leader-card h-100">
-                    <div class="leader-image-wrapper">
-                        <img src="{{ member.profile_image.url }}"
-                             alt="{{ member.get_full_name }}"
-                             class="leader-image">
-                        <div class="image-overlay-gradient"></div>
-                        <span class="experience-badge-premium">
-                            <i class="bi bi-star-fill me-1"></i>
-                            {{ member.years_of_experience|default:"15+" }} yrs
-                        </span>
+                        <div class="card-content">
+                            <div class="role-badge">{{ member.job_title }}</div>
+                            <h3 class="member-name">{{ member.get_full_name }}</h3>
+                            <p class="member-bio">{{ member.bio|truncatewords:25 }}</p>
+
+                            <div class="card-footer">
+                                <span class="read-more">
+                                    View Full Profile
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="leader-content-premium">
-                        <span class="leader-role">
-                            {{ member.job_title }}
-                        </span>
-                        <h3 class="leader-name-premium">
-                            {{ member.get_full_name }}
-                        </h3>
-                        <p class="leader-bio-premium">
-                            {{ member.bio|truncatewords:24 }}
-                        </p>
-
-                        <a href="{{ member.get_absolute_url }}" class="leader-link-premium">
-                            <span>View Profile</span>
-                            <i class="bi bi-arrow-right ms-2"></i>
-                        </a>
-                    </div>
-                </div>
-
+                </a>
             </div>
             {% endfor %}
         </div>
-
     </div>
 </section>
 
 <!-- Specialists Section -->
-<section class="specialists-section py-5 my-5" style="background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);">
-    <div class="container py-4">
-
-        <div class="text-center mb-5 pb-3">
-            <span class="section-badge">SPECIALIST TEAM</span>
-            <h2 class="section-title mt-3 mb-4">Certified <span class="gradient-text">Professionals</span></h2>
-            <p class="section-subtitle mx-auto">
-                Dedicated professionals delivering precision across every project stage.
+<section class="specialists-section py-6 position-relative" style="background: linear-gradient(180deg, rgba(249,249,249,0.5) 0%, rgba(255,255,255,0.8) 100%);">
+    <div class="container py-5">
+        <div class="section-header text-center mb-5 pb-3 animate__animated animate__fadeInUp">
+            <span class="luxury-section-badge">
+                <span class="badge-dot"></span>
+                SPECIALIST TEAM
+            </span>
+            <h2 class="luxury-section-title mt-4 mb-3">
+                Certified <span class="gradient-accent">Professionals</span>
+            </h2>
+            <p class="luxury-section-subtitle">
+                Dedicated craftspeople delivering precision and excellence across every stage of project execution.
             </p>
         </div>
 
-        <div class="row g-4 justify-content-center">
+        <div class="row g-4 g-lg-5 mt-5">
             {% for member in associates %}
-            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0 }}0ms;">
+                <a href="{{ member.get_absolute_url }}" class="specialist-card-link" style="text-decoration: none; color: inherit;">
+                    <div class="luxury-specialist-card h-100">
+                        <div class="specialist-image-wrapper">
+                            <img src="{{ member.profile_image.url }}"
+                                 alt="{{ member.get_full_name }}"
+                                 class="specialist-image"
+                                 loading="lazy">
+                            <div class="specialist-overlay"></div>
+                        </div>
 
-                <div class="premium-specialist-card text-center h-100">
-                    <div class="specialist-image-wrapper">
-                        <img src="{{ member.profile_image.url }}"
-                             alt="{{ member.get_full_name }}"
-                             class="specialist-image-premium">
-                        <div class="specialist-ring"></div>
+                        <div class="specialist-content text-center">
+                            <h4 class="specialist-name">{{ member.get_full_name }}</h4>
+                            <p class="specialist-role">{{ member.job_title }}</p>
+                            
+                            {% if member.specialization %}
+                            <div class="specialist-spec">
+                                {{ member.specialization|truncatewords:3 }}
+                            </div>
+                            {% endif %}
+
+                            <div class="specialist-footer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
-
-                    <h4 class="specialist-name-premium">
-                        {{ member.get_full_name }}
-                    </h4>
-
-                    <p class="specialist-role-premium">
-                        {{ member.job_title }}
-                    </p>
-
-                    {% if member.specializations %}
-                    <div class="specialist-tags-premium">
-                        {% for spec in member.specializations|slice:":2" %}
-                        <span class="tag-item">{{ spec }}</span>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-
-                    <a href="{{ member.get_absolute_url }}" class="specialist-link-premium">
-                        <span>View Details</span>
-                        <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
-                </div>
-
+                </a>
             </div>
             {% endfor %}
         </div>
-
     </div>
 </section>
 
-<!-- Philosophy & Values Section -->
-<section class="philosophy-section py-5 my-5 position-relative overflow-hidden" style="background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
-    <div class="philosophy-pattern"></div>
+<!-- Philosophy Section -->
+<section class="philosophy-section py-6 position-relative overflow-hidden">
+    <div class="philosophy-bg"></div>
     <div class="container py-5 position-relative" style="z-index: 2;">
-
         <div class="row align-items-center g-5">
-            <div class="col-lg-6">
-
-                <span class="section-badge-light mb-4 d-inline-block">
-                    <i class="bi bi-lightbulb me-2"></i>
+            <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                <span class="luxury-section-badge light">
+                    <span class="badge-dot"></span>
                     OUR PHILOSOPHY
                 </span>
 
-                <h2 class="philosophy-title mb-4">
-                    Where Craft Meets<br>
-                    <span class="title-gradient">Architectural Discipline</span>
+                <h2 class="philosophy-title mt-4 mb-4">
+                    Craft Defined By<br>
+                    <span class="gradient-accent">Discipline & Excellence</span>
                 </h2>
 
                 <p class="philosophy-text mb-5">
-                    True luxury is restraint. Precision in execution.
-                    Respect for material, form, and architectural intent.
+                    True luxury reveals itself in restraint. In every cut, every surface, every detail—precision execution and respect for architectural intent. We don't follow trends. We create lasting quality.
                 </p>
 
-                <a href="{% url 'contact:contact_us' %}" class="btn-philosophy-cta">
-                    <span>Consult Our Artisans</span>
-                    <i class="bi bi-arrow-right ms-2"></i>
+                <a href="{% url 'contact:contact_us' %}" class="luxury-cta-button primary">
+                    <span>Schedule Consultation</span>
+                    <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
                 </a>
-
             </div>
 
             <div class="col-lg-6">
                 <div class="row g-4">
-                    {% for value in values %}
-                    <div class="col-md-6">
-
-                        <div class="premium-value-card h-100">
-                            <div class="value-number-premium">
-                                0{{ forloop.counter }}
+                    <div class="col-md-6 animate__animated animate__fadeInRight" style="animation-delay: 0.1s;">
+                        <div class="luxury-value-card">
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" opacity="0.8">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
                             </div>
-                            <h5 class="value-title-premium">
-                                {{ value.title }}
-                            </h5>
-                            <p class="value-description-premium">
-                                {{ value.description }}
-                            </p>
-                            <div class="value-accent-line"></div>
+                            <h4 class="value-title">Precision</h4>
+                            <p class="value-text">Every millimeter matters. Excellence demands exactness.</p>
                         </div>
-
                     </div>
-                    {% endfor %}
+                    <div class="col-md-6 animate__animated animate__fadeInRight" style="animation-delay: 0.15s;">
+                        <div class="luxury-value-card">
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" opacity="0.8">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <h4 class="value-title">Integrity</h4>
+                            <p class="value-text">Standards upheld. Quality never compromised.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 animate__animated animate__fadeInRight" style="animation-delay: 0.2s;">
+                        <div class="luxury-value-card">
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" opacity="0.8">
+                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                </svg>
+                            </div>
+                            <h4 class="value-title">Innovation</h4>
+                            <p class="value-text">Respecting tradition while advancing craft.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 animate__animated animate__fadeInRight" style="animation-delay: 0.25s;">
+                        <div class="luxury-value-card">
+                            <div class="value-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" opacity="0.8">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                                </svg>
+                            </div>
+                            <h4 class="value-title">Partnership</h4>
+                            <p class="value-text">Collaborating closely for your vision.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
 <style>
 :root {
-    /* Project Wide Colors (Sourced from base.html) */
-    --primary-color: #d96a00;
-    --primary-vibrant: #ff7b00;
-    --black-onyx: #050505;
-    --black-charcoal: #121212;
-    --border-dark: #333;
-    --white-soft: #e5e5e5;
-    --white-muted: #cfcfcf;
-
-    /* New Local Variables for Clarity and Premium Look */
-    --card-bg-color: var(--black-onyx);
-    --card-radius: 16px; /* Increased radius for modern squircle look */
-    --image-radius: 12px;
+    --primary: #d96a00;
+    --primary-light: #ff7b00;
+    --dark-bg: #050505;
+    --dark-secondary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.75);
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --border-color: rgba(217, 106, 0, 0.15);
+    --light-bg: #f9f9f9;
 }
 
-/* Architectural Pattern Background */
-.bg-architectural-dots {
-    /* Subtle white dots on dark background */
-    background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 20px 20px;
-}
+/* ============================================
+   HERO SECTION - Premium Luxury Design
+   ============================================ */
 
-/* Base */
-.section {
-    padding: 7rem 0;
-}
-.bg-dark-onyx { background: var(--black-onyx); }
-.bg-dark-charcoal { background: var(--black-charcoal); }
-.text-primary-color { color: var(--primary-color); }
-
-/* Global Transitions */
-*, *:before, *:after {
-    box-sizing: border-box;
-}
-a, .primary-btn, .leader-card, .specialist-card {
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth cubic-bezier transition for luxury feel */
-}
-
-/* Typography */
-.display-1 { font-size: 4.5rem; line-height: 1.1; font-weight: 300; letter-spacing: -1px; }
-.display-2 { font-size: 3.2rem; line-height: 1.2; font-weight: 300; }
-.hero-text,
-.section-subtext,
-.values-text {
-    color: var(--white-muted);
-    font-weight: 300;
-    line-height: 1.7;
-    max-width: 600px;
-    margin: 0 auto;
-}
-.section-label {
-    font-size: 0.75rem;
-    letter-spacing: 5px; /* Increased for premium look */
-    text-transform: uppercase;
-    color: var(--primary-color);
-    font-weight: 500;
-}
-
-/* Cards - Leadership */
-.leader-card {
-    border: 1px solid var(--border-dark);
-    padding: 2.5rem;
-    height: 100%;
-    background: var(--card-bg-color);
-    border-radius: var(--card-radius);
-    overflow: hidden;
-}
-.leader-card:hover {
-    transform: translateY(-10px); /* Deeper lift on hover */
-    border-color: var(--primary-vibrant);
-    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.4); /* Stronger shadow */
-}
-
-.leader-image-container {
+.premium-hero {
+    background: var(--dark-bg);
     position: relative;
-    margin-bottom: 2rem;
     overflow: hidden;
-    border-radius: var(--image-radius); /* Rounded square look for image container */
 }
-.leader-image {
-    width: 100%;
-    aspect-ratio: 4 / 5; /* Taller portrait aspect ratio for professional look */
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.leader-card:hover .leader-image {
-    transform: scale(1.08); /* More noticeable image zoom */
-}
-.experience-badge {
+
+.hero-bg-container {
     position: absolute;
-    bottom: 0;
+    top: 0;
+    left: 0;
     right: 0;
-    background: var(--primary-color);
-    color: var(--black-onyx); /* Contrast text against the primary color */
-    font-size: 0.75rem;
-    padding: 0.4rem 0.8rem;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-    z-index: 10;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 50%, #0f0f0f 100%);
+    z-index: 0;
 }
 
-.leader-name {
-    color: var(--white-soft);
-    font-weight: 600; /* Slightly heavier font for name */
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 1.6rem;
+.premium-hero-pattern {
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(217, 106, 0, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(255, 123, 0, 0.08) 0%, transparent 35%);
+    z-index: 1;
 }
-.leader-title {
-    color: var(--primary-color);
-    font-size: 0.9rem;
+
+.luxury-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    background: rgba(217, 106, 0, 0.12);
+    border: 1px solid rgba(217, 106, 0, 0.25);
+    border-radius: 50px;
+    color: var(--primary-light);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    letter-spacing: 2px; /* Increased letter spacing */
-    margin-bottom: 0.1rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
 }
-.leader-bio {
-    color: var(--white-muted);
+
+.luxury-badge:hover {
+    border-color: rgba(217, 106, 0, 0.45);
+    background: rgba(217, 106, 0, 0.18);
+}
+
+.badge-icon {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.luxury-hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin: 0;
+}
+
+.gradient-accent {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.luxury-hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
     font-weight: 300;
+    letter-spacing: 0.3px;
+}
+
+.hero-cta-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.luxury-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
     font-size: 0.95rem;
-}
-
-/* Links & Buttons */
-.text-link {
-    color: var(--white-soft);
-    font-size: 0.85rem;
     text-decoration: none;
-    font-weight: 500;
-}
-.text-link:hover {
-    color: var(--primary-vibrant);
-}
-
-.primary-btn {
-    display: inline-block;
-    background: var(--primary-color);
-    color: var(--black-onyx);
-    padding: 1rem 2.5rem;
-    font-size: 0.85rem;
-    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     text-transform: uppercase;
-    letter-spacing: 2px;
-    text-decoration: none;
-    border: 1px solid var(--primary-color);
-}
-.primary-btn:hover {
-    background: transparent;
-    color: var(--primary-vibrant);
-    border-color: var(--primary-vibrant);
+    letter-spacing: 1px;
+    border: 2px solid transparent;
 }
 
-/* Specialist */
-.specialist-card {
-    border: 1px solid var(--border-dark);
-    padding: 1.5rem 1rem;
-    height: 100%;
-    background: var(--black-onyx);
-    border-radius: var(--card-radius);
+.luxury-cta-button.primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    box-shadow: 0 8px 25px rgba(217, 106, 0, 0.3);
 }
-.specialist-card:hover {
-    border-color: var(--primary-vibrant);
-    transform: translateY(-5px); /* More significant lift */
+
+.luxury-cta-button.primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(217, 106, 0, 0.5);
 }
-.specialist-image {
-    width: 100px;
-    height: 100px;
-    border-radius: var(--image-radius); /* Rounded square aesthetic */
-    object-fit: cover;
-    margin-bottom: 1rem;
-    border: 3px solid var(--primary-color);
-    box-shadow: 0 0 0 4px var(--black-onyx);
+
+.luxury-cta-button.secondary {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: transparent;
+}
+
+.luxury-cta-button.secondary:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-4px);
+}
+
+.btn-icon {
     transition: transform 0.3s ease;
 }
-.specialist-card:hover .specialist-image {
-    transform: scale(1.05);
+
+.luxury-cta-button:hover .btn-icon {
+    transform: translateX(4px);
+}
+
+/* ============================================
+   LEADERSHIP SECTION
+   ============================================ */
+
+.leadership-section {
+    background: var(--dark-bg);
+}
+
+.section-header {
+    position: relative;
+}
+
+.luxury-section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px;
+    background: rgba(217, 106, 0, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.luxury-section-badge.light {
+    background: rgba(217, 106, 0, 0.2);
+    border-color: rgba(217, 106, 0, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-light);
+    border-radius: 50%;
+    display: inline-block;
+    animation: dot-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.luxury-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 15px;
+}
+
+.luxury-section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* Leadership Card */
+.luxury-leadership-card {
+    background: var(--dark-secondary);
+    border: 1px solid rgba(217, 106, 0, 0.12);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.leadership-card-link {
+    height: 100%;
+}
+
+.luxury-leadership-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--primary-light);
+    box-shadow: 0 25px 50px rgba(217, 106, 0, 0.25);
+}
+
+.card-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: var(--dark-secondary);
+    aspect-ratio: 3 / 4;
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.member-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.luxury-leadership-card:hover .member-image {
+    transform: scale(1.08);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent 0%, rgba(5, 5, 5, 0.6) 100%);
+    z-index: 2;
+}
+
+.expertise-badge {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(5, 5, 5, 0.9);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    backdrop-filter: blur(10px);
+    z-index: 3;
+    transition: all 0.3s ease;
+}
+
+.luxury-leadership-card:hover .expertise-badge {
+    background: rgba(217, 106, 0, 0.15);
+    border-color: var(--primary-light);
+}
+
+.card-content {
+    padding: 28px 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    background: rgba(217, 106, 0, 0.15);
+    border-radius: 8px;
+    color: var(--primary-light);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    width: fit-content;
+}
+
+.member-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 12px 0;
+    line-height: 1.2;
+}
+
+.member-bio {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 12px 0;
+    flex-grow: 1;
+    font-weight: 300;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 16px;
+    border-top: 1px solid rgba(217, 106, 0, 0.12);
+    margin-top: auto;
+}
+
+.read-more {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary-light);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: gap 0.3s ease;
+}
+
+.luxury-leadership-card:hover .read-more {
+    gap: 12px;
+}
+
+/* ============================================
+   SPECIALISTS SECTION
+   ============================================ */
+
+.specialists-section {
+    position: relative;
+}
+
+.luxury-specialist-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(217, 106, 0, 0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+.specialist-card-link {
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.luxury-specialist-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 1);
+    border-color: var(--primary);
+    box-shadow: 0 20px 45px rgba(217, 106, 0, 0.15);
+}
+
+.specialist-image-wrapper {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin-top: -65px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.specialist-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    border: 4px solid rgba(255, 255, 255, 1);
+}
+
+.luxury-specialist-card:hover .specialist-image {
+    transform: scale(1.1);
+}
+
+.specialist-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(217, 106, 0, 0.2) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.luxury-specialist-card:hover .specialist-overlay {
+    opacity: 1;
+}
+
+.specialist-content {
+    padding: 15px 20px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .specialist-name {
-    color: var(--white-soft);
-    font-weight: 600;
-    margin-top: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--dark-bg);
+    margin: 10px 0 5px;
 }
-.specialist-title {
-    color: var(--white-muted);
+
+.specialist-role {
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 10px;
+}
+
+.specialist-spec {
+    color: #666;
     font-size: 0.85rem;
-    margin-bottom: 0.8rem;
+    line-height: 1.5;
+    margin: 10px 0;
     font-weight: 300;
 }
-.specialist-tags span {
-    border-radius: 6px; /* Slightly larger tag radius */
+
+.specialist-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    color: var(--primary);
+    transition: transform 0.3s ease;
 }
 
-/* Values */
-.value-card {
-    border: 1px solid var(--border-dark);
-    padding: 2.5rem;
-    height: 100%;
-    background: var(--black-onyx);
-    border-left: 4px solid var(--primary-color);
-    border-radius: var(--card-radius);
-    /* Ensuring consistent borders */
-    border-top: 1px solid var(--border-dark);
-    border-right: 1px solid var(--border-dark);
-    border-bottom: 1px solid var(--border-dark);
+.luxury-specialist-card:hover .specialist-footer {
+    transform: translateX(5px);
 }
-.value-card:hover {
-    transform: translateY(-5px);
-    border-left-color: var(--primary-vibrant);
+
+/* ============================================
+   PHILOSOPHY SECTION
+   ============================================ */
+
+.philosophy-section {
+    background: var(--dark-bg);
+    position: relative;
+    overflow: hidden;
 }
-.value-number {
-    color: var(--primary-color);
-    font-size: 3rem; /* Larger number */
-    font-weight: 200;
-    display: block;
-    margin-bottom: 1rem;
-    line-height: 1;
+
+.philosophy-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 50%, #0f0f0f 100%);
+    z-index: 0;
 }
+
+.philosophy-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 30% 30%, rgba(217, 106, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 70% 70%, rgba(255, 123, 0, 0.06) 0%, transparent 45%);
+    pointer-events: none;
+}
+
+.philosophy-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.philosophy-text {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+/* Value Card - Philosophy */
+.luxury-value-card {
+    padding: 28px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(217, 106, 0, 0.15);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    text-align: center;
+}
+
+.luxury-value-card:hover {
+    background: rgba(217, 106, 0, 0.1);
+    border-color: var(--primary-light);
+    transform: translateY(-8px);
+}
+
+.value-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(217, 106, 0, 0.15);
+    border-radius: 12px;
+    color: var(--primary-light);
+    transition: all 0.3s ease;
+}
+
+.luxury-value-card:hover .value-icon {
+    background: rgba(217, 106, 0, 0.25);
+    transform: scale(1.1);
+}
+
 .value-title {
-    font-size: 1.35rem; /* Slightly larger title */
-    color: var(--white-soft);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 12px 0;
 }
-.value-description {
-    color: var(--white-muted);
-    font-weight: 300;
+
+.value-text {
+    color: var(--text-secondary);
     font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 300;
 }
 
-/* Responsive (Mobile-First Clarity and Card Sizing) */
-@media (max-width: 992px) {
-    .display-1 { font-size: 3.5rem; }
-    .display-2 { font-size: 2.5rem; }
-    .section { padding: 4rem 0; } /* Reduce section padding on mobile */
-    .section-header { margin-bottom: 4rem !important; } /* Tighter sections */
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1200px) {
+    .luxury-hero-title {
+        font-size: clamp(2rem, 5vw, 4rem);
+    }
+    
+    .luxury-section-title {
+        font-size: clamp(1.6rem, 4vw, 2.8rem);
+    }
 }
+
 @media (max-width: 768px) {
-    /* LEADERSHIP CARD MOBILE REFINEMENT */
-    .leader-card {
-        padding: 1.5rem; /* Smaller card size */
+    .premium-hero {
+        min-height: 60vh;
+        padding: 40px 0;
     }
-    .leader-image {
-        aspect-ratio: 16 / 9; /* Wider image on small screens for better crop */
+    
+    .luxury-hero-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
     }
-    .leader-image-container {
-        margin-bottom: 1.5rem;
+    
+    .luxury-hero-subtitle {
+        font-size: 1rem;
     }
-    .leader-name {
-        font-size: 1.4rem;
+    
+    .hero-cta-group {
+        gap: 12px;
     }
-
-    /* SPECIALIST CARD MOBILE REFINEMENT */
-    .specialist-card {
-        padding: 1rem 0.5rem; /* Smaller padding */
+    
+    .luxury-cta-button {
+        padding: 14px 32px;
+        font-size: 0.85rem;
+        width: 100%;
+        justify-content: center;
     }
-    .specialist-image {
-        width: 80px;
-        height: 80px; /* Smaller image size */
+    
+    .section-header {
+        margin-bottom: 30px;
     }
+    
+    .luxury-section-title {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .luxury-section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .luxury-leadership-card {
+        margin-bottom: 10px;
+    }
+    
+    .card-image-wrapper {
+        aspect-ratio: 2 / 3;
+    }
+    
+    .specialist-image-wrapper {
+        width: 100px;
+        height: 100px;
+        margin-top: -50px;
+        margin-bottom: 10px;
+    }
+    
+    .luxury-specialist-card {
+        padding: 10px;
+    }
+    
     .specialist-name {
         font-size: 1rem;
     }
     
-    .g-10 { --bs-gutter-y: 3rem !important; }
+    .philosophy-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
 }
+
+@media (max-width: 576px) {
+    .luxury-hero-title {
+        font-size: 1.6rem;
+        line-height: 1.2;
+    }
+    
+    .luxury-hero-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .luxury-cta-button {
+        width: 100%;
+        font-size: 0.8rem;
+        padding: 12px 24px;
+    }
+    
+    .luxury-section-title {
+        font-size: 1.5rem;
+    }
+    
+    .luxury-section-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .card-image-wrapper {
+        aspect-ratio: 1 / 1.2;
+    }
+    
+    .member-name {
+        font-size: 1.3rem;
+    }
+    
+    .member-bio {
+        font-size: 0.9rem;
+    }
+    
+    .specialist-content {
+        padding: 10px 15px 15px;
+    }
+    
+    .specialist-name {
+        font-size: 0.95rem;
+    }
+    
+    .luxury-value-card {
+        padding: 20px 16px;
+    }
+    
+    .value-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* ============================================
+   UTILITIES & ANIMATIONS
+   ============================================ */
+
+.py-6 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+@media (max-width: 768px) {
+    .py-6 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+}
+
+</style>
+
+
 </style>
 
 {% endblock %}
