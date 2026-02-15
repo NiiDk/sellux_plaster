@@ -42,6 +42,8 @@ class OrderCreateView(View):
     def post(self, request, *args, **kwargs):
         cart = Cart(request)
         form = OrderCreateForm(request.POST, user=request.user if request.user.is_authenticated else None)
+        shipping_settings = ShippingSetting.objects.first()
+        tax_rate = shipping_settings.tax_rate if shipping_settings else 0
 
         if form.is_valid():
             order = form.save(commit=False)
@@ -90,9 +92,9 @@ class OrderCreateView(View):
                 return redirect(res['data']['authorization_url'])
 
             messages.error(request, 'Payment initialization failed. Please try again.')
-            return render(request, 'orders/order_create.html', {'cart': cart, 'form': form})
+            return render(request, 'orders/order_create.html', {'cart': cart, 'form': form, 'tax_rate': tax_rate})
 
-        return render(request, 'orders/order_create.html', {'cart': cart, 'form': form})
+        return render(request, 'orders/order_create.html', {'cart': cart, 'form': form, 'tax_rate': tax_rate})
 
 class OrderVerifyView(View):
     def get(self, request, *args, **kwargs):
