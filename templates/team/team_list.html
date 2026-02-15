@@ -108,14 +108,14 @@
 <section class="specialists-section py-6 position-relative" style="background: linear-gradient(180deg, rgba(249,249,249,0.5) 0%, rgba(255,255,255,0.8) 100%);">
     <div class="container py-5">
         <div class="section-header text-center mb-5 pb-3 animate__animated animate__fadeInUp">
-            <span class="luxury-section-badge">
+            <span class="luxury-section-badge light-bg-variant">
                 <span class="badge-dot"></span>
                 SPECIALIST TEAM
             </span>
-            <h2 class="luxury-section-title mt-4 mb-3">
+            <h2 class="luxury-section-title light-bg-variant mt-4 mb-3">
                 Certified <span class="gradient-accent">Professionals</span>
             </h2>
-            <p class="luxury-section-subtitle">
+            <p class="luxury-section-subtitle light-bg-variant">
                 Dedicated craftspeople delivering precision and excellence across every stage of project execution.
             </p>
         </div>
@@ -454,6 +454,21 @@
     margin: 0 auto;
     line-height: 1.7;
     font-weight: 300;
+}
+
+/* Light background variant - for sections with light backgrounds */
+.luxury-section-badge.light-bg-variant {
+    color: var(--primary);
+    background: rgba(217, 106, 0, 0.2);
+    border-color: rgba(217, 106, 0, 0.35);
+}
+
+.luxury-section-title.light-bg-variant {
+    color: #1a1a1a;
+}
+
+.luxury-section-subtitle.light-bg-variant {
+    color: #4a4a4a;
 }
 
 /* Leadership Card */
