@@ -50,6 +50,15 @@ class OrderCreateView(View):
             if request.user.is_authenticated:
                 order.user = request.user
             
+            # Combine detailed address fields for the main address field
+            address_parts = [
+                form.cleaned_data.get('building_number'),
+                form.cleaned_data.get('street_address'),
+                form.cleaned_data.get('postal_code'),
+                form.cleaned_data.get('region'),
+            ]
+            order.address = ', '.join(filter(None, address_parts))
+            
             subtotal = cart.get_total_price()
             try:
                 shipping_settings = ShippingSetting.objects.first()

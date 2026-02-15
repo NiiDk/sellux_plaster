@@ -7,7 +7,14 @@ class OrderCreateForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ['first_name', 'last_name', 'email', 'phone_number', 'delivery_option', 'address', 'city']
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'delivery_option', 'street_address', 'building_number', 'region', 'postal_code', 'city']
+        widgets = {
+            'delivery_option': forms.RadioSelect,
+            'street_address': forms.TextInput(attrs={'placeholder': 'e.g., 123 Osu Street'}),
+            'building_number': forms.TextInput(attrs={'placeholder': 'House/Building number'}),
+            'region': forms.TextInput(attrs={'placeholder': 'e.g., Greater Accra'}),
+            'postal_code': forms.TextInput(attrs={'placeholder': 'Postal code'}),
+        }
         widgets = {
             'delivery_option': forms.RadioSelect
         }
@@ -30,8 +37,12 @@ class OrderCreateForm(forms.ModelForm):
         cleaned_data = super().clean()
         delivery_option = cleaned_data.get('delivery_option')
         if delivery_option == Order.DELIVERY_OPTION_DELIVERY:
-            if not cleaned_data.get('address'):
-                self.add_error('address', 'This field is required for delivery.')
+            if not cleaned_data.get('street_address'):
+                self.add_error('street_address', 'This field is required for delivery.')
+            if not cleaned_data.get('building_number'):
+                self.add_error('building_number', 'This field is required for delivery.')
+            if not cleaned_data.get('region'):
+                self.add_error('region', 'This field is required for delivery.')
             if not cleaned_data.get('city'):
                 self.add_error('city', 'This field is required for delivery.')
         return cleaned_data

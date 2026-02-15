@@ -107,6 +107,46 @@
 
                     <div class="divider"></div>
 
+                    <!-- Delivery Address -->
+                    <div class="card-header">
+                        <h3 class="card-title">Delivery Address</h3>
+                    </div>
+
+                    <div class="details-grid">
+                        {% if order.street_address %}
+                        <div class="detail-item">
+                            <span class="detail-label">Street Address</span>
+                            <p class="detail-value">{{ order.street_address }}</p>
+                        </div>
+                        {% endif %}
+                        {% if order.building_number %}
+                        <div class="detail-item">
+                            <span class="detail-label">Building/House Number</span>
+                            <p class="detail-value">{{ order.building_number }}</p>
+                        </div>
+                        {% endif %}
+                        {% if order.region %}
+                        <div class="detail-item">
+                            <span class="detail-label">Region/District</span>
+                            <p class="detail-value">{{ order.region }}</p>
+                        </div>
+                        {% endif %}
+                        {% if order.city %}
+                        <div class="detail-item">
+                            <span class="detail-label">City</span>
+                            <p class="detail-value">{{ order.city }}</p>
+                        </div>
+                        {% endif %}
+                        {% if order.postal_code %}
+                        <div class="detail-item">
+                            <span class="detail-label">Postal Code</span>
+                            <p class="detail-value">{{ order.postal_code }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="divider"></div>
+
                     <!-- Materials Manifest -->
                     <div class="card-header">
                         <h3 class="card-title">Material Manifest</h3>

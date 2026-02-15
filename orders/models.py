@@ -43,7 +43,11 @@ class Order(models.Model):
     email = models.EmailField()
     phone_number = models.CharField(max_length=15, blank=True)
     delivery_option = models.CharField(max_length=20, choices=DELIVERY_CHOICES, default=DELIVERY_OPTION_DELIVERY)
-    address = models.CharField(max_length=250, blank=True)
+    street_address = models.CharField(max_length=250, blank=True, help_text="e.g., 123 Osu Street")
+    building_number = models.CharField(max_length=50, blank=True, help_text="House/Building number")
+    region = models.CharField(max_length=100, blank=True, help_text="Region/District")
+    postal_code = models.CharField(max_length=20, blank=True, help_text="Postal or ZIP code")
+    address = models.CharField(max_length=250, blank=True)  # Keep for backward compatibility
     city = models.CharField(max_length=100, blank=True)
     
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_PENDING)
