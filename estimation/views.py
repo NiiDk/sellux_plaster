@@ -17,7 +17,7 @@ def estimation_view(request):
 
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({
-                    'estimated_cost': f'{estimated_cost:,.2f}',
+                    'estimated_cost': float(estimated_cost),
                     'service_name': service_name
                 })
         elif request.headers.get('x-requested-with') == 'XMLHttpRequest':

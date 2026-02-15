@@ -42,7 +42,7 @@
                         <h3 class="form-title mt-3">Project Specifications</h3>
                     </div>
 
-                    <form id="estimation-form" method="post" class="premium-estimator-form">
+                    <form id="estimation-form" method="post" action="{% url 'estimation:estimator' %}" class="premium-estimator-form">
                         {% csrf_token %}
                         <div id="error-container" class="premium-alert" style="display: none;"></div>
 

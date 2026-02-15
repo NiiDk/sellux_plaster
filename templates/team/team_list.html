@@ -6,66 +6,71 @@
 
 {% block content %}
 
-<!-- HERO -->
-<section class="hero bg-dark-onyx text-center bg-architectural-dots">
-    <div class="container min-vh-70 d-flex align-items-center">
-        <div class="mx-auto" style="max-width: 800px;">
-            <span class="section-label mb-4 d-inline-block">
-                MASTER ARTISANS
-            </span>
-
-            <h1 class="display-1 fw-light mb-5 text-white">
-                Our Team
-            </h1>
-
-            <p class="hero-text mb-0">
-                Skilled craftsmen and technical specialists delivering refined
-                plasterwork through discipline, experience, and exacting standards.
-            </p>
+<!-- Premium Hero Section -->
+<section class="team-hero position-relative overflow-hidden" style="min-height: 70vh; display: flex; align-items: center; background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
+    <div class="hero-pattern position-absolute w-100 h-100"></div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <span class="premium-badge animate__animated animate__fadeIn">
+                    <i class="bi bi-people me-2"></i>
+                    MASTER ARTISANS
+                </span>
+                <h1 class="team-hero-title mt-4 mb-4 animate__animated animate__fadeInUp">
+                    Meet the<br>
+                    <span class="title-gradient">Craftsmen</span>
+                </h1>
+               <p class="team-hero-subtitle animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                    Skilled craftsmen and technical specialists delivering refined plasterwork through discipline, experience, and exacting standards.
+                </p>
+                <div class="hero-divider animate__animated animate__fadeIn" style="animation-delay: 0.4s;"></div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- LEADERSHIP -->
-<section class="section bg-dark-charcoal bg-architectural-dots">
-    <div class="container">
+<!-- Leadership Section -->
+<section class="leadership-section py-5 my-5">
+    <div class="container py-4">
 
-        <div class="section-header text-center mb-12">
-            <h2 class="display-2 fw-light text-white mb-4">
-                Firm <span class="text-primary-color">Leadership</span>
-            </h2>
-            <p class="section-subtext">
+        <div class="text-center mb-5 pb-3">
+            <span class="section-badge">FIRM LEADERSHIP</span>
+            <h2 class="section-title mt-3 mb-4">Executive <span class="gradient-text">Team</span></h2>
+            <p class="section-subtitle mx-auto">
                 Senior professionals guiding quality, execution, and architectural integrity.
             </p>
         </div>
 
-        <div class="row g-6 justify-content-center">
+        <div class="row g-4 g-lg-5 justify-content-center">
             {% for member in firm_leadership %}
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 animate__animated animate__fadeInUp" style="animation-delay: {{ forloop.counter0 }}00ms;">
 
-                <div class="leader-card">
-                    <div class="leader-image-container">
+                <div class="premium-leader-card h-100">
+                    <div class="leader-image-wrapper">
                         <img src="{{ member.profile_image.url }}"
                              alt="{{ member.get_full_name }}"
                              class="leader-image">
-                        <span class="experience-badge">
+                        <div class="image-overlay-gradient"></div>
+                        <span class="experience-badge-premium">
+                            <i class="bi bi-star-fill me-1"></i>
                             {{ member.years_of_experience|default:"15+" }} yrs
                         </span>
                     </div>
 
-                    <div class="leader-content">
-                        <p class="leader-title">
+                    <div class="leader-content-premium">
+                        <span class="leader-role">
                             {{ member.job_title }}
-                        </p>
-                        <h3 class="leader-name">
+                        </span>
+                        <h3 class="leader-name-premium">
                             {{ member.get_full_name }}
                         </h3>
-                        <p class="leader-bio">
+                        <p class="leader-bio-premium">
                             {{ member.bio|truncatewords:24 }}
                         </p>
 
-                        <a href="{{ member.get_absolute_url }}" class="text-link mt-3 d-block">
-                            View Profile <span class="arrow-icon">→</span>
+                        <a href="{{ member.get_absolute_url }}" class="leader-link-premium">
+                            <span>View Profile</span>
+                            <i class="bi bi-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>
@@ -77,46 +82,49 @@
     </div>
 </section>
 
-<!-- SPECIALISTS -->
-<section class="section bg-dark-onyx bg-architectural-dots">
-    <div class="container">
+<!-- Specialists Section -->
+<section class="specialists-section py-5 my-5" style="background: linear-gradient(180deg, #f9f9f9 0%, #ffffff 100%);">
+    <div class="container py-4">
 
-        <div class="section-header text-center mb-12">
-            <h2 class="display-2 fw-light text-white mb-4">
-                Specialist <span class="text-primary-color">Team</span>
-            </h2>
-            <p class="section-subtext">
+        <div class="text-center mb-5 pb-3">
+            <span class="section-badge">SPECIALIST TEAM</span>
+            <h2 class="section-title mt-3 mb-4">Certified <span class="gradient-text">Professionals</span></h2>
+            <p class="section-subtitle mx-auto">
                 Dedicated professionals delivering precision across every project stage.
             </p>
         </div>
 
-        <div class="row g-5">
+        <div class="row g-4 justify-content-center">
             {% for member in associates %}
-            <div class="col-xl-3 col-lg-4 col-md-4 col-6">
+            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
 
-                <div class="specialist-card text-center">
-                    <img src="{{ member.profile_image.url }}"
-                         alt="{{ member.get_full_name }}"
-                         class="specialist-image">
+                <div class="premium-specialist-card text-center h-100">
+                    <div class="specialist-image-wrapper">
+                        <img src="{{ member.profile_image.url }}"
+                             alt="{{ member.get_full_name }}"
+                             class="specialist-image-premium">
+                        <div class="specialist-ring"></div>
+                    </div>
 
-                    <h4 class="specialist-name">
+                    <h4 class="specialist-name-premium">
                         {{ member.get_full_name }}
                     </h4>
 
-                    <p class="specialist-title">
+                    <p class="specialist-role-premium">
                         {{ member.job_title }}
                     </p>
 
                     {% if member.specializations %}
-                    <div class="specialist-tags">
+                    <div class="specialist-tags-premium">
                         {% for spec in member.specializations|slice:":2" %}
-                        <span>{{ spec }}</span>
+                        <span class="tag-item">{{ spec }}</span>
                         {% endfor %}
                     </div>
                     {% endif %}
 
-                    <a href="{{ member.get_absolute_url }}" class="text-link small mt-2 d-block">
-                        Details <span class="arrow-icon small-arrow">→</span>
+                    <a href="{{ member.get_absolute_url }}" class="specialist-link-premium">
+                        <span>View Details</span>
+                        <i class="bi bi-arrow-right ms-1"></i>
                     </a>
                 </div>
 
@@ -127,48 +135,52 @@
     </div>
 </section>
 
-<!-- VALUES -->
-<section class="section bg-dark-charcoal bg-architectural-dots">
-    <div class="container">
+<!-- Philosophy & Values Section -->
+<section class="philosophy-section py-5 my-5 position-relative overflow-hidden" style="background: linear-gradient(135deg, #050505 0%, #1a1a1a 100%);">
+    <div class="philosophy-pattern"></div>
+    <div class="container py-5 position-relative" style="z-index: 2;">
 
-        <div class="row align-items-center g-10">
+        <div class="row align-items-center g-5">
             <div class="col-lg-6">
 
-                <span class="section-label mb-4 d-inline-block">
+                <span class="section-badge-light mb-4 d-inline-block">
+                    <i class="bi bi-lightbulb me-2"></i>
                     OUR PHILOSOPHY
                 </span>
 
-                <h2 class="display-2 fw-light text-white mb-5">
+                <h2 class="philosophy-title mb-4">
                     Where Craft Meets<br>
-                    <span class="text-primary-color">Architectural Discipline</span>
+                    <span class="title-gradient">Architectural Discipline</span>
                 </h2>
 
-                <p class="values-text mb-6">
+                <p class="philosophy-text mb-5">
                     True luxury is restraint. Precision in execution.
                     Respect for material, form, and architectural intent.
                 </p>
 
-                <a href="{% url 'contact:contact_us' %}" class="primary-btn">
-                    Consult Our Artisans
+                <a href="{% url 'contact:contact_us' %}" class="btn-philosophy-cta">
+                    <span>Consult Our Artisans</span>
+                    <i class="bi bi-arrow-right ms-2"></i>
                 </a>
 
             </div>
 
             <div class="col-lg-6">
-                <div class="row g-5">
+                <div class="row g-4">
                     {% for value in values %}
                     <div class="col-md-6">
 
-                        <div class="value-card">
-                            <span class="value-number">
+                        <div class="premium-value-card h-100">
+                            <div class="value-number-premium">
                                 0{{ forloop.counter }}
-                            </span>
-                            <h5 class="value-title">
+                            </div>
+                            <h5 class="value-title-premium">
                                 {{ value.title }}
                             </h5>
-                            <p class="value-description">
+                            <p class="value-description-premium">
                                 {{ value.description }}
                             </p>
+                            <div class="value-accent-line"></div>
                         </div>
 
                     </div>
